@@ -26,7 +26,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,27,42,.95
 .lang-btn.ja{background:rgba(232,149,10,.15);border-color:var(--amber);color:var(--amber);}
 .glossary-btn{padding:4px 10px;border-radius:5px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.45);font-size:11px;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;}
 .glossary-btn:hover{color:var(--off);}
-#hero{height:100vh;display:flex;flex-direction:column;padding-top:52px;position:relative;overflow:hidden;}
+#hero{margin-top:52px;height:calc(100vh - 52px);height:calc(100dvh - 52px);display:flex;flex-direction:column;position:relative;overflow:hidden;}
 .hero-grid{flex:1;display:grid;grid-template-columns:252px 1fr;grid-template-rows:auto 1fr;min-height:0;}
 .hero-title-cell{padding:.55rem 1rem .35rem;border-right:1px solid rgba(255,255,255,.06);display:flex;align-items:flex-end;}
 .hero-title{font-family:"DM Serif Display",serif;font-size:1.75rem;line-height:1.05;color:var(--off);}
@@ -1052,9 +1052,12 @@ function getVerts() {
   var isMobile = window.innerWidth < 768;
   var topLabelH = isMobile ? 26 : 30;
   var cornerLabelH = isMobile ? 26 : 30;
+  var cornerOff = Math.min(26, cornerLabelH - 6);
+  var topLblOff = -(topLabelH - 4);
   var minSideInset = isMobile ? 16 : 20;
-  var topReserve = topLabelH + 4;
-  var botReserve = cornerLabelH + 8;
+  var dotPad = isMobile ? 14 : 18;
+  var topReserve = Math.abs(topLblOff) + 12 + 4;
+  var botReserve = cornerOff + 14 + dotPad;
   var maxH = Math.max(80, H - topReserve - botReserve);
   var maxW = Math.max(80, W - minSideInset * 2);
   var triH = maxH;
@@ -1077,8 +1080,8 @@ function getVerts() {
 function getCompassLayout() {
   var isMobile = window.innerWidth < 768;
   var sidePad = isMobile ? 28 : 52;
-  var topPad = isMobile ? 28 : 32;
-  var botPad = isMobile ? 32 : 34;
+  var topPad = isMobile ? 28 : 36;
+  var botPad = isMobile ? 44 : 52;
   var cx = W / 2;
   var cy = topPad + (H - topPad - botPad) / 2;
   var rng = Math.min(W / 2 - sidePad, (H - topPad - botPad) / 2);

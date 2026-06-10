@@ -1341,7 +1341,9 @@ function updateCrisisOverlay(year) {
 function setYear(y) {
   currentYear=y;
   document.getElementById("tl-display").textContent=y;
-  draw(); buildTable(); updateCrisisOverlay(y);
+  updateCrisisOverlay(y);
+  resize();
+  buildTable();
 }
 
 function setFilter(f,btn) {
@@ -1897,7 +1899,7 @@ function toggleLang() {
   document.getElementById("vt-comp").innerHTML=isJa?"&#10010; \u30B3\u30F3\u30D1\u30B9":"&#10010; Compass";
   applySectionI18n(currentLang);
   updateCrisisOverlay(currentYear);
-  draw();
+  resize();
   if (selectedCountry) openPanel(selectedCountry);
 }
 
@@ -1916,13 +1918,17 @@ function updateStats() {
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
 window.addEventListener("resize",resize);
+var canvasWrapEl=document.getElementById("canvas-wrap");
+if (typeof ResizeObserver!=="undefined"&&canvasWrapEl) {
+  new ResizeObserver(resize).observe(canvasWrapEl);
+}
+updateCrisisOverlay(currentYear);
 resize();
 updateStats();
 buildTable();
 buildTimeline("all");
 renderGlossary("");
 loadAllNews();
-updateCrisisOverlay(2026);
 
 </script>
 </body>

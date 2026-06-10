@@ -36,10 +36,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,27,42,.95
 .controls-stack{display:flex;flex-direction:column;align-items:flex-end;gap:5px;width:100%;max-width:560px;}
 .controls-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
 .timeline-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:6px 12px;display:flex;align-items:center;gap:8px;}
-#crisis-banner{width:100%;max-width:520px;min-height:0;transition:opacity .25s ease,transform .25s ease;}
-#crisis-banner:not(.visible){display:none;}
-#crisis-banner.visible{display:block;}
-.crisis-banner-inner{display:flex;align-items:flex-start;gap:8px;padding:6px 10px;border-radius:7px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-left-width:3px;line-height:1.35;}
+#crisis-banner{position:absolute;top:10px;right:14px;z-index:40;width:auto;max-width:min(440px,calc(100% - 28px));pointer-events:none;opacity:0;transform:translateY(-4px);transition:opacity .25s ease,transform .25s ease;}
+#crisis-banner.visible{opacity:1;transform:translateY(0);pointer-events:auto;}
+.crisis-banner-inner{display:flex;align-items:flex-start;gap:8px;padding:6px 10px;border-radius:7px;background:rgba(13,27,42,.88);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);border-left-width:3px;line-height:1.35;box-shadow:0 4px 20px rgba(0,0,0,.25);}
 .crisis-banner-year{font-family:"DM Serif Display",serif;font-size:1.15rem;line-height:1.1;flex-shrink:0;min-width:42px;padding-top:1px;}
 .crisis-banner-body{flex:1;min-width:0;}
 .crisis-banner-label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-bottom:3px;}
@@ -220,7 +219,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
   #canvas-wrap{grid-column:1;grid-row:3;}
   .hero-title{font-size:1.35rem;}
   .controls-stack{align-items:stretch;max-width:none;}
-  #crisis-banner{max-width:none;}
+  #crisis-banner{top:8px;right:10px;left:10px;max-width:none;}
   .cp-grid{grid-template-columns:1fr;}
 }
 </style>
@@ -261,7 +260,6 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
             <input type="range" class="tl-range" id="timeline" min="2016" max="2026" value="2026" step="1" oninput="setYear(parseInt(this.value))">
           </div>
         </div>
-        <div id="crisis-banner" aria-live="polite"></div>
       </div>
     </div>
     <div id="sidebar">
@@ -318,6 +316,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
     </div>
     <div id="canvas-wrap">
       <canvas id="tri-canvas"></canvas>
+      <div id="crisis-banner" aria-live="polite"></div>
       <div id="tooltip"><div class="tt-name" id="tt-name"></div><div class="tt-coords" id="tt-coords"></div><div class="tt-bind" id="tt-bind"></div><div class="tt-hint" id="tt-hint"></div></div>
       <div id="click-hint">Click any dot to explore &middot; toggle Triangle / Compass &middot; drag timeline</div>
     </div>
@@ -1330,7 +1329,7 @@ function updateCrisisOverlay(year) {
   var m=crisisMilestones[year];
   var milestoneLbl=currentLang==="ja"?"\u91CC\u7A0B\u7891":"Milestone";
   if (m) {
-    banner.innerHTML="<div class=\"crisis-banner-inner\" style=\"border-left-color:"+m.color+";background:rgba(13,27,42,.6)\"><span class=\"crisis-banner-year\" style=\"color:"+m.color+"\">"+year+"</span><div class=\"crisis-banner-body\"><span class=\"crisis-banner-label\" id=\"crisis-label\">"+milestoneLbl+"</span><span class=\"crisis-banner-text\" style=\"color:"+m.color+"\">"+m.text+"</span></div></div>";
+    banner.innerHTML="<div class=\"crisis-banner-inner\" style=\"border-left-color:"+m.color+"\"><span class=\"crisis-banner-year\" style=\"color:"+m.color+"\">"+year+"</span><div class=\"crisis-banner-body\"><span class=\"crisis-banner-label\" id=\"crisis-label\">"+milestoneLbl+"</span><span class=\"crisis-banner-text\" style=\"color:"+m.color+"\">"+m.text+"</span></div></div>";
     banner.classList.add("visible");
   } else {
     banner.innerHTML="";
@@ -1342,7 +1341,7 @@ function setYear(y) {
   currentYear=y;
   document.getElementById("tl-display").textContent=y;
   updateCrisisOverlay(y);
-  resize();
+  draw();
   buildTable();
 }
 
@@ -1899,7 +1898,7 @@ function toggleLang() {
   document.getElementById("vt-comp").innerHTML=isJa?"&#10010; \u30B3\u30F3\u30D1\u30B9":"&#10010; Compass";
   applySectionI18n(currentLang);
   updateCrisisOverlay(currentYear);
-  resize();
+  draw();
   if (selectedCountry) openPanel(selectedCountry);
 }
 

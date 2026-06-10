@@ -27,27 +27,40 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,27,42,.95
 .glossary-btn{padding:4px 10px;border-radius:5px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.45);font-size:11px;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;}
 .glossary-btn:hover{color:var(--off);}
 #hero{height:100vh;display:flex;flex-direction:column;padding-top:52px;position:relative;overflow:hidden;}
-.hero-header{padding:1rem 1.5rem .5rem;display:flex;align-items:flex-start;justify-content:space-between;flex-shrink:0;gap:1rem;flex-wrap:wrap;}
-.hero-title{font-family:"DM Serif Display",serif;font-size:1.6rem;line-height:1.1;color:var(--off);}
+.hero-grid{flex:1;display:grid;grid-template-columns:252px 1fr;grid-template-rows:auto 1fr;min-height:0;}
+.hero-title-cell{padding:.55rem 1rem .35rem;border-right:1px solid rgba(255,255,255,.06);display:flex;align-items:flex-end;}
+.hero-title{font-family:"DM Serif Display",serif;font-size:1.75rem;line-height:1.05;color:var(--off);}
 .hero-title em{color:var(--amber);font-style:italic;}
-.hero-right{display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;}
-.hero-sub{font-size:11px;color:rgba(255,255,255,.4);max-width:280px;text-align:right;line-height:1.6;}
+.hero-controls-cell{padding:.45rem 1.25rem .35rem;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;gap:5px;min-width:0;}
+.hero-sub{font-size:10px;color:rgba(255,255,255,.35);text-align:right;line-height:1.4;max-width:100%;}
+.controls-stack{display:flex;flex-direction:column;align-items:flex-end;gap:5px;width:100%;max-width:560px;}
 .controls-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
 .timeline-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:6px 12px;display:flex;align-items:center;gap:8px;}
+#crisis-banner{width:100%;max-width:520px;min-height:0;transition:opacity .25s ease,transform .25s ease;}
+#crisis-banner:not(.visible){display:none;}
+#crisis-banner.visible{display:block;}
+.crisis-banner-inner{display:flex;align-items:flex-start;gap:8px;padding:6px 10px;border-radius:7px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-left-width:3px;line-height:1.35;}
+.crisis-banner-year{font-family:"DM Serif Display",serif;font-size:1.15rem;line-height:1.1;flex-shrink:0;min-width:42px;padding-top:1px;}
+.crisis-banner-body{flex:1;min-width:0;}
+.crisis-banner-label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-bottom:3px;}
+.crisis-banner-text{font-size:11px;font-weight:500;}
 .tl-label{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;}
 .tl-year{font-family:"DM Serif Display",serif;font-size:1.2rem;color:var(--amber);min-width:36px;text-align:center;}
 input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);cursor:pointer;}
 .view-toggle{display:flex;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:7px;overflow:hidden;}
 .vt-btn{padding:5px 12px;font-size:11px;color:rgba(255,255,255,.45);border:none;background:transparent;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;white-space:nowrap;}
 .vt-btn.active{background:rgba(255,255,255,.12);color:var(--off);}
-#map-area{flex:1;display:flex;min-height:0;position:relative;}
-#sidebar{width:195px;flex-shrink:0;padding:.8rem 1rem;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:1.1rem;overflow-y:auto;}
-.sb-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.4rem;}
+#sidebar{grid-column:1;grid-row:2;padding:.5rem 1rem .75rem;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:.85rem;overflow:hidden;min-height:0;}
+.sb-section{flex-shrink:0;}
+.sb-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.35rem;}
 .filter-group{display:flex;flex-direction:column;gap:3px;}
+.region-group{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.region-filter-btn{justify-content:center;padding:5px 6px!important;font-size:11px!important;}
 .filter-btn{display:flex;align-items:center;gap:7px;padding:5px 7px;border-radius:5px;border:none;background:transparent;cursor:pointer;font-size:12px;color:rgba(255,255,255,.5);text-align:left;transition:all .15s;font-family:"Inter",sans-serif;}
 .filter-btn:hover{background:rgba(255,255,255,.06);color:var(--off);}
 .filter-btn.active{background:rgba(255,255,255,.1);color:var(--off);}
 .fdot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.size-rows{display:flex;flex-direction:column;gap:5px;}
 .size-row{display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,.4);}
 .size-circle{border-radius:50%;background:rgba(255,255,255,.85);flex-shrink:0;}
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
@@ -56,14 +69,12 @@ input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);curs
 .stat-lbl{font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;letter-spacing:.04em;text-transform:uppercase;}
 .compare-btn{width:100%;padding:5px;border-radius:5px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.5);font-size:11px;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;}
 .compare-btn.on{background:rgba(232,149,10,.15);border-color:var(--amber);color:var(--amber);}
-.compare-selected{font-size:11px;color:rgba(255,255,255,.4);min-height:32px;line-height:1.5;margin-top:4px;}
-.about-text{font-size:11px;color:rgba(255,255,255,.35);line-height:1.65;}
+.compare-selected{font-size:11px;color:rgba(255,255,255,.4);min-height:0;line-height:1.5;margin-top:4px;}
+.compare-selected:empty{display:none;}
+.about-text{font-size:11px;color:rgba(255,255,255,.35);line-height:1.55;}
 .about-text a{color:var(--amber);text-decoration:none;}
-#canvas-wrap{flex:1;position:relative;overflow:hidden;}
+#canvas-wrap{grid-column:2;grid-row:2;position:relative;overflow:hidden;min-height:0;}
 #tri-canvas{width:100%;height:100%;}
-#crisis-overlay{position:absolute;bottom:16px;left:0;right:0;pointer-events:none;text-align:center;z-index:5;}
-#crisis-overlay.compass-mode{bottom:8px;}
-#crisis-overlay.triangle-mode{bottom:10px;max-width:92%;margin:0 auto;}
 #tooltip{position:absolute;background:rgba(13,27,42,.97);border:1px solid rgba(255,255,255,.13);border-radius:8px;padding:9px 12px;font-size:12px;pointer-events:none;opacity:0;transition:opacity .15s;max-width:195px;z-index:50;line-height:1.6;color:var(--off);}
 .tt-name{font-weight:600;font-size:13px;margin-bottom:3px;}
 .tt-coords{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:3px;}
@@ -201,7 +212,17 @@ input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);curs
 .tl-filter.active{background:rgba(255,255,255,.1);color:var(--off);border-color:rgba(255,255,255,.25);}
 footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding:1.5rem;text-align:center;font-size:11px;color:rgba(255,255,255,.25);}
 footer a{color:rgba(255,255,255,.4);text-decoration:none;}
-@media(max-width:640px){#sidebar{display:none;}.hero-title{font-size:1.2rem;}.cp-grid{grid-template-columns:1fr;}}
+@media(max-width:640px){
+  .hero-grid{grid-template-columns:1fr;grid-template-rows:auto auto 1fr;}
+  .hero-title-cell{border-right:none;padding:.5rem 1rem .25rem;}
+  .hero-controls-cell{align-items:stretch;padding:.25rem 1rem .4rem;}
+  #sidebar{display:none;}
+  #canvas-wrap{grid-column:1;grid-row:3;}
+  .hero-title{font-size:1.35rem;}
+  .controls-stack{align-items:stretch;max-width:none;}
+  #crisis-banner{max-width:none;}
+  .cp-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
@@ -222,51 +243,67 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
 </nav>
 
 <section id="hero">
-  <div class="hero-header">
-    <div><div class="hero-title" id="hero-title">Global AI Governance</div></div>
-    <div class="hero-right">
-      <div class="hero-sub" id="hero-sub">Click any country. Dot size = binding enforcement strength.</div>
-      <div class="controls-row">
-        <div class="view-toggle">
-          <button class="vt-btn active" id="vt-tri" onclick="setView('triangle',this)">&#9651; Triangle</button>
-          <button class="vt-btn" id="vt-comp" onclick="setView('compass',this)">&#10010; Compass</button>
+  <div class="hero-grid">
+    <div class="hero-title-cell">
+      <div class="hero-title" id="hero-title">Global AI Governance</div>
+    </div>
+    <div class="hero-controls-cell">
+      <div class="hero-sub" id="hero-sub">Dot size = binding enforcement. Pick a region to explore. 12 benchmarks shown in color by default.</div>
+      <div class="controls-stack">
+        <div class="controls-row">
+          <div class="view-toggle">
+            <button class="vt-btn active" id="vt-tri" onclick="setView('triangle',this)">&#9651; Triangle</button>
+            <button class="vt-btn" id="vt-comp" onclick="setView('compass',this)">&#10010; Compass</button>
+          </div>
+          <div class="timeline-wrap">
+            <span class="tl-label">Year</span>
+            <span class="tl-year" id="tl-display">2026</span>
+            <input type="range" class="tl-range" id="timeline" min="2016" max="2026" value="2026" step="1" oninput="setYear(parseInt(this.value))">
+          </div>
         </div>
-        <div class="timeline-wrap">
-          <span class="tl-label">Year</span>
-          <span class="tl-year" id="tl-display">2026</span>
-          <input type="range" class="tl-range" id="timeline" min="2016" max="2026" value="2026" step="1" oninput="setYear(parseInt(this.value))">
-        </div>
+        <div id="crisis-banner" aria-live="polite"></div>
       </div>
     </div>
-  </div>
-  <div id="map-area">
     <div id="sidebar">
-      <div>
-        <div class="sb-label" id="sb-filter">Filter</div>
-        <div class="filter-group">
-          <button class="filter-btn active" onclick="setFilter('all',this)"><span class="fdot" style="background:rgba(255,255,255,.35)"></span><span id="f-all">All</span></button>
-          <button class="filter-btn" onclick="setFilter('rights',this)"><span class="fdot" style="background:#1B6FD4"></span><span id="f-rights">Rights-based</span></button>
-          <button class="filter-btn" onclick="setFilter('market',this)"><span class="fdot" style="background:#1A6B42"></span><span id="f-market">Market-oriented</span></button>
-          <button class="filter-btn" onclick="setFilter('sovereign',this)"><span class="fdot" style="background:#8B1A1A"></span><span id="f-sovereign">Sovereignty</span></button>
-          <button class="filter-btn" onclick="setFilter('hybrid',this)"><span class="fdot" style="background:#7A4A00"></span><span id="f-hybrid">Hybrid</span></button>
+      <div class="sb-section">
+        <div class="sb-label" id="sb-region">Region</div>
+        <div class="filter-group region-group">
+          <button class="filter-btn region-filter-btn active" onclick="setRegion('world',this)"><span id="r-world">World</span></button>
+          <button class="filter-btn region-filter-btn" onclick="setRegion('asia',this)"><span id="r-asia">Asia</span></button>
+          <button class="filter-btn region-filter-btn" onclick="setRegion('europe',this)"><span id="r-europe">Europe</span></button>
+          <button class="filter-btn region-filter-btn" onclick="setRegion('africa',this)"><span id="r-africa">Africa</span></button>
+          <button class="filter-btn region-filter-btn" onclick="setRegion('americas',this)"><span id="r-americas">Americas</span></button>
+          <button class="filter-btn region-filter-btn" onclick="setRegion('oceania',this)"><span id="r-oceania">Oceania</span></button>
+          <button class="filter-btn region-filter-btn" onclick="setRegion('middle_east',this)"><span id="r-middle">Middle East</span></button>
+          <button class="filter-btn region-filter-btn" onclick="setRegion('global',this)"><span id="r-global">Global</span></button>
         </div>
       </div>
-      <div>
+      <div class="sb-section">
+        <div class="sb-label" id="sb-filter">Model</div>
+        <div class="filter-group">
+          <button class="filter-btn model-filter-btn active" onclick="setFilter('all',this)"><span class="fdot" style="background:rgba(255,255,255,.35)"></span><span id="f-all">All</span></button>
+          <button class="filter-btn model-filter-btn" onclick="setFilter('rights',this)"><span class="fdot" style="background:#1B6FD4"></span><span id="f-rights">Rights-based</span></button>
+          <button class="filter-btn model-filter-btn" onclick="setFilter('market',this)"><span class="fdot" style="background:#1A6B42"></span><span id="f-market">Market-oriented</span></button>
+          <button class="filter-btn model-filter-btn" onclick="setFilter('sovereign',this)"><span class="fdot" style="background:#8B1A1A"></span><span id="f-sovereign">Sovereignty</span></button>
+          <button class="filter-btn model-filter-btn" onclick="setFilter('hybrid',this)"><span class="fdot" style="background:#7A4A00"></span><span id="f-hybrid">Hybrid</span></button>
+        </div>
+      </div>
+      <div class="sb-section">
         <div class="sb-label" id="sb-size">Dot size = enforcement</div>
-        <div style="display:flex;flex-direction:column;gap:5px;">
+        <div class="size-rows">
           <div class="size-row"><div class="size-circle" style="width:18px;height:18px"></div><span id="sz-strong">Strong binding</span></div>
           <div class="size-row"><div class="size-circle" style="width:12px;height:12px"></div><span id="sz-mod">Moderate</span></div>
           <div class="size-row"><div class="size-circle" style="width:7px;height:7px"></div><span id="sz-part">Partial</span></div>
           <div class="size-row"><div class="size-circle" style="width:5px;height:5px"></div><span id="sz-vol">Voluntary</span></div>
         </div>
       </div>
-      <div>
+      <div class="sb-section">
         <div class="sb-label" id="sb-compare">Compare mode</div>
         <button class="compare-btn" id="compare-toggle" onclick="toggleCompare()">&#9776; <span id="compare-btn-text">Select 2 countries</span></button>
         <div class="compare-selected" id="compare-selected"></div>
       </div>
-      <div>
-        <div class="sb-label">At a glance</div>
+      <div class="sb-section">
+        <div class="sb-label" id="sb-glance">At a glance</div>
         <div class="stats-grid">
           <div class="stat-card"><div class="stat-num" id="stat-mapped">32</div><div class="stat-lbl">Mapped</div></div>
           <div class="stat-card"><div class="stat-num">4</div><div class="stat-lbl">Models</div></div>
@@ -274,14 +311,13 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
           <div class="stat-card"><div class="stat-num" id="stat-binding">3</div><div class="stat-lbl">Fully binding</div></div>
         </div>
       </div>
-      <div>
+      <div class="sb-section">
         <div class="sb-label">About</div>
-        <div class="about-text" id="about-text">Research by <a href="#">Joohun Kim</a>, Brown University (AI Governance Association, Tokyo; Siegel PIT-SF Fellowship, Princeton CITP). Updated June 2026.</div>
+        <div class="about-text" id="about-text">Research by <a href="#">Joohun Kim</a>, Brown University. Updated June 2026.</div>
       </div>
     </div>
     <div id="canvas-wrap">
       <canvas id="tri-canvas"></canvas>
-      <div id="crisis-overlay"></div>
       <div id="tooltip"><div class="tt-name" id="tt-name"></div><div class="tt-coords" id="tt-coords"></div><div class="tt-bind" id="tt-bind"></div><div class="tt-hint" id="tt-hint"></div></div>
       <div id="click-hint">Click any dot to explore &middot; toggle Triangle / Compass &middot; drag timeline</div>
     </div>
@@ -933,14 +969,41 @@ var countries = [
 ];
 
 var groupColor = {rights:"#1B6FD4",market:"#1A6B42",sovereign:"#8B1A1A",hybrid:"#7A4A00"};
+var GREY_DOT = "#5C6370";
 
-// Major benchmarks: always show name labels on canvas (others appear on hover/filter/search)
-var MAJOR_BENCHMARKS = {eu:1,us:1,cn:1,jp:1,uk:1,kr:1,in:1,br:1,au:1,ca:1,sg:1,ru:1,fr:1,de:1,il:1,ae:1,oecd:1,asean:1,tw:1,za:1,vn:1,my:1,ph:1,ng:1,it:1,es:1,nl:1,pk:1,ar:1,ch:1,unesco:1};
+// Default colored benchmarks on World view
+var FEATURED_BENCHMARKS = {eu:1,kr:1,cn:1,us:1,jp:1,sg:1,uk:1,br:1,ca:1,au:1,au2:1,cl:1};
+
+var countryRegions = {
+  eu:"europe",kr:"asia",cn:"asia",us:"americas",jp:"asia",sg:"asia",uk:"europe",br:"americas",ca:"americas",
+  au:"oceania",in:"asia",ae:"middle_east",cl:"americas",ke:"africa",au2:"africa",ru:"europe",fr:"europe",
+  de:"europe",mx:"americas",th:"asia",id:"asia",za:"africa",sa:"middle_east",tw:"asia",no:"europe",nz:"oceania",
+  se:"europe",co:"americas",eg:"africa",il:"middle_east",oecd:"global",asean:"global",vn:"asia",my:"asia",
+  ph:"asia",pk:"asia",bd:"asia",lk:"asia",np:"asia",it:"europe",es:"europe",nl:"europe",pl:"europe",ie:"europe",
+  ch:"europe",at:"europe",fi:"europe",dk:"europe",pt:"europe",be:"europe",ee:"europe",ua:"europe",tr:"europe",
+  ng:"africa",gh:"africa",ma:"africa",tn:"africa",rw:"africa",et:"africa",mu:"africa",ar:"americas",pe:"americas",
+  uy:"americas",ec:"americas",cr:"americas",qa:"middle_east",bh:"middle_east",jo:"middle_east",ir:"middle_east",
+  kz:"asia",uz:"asia",unesco:"global",cz:"europe",gr:"europe",ro:"europe",hu:"europe",ao:"africa",kh:"asia",la:"asia"
+};
+
+function isRegionHighlighted(c) {
+  if (activeRegion === "world") return !!FEATURED_BENCHMARKS[c.id];
+  return countryRegions[c.id] === activeRegion;
+}
+
+function isCountryEmphasized(c, isH, isS, isCmp, isHL) {
+  return isRegionHighlighted(c) || isH || isS || isCmp || isHL;
+}
+
+function getDotRadius(c, emphasized) {
+  var r = bindRadius(getPos(c, currentYear).bind);
+  return emphasized ? r : Math.max(3, r * 0.55);
+}
 
 function shouldShowCountryLabel(c, isH, isS, isCmp, isHL) {
   if (isH || isS || isCmp || isHL) return true;
-  if (MAJOR_BENCHMARKS[c.id]) return true;
-  if (activeFilter !== "all" && c.group === activeFilter) return true;
+  if (isRegionHighlighted(c)) return true;
+  if (activeFilter !== "all" && c.group === activeFilter && isRegionHighlighted(c)) return true;
   return false;
 }
 
@@ -948,6 +1011,7 @@ function shouldShowCountryLabel(c, isH, isS, isCmp, isHL) {
 var W = 0, H = 0;
 var currentYear = 2026;
 var activeFilter = "all";
+var activeRegion = "world";
 var selectedCountry = null;
 var hoveredCountry = null;
 var highlightedCountry = null;
@@ -986,12 +1050,11 @@ var ctx = canvas.getContext("2d");
 
 function getVerts() {
   var isMobile = window.innerWidth < 768;
-  var topLabelH = isMobile ? 30 : 34;
-  var cornerLabelH = isMobile ? 30 : 34;
-  var minSideInset = isMobile ? 20 : 28;
-  var crisisH = (viewMode === "triangle" && crisisMilestones[currentYear]) ? 40 : 0;
-  var topReserve = topLabelH + 6;
-  var botReserve = cornerLabelH + crisisH + 10;
+  var topLabelH = isMobile ? 26 : 30;
+  var cornerLabelH = isMobile ? 26 : 30;
+  var minSideInset = isMobile ? 16 : 20;
+  var topReserve = topLabelH + 4;
+  var botReserve = cornerLabelH + 8;
   var maxH = Math.max(80, H - topReserve - botReserve);
   var maxW = Math.max(80, W - minSideInset * 2);
   var triH = maxH;
@@ -1013,10 +1076,9 @@ function getVerts() {
 
 function getCompassLayout() {
   var isMobile = window.innerWidth < 768;
-  var sidePad = isMobile ? 36 : 70;
-  var topPad = isMobile ? 36 : 42;
-  var hasCrisis = !!crisisMilestones[currentYear];
-  var botPad = (isMobile ? 36 : 40) + (hasCrisis ? 38 : 0);
+  var sidePad = isMobile ? 28 : 52;
+  var topPad = isMobile ? 28 : 32;
+  var botPad = isMobile ? 32 : 34;
   var cx = W / 2;
   var cy = topPad + (H - topPad - botPad) / 2;
   var rng = Math.min(W / 2 - sidePad, (H - topPad - botPad) / 2);
@@ -1116,41 +1178,53 @@ function drawCompass() {
   ctx.fillText(isJa?currentYear+"年時点のスナップショット":currentYear+" snapshot",cx,cy+14);
 }
 
+function drawCountryDot(c) {
+  var xy=getXY(c,currentYear);
+  var isH=hoveredCountry&&hoveredCountry.id===c.id;
+  var isS=selectedCountry&&selectedCountry.id===c.id;
+  var isCmp=compareList.some(function(cc){return cc.id===c.id;});
+  var isHL=highlightedCountry&&highlightedCountry.id===c.id;
+  var emphasized=isCountryEmphasized(c,isH,isS,isCmp,isHL);
+  var passesModel=activeFilter==="all"||c.group===activeFilter;
+  var r=getDotRadius(c,emphasized);
+  var col=emphasized?(groupColor[c.group]||"#666"):GREY_DOT;
+  if (!passesModel) {
+    ctx.beginPath(); ctx.arc(xy[0],xy[1],r,0,Math.PI*2);
+    ctx.fillStyle=col; ctx.globalAlpha=0.04; ctx.fill(); ctx.globalAlpha=1;
+    return;
+  }
+  if (isH||isS||isCmp||isHL) {
+    ctx.beginPath(); ctx.arc(xy[0],xy[1],r+8,0,Math.PI*2);
+    ctx.fillStyle=isHL?"#E8950A":col; ctx.globalAlpha=isHL?0.30:0.18; ctx.fill(); ctx.globalAlpha=1;
+  }
+  ctx.beginPath(); ctx.arc(xy[0],xy[1],r,0,Math.PI*2);
+  ctx.fillStyle=isHL?"#E8950A":col;
+  ctx.globalAlpha=emphasized?(isH||isS||isCmp||isHL?1:0.92):0.26;
+  ctx.fill();
+  if (isS||isCmp) { ctx.strokeStyle="rgba(255,255,255,0.85)"; ctx.lineWidth=2; ctx.stroke(); }
+  ctx.globalAlpha=1;
+  if (shouldShowCountryLabel(c,isH,isS,isCmp,isHL)) {
+    ctx.font=(isH||isS?"600":"400")+" 11px Inter,sans-serif";
+    ctx.fillStyle=isH||isS?"rgba(255,255,255,0.95)":(emphasized?"rgba(255,255,255,0.68)":"rgba(255,255,255,0.35)");
+    ctx.textAlign="center"; ctx.fillText(c.name,xy[0],xy[1]-r-5);
+  }
+}
+
 function draw() {
   ctx.clearRect(0,0,W,H);
   if (viewMode==="triangle") drawTriangle(); else drawCompass();
-  var vis=[], fad=[];
+  var back=[], front=[];
   for (var di=0;di<countries.length;di++) {
-    if (activeFilter==="all"||countries[di].group===activeFilter) vis.push(countries[di]);
-    else fad.push(countries[di]);
-  }
-  for (var fi=0;fi<fad.length;fi++) {
-    var c=fad[fi]; var xy=getXY(c,currentYear); var pos=getPos(c,currentYear);
-    ctx.beginPath(); ctx.arc(xy[0],xy[1],bindRadius(pos.bind),0,Math.PI*2);
-    ctx.fillStyle=groupColor[c.group]||"#666"; ctx.globalAlpha=0.06; ctx.fill(); ctx.globalAlpha=1;
-  }
-  for (var vi=0;vi<vis.length;vi++) {
-    var c=vis[vi]; var xy=getXY(c,currentYear); var pos=getPos(c,currentYear);
-    var r=bindRadius(pos.bind);
+    var c=countries[di];
     var isH=hoveredCountry&&hoveredCountry.id===c.id;
     var isS=selectedCountry&&selectedCountry.id===c.id;
     var isCmp=compareList.some(function(cc){return cc.id===c.id;});
     var isHL=highlightedCountry&&highlightedCountry.id===c.id;
-    var col=groupColor[c.group]||"#666";
-    if (isH||isS||isCmp||isHL) {
-      ctx.beginPath(); ctx.arc(xy[0],xy[1],r+8,0,Math.PI*2);
-      ctx.fillStyle=isHL?"#E8950A":col; ctx.globalAlpha=isHL?0.30:0.18; ctx.fill(); ctx.globalAlpha=1;
-    }
-    ctx.beginPath(); ctx.arc(xy[0],xy[1],r,0,Math.PI*2);
-    ctx.fillStyle=isHL?"#E8950A":col; ctx.globalAlpha=isH||isS||isCmp||isHL?1:0.85; ctx.fill();
-    if (isS||isCmp) { ctx.strokeStyle="rgba(255,255,255,0.85)"; ctx.lineWidth=2; ctx.stroke(); }
-    ctx.globalAlpha=1;
-    if (shouldShowCountryLabel(c,isH,isS,isCmp,isHL)) {
-      ctx.font=(isH||isS?"600":"400")+" 11px Inter,sans-serif";
-      ctx.fillStyle=isH||isS?"rgba(255,255,255,0.95)":"rgba(255,255,255,0.68)";
-      ctx.textAlign="center"; ctx.fillText(c.name,xy[0],xy[1]-r-5);
-    }
+    if (isCountryEmphasized(c,isH,isS,isCmp,isHL)) front.push(c);
+    else back.push(c);
   }
+  for (var bi=0;bi<back.length;bi++) drawCountryDot(back[bi]);
+  for (var fi=0;fi<front.length;fi++) drawCountryDot(front[fi]);
 }
 
 function resize() {
@@ -1164,11 +1238,20 @@ function resize() {
 // ── INTERACTION ───────────────────────────────────────────────────────────────
 function getCountryAt(ex,ey) {
   var rect=canvas.getBoundingClientRect(), x=ex-rect.left, y=ey-rect.top;
+  var best=null, bestD=Infinity;
   for (var i=0;i<countries.length;i++) {
-    var c=countries[i]; var xy=getXY(c,currentYear); var pos=getPos(c,currentYear);
-    if (Math.hypot(x-xy[0],y-xy[1])<=bindRadius(pos.bind)+6) return c;
+    var c=countries[i];
+    var xy=getXY(c,currentYear);
+    var isH=hoveredCountry&&hoveredCountry.id===c.id;
+    var isS=selectedCountry&&selectedCountry.id===c.id;
+    var isCmp=compareList.some(function(cc){return cc.id===c.id;});
+    var isHL=highlightedCountry&&highlightedCountry.id===c.id;
+    var emphasized=isCountryEmphasized(c,isH,isS,isCmp,isHL);
+    var r=getDotRadius(c,emphasized);
+    var d=Math.hypot(x-xy[0],y-xy[1]);
+    if (d<=r+6&&d<bestD) { best=c; bestD=d; }
   }
-  return null;
+  return best;
 }
 
 canvas.addEventListener("mousemove",function(e){
@@ -1227,11 +1310,6 @@ function setView(v,btn) {
   viewMode=v;
   document.querySelectorAll(".vt-btn").forEach(function(b){b.classList.remove("active");});
   btn.classList.add("active");
-  var overlay=document.getElementById("crisis-overlay");
-  if (overlay) {
-    overlay.classList.toggle("compass-mode",v==="compass");
-    overlay.classList.toggle("triangle-mode",v==="triangle");
-  }
   draw();
 }
 
@@ -1244,16 +1322,17 @@ var crisisMilestones = {
 };
 
 function updateCrisisOverlay(year) {
-  var overlay=document.getElementById("crisis-overlay");
-  if (!overlay) return;
+  var banner=document.getElementById("crisis-banner");
+  if (!banner) return;
   var m=crisisMilestones[year];
+  var milestoneLbl=currentLang==="ja"?"\u91CC\u7A0B\u7891":"Milestone";
   if (m) {
-    overlay.innerHTML="<div style=\"display:inline-block;background:rgba(13,27,42,.92);border:1px solid "+m.color+";border-radius:6px;padding:4px 12px;font-size:11px;color:"+m.color+";max-width:420px;text-align:center;\">"+m.text+"</div>";
+    banner.innerHTML="<div class=\"crisis-banner-inner\" style=\"border-left-color:"+m.color+";background:rgba(13,27,42,.6)\"><span class=\"crisis-banner-year\" style=\"color:"+m.color+"\">"+year+"</span><div class=\"crisis-banner-body\"><span class=\"crisis-banner-label\" id=\"crisis-label\">"+milestoneLbl+"</span><span class=\"crisis-banner-text\" style=\"color:"+m.color+"\">"+m.text+"</span></div></div>";
+    banner.classList.add("visible");
   } else {
-    overlay.innerHTML="";
+    banner.innerHTML="";
+    banner.classList.remove("visible");
   }
-  overlay.classList.toggle("compass-mode",viewMode==="compass");
-  overlay.classList.toggle("triangle-mode",viewMode==="triangle");
 }
 
 function setYear(y) {
@@ -1264,7 +1343,13 @@ function setYear(y) {
 
 function setFilter(f,btn) {
   activeFilter=f;
-  document.querySelectorAll(".filter-btn").forEach(function(b){b.classList.remove("active");});
+  document.querySelectorAll(".model-filter-btn").forEach(function(b){b.classList.remove("active");});
+  btn.classList.add("active"); draw();
+}
+
+function setRegion(r,btn) {
+  activeRegion=r;
+  document.querySelectorAll(".region-filter-btn").forEach(function(b){b.classList.remove("active");});
   btn.classList.add("active"); draw();
 }
 
@@ -1777,16 +1862,27 @@ function toggleLang() {
   btn.classList.toggle("ja",currentLang==="ja");
   var isJa=currentLang==="ja";
   document.getElementById("hero-title").textContent=isJa?"\u30B0\u30ED\u30FC\u30D0\u30EBAI\u30AC\u30D0\u30CA\u30F3\u30B9\u6307\u6570":"Global AI Governance";
-  document.getElementById("hero-sub").textContent=isJa?"\u56FD\u3092\u30AF\u30EA\u30C3\u30AF\u3057\u3066\u8A73\u7D30\u3092\u8868\u793A\u3002\u30C9\u30C3\u30C8\u306E\u5927\u304D\u3055\uFF1D\u6CD5\u7684\u626F\u675F\u529B\u3002\u30DB\u30D0\u30FC\u3067\u56FD\u540D\u3092\u8868\u793A\u3002":"Click any country. Dot size = binding enforcement. Hover for country names.";
-  document.getElementById("sb-filter").textContent=isJa?"\u30D5\u30A3\u30EB\u30BF\u30FC":"Filter";
+  document.getElementById("hero-sub").textContent=isJa?"\u30C9\u30C3\u30C8\u306E\u5927\u304D\u3055\uFF1D\u6CD5\u7684\u626F\u675F\u529B\u3002\u5730\u57DF\u3092\u9078\u3073\u3066\u8868\u793A\u300212\u57FA\u6E96\u56FD\u306F\u5E38\u6642\u30AB\u30E9\u30FC\u3002":"Dot size = binding enforcement. Pick a region to explore. 12 benchmarks shown in color by default.";
+  document.getElementById("sb-region").textContent=isJa?"\u5730\u57DF":"Region";
+  document.getElementById("r-world").textContent=isJa?"\u4E16\u754C":"World";
+  document.getElementById("r-asia").textContent=isJa?"\u30A2\u30B8\u30A2":"Asia";
+  document.getElementById("r-europe").textContent=isJa?"\u30E8\u30FC\u30ED\u30C3\u30D1":"Europe";
+  document.getElementById("r-africa").textContent=isJa?"\u30A2\u30D5\u30EA\u30AB":"Africa";
+  document.getElementById("r-americas").textContent=isJa?"\u7C73\u6D32":"Americas";
+  document.getElementById("r-oceania").textContent=isJa?"\u30AA\u30BB\u30A2\u30CB\u30A2":"Oceania";
+  document.getElementById("r-middle").textContent=isJa?"\u4E2D\u6771":"Middle East";
+  document.getElementById("r-global").textContent=isJa?"\u56FD\u969B":"Global";
+  document.getElementById("sb-filter").textContent=isJa?"\u30E2\u30C7\u30EB":"Model";
   document.getElementById("sb-size").textContent=isJa?"\u30C9\u30C3\u30C8\u30B5\u30A4\u30BA\uFF1D\u57F7\u884C\u529B":"Dot size = enforcement";
   document.getElementById("sb-compare").textContent=isJa?"\u6BD4\u8F03\u30E2\u30FC\u30C9":"Compare mode";
+  document.getElementById("sb-glance").textContent=isJa?"\u6982\u8981":"At a glance";
   document.getElementById("f-all").textContent=isJa?"\u3059\u3079\u3066":"All";
   document.getElementById("f-rights").textContent=isJa?"\u6A29\u5229\u30D9\u30FC\u30B9":"Rights-based";
   document.getElementById("f-market").textContent=isJa?"\u5E02\u5834\u5FD7\u5411":"Market-oriented";
   document.getElementById("f-sovereign").textContent=isJa?"\u4E3B\u6A29\u91CD\u8996":"Sovereignty";
   document.getElementById("f-hybrid").textContent=isJa?"\u30CF\u30A4\u30D6\u30EA\u30C3\u30C9":"Hybrid";
   document.getElementById("sz-strong").textContent=isJa?"\u5F37\u3044\u6CD5\u7684\u626F\u675F\u529B":"Strong binding";
+  document.getElementById("compare-btn-text").textContent=isJa?"2\u56FD\u3092\u9078\u629E":"Select 2 countries";
   document.getElementById("sz-mod").textContent=isJa?"\u4E2D\u7A0B\u5EA6":"Moderate";
   document.getElementById("sz-part").textContent=isJa?"\u90E8\u5206\u7684":"Partial";
   document.getElementById("sz-vol").textContent=isJa?"\u81EA\u767A\u7684":"Voluntary";
@@ -1797,6 +1893,7 @@ function toggleLang() {
   document.getElementById("vt-tri").innerHTML=isJa?"&#9651; \u4E09\u89D2\u5F62":"&#9651; Triangle";
   document.getElementById("vt-comp").innerHTML=isJa?"&#10010; \u30B3\u30F3\u30D1\u30B9":"&#10010; Compass";
   applySectionI18n(currentLang);
+  updateCrisisOverlay(currentYear);
   draw();
   if (selectedCountry) openPanel(selectedCountry);
 }

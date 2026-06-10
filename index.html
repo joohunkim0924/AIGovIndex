@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global AI Governance Index — Joohun Kim</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #0D1B2A;
+  --navy2:   #162638;
+  --navy3:   #1E3450;
+  --blue:    #1B6FD4;
+  --blue2:   #2882F0;
+  --amber:   #E8950A;
+  --amber2:  #F0A830;
+  --rights:  #1B6FD4;
+  --market:  #1A6B42;
+  --sov:     #8B1A1A;
+  --hybrid:  #7A4A00;
+  --off:     #F5F2EC;
+  --off2:    #EDE9E0;
+  --off3:    #E0DDD4;
+  --text:    #0D1B2A;
+  --text2:   #2D3748;
+  --text3:   #6B7280;
+  --border:  #D4CFC6;
+  --white:   #FFFFFF;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow-x:hidden;}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--off);font-size:14px;line-height:1.65;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,27,42,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);padding:0 2rem;height:52px;display:flex;align-items:center;justify-content:space-between;}
+.nav-brand{font-family:'DM Serif Display',serif;font-size:16px;color:var(--amber);letter-spacing:0.01em;}
+.nav-brand span{color:rgba(255,255,255,0.5);font-family:'Inter',sans-serif;font-size:12px;margin-left:8px;font-style:italic;}
+.nav-links{display:flex;gap:1.5rem;align-items:center;}
+.nav-links a{font-size:12px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.04em;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover{color:var(--off);}
+
+/* ── HERO SECTION ── */
+#hero{height:100vh;display:flex;flex-direction:column;padding-top:52px;position:relative;overflow:hidden;}
+.hero-header{padding:1.8rem 2rem 0.8rem;display:flex;align-items:flex-end;justify-content:space-between;flex-shrink:0;}
+.hero-title{font-family:'DM Serif Display',serif;font-size:2rem;line-height:1.1;color:var(--off);}
+.hero-title em{color:var(--amber);font-style:italic;}
+.hero-sub{font-size:12px;color:rgba(255,255,255,0.45);max-width:340px;text-align:right;line-height:1.6;}
+.hero-sub strong{color:rgba(255,255,255,0.7);}
+
+/* ── MAP AREA ── */
+#map-area{flex:1;display:flex;gap:0;min-height:0;position:relative;}
+
+/* ── SIDEBAR ── */
+#sidebar{width:220px;flex-shrink:0;padding:1rem 1.2rem;border-right:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;gap:1.4rem;overflow-y:auto;}
+.sb-section-label{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:0.5rem;}
+
+.filter-group{display:flex;flex-direction:column;gap:4px;}
+.filter-btn{display:flex;align-items:center;gap:7px;padding:5px 8px;border-radius:5px;border:none;background:transparent;cursor:pointer;font-size:12px;color:rgba(255,255,255,0.55);text-align:left;transition:all 0.15s;font-family:'Inter',sans-serif;}
+.filter-btn:hover{background:rgba(255,255,255,0.06);color:var(--off);}
+.filter-btn.active{background:rgba(255,255,255,0.1);color:var(--off);}
+.filter-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+
+.size-legend{display:flex;flex-direction:column;gap:6px;}
+.size-row{display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,0.45);}
+.size-circle{border-radius:50%;background:rgba(255,255,255,0.25);flex-shrink:0;}
+
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.stat-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.07);border-radius:6px;padding:8px;text-align:center;}
+.stat-num{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--amber);line-height:1;}
+.stat-lbl{font-size:9px;color:rgba(255,255,255,0.4);margin-top:2px;letter-spacing:0.04em;text-transform:uppercase;}
+
+.about-text{font-size:11px;color:rgba(255,255,255,0.4);line-height:1.65;}
+.about-text a{color:var(--amber);text-decoration:none;}
+
+/* ── CANVAS WRAPPER ── */
+#canvas-wrap{flex:1;position:relative;overflow:hidden;}
+#tri-canvas{width:100%;height:100%;}
+
+/* ── TOOLTIP ── */
+#tooltip{position:absolute;background:rgba(13,27,42,0.96);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:10px 14px;font-size:12px;pointer-events:none;opacity:0;transition:opacity 0.15s;max-width:200px;z-index:50;line-height:1.6;color:var(--off);}
+#tooltip .tt-name{font-weight:600;font-size:13px;margin-bottom:4px;}
+#tooltip .tt-coords{font-size:10px;color:rgba(255,255,255,0.45);margin-bottom:4px;}
+#tooltip .tt-bind{font-size:10px;color:var(--amber);}
+
+/* ── COUNTRY PANEL (slides up) ── */
+#country-panel{position:fixed;bottom:-100%;left:0;right:0;background:var(--navy2);border-top:1px solid rgba(255,255,255,0.1);border-radius:16px 16px 0 0;padding:0;z-index:90;transition:bottom 0.4s cubic-bezier(0.4,0,0.2,1);max-height:55vh;overflow:hidden;}
+#country-panel.open{bottom:0;}
+.panel-drag{width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,0.15);margin:10px auto 0;}
+.panel-inner{padding:1.2rem 1.8rem 1.8rem;overflow-y:auto;max-height:calc(55vh - 24px);}
+.panel-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.2rem;}
+.panel-flag-name{display:flex;align-items:center;gap:10px;}
+.panel-flag{font-size:2rem;}
+.panel-name{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--off);}
+.panel-model{font-size:11px;padding:3px 10px;border-radius:3px;margin-top:3px;display:inline-block;font-weight:500;}
+.pm-rights{background:rgba(27,111,212,0.2);color:#6BAFF4;}
+.pm-market{background:rgba(26,107,66,0.2);color:#6DBF8C;}
+.pm-sovereign{background:rgba(139,26,26,0.2);color:#F48C8C;}
+.pm-hybrid{background:rgba(122,74,0,0.2);color:#F4B86D;}
+.panel-close{background:rgba(255,255,255,0.07);border:none;color:rgba(255,255,255,0.5);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;}
+.panel-close:hover{background:rgba(255,255,255,0.12);color:var(--off);}
+
+.panel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin-bottom:1.2rem;}
+.panel-stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:6px;padding:10px 12px;text-align:center;}
+.ps-num{font-family:'DM Serif Display',serif;font-size:1.4rem;line-height:1;}
+.ps-lbl{font-size:9px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.05em;margin-top:2px;}
+.ps-rights .ps-num{color:#6BAFF4;}
+.ps-market .ps-num{color:#6DBF8C;}
+.ps-sov .ps-num{color:#F48C8C;}
+
+.bind-bar{margin-bottom:1rem;}
+.bind-label{font-size:10px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}
+.bind-track{height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;}
+.bind-fill{height:100%;border-radius:3px;background:var(--amber);transition:width 0.5s;}
+
+.panel-desc{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:1rem;}
+.panel-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.panel-tag{font-size:10px;padding:3px 9px;border-radius:3px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.55);}
+
+/* ── METHODOLOGY SECTION ── */
+#methodology{background:var(--off);color:var(--text);padding:5rem 2rem;}
+.method-inner{max-width:860px;margin:0 auto;}
+.method-tag{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:0.6rem;}
+.method-h2{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--navy);margin-bottom:0.5rem;}
+.method-sub{font-size:14px;color:var(--text3);margin-bottom:2.5rem;max-width:560px;line-height:1.7;}
+.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-bottom:2.5rem;}
+.method-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.4rem;}
+.mc-num{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--amber);line-height:1;margin-bottom:0.5rem;}
+.mc-title{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:0.4rem;}
+.mc-body{font-size:12px;color:var(--text3);line-height:1.6;}
+.method-note{background:var(--off2);border-left:3px solid var(--amber);padding:1rem 1.4rem;border-radius:0 6px 6px 0;font-size:13px;color:var(--text2);line-height:1.7;}
+
+/* ── COUNTRY TABLE ── */
+#countries{background:var(--off2);padding:4rem 2rem;}
+.ct-inner{max-width:860px;margin:0 auto;}
+.ct-tag{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:0.6rem;}
+.ct-h2{font-family:'DM Serif Display',serif;font-size:2rem;color:var(--navy);margin-bottom:1.5rem;}
+.ct-table{width:100%;border-collapse:collapse;font-size:12px;}
+.ct-table th{background:var(--navy);color:rgba(255,255,255,0.8);padding:8px 12px;text-align:left;font-weight:500;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;}
+.ct-table td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle;}
+.ct-table tr:hover td{background:var(--off3);cursor:pointer;}
+.ct-country{font-weight:500;color:var(--navy);display:flex;align-items:center;gap:6px;}
+.ct-model{font-size:10px;padding:2px 7px;border-radius:2px;font-weight:500;}
+.ctm-r{background:#DBEAFE;color:#1D4ED8;}
+.ctm-m{background:#DCFCE7;color:#166534;}
+.ctm-s{background:#FEE2E2;color:#991B1B;}
+.ctm-h{background:#FEF3C7;color:#92400E;}
+.ct-bar-wrap{width:80px;height:5px;background:var(--off3);border-radius:2px;overflow:hidden;}
+.ct-bar{height:100%;border-radius:2px;background:var(--amber);}
+.ct-bind{font-weight:500;font-size:11px;}
+.bind-yes{color:#166534;}.bind-no{color:#991B1B;}.bind-part{color:#92400E;}
+
+/* ── FOOTER ── */
+footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.07);padding:2rem;text-align:center;font-size:11px;color:rgba(255,255,255,0.3);}
+footer a{color:rgba(255,255,255,0.5);text-decoration:none;}
+
+/* ── CLICK HINT ── */
+#click-hint{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-size:11px;color:rgba(255,255,255,0.3);pointer-events:none;animation:fadeHint 3s ease-in-out 1.5s forwards;opacity:0;}
+@keyframes fadeHint{0%{opacity:0}20%{opacity:1}80%{opacity:1}100%{opacity:0}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">AI Governance Index <span>by Joohun Kim</span></div>
+  <div class="nav-links">
+    <a href="#hero">Map</a>
+    <a href="#methodology">Methodology</a>
+    <a href="#countries">All Countries</a>
+    <a href="https://citp.princeton.edu" target="_blank">Princeton CITP</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-header">
+    <div>
+      <div class="hero-title">Global AI Governance<br><em>Philosophy Map</em></div>
+    </div>
+    <div class="hero-sub">
+      <strong>16 jurisdictions</strong> mapped across three competing governance philosophies.<br>
+      Dot size = binding enforcement strength. Click any country to explore.
+    </div>
+  </div>
+
+  <div id="map-area">
+    <div id="sidebar">
+      <div>
+        <div class="sb-section-label">Filter by model</div>
+        <div class="filter-group">
+          <button class="filter-btn active" onclick="setFilter('all',this)"><span class="filter-dot" style="background:rgba(255,255,255,0.4)"></span>All countries</button>
+          <button class="filter-btn" onclick="setFilter('rights',this)"><span class="filter-dot" style="background:#1B6FD4"></span>Rights-based</button>
+          <button class="filter-btn" onclick="setFilter('market',this)"><span class="filter-dot" style="background:#1A6B42"></span>Market-oriented</button>
+          <button class="filter-btn" onclick="setFilter('sovereign',this)"><span class="filter-dot" style="background:#8B1A1A"></span>Sovereignty-centered</button>
+          <button class="filter-btn" onclick="setFilter('hybrid',this)"><span class="filter-dot" style="background:#7A4A00"></span>Hybrid</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="sb-section-label">Dot size = enforcement</div>
+        <div class="size-legend">
+          <div class="size-row"><div class="size-circle" style="width:18px;height:18px"></div><span>Strong binding</span></div>
+          <div class="size-row"><div class="size-circle" style="width:12px;height:12px"></div><span>Moderate</span></div>
+          <div class="size-row"><div class="size-circle" style="width:7px;height:7px"></div><span>Partial / sector</span></div>
+          <div class="size-row"><div class="size-circle" style="width:5px;height:5px"></div><span>Voluntary only</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sb-section-label">Index at a glance</div>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-num">16</div><div class="stat-lbl">Jurisdictions</div></div>
+          <div class="stat-card"><div class="stat-num">3</div><div class="stat-lbl">Models</div></div>
+          <div class="stat-card"><div class="stat-num">72+</div><div class="stat-lbl">Countries<br>with AI policy</div></div>
+          <div class="stat-card"><div class="stat-num">3</div><div class="stat-lbl">Fully binding</div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sb-section-label">About</div>
+        <div class="about-text">
+          Research by <a href="#">Joohun Kim</a>, Brown University.<br>
+          Produced during a placement at the <a href="https://aiga.or.jp" target="_blank">AI Governance Association (AIGA)</a>, Tokyo, as part of the <a href="https://citp.princeton.edu" target="_blank">Siegel PIT-SF Fellowship</a> at Princeton CITP.<br><br>
+          Updated June 2026.
+        </div>
+      </div>
+    </div>
+
+    <div id="canvas-wrap">
+      <canvas id="tri-canvas"></canvas>
+      <div id="tooltip">
+        <div class="tt-name" id="tt-name"></div>
+        <div class="tt-coords" id="tt-coords"></div>
+        <div class="tt-bind" id="tt-bind"></div>
+      </div>
+      <div id="click-hint">Click any country dot to explore</div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTRY DETAIL PANEL -->
+<div id="country-panel">
+  <div class="panel-drag"></div>
+  <div class="panel-inner">
+    <div class="panel-header">
+      <div class="panel-flag-name">
+        <div class="panel-flag" id="p-flag"></div>
+        <div>
+          <div class="panel-name" id="p-name"></div>
+          <div class="panel-model" id="p-model"></div>
+        </div>
+      </div>
+      <button class="panel-close" onclick="closePanel()">✕</button>
+    </div>
+    <div class="panel-grid">
+      <div class="panel-stat ps-rights"><div class="ps-num" id="p-rights"></div><div class="ps-lbl">Rights</div></div>
+      <div class="panel-stat ps-market"><div class="ps-num" id="p-market"></div><div class="ps-lbl">Market</div></div>
+      <div class="panel-stat ps-sov"><div class="ps-num" id="p-sov"></div><div class="ps-lbl">Sovereign</div></div>
+    </div>
+    <div class="bind-bar">
+      <div class="bind-label">Binding enforcement strength</div>
+      <div class="bind-track"><div class="bind-fill" id="p-bind-fill"></div></div>
+    </div>
+    <div class="panel-desc" id="p-desc"></div>
+    <div class="panel-tags" id="p-tags"></div>
+  </div>
+</div>
+
+<!-- METHODOLOGY -->
+<section id="methodology">
+  <div class="method-inner">
+    <div class="method-tag">How it works</div>
+    <h2 class="method-h2">Methodology</h2>
+    <p class="method-sub">Each jurisdiction is positioned on a ternary plot — a triangular coordinate system — based on how strongly its AI governance framework pulls toward each of three philosophical poles.</p>
+    <div class="method-grid">
+      <div class="method-card">
+        <div class="mc-num">01</div>
+        <div class="mc-title">Three governance philosophies</div>
+        <div class="mc-body">Every framework is evaluated across three dimensions: rights-protective orientation, market-oriented flexibility, and state sovereignty emphasis. Coordinates sum to 1.0.</div>
+      </div>
+      <div class="method-card">
+        <div class="mc-num">02</div>
+        <div class="mc-title">Dot size = enforcement</div>
+        <div class="mc-body">Dot size independently encodes binding enforcement strength — whether the framework has legally enforceable obligations with meaningful penalties. Larger = stronger binding law.</div>
+      </div>
+      <div class="method-card">
+        <div class="mc-num">03</div>
+        <div class="mc-title">Position ≠ ranking</div>
+        <div class="mc-body">This is a positioning tool, not a grading system. No country scores "higher" than another. The map reveals philosophical orientation and governance architecture, not quality.</div>
+      </div>
+    </div>
+    <div class="method-note">
+      <strong>Key insight:</strong> The EU and China are both large dots (strong binding enforcement) but sit at opposite corners of the triangle. This reveals that binding enforcement is not the same as rights protection — China uses binding law to enforce state control, the EU uses it to protect individual rights. Enforcement strength and governance philosophy are independent dimensions.
+    </div>
+  </div>
+</section>
+
+<!-- COUNTRY TABLE -->
+<section id="countries">
+  <div class="ct-inner">
+    <div class="ct-tag">Full dataset</div>
+    <h2 class="ct-h2">All jurisdictions</h2>
+    <table class="ct-table" id="ct">
+      <thead>
+        <tr>
+          <th>Jurisdiction</th>
+          <th>Model</th>
+          <th>Binding?</th>
+          <th>Rights</th>
+          <th>Market</th>
+          <th>Sovereign</th>
+          <th>Enforcement</th>
+        </tr>
+      </thead>
+      <tbody id="ct-body"></tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  Global AI Governance Philosophy Index · Research by <a href="#">Joohun Kim</a> · Brown University · AIGA Placement · Siegel PIT-SF Fellowship, Princeton University CITP · June 2026
+</footer>
+
+<script>
+// ── DATA ────────────────────────────────────────────────────────────────────
+const countries = [
+  {id:'eu',   flag:'🇪🇺', name:'European Union',  group:'rights',   r:0.72,m:0.18,s:0.10, bind:95,
+   modelLabel:'Rights-based', modelClass:'pm-rights', ctmClass:'ctm-r',
+   bindText:'Strong — AI Act 2024',
+   desc:'The paradigmatic rights-based model. EU AI Act establishes 4-tier risk classification with prohibited uses, GPAI obligations for foundation models, and penalties up to €35M or 7% global turnover. August 2026 high-risk enforcement deadline.',
+   tags:['EU AI Act 2024','GPAI obligations','€35M penalty','4 risk tiers','Brussels Effect','Aug 2026 enforcement']},
+  {id:'kr',   flag:'🇰🇷', name:'South Korea',     group:'hybrid',   r:0.52,m:0.30,s:0.18, bind:75,
+   modelLabel:'Hybrid', modelClass:'pm-hybrid', ctmClass:'ctm-h',
+   bindText:'Moderate — AI Basic Act Jan 2026',
+   desc:'First binding AI law in Asia-Pacific. Hybrid model balancing binding obligations for high-impact AI with explicit innovation promotion. KAISI established with international cooperation. Lighter penalties than EU.',
+   tags:['AI Basic Act 2026','High-impact AI','KAISI','First in Asia-Pacific','Hybrid model']},
+  {id:'cn',   flag:'🇨🇳', name:'China',           group:'sovereign',r:0.08,m:0.10,s:0.82, bind:90,
+   modelLabel:'Sovereignty-centered', modelClass:'pm-sovereign', ctmClass:'ctm-s',
+   bindText:'Strong — sectoral laws',
+   desc:'Paradigmatic sovereignty-centered model. Binding sectoral regulations covering algorithms, deepfakes, and generative AI. Mandatory CAC registration. Content must align with state values. Actively exporting governance model to Global South.',
+   tags:['Generative AI rules 2023','Algorithm rules 2022','CAC registration','WAICO proposal','Belt and Road governance']},
+  {id:'us',   flag:'🇺🇸', name:'United States',   group:'market',   r:0.30,m:0.52,s:0.18, bind:35,
+   modelLabel:'Market-oriented', modelClass:'pm-market', ctmClass:'ctm-m',
+   bindText:'Partial — state laws only',
+   desc:'Fragmented governance under deregulatory federal pressure. No federal AI law. NIST AI RMF voluntary. State laws (Colorado, Texas) binding but federal preemption underway. Trump admin AI Action Plan frames AI as geopolitical competition.',
+   tags:['NIST AI RMF','No federal AI law','State patchwork','EO 14365 preemption','AI Action Plan 2025']},
+  {id:'jp',   flag:'🇯🇵', name:'Japan',           group:'market',   r:0.18,m:0.68,s:0.14, bind:12,
+   modelLabel:'Market-oriented', modelClass:'pm-market', ctmClass:'ctm-m',
+   bindText:'Voluntary only — no AI penalties',
+   desc:'Paradigmatic market-oriented model. AI Promotion Act 2025 uses non-binding duties to endeavor. No AI-specific financial penalties. Governance operationalized through AIGA and METI guidelines. G7 Hiroshima Process architect. Pluralistic interoperability concept.',
+   tags:['AI Promotion Act 2025','AIGA self-governance','G7 Hiroshima Process','No penalties','Pluralistic interoperability']},
+  {id:'sg',   flag:'🇸🇬', name:'Singapore',       group:'market',   r:0.20,m:0.70,s:0.10, bind:14,
+   modelLabel:'Market-oriented', modelClass:'pm-market', ctmClass:'ctm-m',
+   bindText:'Voluntary only',
+   desc:'Most technically sophisticated soft-law framework globally. World\'s first governance framework for agentic AI (Jan 2026) with 5-tier autonomy classification. AI Verify testing toolkit. No binding national AI law. ASEAN regional governance leader.',
+   tags:['Agentic AI framework 2026','AI Verify toolkit','Model AI Gov. Framework','No binding law','ASEAN leader']},
+  {id:'uk',   flag:'🇬🇧', name:'United Kingdom',  group:'market',   r:0.42,m:0.46,s:0.12, bind:25,
+   modelLabel:'Market-oriented', modelClass:'pm-market', ctmClass:'ctm-m',
+   bindText:'Sector-specific only',
+   desc:'Pro-innovation principles-based approach. No unified AI law. Sector-specific regulators (FCA, ICO, MHRA, CMA) each address AI in their domain. AI Safety Institute established after Bletchley Declaration. Post-2025 government showing openness to some binding rules.',
+   tags:['AI Reg. White Paper 2023','AI Safety Institute','Bletchley Declaration','Sector-specific','Pro-innovation']},
+  {id:'br',   flag:'🇧🇷', name:'Brazil',          group:'hybrid',   r:0.58,m:0.26,s:0.16, bind:52,
+   modelLabel:'Hybrid', modelClass:'pm-hybrid', ctmClass:'ctm-h',
+   bindText:'Pending — Bill 2338 passed Senate',
+   desc:'EU-inspired 4-tier framework adapted explicitly for Brazil\'s social inequality and racial justice context. First Latin American comprehensive AI law. Bill passed Senate December 2024. Includes anti-discrimination provisions targeting structural racism.',
+   tags:['Bill 2338','EU-inspired','Racial justice focus','4-tier framework','Latin America first']},
+  {id:'ca',   flag:'🇨🇦', name:'Canada',          group:'hybrid',   r:0.55,m:0.36,s:0.09, bind:15,
+   modelLabel:'Hybrid', modelClass:'pm-hybrid', ctmClass:'ctm-h',
+   bindText:'Voluntary — AIDA failed 2025',
+   desc:'Proposed binding law (AIDA) failed in Parliament 2025. Soft-law approach emphasizing OECD and EU interoperability. GPAI Secretariat host. Canada AI Safety Institute established. Active in international governance coordination.',
+   tags:['AIDA failed 2025','GPAI Secretariat','AI Safety Institute','Soft-law','OECD alignment']},
+  {id:'au',   flag:'🇦🇺', name:'Australia',       group:'hybrid',   r:0.48,m:0.38,s:0.14, bind:22,
+   modelLabel:'Hybrid', modelClass:'pm-hybrid', ctmClass:'ctm-h',
+   bindText:'Proposed — not yet enacted',
+   desc:'Voluntary AI Ethics Framework (2019) as baseline. 2024 consultation proposed mandatory rules for high-risk AI in critical services and employment. Bletchley Declaration signatory. Moving toward binding rules but legislation not yet enacted.',
+   tags:['AI Ethics Framework 2019','Proposed mandatory rules','Bletchley signatory','Moving toward binding']},
+  {id:'in',   flag:'🇮🇳', name:'India',           group:'hybrid',   r:0.25,m:0.60,s:0.15, bind:14,
+   modelLabel:'Hybrid', modelClass:'pm-hybrid', ctmClass:'ctm-h',
+   bindText:'Voluntary — sandbox model',
+   desc:'Sandbox-to-regulation model — encouraging experimentation before legislating. No binding AI law. RBI FREE-AI framework for finance. Digital India Act pending. NITI Aayog positions India to "own the disruption" in AI governance.',
+   tags:['Sandbox-to-regulation','RBI FREE-AI','Digital India Act pending','G20 AI principles']},
+  {id:'ae',   flag:'🇦🇪', name:'UAE',             group:'sovereign',r:0.12,m:0.28,s:0.60, bind:32,
+   modelLabel:'Sovereignty-centered', modelClass:'pm-sovereign', ctmClass:'ctm-s',
+   bindText:'Partial — sectoral rules',
+   desc:'AI governance as economic diversification tool. World\'s first AI Minister appointed 2017. Sector-specific binding rules in finance and healthcare. Vision 2030 AI hub ambition. State-directed content control alongside market development goals.',
+   tags:['First AI Minister 2017','Vision 2030','Sectoral rules','Economic diversification']},
+  {id:'cl',   flag:'🇨🇱', name:'Chile',           group:'rights',   r:0.65,m:0.28,s:0.07, bind:22,
+   modelLabel:'Rights-based', modelClass:'pm-rights', ctmClass:'ctm-r',
+   bindText:'Constitutional + proposed AI bill',
+   desc:'World\'s first country to constitutionally protect neuro-rights against AI mental manipulation. Proposed AI bill under public consultation. Rights-focused governance approach but limited binding AI-specific law so far.',
+   tags:['Constitutional neuro-rights','World first','Proposed AI bill','Rights-focused']},
+  {id:'ke',   flag:'🇰🇪', name:'Kenya',           group:'rights',   r:0.50,m:0.32,s:0.18, bind:18,
+   modelLabel:'Rights-based', modelClass:'pm-rights', ctmClass:'ctm-r',
+   bindText:'Proposed — Data Protection Act applies',
+   desc:'Most advanced AI governance framework in sub-Saharan Africa. Proposed AI licensing framework under Kenya Robotics and AI Society Bill. Data Protection Act 2019 already applies. African Union AI Strategy adopted.',
+   tags:['Sub-Saharan leader','AI licensing proposed','DPA 2019','AU AI Strategy']},
+  {id:'au2',  flag:'🌍', name:'African Union',    group:'rights',   r:0.55,m:0.28,s:0.17, bind:10,
+   modelLabel:'Rights-based', modelClass:'pm-rights', ctmClass:'ctm-r',
+   bindText:'Voluntary — AU-AI Strategy',
+   desc:'Unique governance framework classifying environmental harm (e-waste, carbon, water), system-level risks, structural inequality, and threats to African cultural values as primary risk categories. Explicit anti-digital-colonization focus.',
+   tags:['Environmental risk category','Cultural values protection','Anti-digital-colonization','Voluntary strategy']},
+  {id:'oecd', flag:'🌐', name:'OECD',             group:'rights',   r:0.60,m:0.30,s:0.10, bind:8,
+   modelLabel:'Intergovernmental', modelClass:'pm-rights', ctmClass:'ctm-r',
+   bindText:'Voluntary — 49 adherents',
+   desc:'First intergovernmental AI standard. 49 countries adhered to OECD AI Principles. Shaped NIST, ISO, and EU AI Act definitions. De facto secretariat for democratic AI governance. OECD.AI Policy Observatory tracks 70+ jurisdictions.',
+   tags:['49 adherents','OECD AI Principles 2019','OECD.AI Observatory','Intergovernmental','Shaped NIST + EU']},
+];
+
+// ── CANVAS SETUP ─────────────────────────────────────────────────────────────
+const canvas = document.getElementById('tri-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, activeFilter = 'all', selectedCountry = null;
+let mouseX = 0, mouseY = 0, hoveredCountry = null;
+
+// Triangle vertices in normalized [0,1] space → converted to canvas
+function getVerts() {
+  const pad = { top: 70, left: 60, right: 60, bottom: 80 };
+  const cx = W / 2, topY = pad.top;
+  const bY = H - pad.bottom;
+  const bLX = pad.left, bRX = W - pad.right;
+  return { top: [cx, topY], bl: [bLX, bY], br: [bRX, bY] };
+}
+
+function ternaryToXY(r, m, s) {
+  const v = getVerts();
+  const x = r * v.top[0] + m * v.bl[0] + s * v.br[0];
+  const y = r * v.top[1] + m * v.bl[1] + s * v.br[1];
+  return [x, y];
+}
+
+function bindRadius(bind) {
+  if (bind >= 85) return 16;
+  if (bind >= 65) return 13;
+  if (bind >= 40) return 10;
+  if (bind >= 20) return 7;
+  return 5;
+}
+
+const groupColor = {
+  rights:   '#1B6FD4',
+  market:   '#1A6B42',
+  sovereign:'#8B1A1A',
+  hybrid:   '#7A4A00',
+};
+
+function resize() {
+  const wrap = document.getElementById('canvas-wrap');
+  W = wrap.clientWidth;
+  H = wrap.clientHeight;
+  canvas.width = W * devicePixelRatio;
+  canvas.height = H * devicePixelRatio;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+  draw();
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  const v = getVerts();
+
+  // Subtle background zones
+  const zones = [
+    { pts: [v.top, v.bl, [(v.top[0]+v.bl[0]+v.br[0])/3, (v.top[1]+v.bl[1]+v.br[1])/3]], color: '#1B6FD4', alpha: 0.04 },
+    { pts: [v.top, v.br, [(v.top[0]+v.bl[0]+v.br[0])/3, (v.top[1]+v.bl[1]+v.br[1])/3]], color: '#8B1A1A', alpha: 0.04 },
+    { pts: [v.bl,  v.br, [(v.top[0]+v.bl[0]+v.br[0])/3, (v.top[1]+v.bl[1]+v.br[1])/3]], color: '#1A6B42', alpha: 0.03 },
+  ];
+  zones.forEach(z => {
+    ctx.beginPath();
+    ctx.moveTo(z.pts[0][0], z.pts[0][1]);
+    z.pts.slice(1).forEach(p => ctx.lineTo(p[0], p[1]));
+    ctx.closePath();
+    ctx.fillStyle = z.color;
+    ctx.globalAlpha = z.alpha;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  });
+
+  // Grid lines (1/3 divisions)
+  const thirds = [
+    [ternaryToXY(0.33,0.67,0), ternaryToXY(0.33,0,0.67)],
+    [ternaryToXY(0.67,0.33,0), ternaryToXY(0,0.33,0.67)],
+    [ternaryToXY(0,0.67,0.33), ternaryToXY(0.67,0,0.33)],
+  ];
+  thirds.forEach(([a,b]) => {
+    ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]);
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+    ctx.lineWidth = 0.5; ctx.setLineDash([4,4]); ctx.stroke(); ctx.setLineDash([]);
+  });
+
+  // Main triangle
+  ctx.beginPath();
+  ctx.moveTo(v.top[0], v.top[1]);
+  ctx.lineTo(v.bl[0], v.bl[1]);
+  ctx.lineTo(v.br[0], v.br[1]);
+  ctx.closePath();
+  ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Pole labels
+  const labels = [
+    { xy: v.top, main: 'Liberal-rights model', sub: '"governance is protective"', color: '#4A9AF4', dy: -36 },
+    { xy: v.bl,  main: 'Market-oriented',       sub: '"governance enables"',       color: '#4DBF85', dy: 28, dx: -5 },
+    { xy: v.br,  main: 'Sovereignty-centered',  sub: '"governance serves state"',  color: '#E87070', dy: 28, dx: 5 },
+  ];
+  labels.forEach(l => {
+    const x = l.xy[0] + (l.dx||0);
+    const y = l.xy[1] + l.dy;
+    ctx.font = '500 13px Inter, sans-serif';
+    ctx.fillStyle = l.color;
+    ctx.textAlign = 'center';
+    ctx.fillText(l.main, x, y);
+    ctx.font = '300 10px Inter, sans-serif';
+    ctx.fillStyle = l.color;
+    ctx.globalAlpha = 0.6;
+    ctx.fillText(l.sub, x, y + 15);
+    ctx.globalAlpha = 1;
+  });
+
+  // Country dots
+  const visible = countries.filter(c => activeFilter === 'all' || c.group === activeFilter);
+  const faded   = countries.filter(c => activeFilter !== 'all' && c.group !== activeFilter);
+
+  // Draw faded first
+  faded.forEach(c => {
+    const [x, y] = ternaryToXY(c.r, c.m, c.s);
+    const r = bindRadius(c.bind);
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI*2);
+    ctx.fillStyle = groupColor[c.group] || '#666';
+    ctx.globalAlpha = 0.07;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  });
+
+  // Draw visible
+  visible.forEach(c => {
+    const [x, y] = ternaryToXY(c.r, c.m, c.s);
+    const r = bindRadius(c.bind);
+    const isHovered = hoveredCountry && hoveredCountry.id === c.id;
+    const isSelected = selectedCountry && selectedCountry.id === c.id;
+    const col = groupColor[c.group] || '#666';
+
+    // Glow for hovered/selected
+    if (isHovered || isSelected) {
+      ctx.beginPath();
+      ctx.arc(x, y, r + 7, 0, Math.PI*2);
+      ctx.fillStyle = col;
+      ctx.globalAlpha = 0.18;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI*2);
+    ctx.fillStyle = col;
+    ctx.globalAlpha = isHovered || isSelected ? 1 : 0.88;
+    ctx.fill();
+
+    // White border for selected
+    if (isSelected) {
+      ctx.strokeStyle = 'rgba(255,255,255,0.8)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+
+    // Country name label
+    ctx.font = (isHovered || isSelected ? '600' : '400') + ' 11px Inter, sans-serif';
+    ctx.fillStyle = isHovered || isSelected ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.7)';
+    ctx.textAlign = 'center';
+    ctx.fillText(c.name, x, y - r - 6);
+  });
+}
+
+// ── INTERACTION ──────────────────────────────────────────────────────────────
+function getCountryAt(ex, ey) {
+  const rect = canvas.getBoundingClientRect();
+  const x = ex - rect.left, y = ey - rect.top;
+  for (const c of countries) {
+    const [cx, cy] = ternaryToXY(c.r, c.m, c.s);
+    const r = bindRadius(c.bind) + 5;
+    if (Math.hypot(x - cx, y - cy) <= r) return c;
+  }
+  return null;
+}
+
+canvas.addEventListener('mousemove', e => {
+  const c = getCountryAt(e.clientX, e.clientY);
+  canvas.style.cursor = c ? 'pointer' : 'default';
+  hoveredCountry = c;
+  if (c) {
+    const tt = document.getElementById('tooltip');
+    document.getElementById('tt-name').textContent = c.flag + '  ' + c.name;
+    document.getElementById('tt-coords').textContent =
+      'Rights ' + Math.round(c.r*100) + '%  ·  Market ' + Math.round(c.m*100) + '%  ·  Sovereign ' + Math.round(c.s*100) + '%';
+    document.getElementById('tt-bind').textContent = c.bindText;
+    const rect = canvas.getBoundingClientRect();
+    let lx = e.clientX - rect.left + 14;
+    let ly = e.clientY - rect.top - 10;
+    if (lx + 210 > W) lx = e.clientX - rect.left - 220;
+    tt.style.left = lx + 'px'; tt.style.top = ly + 'px';
+    tt.style.opacity = '1';
+  } else {
+    document.getElementById('tooltip').style.opacity = '0';
+  }
+  draw();
+});
+
+canvas.addEventListener('mouseleave', () => {
+  hoveredCountry = null;
+  document.getElementById('tooltip').style.opacity = '0';
+  draw();
+});
+
+canvas.addEventListener('click', e => {
+  const c = getCountryAt(e.clientX, e.clientY);
+  if (c) { selectedCountry = c; openPanel(c); draw(); }
+  else { selectedCountry = null; closePanel(); draw(); }
+});
+
+// ── PANEL ────────────────────────────────────────────────────────────────────
+function openPanel(c) {
+  document.getElementById('p-flag').textContent = c.flag;
+  document.getElementById('p-name').textContent = c.name;
+  const pm = document.getElementById('p-model');
+  pm.textContent = c.modelLabel;
+  pm.className = 'panel-model ' + c.modelClass;
+  document.getElementById('p-rights').textContent = Math.round(c.r*100) + '%';
+  document.getElementById('p-market').textContent = Math.round(c.m*100) + '%';
+  document.getElementById('p-sov').textContent    = Math.round(c.s*100) + '%';
+  document.getElementById('p-bind-fill').style.width = c.bind + '%';
+  document.getElementById('p-desc').textContent = c.desc;
+  const tags = document.getElementById('p-tags');
+  tags.innerHTML = c.tags.map(t => `<span class="panel-tag">${t}</span>`).join('');
+  document.getElementById('country-panel').classList.add('open');
+}
+
+function closePanel() {
+  document.getElementById('country-panel').classList.remove('open');
+  selectedCountry = null;
+  draw();
+}
+
+// ── FILTER ───────────────────────────────────────────────────────────────────
+function setFilter(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  draw();
+}
+
+// ── TABLE ────────────────────────────────────────────────────────────────────
+function buildTable() {
+  const tbody = document.getElementById('ct-body');
+  countries.forEach(c => {
+    const tr = document.createElement('tr');
+    const bindLabel = c.bind >= 70 ? `<span class="ct-bind bind-yes">Yes — binding</span>`
+                    : c.bind >= 35 ? `<span class="ct-bind bind-part">Partial</span>`
+                    : `<span class="ct-bind bind-no">Voluntary</span>`;
+    tr.innerHTML = `
+      <td><div class="ct-country">${c.flag} ${c.name}</div></td>
+      <td><span class="ct-model ${c.ctmClass}">${c.modelLabel}</span></td>
+      <td>${bindLabel}</td>
+      <td>${Math.round(c.r*100)}%</td>
+      <td>${Math.round(c.m*100)}%</td>
+      <td>${Math.round(c.s*100)}%</td>
+      <td><div style="display:flex;align-items:center;gap:8px">
+        <div class="ct-bar-wrap"><div class="ct-bar" style="width:${c.bind}%"></div></div>
+        <span style="font-size:11px;color:var(--text3)">${c.bind}/100</span>
+      </div></td>`;
+    tr.addEventListener('click', () => {
+      selectedCountry = c;
+      openPanel(c);
+      document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => draw(), 400);
+    });
+    tbody.appendChild(tr);
+  });
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+window.addEventListener('resize', resize);
+resize();
+buildTable();
+</script>
+</body>
+</html>

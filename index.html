@@ -691,8 +691,20 @@ var canvas = document.getElementById("tri-canvas");
 var ctx = canvas.getContext("2d");
 
 function getVerts() {
-  var pad = {top:70,left:160,right:160,bot:85};
-  return {top:[W/2,pad.top], bl:[pad.left,H-pad.bot], br:[W-pad.right,H-pad.bot]};
+  var isMobile = window.innerWidth < 768;
+  
+  var pad = {
+    top: isMobile ? 40 : 35,   
+    left: isMobile ? 30 : 160, 
+    right: isMobile ? 30 : 160, 
+    bot: isMobile ? 50 : 50    
+  }; 
+  
+  return {
+    top: [W / 2, pad.top], 
+    bl: [pad.left, H - pad.bot], 
+    br: [W - pad.right, H - pad.bot]
+  };
 }
 
 function ternaryToXY(r,m,s) {

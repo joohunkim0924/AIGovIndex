@@ -163,6 +163,15 @@ input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);curs
 .news-card-title a{color:inherit;text-decoration:none;}
 .news-card-title a:hover{text-decoration:underline;}
 .news-card-date{font-size:10px;color:rgba(255,255,255,.3);}
+.news-headlines{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;}
+@media(max-width:900px){.news-headlines{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.news-headlines{grid-template-columns:1fr;}}
+.news-title-row{display:flex;align-items:center;gap:.65rem;flex-wrap:wrap;}
+.news-live-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 8px;border-radius:999px;background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.35);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#FCA5A5;line-height:1;}
+.news-live-dot{width:7px;height:7px;border-radius:50%;background:#EF4444;box-shadow:0 0 0 0 rgba(239,68,68,.7);animation:live-pulse 1.4s ease-in-out infinite;}
+@keyframes live-pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(239,68,68,.65);}50%{opacity:.35;box-shadow:0 0 0 5px rgba(239,68,68,0);}}
+.news-updated{font-size:11px;color:rgba(255,255,255,.35);margin-top:.35rem;}
+.news-updated.refreshing{color:var(--amber);}
 .tl-year-group{margin-bottom:.8rem;}
 .tl-year-header{display:flex;align-items:center;gap:10px;cursor:pointer;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:.8rem;user-select:none;}
 .tl-year-num{font-family:"DM Serif Display",serif;font-size:1.4rem;color:var(--amber);min-width:50px;}
@@ -430,23 +439,18 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
 
 <section id="news-section">
   <div class="sec-inner">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.8rem;">
-      <div>
-        <div class="sec-tag">Live updates</div>
-        <h2 style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--off);">Recent AI Governance News</h2>
-        <p style="font-size:12px;color:rgba(255,255,255,.35);margin-top:.3rem;">Links to original sources. Updated on page load via public RSS feeds.</p>
+    <div style="margin-bottom:1.5rem;">
+      <div class="sec-tag">Live updates</div>
+      <div class="news-title-row">
+        <h2 style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--off);margin:0;">Recent AI Governance News</h2>
+        <span class="news-live-badge" aria-label="Live feed"><span class="news-live-dot"></span>Live</span>
       </div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap;">
-        <button class="news-filter active" onclick="filterNews('all',this)">All</button>
-        <button class="news-filter" onclick="filterNews('Guardian',this)">Guardian</button>
-        <button class="news-filter" onclick="filterNews('Reuters',this)">Reuters</button>
-        <button class="news-filter" onclick="filterNews('BBC',this)">BBC</button>
-        <button class="news-filter" onclick="filterNews('MIT',this)">MIT Tech Review</button>
-      </div>
+      <p style="font-size:12px;color:rgba(255,255,255,.35);margin-top:.3rem;">Top headlines on AI policy and regulation from BBC, CNN, The Economist, The Guardian, NYT, and more. Refreshes automatically.</p>
+      <p class="news-updated" id="news-updated"></p>
     </div>
-    <div id="news-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.8rem;"></div>
-    <div id="news-loading" style="text-align:center;padding:2rem;color:rgba(255,255,255,.3);font-size:13px;">Loading latest AI governance news...</div>
-    <p style="font-size:11px;color:rgba(255,255,255,.2);margin-top:1rem;text-align:center;">News sourced from public RSS feeds. Links open original source.</p>
+    <div id="news-grid" class="news-headlines"></div>
+    <div id="news-loading" style="text-align:center;padding:2rem;color:rgba(255,255,255,.3);font-size:13px;">Loading latest AI governance headlines...</div>
+    <p style="font-size:11px;color:rgba(255,255,255,.2);margin-top:1rem;text-align:center;">Headlines link to original reporting. Sourced via public RSS feeds.</p>
   </div>
 </section>
 
@@ -1781,56 +1785,146 @@ function filterTimeline(cat,btn) {
 
 // ── NEWS FEED ─────────────────────────────────────────────────────────────────
 var RSS_SOURCES = [
-  {name:"Guardian",url:"https://www.theguardian.com/technology/artificialintelligenceai/rss",color:"#0052CC"},
-  {name:"MIT",url:"https://www.technologyreview.com/feed/",color:"#E8950A"},
-  {name:"BBC",url:"http://feeds.bbci.co.uk/news/technology/rss.xml",color:"#BB1919"},
-  {name:"Reuters",url:"https://feeds.reuters.com/reuters/technologyNews",color:"#FF8000"}
+  {name:"The Guardian",url:"https://www.theguardian.com/technology/artificialintelligenceai/rss",color:"#0052CC",aiSection:true},
+  {name:"BBC",url:"https://feeds.bbci.co.uk/news/technology/rss.xml",color:"#BB1919"},
+  {name:"NYT",url:"https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",color:"#C4C4C4"},
+  {name:"CNN",url:"http://rss.cnn.com/rss/edition_technology.rss",color:"#CC0000"},
+  {name:"The Economist",url:"https://www.economist.com/science-and-technology/rss.xml",color:"#E3120B"},
+  {name:"Financial Times",url:"https://www.ft.com/technology?format=rss",color:"#FFF1E5"},
+  {name:"NPR",url:"https://feeds.npr.org/1019/rss.xml",color:"#00A0DF"}
 ];
-var AI_KEYWORDS = ["AI","artificial intelligence","regulation","governance","policy","law","legislation","EU AI Act","OpenAI","Anthropic","algorithm","LLM","ChatGPT","machine learning"];
-var allNewsItems = [];
-var activeNewsFilter = "all";
+var GOV_KEYWORDS = [
+  "governance","regulation","regulatory","legislat","policy","lawmaker","congress","senate",
+  "parliament","executive order","antitrust","compliance","oversight","eu ai act","ai act",
+  "binding","framework","enforcement","liability","summit","treaty","government","federal",
+  "commission","lawsuit","privacy law","deepfake law","copyright","safety board","ban ai",
+  "restrict","oecd","unesco","bletchley","hiroshima","white house","brussels","european union"
+];
+var AI_SIGNALS = ["artificial intelligence"," ai ","openai","anthropic","chatgpt","llm","algorithm","machine learning","deepfake","facial recognition","generative ai","frontier model"];
+var NEWS_HEADLINE_COUNT = 4;
+var NEWS_REFRESH_MS = 15 * 60 * 1000;
+var newsHeadlines = [];
+var newsRefreshTimer = null;
+var newsLoading = false;
 
-function fetchNewsFeed(source) {
-  var proxyUrl="https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(source.url)+"&count=6";
-  return fetch(proxyUrl).then(function(res){return res.json();}).then(function(data){
-    if (data.status!=="ok") return [];
-    return (data.items||[]).map(function(item){
-      return {source:source.name,color:source.color,title:item.title,link:item.link,
-              date:item.pubDate?new Date(item.pubDate).toLocaleDateString():"",
-              relevant:AI_KEYWORDS.some(function(kw){return (item.title+" "+(item.description||"")).toLowerCase().indexOf(kw.toLowerCase())!==-1;})};
-    }).filter(function(i){return i.relevant;});
-  }).catch(function(){return [];});
+function stripHtml(s) {
+  return (s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
 }
 
-function loadAllNews() {
-  allNewsItems=[];
-  Promise.all(RSS_SOURCES.map(function(s){return fetchNewsFeed(s);})).then(function(results){
-    results.forEach(function(items){allNewsItems=allNewsItems.concat(items);});
-    allNewsItems=allNewsItems.slice(0,24);
-    var loading=document.getElementById("news-loading");
-    if (!allNewsItems.length) {
-      loading.innerHTML="Unable to load live news. <a href=\"https://www.theguardian.com/technology/artificialintelligenceai\" target=\"_blank\" style=\"color:#E8950A\">Browse Guardian AI coverage</a>";
-      return;
-    }
-    loading.style.display="none";
-    renderNews();
+function normalizeTitle(t) {
+  return t.toLowerCase().replace(/[^a-z0-9\s]/g,"").replace(/\s+/g," ").trim();
+}
+
+function scoreNewsItem(title, desc, source) {
+  var text = (title + " " + desc).toLowerCase();
+  var score = source.aiSection ? 2 : 0;
+  var ki;
+  for (ki = 0; ki < GOV_KEYWORDS.length; ki++) {
+    if (text.indexOf(GOV_KEYWORDS[ki]) !== -1) score += 4;
+  }
+  for (ki = 0; ki < AI_SIGNALS.length; ki++) {
+    if (text.indexOf(AI_SIGNALS[ki]) !== -1) score += 1;
+  }
+  if (/\bai\b/.test(text)) score += 1;
+  return score;
+}
+
+function fetchNewsFeed(source) {
+  var proxyUrl = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(source.url);
+  return fetch(proxyUrl).then(function(res) { return res.json(); }).then(function(data) {
+    if (data.status !== "ok") return [];
+    return (data.items || []).map(function(item) {
+      var desc = stripHtml(item.description || item.content || "");
+      var pubTs = item.pubDate ? new Date(item.pubDate).getTime() : 0;
+      return {
+        source: source.name,
+        color: source.color,
+        title: item.title || "",
+        link: item.link || "",
+        desc: desc,
+        date: item.pubDate ? new Date(item.pubDate).toLocaleDateString(undefined, {month:"short", day:"numeric", year:"numeric"}) : "",
+        pubTs: pubTs,
+        score: scoreNewsItem(item.title || "", desc, source)
+      };
+    });
+  }).catch(function() { return []; });
+}
+
+function dedupeNews(items) {
+  var seen = {};
+  return items.filter(function(item) {
+    var key = normalizeTitle(item.title).slice(0, 72);
+    if (!key || seen[key]) return false;
+    seen[key] = true;
+    return true;
   });
 }
 
+function pickHeadlines(items) {
+  var deduped = dedupeNews(items);
+  var thresholds = [5, 4, 3, 2];
+  var ti, picked = [];
+  for (ti = 0; ti < thresholds.length; ti++) {
+    picked = deduped.filter(function(i) { return i.score >= thresholds[ti]; });
+    picked.sort(function(a, b) { return b.pubTs - a.pubTs; });
+    if (picked.length >= NEWS_HEADLINE_COUNT) break;
+  }
+  return picked.slice(0, NEWS_HEADLINE_COUNT);
+}
+
+function setNewsStatus(msg, refreshing) {
+  var el = document.getElementById("news-updated");
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.toggle("refreshing", !!refreshing);
+}
+
 function renderNews() {
-  var grid=document.getElementById("news-grid");
-  var items=activeNewsFilter==="all"?allNewsItems:allNewsItems.filter(function(i){return i.source===activeNewsFilter;});
-  if (!items.length) { grid.innerHTML="<div style=\"color:rgba(255,255,255,.3);font-size:13px;padding:1rem\">No articles from this source yet.</div>"; return; }
-  grid.innerHTML=items.map(function(item){
-    return "<div class=\"news-card\" data-source=\""+item.source+"\"><div class=\"news-card-source\" style=\"color:"+item.color+"\">"+item.source+"</div><div class=\"news-card-title\"><a href=\""+item.link+"\" target=\"_blank\" rel=\"noopener\">"+item.title+"</a></div><div class=\"news-card-date\">"+item.date+"</div></div>";
+  var grid = document.getElementById("news-grid");
+  var loading = document.getElementById("news-loading");
+  if (!newsHeadlines.length) {
+    grid.innerHTML = "";
+    loading.style.display = "block";
+    loading.textContent = "No recent AI governance headlines found. Retrying shortly...";
+    return;
+  }
+  loading.style.display = "none";
+  grid.innerHTML = newsHeadlines.map(function(item) {
+    return "<div class=\"news-card\"><div class=\"news-card-source\" style=\"color:"+item.color+"\">"+item.source+"</div><div class=\"news-card-title\"><a href=\""+item.link+"\" target=\"_blank\" rel=\"noopener\">"+item.title+"</a></div><div class=\"news-card-date\">"+item.date+"</div></div>";
   }).join("");
 }
 
-function filterNews(source,btn) {
-  activeNewsFilter=source;
-  document.querySelectorAll(".news-filter").forEach(function(b){b.classList.remove("active");});
-  btn.classList.add("active");
-  renderNews();
+function loadAllNews() {
+  if (newsLoading) return;
+  newsLoading = true;
+  var hadHeadlines = newsHeadlines.length > 0;
+  if (!hadHeadlines) {
+    document.getElementById("news-loading").style.display = "block";
+    document.getElementById("news-loading").textContent = "Loading latest AI governance headlines...";
+  } else {
+    setNewsStatus("Refreshing headlines...", true);
+  }
+  Promise.all(RSS_SOURCES.map(function(s) { return fetchNewsFeed(s); })).then(function(results) {
+    var merged = [];
+    results.forEach(function(items) { merged = merged.concat(items); });
+    newsHeadlines = pickHeadlines(merged);
+    renderNews();
+    var now = new Date().toLocaleTimeString(undefined, {hour:"numeric", minute:"2-digit"});
+    setNewsStatus("Last updated " + now + " · auto-refreshes every 15 min", false);
+  }).catch(function() {
+    if (!newsHeadlines.length) {
+      document.getElementById("news-loading").innerHTML = "Unable to load live headlines. <a href=\"https://www.theguardian.com/technology/artificialintelligenceai\" target=\"_blank\" style=\"color:#E8950A\">Browse Guardian AI coverage</a>";
+    } else {
+      setNewsStatus("Refresh failed — showing cached headlines", false);
+    }
+  }).finally(function() {
+    newsLoading = false;
+  });
+}
+
+function startNewsAutoRefresh() {
+  if (newsRefreshTimer) clearInterval(newsRefreshTimer);
+  newsRefreshTimer = setInterval(loadAllNews, NEWS_REFRESH_MS);
 }
 
 // ── TABLE ─────────────────────────────────────────────────────────────────────
@@ -2015,6 +2109,7 @@ buildTable();
 buildTimeline("all");
 renderGlossary("");
 loadAllNews();
+startNewsAutoRefresh();
 
 </script>
 </body>

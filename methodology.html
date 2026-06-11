@@ -32,6 +32,15 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
 .hero-band p{font-size:13px;color:rgba(255,255,255,.45);max-width:600px;line-height:1.7;}
 .hero-band .pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem;}
 .pill{font-size:11px;padding:3px 10px;border-radius:4px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);}
+.pdf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;}
+@media(max-width:640px){.pdf-grid{grid-template-columns:1fr;}}
+.pdf-card{display:flex;align-items:center;gap:12px;padding:12px 14px;background:#fff;border:1px solid #D4CFC6;border-radius:8px;text-decoration:none;color:inherit;transition:background .15s,border-color .15s,box-shadow .15s;}
+.pdf-card:hover{background:#F5F2EC;border-color:#C4BDB0;box-shadow:0 2px 8px rgba(13,27,42,.06);}
+.pdf-icon{flex-shrink:0;width:36px;height:36px;border-radius:6px;background:#EDE9E0;display:flex;align-items:center;justify-content:center;font-size:15px;color:#8B1A1A;font-weight:700;font-family:"Inter",sans-serif;}
+.pdf-meta{flex:1;min-width:0;}
+.pdf-title{font-size:13px;font-weight:600;color:#0D1B2A;line-height:1.35;}
+.pdf-desc{font-size:11px;color:#6B7280;margin-top:2px;line-height:1.45;}
+.pdf-dl{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#1B6FD4;flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -71,7 +80,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
       <a href="#market">4. Market dimension — M1 to M10</a>
       <a href="#sovereign">5. Sovereign dimension — S1 to S10</a>
       <a href="#compass">6. Compass coordinates (rx, bx)</a>
-      <a href="#example">7. Worked example: Japan vs EU</a>
+      <a href="#example">7. Worked examples &amp; scorecard PDFs</a>
       <a href="#all-scores">8. Full scoring table — all 79 jurisdictions</a>
       <a href="#limitations">9. Known limitations</a>
       <a href="#sources">10. Primary source basis</a>
@@ -230,8 +239,9 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
     <!-- WORKED EXAMPLE -->
     <div id="example" style="margin-bottom:2.5rem;">
       <div class="sec-tag">Section 7</div>
-      <h2 class="sec-h2">Worked example: Japan vs EU</h2>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+      <h2 class="sec-h2">Worked examples &amp; scorecard PDFs</h2>
+      <p class="sec-sub" style="margin-bottom:1.2rem;">Side-by-side coordinate derivation for Japan and the EU, plus full indicator-by-indicator scorecards for four benchmark jurisdictions. Each PDF documents every R, M, and S indicator with primary-source justification.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
         <div style="background:#fff;border:1px solid #D4CFC6;border-radius:8px;overflow:hidden;">
           <div style="background:#1A6B42;color:#fff;padding:10px 14px;font-size:13px;font-weight:600;">&#127471;&#127477; Japan &mdash; AI Promotion Act 2025</div>
           <div style="padding:12px 14px;font-size:12px;color:#2D3748;line-height:1.9;font-family:monospace;">
@@ -254,6 +264,41 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
           </div>
           <div style="background:#F5F2EC;padding:8px 14px;font-size:11px;color:#6B7280;line-height:1.6;">R10 = 0: AI Act is a regulation, not constitutional. R9 = 2: binding prohibitions on real-time biometric surveillance in public spaces. S3 = 1: national security is excluded from scope (carve-out, not override).</div>
         </div>
+      </div>
+      <div style="font-size:12px;font-weight:600;color:#0D1B2A;margin-bottom:.65rem;letter-spacing:.02em;">Full indicator scorecards (PDF)</div>
+      <div class="pdf-grid">
+        <a class="pdf-card" href="files/scoring_eu.pdf" target="_blank" rel="noopener">
+          <div class="pdf-icon">PDF</div>
+          <div class="pdf-meta">
+            <div class="pdf-title">&#127466;&#127482; European Union &mdash; EU AI Act 2024</div>
+            <div class="pdf-desc">All 30 indicators with article-level citations and scoring rationale.</div>
+          </div>
+          <span class="pdf-dl">Download</span>
+        </a>
+        <a class="pdf-card" href="files/scoring_jp.pdf" target="_blank" rel="noopener">
+          <div class="pdf-icon">PDF</div>
+          <div class="pdf-meta">
+            <div class="pdf-title">&#127471;&#127477; Japan &mdash; AI Promotion Act 2025</div>
+            <div class="pdf-desc">All 30 indicators with primary-source justification for each score.</div>
+          </div>
+          <span class="pdf-dl">Download</span>
+        </a>
+        <a class="pdf-card" href="files/scoring_kr.pdf" target="_blank" rel="noopener">
+          <div class="pdf-icon">PDF</div>
+          <div class="pdf-meta">
+            <div class="pdf-title">&#127472;&#127479; South Korea &mdash; AI Basic Act 2026</div>
+            <div class="pdf-desc">All 30 indicators including extraterritorial scope and penalty analysis.</div>
+          </div>
+          <span class="pdf-dl">Download</span>
+        </a>
+        <a class="pdf-card" href="files/scoring_us.pdf" target="_blank" rel="noopener">
+          <div class="pdf-icon">PDF</div>
+          <div class="pdf-meta">
+            <div class="pdf-title">&#127482;&#127480; United States &mdash; Federal &amp; state AI law</div>
+            <div class="pdf-desc">All 30 indicators across federal EO, Colorado SB 205, Illinois BIPA, and more.</div>
+          </div>
+          <span class="pdf-dl">Download</span>
+        </a>
       </div>
     </div>
 

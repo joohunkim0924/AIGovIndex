@@ -66,7 +66,11 @@ input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);curs
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
 .stat-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:5px;padding:7px;text-align:center;}
 .stat-num{font-family:"DM Serif Display",serif;font-size:1.3rem;color:var(--amber);line-height:1;}
-.stat-lbl{font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;letter-spacing:.04em;text-transform:uppercase;}
+.stat-lbl{font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;letter-spacing:.04em;text-transform:uppercase;line-height:1.25;}
+.stat-footnote{font-size:10px;color:rgba(255,255,255,.32);line-height:1.5;margin-top:5px;}
+.stat-footnote+.stat-footnote{margin-top:3px;}
+.stat-footnote a{color:var(--amber);text-decoration:none;}
+.stat-footnote a:hover{text-decoration:underline;}
 .compare-btn{width:100%;padding:5px;border-radius:5px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.5);font-size:11px;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;}
 .compare-btn.on{background:rgba(232,149,10,.15);border-color:var(--amber);color:var(--amber);}
 .compare-selected{font-size:11px;color:rgba(255,255,255,.4);min-height:0;line-height:1.5;margin-top:4px;}
@@ -315,11 +319,14 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
       <div class="sb-section">
         <div class="sb-label" id="sb-glance">At a glance</div>
         <div class="stats-grid">
-          <div class="stat-card"><div class="stat-num" id="stat-mapped">32</div><div class="stat-lbl">Mapped</div></div>
-          <div class="stat-card"><div class="stat-num">4</div><div class="stat-lbl">Models</div></div>
-          <div class="stat-card"><div class="stat-num">72+</div><div class="stat-lbl">AI policies</div></div>
-          <div class="stat-card"><div class="stat-num" id="stat-binding">3</div><div class="stat-lbl">Fully binding</div></div>
+          <div class="stat-card"><div class="stat-num" id="stat-mapped">79</div><div class="stat-lbl" id="stat-lbl-mapped">Jurisdictions</div></div>
+          <div class="stat-card"><div class="stat-num" id="stat-documented">32</div><div class="stat-lbl" id="stat-lbl-documented">Fully documented</div></div>
+          <div class="stat-card"><div class="stat-num" id="stat-benchmarks">12</div><div class="stat-lbl" id="stat-lbl-benchmarks">Benchmarks</div></div>
+          <div class="stat-card"><div class="stat-num" id="stat-types">4</div><div class="stat-lbl" id="stat-lbl-types">Governance types</div></div>
+          <div class="stat-card"><div class="stat-num" id="stat-binding">23</div><div class="stat-lbl" id="stat-lbl-binding">Fully binding</div></div>
+          <div class="stat-card"><div class="stat-num" id="stat-indicators">30</div><div class="stat-lbl" id="stat-lbl-indicators">Indicators</div></div>
         </div>
+        <p class="stat-footnote" id="stat-footnote-docs"><span id="stat-footnote-docs-text">32 jurisdictions have full primary-source scoring documentation.</span> <a href="methodology.html#all-scores" id="stat-footnote-docs-link">View methodology &rarr;</a></p>
       </div>
       <div class="sb-section">
         <div class="sb-label">About</div>
@@ -1354,6 +1361,7 @@ function setYear(y) {
   updateCrisisOverlay(y);
   draw();
   buildTable();
+  updateStats();
 }
 
 function setFilter(f,btn) {
@@ -2071,6 +2079,14 @@ function toggleLang() {
   document.getElementById("sb-size").textContent=isJa?"\u30C9\u30C3\u30C8\u30B5\u30A4\u30BA\uFF1D\u57F7\u884C\u529B":"Dot size = enforcement";
   document.getElementById("sb-compare").textContent=isJa?"\u6BD4\u8F03\u30E2\u30FC\u30C9":"Compare mode";
   document.getElementById("sb-glance").textContent=isJa?"\u6982\u8981":"At a glance";
+  document.getElementById("stat-lbl-mapped").textContent=isJa?"\u6CD5\u57DF\u6570":"Jurisdictions";
+  document.getElementById("stat-lbl-documented").textContent=isJa?"\u5B8C\u5168\u8A3C\u660E":"Fully documented";
+  document.getElementById("stat-lbl-benchmarks").textContent=isJa?"\u30D9\u30F3\u30C1\u30DE\u30FC\u30AF":"Benchmarks";
+  document.getElementById("stat-lbl-types").textContent=isJa?"\u30AC\u30D0\u30CA\u30F3\u30B9\u985E\u578B":"Governance types";
+  document.getElementById("stat-lbl-binding").textContent=isJa?"\u5B8C\u5168\u626F\u675F":"Fully binding";
+  document.getElementById("stat-lbl-indicators").textContent=isJa?"\u6307\u6A19":"Indicators";
+  document.getElementById("stat-footnote-docs-text").textContent=isJa?"32\u6CD5\u57DF\u306F\u4E00\u6B21\u8CC7\u6599\u306B\u3088\u308B\u5B8C\u5168\u306A\u30B9\u30B3\u30A2\u8A3C\u660E\u304C\u3042\u308A\u307E\u3059\u3002":"32 jurisdictions have full primary-source scoring documentation.";
+  document.getElementById("stat-footnote-docs-link").textContent=isJa?"\u65B9\u6CD5\u8AD6\u3092\u898B\u308B \u2192":"View methodology \u2192";
   document.getElementById("f-all").textContent=isJa?"\u3059\u3079\u3066":"All";
   document.getElementById("f-rights").textContent=isJa?"\u6A29\u5229\u30D9\u30FC\u30B9":"Rights-based";
   document.getElementById("f-market").textContent=isJa?"\u5E02\u5834\u5FD7\u5411":"Market-oriented";
@@ -2093,10 +2109,26 @@ function toggleLang() {
   if (selectedCountry) openPanel(selectedCountry);
 }
 
+var FULLY_DOCUMENTED_COUNT = 32;
+var GOVERNANCE_TYPE_COUNT = 4;
+var INDICATOR_COUNT = 30;
+
 function updateStats() {
   var mapped = document.getElementById("stat-mapped");
+  var documented = document.getElementById("stat-documented");
+  var benchmarks = document.getElementById("stat-benchmarks");
+  var types = document.getElementById("stat-types");
   var binding = document.getElementById("stat-binding");
+  var indicators = document.getElementById("stat-indicators");
   if (mapped) mapped.textContent = countries.length;
+  if (documented) documented.textContent = FULLY_DOCUMENTED_COUNT;
+  if (benchmarks) {
+    var b = 0;
+    for (var bk in FEATURED_BENCHMARKS) if (FEATURED_BENCHMARKS[bk]) b++;
+    benchmarks.textContent = b;
+  }
+  if (types) types.textContent = GOVERNANCE_TYPE_COUNT;
+  if (indicators) indicators.textContent = INDICATOR_COUNT;
   if (binding) {
     var n = 0;
     for (var i = 0; i < countries.length; i++) {

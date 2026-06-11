@@ -36,13 +36,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,27,42,.95
 .controls-stack{display:flex;flex-direction:column;align-items:flex-end;gap:5px;width:100%;max-width:560px;}
 .controls-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
 .timeline-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:6px 12px;display:flex;align-items:center;gap:8px;}
-#crisis-banner{position:absolute;top:10px;right:14px;z-index:40;width:auto;max-width:min(440px,calc(100% - 28px));pointer-events:none;opacity:0;transform:translateY(-4px);transition:opacity .25s ease,transform .25s ease;}
-#crisis-banner.visible{opacity:1;transform:translateY(0);pointer-events:auto;}
-.crisis-banner-inner{display:flex;align-items:flex-start;gap:8px;padding:6px 10px;border-radius:7px;background:rgba(13,27,42,.88);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);border-left-width:3px;line-height:1.35;box-shadow:0 4px 20px rgba(0,0,0,.25);}
-.crisis-banner-year{font-family:"DM Serif Display",serif;font-size:1.15rem;line-height:1.1;flex-shrink:0;min-width:42px;padding-top:1px;}
+#crisis-banner{position:absolute;top:10px;right:12px;z-index:40;width:min(188px,calc(100% - 24px));pointer-events:none;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .22s ease,transform .22s ease,visibility .22s;}
+#crisis-banner.visible{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto;}
+.crisis-banner-inner{display:flex;flex-direction:column;align-items:stretch;gap:5px;padding:8px 10px;border-radius:7px;background:rgba(13,27,42,.88);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);border-left-width:3px;line-height:1.4;box-shadow:0 4px 20px rgba(0,0,0,.25);}
+.crisis-banner-year{font-family:"DM Serif Display",serif;font-size:1.2rem;line-height:1.1;}
 .crisis-banner-body{flex:1;min-width:0;}
 .crisis-banner-label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-bottom:3px;}
 .crisis-banner-text{font-size:11px;font-weight:500;}
+.crisis-banner-growth{margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,.08);font-size:10px;color:rgba(255,255,255,.52);line-height:1.45;}
+.crisis-banner-growth.has-milestone{margin-top:6px;}
+.crisis-banner-dotcount{font-weight:600;color:var(--amber);display:block;margin-bottom:2px;}
+.crisis-banner-growth-text{display:block;}
 .tl-label{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;}
 .tl-year{font-family:"DM Serif Display",serif;font-size:1.2rem;color:var(--amber);min-width:36px;text-align:center;}
 input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);cursor:pointer;}
@@ -233,7 +237,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
   #canvas-wrap{grid-column:1;grid-row:3;}
   .hero-title{font-size:1.35rem;}
   .controls-stack{align-items:stretch;max-width:none;}
-  #crisis-banner{top:8px;right:10px;left:10px;max-width:none;}
+  #crisis-banner{width:min(168px,calc(100% - 20px));top:8px;right:8px;}
   .cp-grid{grid-template-columns:1fr;}
 }
 </style>
@@ -1336,25 +1340,104 @@ function setView(v,btn) {
 }
 
 var crisisMilestones = {
-  2022:{text:"\uD83D\uDCA5 ChatGPT launches \u2014 global regulatory acceleration",color:"#E8950A"},
-  2023:{text:"\uD83D\uDCDC EU AI Act agreed \u00b7 Bletchley Declaration \u00b7 G7 Hiroshima",color:"#1B6FD4"},
-  2024:{text:"\u2696\uFE0F EU AI Act enters into force \u00b7 Binding era begins",color:"#1B6FD4"},
-  2025:{text:"\uD83C\uDDFA\uD83C\uDDF8 Trump EO revokes Biden AI safety order \u00b7 Paris Summit",color:"#1A6B42"},
-  2026:{text:"\uD83D\uDD34 EU high-risk enforcement \u00b7 Korea AI Basic Act active",color:"#E87878"}
+  2022:{text:"\uD83D\uDCA5 ChatGPT launches \u2014 global regulatory acceleration",color:"#E8950A",
+    textJa:"\uD83D\uDCA5 ChatGPT\u516c\u958b \u2014 \u5168\u7403\u7684\u306a\u898f\u5236\u52a0\u901f"},
+  2023:{text:"\uD83D\uDCDC EU AI Act agreed \u00b7 Bletchley Declaration \u00b7 G7 Hiroshima",color:"#1B6FD4",
+    textJa:"\uD83D\uDCDC EU AI\u6cd5\u5408\u610f \u00b7 \u30d6\u30ec\u30c3\u30c1\u30ea\u30fc\u5ba3\u8a00 \u00b7 G7\u5e83\u5cf6"},
+  2024:{text:"\u2696\uFE0F EU AI Act enters into force \u00b7 Binding era begins",color:"#1B6FD4",
+    textJa:"\u2696\uFE0F EU AI\u6cd5\u767a\u52b9 \u00b7 \u7d81\u5b9a\u6642\u4ee3\u306e\u59cb\u307e\u308a"},
+  2025:{text:"\uD83C\uDDFA\uD83C\uDDF8 Trump EO revokes Biden AI safety order \u00b7 Paris Summit",color:"#1A6B42",
+    textJa:"\uD83C\uDDFA\uD83C\uDDF8 \u30c8\u30e9\u30f3\u30d7\u5927\u7d71\u9818\u4ee4\u304c\u30d0\u30a4\u30c7\u30f3AI\u5b89\u5168\u4ee4\u3092\u64a4\u56de \u00b7 \u30d1\u30ea\u30b5\u30df\u30c3\u30c8"},
+  2026:{text:"\uD83D\uDD34 EU high-risk enforcement \u00b7 Korea AI Basic Act active",color:"#E87878",
+    textJa:"\uD83D\uDD34 EU\u9ad8\u30ea\u30b9\u30af\u57f7\u884c \u00b7 \u97d3\u56fdAI\u57fa\u672c\u6cd5\u767a\u52b9"}
 };
+
+var mapGrowthByYear = {
+  2016: {
+    en: "Only United States and China. Both had citable AI policy documents that year (Obama White House \u201cPreparing for the Future of AI,\u201d China\u2019s Internet Plus / early Cybersecurity Law framework).",
+    ja: "\u7c73\u56fd\u3068\u4e2d\u56fd\u306e2\u306e\u307f\u3002\u305d\u308c\u307e\u3067\u306b\u5f15\u7528\u53ef\u80fd\u306aAI\u653f\u7b56\u6587\u66f8\u304c\u3042\u308a\u307e\u3057\u305f\uff08\u30aa\u30d0\u30de\u767d\u5b98\u300cPreparing for the Future of AI\u300d\u3001\u4e2d\u56fd\u306eInternet Plus\u30fb\u65e9\u671f\u30b5\u30a4\u30d0\u30fc\u30bb\u30ad\u30e5\u30ea\u30c6\u30a3\u6cd5\u6846\u7d44\u307f\uff09\u3002"
+  },
+  2017: {
+    en: "Adds Japan (AI Technology Strategy), UAE (world\u2019s first AI Minister), Canada (Pan-Canadian AI Strategy \u2014 the world\u2019s first national AI strategy), Finland (Age of Artificial Intelligence report).",
+    ja: "\u65e5\u672c\uff08AI\u30c6\u30af\u30ce\u30ed\u30b8\u30fc\u6226\u7565\uff09\u3001UAE\uff08\u4e16\u754c\u521d\u306eAI\u5927\u81e3\uff09\u3001\u30ab\u30ca\u30c0\uff08\u4e16\u754c\u521d\u306e\u56fd\u5bb6AI\u6226\u7565\uff09\u3001\u30d5\u30a3\u30f3\u30e9\u30f3\u30c9\u304c\u52a0\u308f\u308a\u307e\u3059\u3002"
+  },
+  2018: {
+    en: "The GDPR cluster appears. All EU member states plus France, Germany, Sweden, India, Mexico, Mauritius.",
+    ja: "GDPR\u30af\u30e9\u30b9\u30bf\u304c\u767b\u5834\u3002EU\u5168\u52a0\u76df\u56fd\u306b\u52a0\u3048\u3001\u30d5\u30e9\u30f3\u30b9\u3001\u30c9\u30a4\u30c4\u3001\u30b9\u30a6\u30a7\u30fc\u30c7\u30f3\u3001\u30a4\u30f3\u30c9\u3001\u30e1\u30ad\u30b7\u30b3\u3001\u30e2\u30fc\u30ea\u30b7\u30e3\u30b9\u3002"
+  },
+  2019: {
+    en: "The big year. OECD AI Principles trigger a wave \u2014 Korea, Singapore, UK, Brazil, Australia, Russia, Taiwan, Norway, Colombia, Egypt, Israel, OECD, ASEAN, and many others all get their first citable AI governance event this year.",
+    ja: "OECD AI\u539f\u5247\u3092\u5c01\u3058\u3066\u5927\u898f\u6a21\u306a\u6ce8\u5165\u3002\u97d3\u56fd\u3001\u30b7\u30f3\u30ac\u30dd\u30fc\u30eb\u3001\u82f1\u56fd\u3001\u30d6\u30e9\u30b8\u30eb\u3001\u30aa\u30fc\u30b9\u30c8\u30e9\u30ea\u30a2\u3001\u30ed\u30b7\u30a2\u3001\u53f0\u6e7e\u3001\u30ce\u30eb\u30a6\u30a7\u30fc\u3001\u30b3\u30ed\u30f3\u30d3\u30a2\u3001\u30a8\u30b8\u30d7\u30c8\u3001\u30a4\u30b9\u30e9\u30a8\u30eb\u3001OECD\u3001ASEAN\u306a\u3069\u591a\u6570\u304c\u521d\u3081\u3066\u767b\u5834\u3002"
+  },
+  2020: {
+    en: "Rwanda, African Union, Indonesia, South Africa, Saudi Arabia, Switzerland, Ukraine, Spain, Morocco, and others.",
+    ja: "\u30eb\u30ef\u30f3\u30c0\u3001\u30a2\u30d5\u30ea\u30ab\u9023\u5408\u3001\u30a4\u30f3\u30c9\u30cd\u30b7\u30a2\u3001\u5357\u30a2\u30d5\u30ea\u30ab\u3001\u30b5\u30a6\u30b8\u30a2\u30e9\u30d3\u30a2\u3001\u30b9\u30a4\u30b9\u3001\u30a6\u30af\u30e9\u30a4\u30ca\u3001\u30b9\u30da\u30a4\u30f3\u3001\u30e2\u30ed\u30c3\u30b3\u306a\u3069\u304c\u52a0\u308f\u308a\u307e\u3059\u3002"
+  },
+  2021: {
+    en: "Vietnam, Philippines, Turkey, Jordan, Cambodia, Ghana, UNESCO.",
+    ja: "\u30d9\u30c8\u30ca\u30e0\u3001\u30d5\u30a3\u30ea\u30d4\u30f3\u3001\u30c8\u30eb\u30b3\u3001\u30b8\u30e7\u30fc\u30c0\u30f3\u3001\u30ab\u30f3\u30dc\u30b8\u30a2\u3001\u30ac\u30fc\u30ca\u3001UNESCO\u304c\u52a0\u308f\u308a\u307e\u3059\u3002"
+  },
+  2022: {
+    en: "Pakistan, Sri Lanka, Bangladesh, Laos, Angola.",
+    ja: "\u30d1\u30ad\u30b9\u30bf\u30f3\u3001\u30b9\u30ea\u30e9\u30f3\u30ab\u3001\u30d0\u30f3\u30b0\u30e9\u30c7\u30b7\u30e5\u3001\u30e9\u30aa\u30b9\u3001\u30a2\u30f3\u30b4\u30e9\u304c\u52a0\u308f\u308a\u307e\u3059\u3002"
+  },
+  2023: {
+    en: "No new jurisdictions \u2014 positions update as existing frameworks mature.",
+    ja: "\u65b0\u898f\u6cd5\u57df\u306a\u3057 \u2014 \u65e2\u5b58\u6846\u7d44\u307f\u306e\u6210\u719f\u306b\u3068\u3082\u306b\u4f4d\u7f6e\u304c\u66f4\u65b0\u3055\u308c\u307e\u3059\u3002"
+  },
+  2024: {
+    en: "Nepal finally appears with minimal governance.",
+    ja: "\u30cd\u30d1\u30fc\u30eb\u304c\u6700\u5c0f\u9650\u306e\u30ac\u30d0\u30ca\u30f3\u30b9\u3067\u3084\u3063\u3068\u767b\u5834\u3057\u307e\u3059\u3002"
+  },
+  2025: {
+    en: "Full dataset mapped \u2014 all 79 jurisdictions now on the map.",
+    ja: "\u5168\u30c7\u30fc\u30bf\u30bb\u30c3\u30c8\u304c\u5b8c\u4e86 \u2014 79\u6cd5\u57df\u3059\u3079\u3066\u304c\u5730\u56f3\u306b\u8868\u793a\u3055\u308c\u307e\u3059\u3002"
+  },
+  2026: {
+    en: "Current snapshot \u2014 drag the slider to compare how the map built up over time.",
+    ja: "\u73fe\u5728\u306e\u30b9\u30ca\u30c3\u30d7\u30b7\u30e7\u30c3\u30c8 \u2014 \u30b9\u30e9\u30a4\u30c0\u30fc\u3067\u6642\u7cfb\u5217\u306e\u62e1\u5927\u3092\u6bd4\u8f03\u3067\u304d\u307e\u3059\u3002"
+  }
+};
+
+function countMappedAtYear(year) {
+  return countries.filter(function(c) { return !c.start || c.start <= year; }).length;
+}
 
 function updateCrisisOverlay(year) {
   var banner=document.getElementById("crisis-banner");
   if (!banner) return;
-  var m=crisisMilestones[year];
-  var milestoneLbl=currentLang==="ja"?"\u91CC\u7A0B\u7891":"Milestone";
-  if (m) {
-    banner.innerHTML="<div class=\"crisis-banner-inner\" style=\"border-left-color:"+m.color+"\"><span class=\"crisis-banner-year\" style=\"color:"+m.color+"\">"+year+"</span><div class=\"crisis-banner-body\"><span class=\"crisis-banner-label\" id=\"crisis-label\">"+milestoneLbl+"</span><span class=\"crisis-banner-text\" style=\"color:"+m.color+"\">"+m.text+"</span></div></div>";
-    banner.classList.add("visible");
-  } else {
+  var isJa=currentLang==="ja";
+  var crisis=crisisMilestones[year];
+  var growth=mapGrowthByYear[year];
+  if (!crisis && !growth) {
     banner.innerHTML="";
     banner.classList.remove("visible");
+    return;
   }
+  var accent=crisis?crisis.color:"#E8950A";
+  var dots=countMappedAtYear(year);
+  var dotLbl=isJa?(dots+"\u4ef6\u306e\u30c9\u30c3\u30c8"):(dots+" dot"+(dots!==1?"s":""));
+  var milestoneLbl=isJa?"\u91cc\u7a0b\u7891":"Milestone";
+  var buildLbl=isJa?"\u30de\u30c3\u30d7\u306e\u62e1\u5927":"Map build-up";
+  var html="<div class=\"crisis-banner-inner\" style=\"border-left-color:"+accent+"\">";
+  html+="<span class=\"crisis-banner-year\" style=\"color:"+accent+"\">"+year+"</span>";
+  html+="<div class=\"crisis-banner-body\">";
+  if (crisis) {
+    var cText=isJa&&crisis.textJa?crisis.textJa:crisis.text;
+    html+="<span class=\"crisis-banner-label\">"+milestoneLbl+"</span>";
+    html+="<span class=\"crisis-banner-text\" style=\"color:"+accent+"\">"+cText+"</span>";
+  }
+  if (growth) {
+    var gText=isJa?growth.ja:growth.en;
+    html+="<div class=\"crisis-banner-growth"+(crisis?" has-milestone":"")+"\">";
+    if (!crisis) html+="<span class=\"crisis-banner-label\">"+buildLbl+"</span> ";
+    html+="<span class=\"crisis-banner-dotcount\">"+dotLbl+"</span> ";
+    html+="<span class=\"crisis-banner-growth-text\">"+gText+"</span>";
+    html+="</div>";
+  }
+  html+="</div></div>";
+  banner.innerHTML=html;
+  banner.classList.add("visible");
 }
 
 function setYear(y) {
@@ -2118,7 +2201,6 @@ function applySectionI18n(lang) {
 
 function toggleLang() {
   currentLang=currentLang==="en"?"ja":"en";
-  try { localStorage.setItem("ai_gov_lang", currentLang); } catch(e) {}
   applyUiLang();
 }
 
@@ -2218,10 +2300,7 @@ buildTimeline("all");
 renderGlossary("");
 loadAllNews();
 startNewsAutoRefresh();
-try {
-  var savedLang = localStorage.getItem("ai_gov_lang");
-  if (savedLang === "ja" || savedLang === "en") currentLang = savedLang;
-} catch(e) {}
+currentLang = "en";
 applyUiLang();
 
 </script>

@@ -1,5 +1,4 @@
 (function () {
-  var LANG_KEY = "ai_gov_lang";
   var currentLang = "en";
 
   var t = {
@@ -226,18 +225,12 @@
 
   function toggleMethLang() {
     var next = currentLang === "ja" ? "en" : "ja";
-    try { localStorage.setItem(LANG_KEY, next); } catch (e) {}
     applyMethLang(next);
   }
 
   window.toggleMethLang = toggleMethLang;
 
   document.addEventListener("DOMContentLoaded", function () {
-    var saved = "en";
-    try {
-      var v = localStorage.getItem(LANG_KEY);
-      if (v === "ja" || v === "en") saved = v;
-    } catch (e) {}
-    applyMethLang(saved);
+    applyMethLang("en");
   });
 })();

@@ -54,6 +54,7 @@ input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);curs
 .sb-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.35rem;}
 .filter-group{display:flex;flex-direction:column;gap:3px;}
 .region-group{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.region-all-btn{grid-column:1/-1;}
 .region-filter-btn{justify-content:center;padding:5px 6px!important;font-size:11px!important;}
 .filter-btn{display:flex;align-items:center;gap:7px;padding:5px 7px;border-radius:5px;border:none;background:transparent;cursor:pointer;font-size:12px;color:rgba(255,255,255,.5);text-align:left;transition:all .15s;font-family:"Inter",sans-serif;}
 .filter-btn:hover{background:rgba(255,255,255,.06);color:var(--off);}
@@ -257,7 +258,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
       <div class="hero-title" id="hero-title">Global AI Governance</div>
     </div>
     <div class="hero-controls-cell">
-      <div class="hero-sub" id="hero-sub">Dot size = binding enforcement. Pick a region to explore. 12 benchmarks shown in color by default.</div>
+      <div class="hero-sub" id="hero-sub">Dot size = binding enforcement. Pick a region to explore. Benchmarks highlights 12 jurisdictions with the most comprehensive AI governance laws.</div>
       <div class="controls-stack">
         <div class="controls-row">
           <div class="view-toggle">
@@ -276,7 +277,8 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
       <div class="sb-section">
         <div class="sb-label" id="sb-region">Region</div>
         <div class="filter-group region-group">
-          <button class="filter-btn region-filter-btn active" onclick="setRegion('world',this)"><span id="r-world">World</span></button>
+          <button class="filter-btn region-filter-btn region-all-btn" onclick="setRegion('all',this)"><span id="r-all">All</span></button>
+          <button class="filter-btn region-filter-btn active" onclick="setRegion('world',this)"><span id="r-world">Benchmarks</span></button>
           <button class="filter-btn region-filter-btn" onclick="setRegion('asia',this)"><span id="r-asia">Asia</span></button>
           <button class="filter-btn region-filter-btn" onclick="setRegion('europe',this)"><span id="r-europe">Europe</span></button>
           <button class="filter-btn region-filter-btn" onclick="setRegion('africa',this)"><span id="r-africa">Africa</span></button>
@@ -977,7 +979,7 @@ var countries = [
 var groupColor = {rights:"#1B6FD4",market:"#1A6B42",sovereign:"#8B1A1A",hybrid:"#7A4A00"};
 var GREY_DOT = "#5C6370";
 
-// Default colored benchmarks on World view
+// Default colored benchmarks on Benchmarks view (activeRegion === "world")
 var FEATURED_BENCHMARKS = {eu:1,kr:1,cn:1,us:1,jp:1,sg:1,uk:1,br:1,ca:1,au:1,au2:1,cl:1};
 
 var countryRegions = {
@@ -993,6 +995,7 @@ var countryRegions = {
 };
 
 function isRegionHighlighted(c) {
+  if (activeRegion === "all") return true;
   if (activeRegion === "world") return !!FEATURED_BENCHMARKS[c.id];
   return countryRegions[c.id] === activeRegion;
 }
@@ -1008,6 +1011,7 @@ function getDotRadius(c, emphasized) {
 
 function shouldShowCountryLabel(c, isH, isS, isCmp, isHL) {
   if (isH || isS || isCmp || isHL) return true;
+  if (activeRegion === "all") return false;
   if (isRegionHighlighted(c)) return true;
   if (activeFilter !== "all" && c.group === activeFilter && isRegionHighlighted(c)) return true;
   return false;
@@ -2052,9 +2056,10 @@ function toggleLang() {
   btn.classList.toggle("ja",currentLang==="ja");
   var isJa=currentLang==="ja";
   document.getElementById("hero-title").textContent=isJa?"\u30B0\u30ED\u30FC\u30D0\u30EBAI\u30AC\u30D0\u30CA\u30F3\u30B9\u6307\u6570":"Global AI Governance";
-  document.getElementById("hero-sub").textContent=isJa?"\u30C9\u30C3\u30C8\u306E\u5927\u304D\u3055\uFF1D\u6CD5\u7684\u626F\u675F\u529B\u3002\u5730\u57DF\u3092\u9078\u3073\u3066\u8868\u793A\u300212\u57FA\u6E96\u56FD\u306F\u5E38\u6642\u30AB\u30E9\u30FC\u3002":"Dot size = binding enforcement. Pick a region to explore. 12 benchmarks shown in color by default.";
+  document.getElementById("hero-sub").textContent=isJa?"\u30C9\u30C3\u30C8\u306E\u5927\u304D\u3055\uFF1D\u6CD5\u7684\u626F\u675F\u529B\u3002\u5730\u57DF\u3092\u9078\u3073\u3066\u8868\u793A\u3002\u30D9\u30F3\u30C1\u30DE\u30FC\u30AF\u306FAI\u6CD5\u5236\u304C\u5145\u5B9F\u306A12\u56FD\u3002":"Dot size = binding enforcement. Pick a region to explore. Benchmarks highlights 12 jurisdictions with the most comprehensive AI governance laws.";
   document.getElementById("sb-region").textContent=isJa?"\u5730\u57DF":"Region";
-  document.getElementById("r-world").textContent=isJa?"\u4E16\u754C":"World";
+  document.getElementById("r-all").textContent=isJa?"\u3059\u3079\u3066":"All";
+  document.getElementById("r-world").textContent=isJa?"\u30D9\u30F3\u30C1\u30DE\u30FC\u30AF":"Benchmarks";
   document.getElementById("r-asia").textContent=isJa?"\u30A2\u30B8\u30A2":"Asia";
   document.getElementById("r-europe").textContent=isJa?"\u30E8\u30FC\u30ED\u30C3\u30D1":"Europe";
   document.getElementById("r-africa").textContent=isJa?"\u30A2\u30D5\u30EA\u30AB":"Africa";

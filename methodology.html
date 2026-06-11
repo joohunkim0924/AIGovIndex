@@ -15,6 +15,9 @@ nav{background:#0D1B2A;padding:0 1.5rem;height:52px;display:flex;align-items:cen
 .nav-links a:hover{color:#F5F2EC;}
 .back-btn{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:5px;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.55);font-size:11px;text-decoration:none;font-family:"Inter",sans-serif;transition:all .15s;}
 .back-btn:hover{background:rgba(255,255,255,.08);color:#F5F2EC;}
+.lang-btn{padding:4px 10px;border-radius:4px;border:1px solid rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.6);font-size:11px;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;}
+.lang-btn:hover{background:rgba(255,255,255,.08);color:#F5F2EC;}
+.lang-btn.ja{background:rgba(232,149,10,.15);border-color:rgba(232,149,10,.4);color:#E8950A;}
 /* reuse all the how-scored CSS inline via the section styles */
 .sec-inner{max-width:900px;margin:0 auto;}
 .sec-tag{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#E8950A;font-weight:600;margin-bottom:.5rem;}
@@ -46,24 +49,25 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
 <body>
 
 <nav>
-  <a class="nav-brand" href="index.html">AI Governance Index</a>
+  <a class="nav-brand" href="index.html" data-i18n="navBrand">AI Governance Index</a>
   <div class="nav-links">
-    <a href="index.html#hero">Map</a>
-    <a href="index.html#countries">Data</a>
-    <a class="back-btn" href="index.html">&larr; Back to map</a>
+    <a href="index.html#hero" data-i18n="navMap">Map</a>
+    <a href="index.html#countries" data-i18n="navData">Data</a>
+    <button type="button" id="meth-lang-btn" class="lang-btn" onclick="toggleMethLang()">日本語</button>
+    <a class="back-btn" href="index.html" data-i18n="navBack">&larr; Back to map</a>
   </div>
 </nav>
 
 <div class="hero-band">
   <div style="max-width:900px;margin:0 auto;">
-    <h1>Methodology</h1>
-    <p>A full explanation of the 30-indicator formula used to derive every country position on the Global AI Governance Index. Designed to be reproducible by any researcher with access to primary governance documents.</p>
+    <h1 data-i18n="heroH1">Methodology</h1>
+    <p data-i18n="heroSub">A full explanation of the 30-indicator formula used to derive every country position on the Global AI Governance Index. Designed to be reproducible by any researcher with access to primary governance documents.</p>
     <div class="pills">
-      <span class="pill">30 indicators</span>
-      <span class="pill">3 dimensions</span>
-      <span class="pill">79 jurisdictions</span>
-      <span class="pill">Updated June 2026</span>
-      <span class="pill">Primary sources only</span>
+      <span class="pill" data-i18n="pill1">30 indicators</span>
+      <span class="pill" data-i18n="pill2">3 dimensions</span>
+      <span class="pill" data-i18n="pill3">79 jurisdictions</span>
+      <span class="pill" data-i18n="pill4">Updated June 2026</span>
+      <span class="pill" data-i18n="pill5">Primary sources only</span>
     </div>
   </div>
 </div>
@@ -73,24 +77,24 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
 
     <!-- TABLE OF CONTENTS -->
     <div class="toc">
-      <div class="toc-title">Contents</div>
-      <a href="#overview">1. Overview &amp; core formula</a>
-      <a href="#scale">2. The three-level scoring scale</a>
-      <a href="#rights">3. Rights dimension — R1 to R10</a>
-      <a href="#market">4. Market dimension — M1 to M10</a>
-      <a href="#sovereign">5. Sovereign dimension — S1 to S10</a>
-      <a href="#compass">6. Compass coordinates (rx, bx)</a>
-      <a href="#example">7. Worked examples &amp; scorecard PDFs</a>
-      <a href="#all-scores">8. Full scoring table — all 79 jurisdictions</a>
-      <a href="#limitations">9. Known limitations</a>
-      <a href="#sources">10. Primary source basis</a>
+      <div class="toc-title" data-i18n="tocTitle">Contents</div>
+      <a href="#overview" data-i18n="toc1">1. Overview &amp; core formula</a>
+      <a href="#scale" data-i18n="toc2">2. The three-level scoring scale</a>
+      <a href="#rights" data-i18n="toc3">3. Rights dimension — R1 to R10</a>
+      <a href="#market" data-i18n="toc4">4. Market dimension — M1 to M10</a>
+      <a href="#sovereign" data-i18n="toc5">5. Sovereign dimension — S1 to S10</a>
+      <a href="#compass" data-i18n="toc6">6. Compass coordinates (rx, bx)</a>
+      <a href="#example" data-i18n="toc7">7. Worked examples &amp; scorecard PDFs</a>
+      <a href="#all-scores" data-i18n="toc8">8. Full scoring table — all 79 jurisdictions</a>
+      <a href="#limitations" data-i18n="toc9">9. Known limitations</a>
+      <a href="#sources" data-i18n="toc10">10. Primary source basis</a>
     </div>
 
     <!-- OVERVIEW -->
     <div id="overview" style="margin-bottom:2.5rem;">
-      <div class="sec-tag">Section 1</div>
-      <h2 class="sec-h2">Overview &amp; core formula</h2>
-      <p class="sec-sub">Every position on this index is derived from a formal, reproducible formula applied to primary governance documents. No secondary commentary, media reporting, or expert surveys were used as inputs.</p>
+      <div class="sec-tag" data-i18n="s1tag">Section 1</div>
+      <h2 class="sec-h2" data-i18n="s1h2">Overview &amp; core formula</h2>
+      <p class="sec-sub" data-i18n="s1sub">Every position on this index is derived from a formal, reproducible formula applied to primary governance documents. No secondary commentary, media reporting, or expert surveys were used as inputs.</p>
       <div style="background:#0D1B2A;border-radius:8px;padding:1.4rem 1.6rem;font-family:monospace;font-size:13px;color:#F0A830;line-height:2.2;margin-bottom:1.2rem;">
         R_raw &nbsp;= &Sigma;(R1 &hellip; R10) &nbsp;&nbsp; <span style="color:rgba(255,255,255,.4);font-size:11px;">// sum of 10 Rights indicators, each scored 0, 1, or 2</span><br>
         M_raw = &Sigma;(M1 &hellip; M10) &nbsp;&nbsp; <span style="color:rgba(255,255,255,.4);font-size:11px;">// sum of 10 Market indicators, each scored 0, 1, or 2</span><br>
@@ -102,145 +106,112 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
         m = M_raw &divide; Total &nbsp;&nbsp;&nbsp;&nbsp; <span style="color:rgba(255,255,255,.4);font-size:11px;">// ternary market coordinate</span><br>
         s &nbsp;= 1.00 &minus; r &minus; m &nbsp;&nbsp;&nbsp;&nbsp; <span style="color:rgba(255,255,255,.4);font-size:11px;">// ensures exact sum to 1.00</span>
       </div>
-      <div style="background:#fff;border:1px solid #D4CFC6;border-radius:8px;padding:1rem 1.2rem;font-size:13px;color:#2D3748;line-height:1.7;">
+      <div data-i18n-html="s1precision" style="background:#fff;border:1px solid #D4CFC6;border-radius:8px;padding:1rem 1.2rem;font-size:13px;color:#2D3748;line-height:1.7;">
         <strong>Precision.</strong> With 10 indicators per dimension scored 0&ndash;2, each raw score ranges from 0 to 20. The maximum total is 60, giving a minimum step size of 1/60 &asymp; 0.017 after normalization. Coordinates are rounded to two decimal places. The honest uncertainty at that precision is <strong>&plusmn;0.02</strong>, corresponding to a single indicator being scored one level differently by another researcher applying the same rubric to the same document. All indicators are weighted equally to minimize researcher subjectivity.
       </div>
     </div>
 
     <!-- SCORING SCALE -->
     <div id="scale" style="margin-bottom:2.5rem;">
-      <div class="sec-tag">Section 2</div>
-      <h2 class="sec-h2">The three-level scoring scale</h2>
-      <p class="sec-sub">Every indicator uses the same scale, applied exclusively to primary governance documents — legislation, official regulatory guidance, executive orders, and international treaties.</p>
+      <div class="sec-tag" data-i18n="s2tag">Section 2</div>
+      <h2 class="sec-h2" data-i18n="s2h2">The three-level scoring scale</h2>
+      <p class="sec-sub" data-i18n="s2sub">Every indicator uses the same scale, applied exclusively to primary governance documents — legislation, official regulatory guidance, executive orders, and international treaties.</p>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
         <div style="background:#fff;border:1px solid #D4CFC6;border-radius:8px;padding:1.1rem;border-top:3px solid #9CA3AF;">
           <div style="font-size:2rem;font-weight:700;color:#9CA3AF;margin-bottom:.4rem;">0</div>
-          <div style="font-size:13px;font-weight:600;color:#0D1B2A;margin-bottom:.4rem;">Absent</div>
-          <div style="font-size:12px;color:#6B7280;line-height:1.65;">No meaningful provision exists. Silence, vague aspiration, or rhetorical reference without operational content all score 0.</div>
-          <div style="margin-top:.7rem;padding:.6rem;background:#F5F2EC;border-radius:4px;font-size:11px;color:#6B7280;font-style:italic;">Japan: no binding right to explanation &rarr; R3 = 0</div>
+          <div style="font-size:13px;font-weight:600;color:#0D1B2A;margin-bottom:.4rem;" data-i18n="scale0">Absent</div>
+          <div style="font-size:12px;color:#6B7280;line-height:1.65;" data-i18n="scale0d">No meaningful provision exists. Silence, vague aspiration, or rhetorical reference without operational content all score 0.</div>
+          <div style="margin-top:.7rem;padding:.6rem;background:#F5F2EC;border-radius:4px;font-size:11px;color:#6B7280;font-style:italic;" data-i18n="scale0e">Japan: no binding right to explanation &rarr; R3 = 0</div>
         </div>
         <div style="background:#fff;border:1px solid #D4CFC6;border-radius:8px;padding:1.1rem;border-top:3px solid #E8950A;">
           <div style="font-size:2rem;font-weight:700;color:#E8950A;margin-bottom:.4rem;">1</div>
-          <div style="font-size:13px;font-weight:600;color:#0D1B2A;margin-bottom:.4rem;">Soft / partial / sector-specific</div>
-          <div style="font-size:12px;color:#6B7280;line-height:1.65;">Exists but is voluntary, limited to one sector, or binding without meaningful enforcement capacity.</div>
-          <div style="margin-top:.7rem;padding:.6rem;background:#F5F2EC;border-radius:4px;font-size:11px;color:#6B7280;font-style:italic;">UK: sector regulators issue AI transparency guidance &rarr; R3 = 1</div>
+          <div style="font-size:13px;font-weight:600;color:#0D1B2A;margin-bottom:.4rem;" data-i18n="scale1">Soft / partial / sector-specific</div>
+          <div style="font-size:12px;color:#6B7280;line-height:1.65;" data-i18n="scale1d">Exists but is voluntary, limited to one sector, or binding without meaningful enforcement capacity.</div>
+          <div style="margin-top:.7rem;padding:.6rem;background:#F5F2EC;border-radius:4px;font-size:11px;color:#6B7280;font-style:italic;" data-i18n="scale1e">UK: sector regulators issue AI transparency guidance &rarr; R3 = 1</div>
         </div>
         <div style="background:#fff;border:1px solid #D4CFC6;border-radius:8px;padding:1.1rem;border-top:3px solid #1B6FD4;">
           <div style="font-size:2rem;font-weight:700;color:#1B6FD4;margin-bottom:.4rem;">2</div>
-          <div style="font-size:13px;font-weight:600;color:#0D1B2A;margin-bottom:.4rem;">Binding / comprehensive</div>
-          <div style="font-size:12px;color:#6B7280;line-height:1.65;">A binding legal obligation across sectors, with real enforcement mechanism and meaningful penalties or powers.</div>
-          <div style="margin-top:.7rem;padding:.6rem;background:#F5F2EC;border-radius:4px;font-size:11px;color:#6B7280;font-style:italic;">EU AI Act: binding right to explanation for high-risk AI &rarr; R3 = 2</div>
+          <div style="font-size:13px;font-weight:600;color:#0D1B2A;margin-bottom:.4rem;" data-i18n="scale2">Binding / comprehensive</div>
+          <div style="font-size:12px;color:#6B7280;line-height:1.65;" data-i18n="scale2d">A binding legal obligation across sectors, with real enforcement mechanism and meaningful penalties or powers.</div>
+          <div style="margin-top:.7rem;padding:.6rem;background:#F5F2EC;border-radius:4px;font-size:11px;color:#6B7280;font-style:italic;" data-i18n="scale2e">EU AI Act: binding right to explanation for high-risk AI &rarr; R3 = 2</div>
         </div>
       </div>
     </div>
 
     <!-- RIGHTS TABLE -->
     <div id="rights" style="margin-bottom:2rem;">
-      <div class="sec-tag">Section 3</div>
-      <h2 class="sec-h2" style="margin-bottom:.4rem;">Rights dimension (R)</h2>
-      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;">Measures how strongly the framework protects individuals from AI harms. Max raw score: 20.</p>
+      <div class="sec-tag" data-i18n="s3tag">Section 3</div>
+      <h2 class="sec-h2" style="margin-bottom:.4rem;" data-i18n="s3h2">Rights dimension (R)</h2>
+      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;" data-i18n="s3sub">Measures how strongly the framework protects individuals from AI harms. Max raw score: 20.</p>
       <div style="border:1px solid #D4CFC6;border-radius:8px;overflow:hidden;">
         <table style="width:100%;border-collapse:collapse;font-size:12px;">
           <thead><tr style="background:#1B6FD4;color:#fff;">
-            <th style="padding:8px 12px;text-align:left;width:48px;">Code</th>
-            <th style="padding:8px 12px;text-align:left;">Indicator</th>
-            <th style="padding:8px 12px;text-align:left;width:130px;">Score 0</th>
-            <th style="padding:8px 12px;text-align:left;width:160px;">Score 1</th>
-            <th style="padding:8px 12px;text-align:left;width:160px;">Score 2</th>
+            <th style="padding:8px 12px;text-align:left;width:48px;" data-i18n="thCode">Code</th>
+            <th style="padding:8px 12px;text-align:left;" data-i18n="thIndicator">Indicator</th>
+            <th style="padding:8px 12px;text-align:left;width:130px;" data-i18n="th0">Score 0</th>
+            <th style="padding:8px 12px;text-align:left;width:160px;" data-i18n="th1">Score 1</th>
+            <th style="padding:8px 12px;text-align:left;width:160px;" data-i18n="th2">Score 2</th>
           </tr></thead>
-          <tbody>
-            <tr style="border-top:1px solid #E5E3DC;"><td style="padding:8px 12px;font-weight:700;color:#185FA5;">R1</td><td style="padding:8px 12px;">Binding comprehensive AI law with individual rights provisions</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Voluntary only</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Sector-specific binding</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Comprehensive binding law</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;background:#FAFAF8;"><td style="padding:8px 12px;font-weight:700;color:#185FA5;">R2</td><td style="padding:8px 12px;">Explicit list of prohibited AI use cases in binding law</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">None</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Soft discouragements</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Binding prohibition list</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;"><td style="padding:8px 12px;font-weight:700;color:#185FA5;">R3</td><td style="padding:8px 12px;">Legal right to explanation for automated AI decisions</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Absent</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Soft guideline or sector rule</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Binding legal right</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;background:#FAFAF8;"><td style="padding:8px 12px;font-weight:700;color:#185FA5;">R4</td><td style="padding:8px 12px;">Legal right to human review of AI decisions</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Absent</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Recommended in guidelines</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Binding legal right</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;"><td style="padding:8px 12px;font-weight:700;color:#185FA5;">R5</td><td style="padding:8px 12px;">Legal right to contest or appeal AI-driven decisions</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Absent</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Soft or sector-limited</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Binding legal right</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;background:#FAFAF8;"><td style="padding:8px 12px;font-weight:700;color:#185FA5;">R6</td><td style="padding:8px 12px;">Anti-discrimination provisions specifically targeting AI</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">None</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">General law applied to AI</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">AI-specific binding law</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;"><td style="padding:8px 12px;font-weight:700;color:#185FA5;">R7</td><td style="padding:8px 12px;">Independent enforcement body acting on behalf of individuals</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">None</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Existing agency with AI mandate</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">AI-specific body with full powers</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;background:#FAFAF8;"><td style="padding:8px 12px;font-weight:700;color:#185FA5;">R8</td><td style="padding:8px 12px;">Meaningful financial penalties calibrated to turnover or harm</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">None</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Fixed or limited penalties</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Turnover-based or substantial</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;"><td style="padding:8px 12px;font-weight:700;color:#185FA5;">R9</td><td style="padding:8px 12px;">Restrictions on biometric surveillance or invasive AI in binding law</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Absent or authorized</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Guidelines or limited rules</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Binding prohibition or strict limits</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;background:#FAFAF8;"><td style="padding:8px 12px;font-weight:700;color:#185FA5;">R10</td><td style="padding:8px 12px;">Constitutional or treaty-level AI rights protection</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">None</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Foundational law reference</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Constitutional or treaty protection</td></tr>
-          </tbody>
+          <tbody id="rights-tbody"></tbody>
         </table>
       </div>
     </div>
 
     <!-- MARKET TABLE -->
     <div id="market" style="margin-bottom:2rem;">
-      <div class="sec-tag">Section 4</div>
-      <h2 class="sec-h2" style="margin-bottom:.4rem;">Market dimension (M)</h2>
-      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;">Measures how strongly governance relies on voluntary, industry-led mechanisms. Max raw score: 20.</p>
+      <div class="sec-tag" data-i18n="s4tag">Section 4</div>
+      <h2 class="sec-h2" style="margin-bottom:.4rem;" data-i18n="s4h2">Market dimension (M)</h2>
+      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;" data-i18n="s4sub">Measures how strongly governance relies on voluntary, industry-led mechanisms. Max raw score: 20.</p>
       <div style="border:1px solid #D4CFC6;border-radius:8px;overflow:hidden;">
         <table style="width:100%;border-collapse:collapse;font-size:12px;">
           <thead><tr style="background:#1A6B42;color:#fff;">
-            <th style="padding:8px 12px;text-align:left;width:48px;">Code</th>
-            <th style="padding:8px 12px;text-align:left;">Indicator</th>
-            <th style="padding:8px 12px;text-align:left;width:130px;">Score 0</th>
-            <th style="padding:8px 12px;text-align:left;width:160px;">Score 1</th>
-            <th style="padding:8px 12px;text-align:left;width:160px;">Score 2</th>
+            <th style="padding:8px 12px;text-align:left;width:48px;" data-i18n="thCode">Code</th>
+            <th style="padding:8px 12px;text-align:left;" data-i18n="thIndicator">Indicator</th>
+            <th style="padding:8px 12px;text-align:left;width:130px;" data-i18n="th0">Score 0</th>
+            <th style="padding:8px 12px;text-align:left;width:160px;" data-i18n="th1">Score 1</th>
+            <th style="padding:8px 12px;text-align:left;width:160px;" data-i18n="th2">Score 2</th>
           </tr></thead>
-          <tbody>
-            <tr style="border-top:1px solid #E5E3DC;"><td style="padding:8px 12px;font-weight:700;color:#1A6B42;">M1</td><td style="padding:8px 12px;">Primary governance mechanism is voluntary, not legally binding</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Primarily binding</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Mix of binding and voluntary</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Fully voluntary</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;background:#FAFAF8;"><td style="padding:8px 12px;font-weight:700;color:#1A6B42;">M2</td><td style="padding:8px 12px;">Industry self-governance is the primary compliance mechanism</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">State-led entirely</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Significant industry role</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Industry self-gov primary</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;"><td style="padding:8px 12px;font-weight:700;color:#1A6B42;">M3</td><td style="padding:8px 12px;">Innovation promotion explicitly mandated in governance framework</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Absent</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Stated policy goal</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Legal mandate</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;background:#FAFAF8;"><td style="padding:8px 12px;font-weight:700;color:#1A6B42;">M4</td><td style="padding:8px 12px;">No binding financial penalties exist for AI violations</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Strong penalties exist</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Limited or fixed penalties</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">No AI-specific penalties</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;"><td style="padding:8px 12px;font-weight:700;color:#1A6B42;">M5</td><td style="padding:8px 12px;">Formal regulatory sandbox or experimental AI zone</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">None</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Informal pilots only</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Formal legal sandbox</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;background:#FAFAF8;"><td style="padding:8px 12px;font-weight:700;color:#1A6B42;">M6</td><td style="padding:8px 12px;">Framework is principles-based rather than prescriptive-rules-based</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Prescriptive rules</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Mix of principles and rules</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Principles only</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;"><td style="padding:8px 12px;font-weight:700;color:#1A6B42;">M7</td><td style="padding:8px 12px;">No dedicated enforcement body with AI sanctioning powers</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Full AI regulator exists</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Light-touch or sector regulator</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">No AI-specific regulator</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;background:#FAFAF8;"><td style="padding:8px 12px;font-weight:700;color:#1A6B42;">M8</td><td style="padding:8px 12px;">Compliance is primarily self-assessed, not externally audited</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">External audit required</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Mix of self and external</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Self-assessment primary</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;"><td style="padding:8px 12px;font-weight:700;color:#1A6B42;">M9</td><td style="padding:8px 12px;">Explicit alignment with international voluntary standards (OECD, ISO 42001)</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">None</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Referenced but not adopted</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Actively adopted</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;background:#FAFAF8;"><td style="padding:8px 12px;font-weight:700;color:#1A6B42;">M10</td><td style="padding:8px 12px;">Light-touch, pro-industry approach explicitly stated in official policy</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Not stated</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Implied or mentioned</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Explicit core policy statement</td></tr>
-          </tbody>
+          <tbody id="market-tbody"></tbody>
         </table>
       </div>
     </div>
 
     <!-- SOVEREIGN TABLE -->
     <div id="sovereign" style="margin-bottom:2rem;">
-      <div class="sec-tag">Section 5</div>
-      <h2 class="sec-h2" style="margin-bottom:.4rem;">Sovereign dimension (S)</h2>
-      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;">Measures how strongly the state directs and controls AI development and deployment. Max raw score: 20.</p>
+      <div class="sec-tag" data-i18n="s5tag">Section 5</div>
+      <h2 class="sec-h2" style="margin-bottom:.4rem;" data-i18n="s5h2">Sovereign dimension (S)</h2>
+      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;" data-i18n="s5sub">Measures how strongly the state directs and controls AI development and deployment. Max raw score: 20.</p>
       <div style="border:1px solid #D4CFC6;border-radius:8px;overflow:hidden;">
         <table style="width:100%;border-collapse:collapse;font-size:12px;">
           <thead><tr style="background:#8B1A1A;color:#fff;">
-            <th style="padding:8px 12px;text-align:left;width:48px;">Code</th>
-            <th style="padding:8px 12px;text-align:left;">Indicator</th>
-            <th style="padding:8px 12px;text-align:left;width:130px;">Score 0</th>
-            <th style="padding:8px 12px;text-align:left;width:160px;">Score 1</th>
-            <th style="padding:8px 12px;text-align:left;width:160px;">Score 2</th>
+            <th style="padding:8px 12px;text-align:left;width:48px;" data-i18n="thCode">Code</th>
+            <th style="padding:8px 12px;text-align:left;" data-i18n="thIndicator">Indicator</th>
+            <th style="padding:8px 12px;text-align:left;width:130px;" data-i18n="th0">Score 0</th>
+            <th style="padding:8px 12px;text-align:left;width:160px;" data-i18n="th1">Score 1</th>
+            <th style="padding:8px 12px;text-align:left;width:160px;" data-i18n="th2">Score 2</th>
           </tr></thead>
-          <tbody>
-            <tr style="border-top:1px solid #E5E3DC;"><td style="padding:8px 12px;font-weight:700;color:#8B1A1A;">S1</td><td style="padding:8px 12px;">AI outputs must comply with state values or ideology in binding law</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Absent</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Soft preference or guidance</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Binding legal requirement</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;background:#FAFAF8;"><td style="padding:8px 12px;font-weight:700;color:#8B1A1A;">S2</td><td style="padding:8px 12px;">Mandatory state registration required before AI deployment</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">None</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Sector-specific registration</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Comprehensive mandatory registration</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;"><td style="padding:8px 12px;font-weight:700;color:#8B1A1A;">S3</td><td style="padding:8px 12px;">National security provisions give state broad AI override powers</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">None</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Limited carve-out only</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Broad state override powers</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;background:#FAFAF8;"><td style="padding:8px 12px;font-weight:700;color:#8B1A1A;">S4</td><td style="padding:8px 12px;">State directs AI development priorities through binding strategic mandate</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Absent</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Non-binding policy document</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Binding strategic direction</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;"><td style="padding:8px 12px;font-weight:700;color:#8B1A1A;">S5</td><td style="padding:8px 12px;">Data localization requirements affecting AI training or deployment</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">None</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Sector-specific requirements</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Strict binding requirements</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;background:#FAFAF8;"><td style="padding:8px 12px;font-weight:700;color:#8B1A1A;">S6</td><td style="padding:8px 12px;">Restrictions on foreign AI providers or models in binding law</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">None</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Preferences or soft guidance</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Binding restrictions</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;"><td style="padding:8px 12px;font-weight:700;color:#8B1A1A;">S7</td><td style="padding:8px 12px;">State ownership or investment explicitly directs AI development</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Market-led entirely</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Significant state investment role</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">State explicitly directs development</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;background:#FAFAF8;"><td style="padding:8px 12px;font-weight:700;color:#8B1A1A;">S8</td><td style="padding:8px 12px;">State surveillance AI explicitly authorized or mandated in law</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Restricted or absent</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Permitted without explicit law</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Explicitly authorized in law</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;"><td style="padding:8px 12px;font-weight:700;color:#8B1A1A;">S9</td><td style="padding:8px 12px;">Content moderation requirements serving state political interests</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Absent</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Soft guidance</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Binding requirement</td></tr>
-            <tr style="border-top:1px solid #E5E3DC;background:#FAFAF8;"><td style="padding:8px 12px;font-weight:700;color:#8B1A1A;">S10</td><td style="padding:8px 12px;">State pre-approval required for AI deployment</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">None required</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Sector-specific approval</td><td style="padding:8px 12px;color:#9CA3AF;font-size:11px;">Broad prior approval required</td></tr>
-          </tbody>
+          <tbody id="sovereign-tbody"></tbody>
         </table>
       </div>
     </div>
 
     <!-- COMPASS -->
     <div id="compass" style="margin-bottom:2.5rem;">
-      <div class="sec-tag">Section 6</div>
-      <h2 class="sec-h2">Compass coordinates (rx, bx)</h2>
-      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;">The Compass view uses a two-axis system. The vertical axis (rx) maps individual rights vs. state control. The horizontal axis (bx) maps voluntary vs. binding governance. These are derived independently from the ternary coordinates.</p>
+      <div class="sec-tag" data-i18n="s6tag">Section 6</div>
+      <h2 class="sec-h2" data-i18n="s6h2">Compass coordinates (rx, bx)</h2>
+      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;" data-i18n="s6sub">The Compass view uses a two-axis system. The vertical axis (rx) maps individual rights vs. state control. The horizontal axis (bx) maps voluntary vs. binding governance. These are derived independently from the ternary coordinates.</p>
       <div style="background:#0D1B2A;border-radius:8px;padding:1.2rem 1.5rem;font-family:monospace;font-size:13px;color:#F0A830;line-height:2.2;">
         rx = (r &minus; s) &times; 1.15 &nbsp;&nbsp; <span style="color:rgba(255,255,255,.4);font-size:11px;">// capped at [&minus;1, +1]. Positive = rights-oriented. Negative = state control.</span><br>
         bx = existing enforcement score &nbsp;&nbsp; <span style="color:rgba(255,255,255,.4);font-size:11px;">// derived from the bind score in each year's timeline entry</span>
       </div>
-      <p style="font-size:12px;color:#6B7280;margin-top:.8rem;line-height:1.65;">The 1.15 multiplier stretches the rx axis to better utilize the full compass range, since most countries have moderate (r&minus;s) values. Countries with r=0.75 and s=0.04 get rx=(0.71)&times;1.15=0.82, placing them near the top of the compass without reaching the extreme.</p>
+      <p style="font-size:12px;color:#6B7280;margin-top:.8rem;line-height:1.65;" data-i18n="s6note">The 1.15 multiplier stretches the rx axis to better utilize the full compass range, since most countries have moderate (r&minus;s) values. Countries with r=0.75 and s=0.04 get rx=(0.71)&times;1.15=0.82, placing them near the top of the compass without reaching the extreme.</p>
     </div>
 
     <!-- WORKED EXAMPLE -->
     <div id="example" style="margin-bottom:2.5rem;">
-      <div class="sec-tag">Section 7</div>
-      <h2 class="sec-h2">Worked examples &amp; scorecard PDFs</h2>
-      <p class="sec-sub" style="margin-bottom:1.2rem;">Side-by-side coordinate derivation for Japan and the EU, plus full indicator-by-indicator scorecards for four benchmark jurisdictions. Each PDF documents every R, M, and S indicator with primary-source justification.</p>
+      <div class="sec-tag" data-i18n="s7tag">Section 7</div>
+      <h2 class="sec-h2" data-i18n="s7h2">Worked examples &amp; scorecard PDFs</h2>
+      <p class="sec-sub" style="margin-bottom:1.2rem;" data-i18n="s7sub">Side-by-side coordinate derivation for Japan and the EU, plus full indicator-by-indicator scorecards for four benchmark jurisdictions. Each PDF documents every R, M, and S indicator with primary-source justification.</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
         <div style="background:#fff;border:1px solid #D4CFC6;border-radius:8px;overflow:hidden;">
           <div style="background:#1A6B42;color:#fff;padding:10px 14px;font-size:13px;font-weight:600;">&#127471;&#127477; Japan &mdash; AI Promotion Act 2025</div>
@@ -265,52 +236,52 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
           <div style="background:#F5F2EC;padding:8px 14px;font-size:11px;color:#6B7280;line-height:1.6;">R10 = 0: AI Act is a regulation, not constitutional. R9 = 2: binding prohibitions on real-time biometric surveillance in public spaces. S3 = 1: national security is excluded from scope (carve-out, not override).</div>
         </div>
       </div>
-      <div style="font-size:12px;font-weight:600;color:#0D1B2A;margin-bottom:.65rem;letter-spacing:.02em;">Full indicator scorecards (PDF)</div>
+      <div style="font-size:12px;font-weight:600;color:#0D1B2A;margin-bottom:.65rem;letter-spacing:.02em;" data-i18n="s7pdfHead">Full indicator scorecards (PDF)</div>
       <div class="pdf-grid">
         <a class="pdf-card" href="files/scoring_eu.pdf" target="_blank" rel="noopener">
           <div class="pdf-icon">PDF</div>
           <div class="pdf-meta">
             <div class="pdf-title">&#127466;&#127482; European Union &mdash; EU AI Act 2024</div>
-            <div class="pdf-desc">All 30 indicators with article-level citations and scoring rationale.</div>
+            <div class="pdf-desc" data-i18n="pdfEuDesc">All 30 indicators with article-level citations and scoring rationale.</div>
           </div>
-          <span class="pdf-dl">Download</span>
+          <span class="pdf-dl" data-i18n="pdfDl">Download</span>
         </a>
         <a class="pdf-card" href="files/scoring_jp.pdf" target="_blank" rel="noopener">
           <div class="pdf-icon">PDF</div>
           <div class="pdf-meta">
             <div class="pdf-title">&#127471;&#127477; Japan &mdash; AI Promotion Act 2025</div>
-            <div class="pdf-desc">All 30 indicators with primary-source justification for each score.</div>
+            <div class="pdf-desc" data-i18n="pdfJpDesc">All 30 indicators with primary-source justification for each score.</div>
           </div>
-          <span class="pdf-dl">Download</span>
+          <span class="pdf-dl" data-i18n="pdfDl">Download</span>
         </a>
         <a class="pdf-card" href="files/scoring_kr.pdf" target="_blank" rel="noopener">
           <div class="pdf-icon">PDF</div>
           <div class="pdf-meta">
             <div class="pdf-title">&#127472;&#127479; South Korea &mdash; AI Basic Act 2026</div>
-            <div class="pdf-desc">All 30 indicators including extraterritorial scope and penalty analysis.</div>
+            <div class="pdf-desc" data-i18n="pdfKrDesc">All 30 indicators including extraterritorial scope and penalty analysis.</div>
           </div>
-          <span class="pdf-dl">Download</span>
+          <span class="pdf-dl" data-i18n="pdfDl">Download</span>
         </a>
         <a class="pdf-card" href="files/scoring_us.pdf" target="_blank" rel="noopener">
           <div class="pdf-icon">PDF</div>
           <div class="pdf-meta">
             <div class="pdf-title">&#127482;&#127480; United States &mdash; Federal &amp; state AI law</div>
-            <div class="pdf-desc">All 30 indicators across federal EO, Colorado SB 205, Illinois BIPA, and more.</div>
+            <div class="pdf-desc" data-i18n="pdfUsDesc">All 30 indicators across federal EO, Colorado SB 205, Illinois BIPA, and more.</div>
           </div>
-          <span class="pdf-dl">Download</span>
+          <span class="pdf-dl" data-i18n="pdfDl">Download</span>
         </a>
       </div>
     </div>
 
     <!-- FULL SCORES TABLE -->
     <div id="all-scores" style="margin-bottom:2.5rem;">
-      <div class="sec-tag">Section 8</div>
-      <h2 class="sec-h2">Full scoring table &mdash; all 79 jurisdictions</h2>
-      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;">Raw indicator sums and derived coordinates for every jurisdiction in the index, as of June 2026. EU member states share the same R/M baseline from the EU AI Act but may differ on S indicators reflecting national governance context.</p>
+      <div class="sec-tag" data-i18n="s8tag">Section 8</div>
+      <h2 class="sec-h2" data-i18n="s8h2">Full scoring table &mdash; all 79 jurisdictions</h2>
+      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;" data-i18n="s8sub">Raw indicator sums and derived coordinates for every jurisdiction in the index, as of June 2026. EU member states share the same R/M baseline from the EU AI Act but may differ on S indicators reflecting national governance context.</p>
       <div style="border:1px solid #D4CFC6;border-radius:8px;overflow:hidden;overflow-x:auto;">
         <table style="width:100%;border-collapse:collapse;font-size:11px;min-width:600px;">
           <thead><tr style="background:#0D1B2A;color:rgba(255,255,255,.75);">
-            <th style="padding:7px 10px;text-align:left;">Jurisdiction</th>
+            <th style="padding:7px 10px;text-align:left;" data-i18n="thJurisdiction">Jurisdiction</th>
             <th style="padding:7px 10px;text-align:right;">R raw</th>
             <th style="padding:7px 10px;text-align:right;">M raw</th>
             <th style="padding:7px 10px;text-align:right;">S raw</th>
@@ -404,53 +375,53 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
 
     <!-- LIMITATIONS -->
     <div id="limitations" style="margin-bottom:2.5rem;">
-      <div class="sec-tag">Section 9</div>
-      <h2 class="sec-h2">Known limitations</h2>
+      <div class="sec-tag" data-i18n="s9tag">Section 9</div>
+      <h2 class="sec-h2" data-i18n="s9h2">Known limitations</h2>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
         <div style="background:#FEF3C7;border:1px solid #FCD34D;border-radius:8px;padding:1rem 1.2rem;">
-          <div style="font-size:12px;font-weight:600;color:#92400E;margin-bottom:.4rem;">Advocacy bodies vs governance actors</div>
-          <div style="font-size:12px;color:#78350F;line-height:1.6;">OECD and UNESCO score market-oriented because their frameworks are voluntary — but their philosophy is rights-protective. The formula measures governance mechanism, not governance intent. These are noted as edge cases.</div>
+          <div style="font-size:12px;font-weight:600;color:#92400E;margin-bottom:.4rem;" data-i18n="lim1t">Advocacy bodies vs governance actors</div>
+          <div style="font-size:12px;color:#78350F;line-height:1.6;" data-i18n="lim1b">OECD and UNESCO score market-oriented because their frameworks are voluntary — but their philosophy is rights-protective. The formula measures governance mechanism, not governance intent. These are noted as edge cases.</div>
         </div>
         <div style="background:#FEF3C7;border:1px solid #FCD34D;border-radius:8px;padding:1rem 1.2rem;">
-          <div style="font-size:12px;font-weight:600;color:#92400E;margin-bottom:.4rem;">Intent vs enacted reality</div>
-          <div style="font-size:12px;color:#78350F;line-height:1.6;">Canada and Australia have strong rights traditions but lack binding AI law following legislative failures. The formula scores current enacted governance, not aspiration. Timeline data captures the trajectory.</div>
+          <div style="font-size:12px;font-weight:600;color:#92400E;margin-bottom:.4rem;" data-i18n="lim2t">Intent vs enacted reality</div>
+          <div style="font-size:12px;color:#78350F;line-height:1.6;" data-i18n="lim2b">Canada and Australia have strong rights traditions but lack binding AI law following legislative failures. The formula scores current enacted governance, not aspiration. Timeline data captures the trajectory.</div>
         </div>
         <div style="background:#FEF3C7;border:1px solid #FCD34D;border-radius:8px;padding:1rem 1.2rem;">
-          <div style="font-size:12px;font-weight:600;color:#92400E;margin-bottom:.4rem;">Inter-rater reliability</div>
-          <div style="font-size:12px;color:#78350F;line-height:1.6;">Indicator scoring requires reading primary documents. Two researchers may score a single indicator &#177;1, producing a coordinate shift of approximately &#177;0.02. This is the irreducible uncertainty of any document-based governance index.</div>
+          <div style="font-size:12px;font-weight:600;color:#92400E;margin-bottom:.4rem;" data-i18n="lim3t">Inter-rater reliability</div>
+          <div style="font-size:12px;color:#78350F;line-height:1.6;" data-i18n="lim3b">Indicator scoring requires reading primary documents. Two researchers may score a single indicator &#177;1, producing a coordinate shift of approximately &#177;0.02. This is the irreducible uncertainty of any document-based governance index.</div>
         </div>
         <div style="background:#FEF3C7;border:1px solid #FCD34D;border-radius:8px;padding:1rem 1.2rem;">
-          <div style="font-size:12px;font-weight:600;color:#92400E;margin-bottom:.4rem;">Equal indicator weighting</div>
-          <div style="font-size:12px;color:#78350F;line-height:1.6;">All 10 indicators per dimension are weighted equally. A future version could weight foundational indicators (R1, S1) more heavily. Current equal weighting is a deliberate choice to minimize researcher subjectivity.</div>
+          <div style="font-size:12px;font-weight:600;color:#92400E;margin-bottom:.4rem;" data-i18n="lim4t">Equal indicator weighting</div>
+          <div style="font-size:12px;color:#78350F;line-height:1.6;" data-i18n="lim4b">All 10 indicators per dimension are weighted equally. A future version could weight foundational indicators (R1, S1) more heavily. Current equal weighting is a deliberate choice to minimize researcher subjectivity.</div>
         </div>
       </div>
     </div>
 
     <!-- PRIMARY SOURCES -->
     <div id="sources" style="margin-bottom:2rem;">
-      <div class="sec-tag">Section 10</div>
-      <h2 class="sec-h2">Primary source basis</h2>
-      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;">All indicator scores are based exclusively on the following primary source types. Secondary commentary, news articles, and think-tank summaries were not used as scoring inputs.</p>
+      <div class="sec-tag" data-i18n="s10tag">Section 10</div>
+      <h2 class="sec-h2" data-i18n="s10h2">Primary source basis</h2>
+      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;" data-i18n="s10sub">All indicator scores are based exclusively on the following primary source types. Secondary commentary, news articles, and think-tank summaries were not used as scoring inputs.</p>
       <div style="background:#fff;border:1px solid #D4CFC6;border-radius:8px;padding:1.2rem 1.5rem;">
         <ul style="font-size:12px;color:#2D3748;line-height:2;padding-left:1.2rem;">
-          <li>National AI legislation and regulations (official government portals and official journals)</li>
-          <li>Executive orders, cabinet decisions, and prime ministerial directives</li>
-          <li>Binding regulatory guidance issued by national supervisory authorities (e.g., CAC, BfDI, ICO, CNIL)</li>
-          <li>Constitutional provisions and constitutional court judgments</li>
-          <li>International treaties and intergovernmental agreements</li>
-          <li>National AI strategies where adopted by formal government decision (not consultation documents)</li>
-          <li>OECD AI Policy Observatory database for cross-verification</li>
-          <li>Stanford HAI AI Index 2026 for secondary validation of key facts</li>
+          <li data-i18n="src1">National AI legislation and regulations (official government portals and official journals)</li>
+          <li data-i18n="src2">Executive orders, cabinet decisions, and prime ministerial directives</li>
+          <li data-i18n="src3">Binding regulatory guidance issued by national supervisory authorities (e.g., CAC, BfDI, ICO, CNIL)</li>
+          <li data-i18n="src4">Constitutional provisions and constitutional court judgments</li>
+          <li data-i18n="src5">International treaties and intergovernmental agreements</li>
+          <li data-i18n="src6">National AI strategies where adopted by formal government decision (not consultation documents)</li>
+          <li data-i18n="src7">OECD AI Policy Observatory database for cross-verification</li>
+          <li data-i18n="src8">Stanford HAI AI Index 2026 for secondary validation of key facts</li>
         </ul>
       </div>
     </div>
 
-    <div class="callout-note" style="margin-bottom:2rem;">
+    <div class="callout-note" style="margin-bottom:2rem;" data-i18n-html="callout">
       <strong>Position &ne; ranking.</strong> The formula produces a location in three-dimensional governance space, not a score from good to bad. A country positioned near the sovereignty corner is not worse than one near the rights corner &mdash; it reflects a different philosophy about what AI governance is for. The formula makes that philosophy visible and contestable, which is the point.
     </div>
 
     <div style="text-align:center;padding:1rem 0;">
-      <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:6px;background:#0D1B2A;color:#F5F2EC;text-decoration:none;font-size:13px;font-family:'Inter',sans-serif;">&larr; Back to the map</a>
+      <a href="index.html" data-i18n="backBtn" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:6px;background:#0D1B2A;color:#F5F2EC;text-decoration:none;font-size:13px;font-family:'Inter',sans-serif;">&larr; Back to the map</a>
     </div>
 
   </div>
@@ -458,5 +429,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
 
 <footer>&copy; 2026 Joohun Kim &middot; Research by Joohun Kim, Brown University (AI Governance Association, Tokyo; Siegel PIT-SF Fellowship, Princeton CITP) &middot; All rights reserved</footer>
 
+<script src="meth-indicators.js"></script>
+<script src="meth-i18n.js"></script>
 </body>
 </html>

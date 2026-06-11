@@ -250,7 +250,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
     <a href="#hero" id="nav-map">Map</a>
     <a href="#methodology" id="nav-method">Methodology</a>
     <a href="#countries" id="nav-data">Data</a>
-    <a href="methodology.html" style="font-size:11px;padding:3px 9px;border-radius:4px;border:1px solid rgba(232,149,10,.35);color:#E8950A;text-decoration:none;letter-spacing:.04em;transition:all .15s;" onmouseover="this.style.background='rgba(232,149,10,.12)'" onmouseout="this.style.background='transparent'">Formula &#8599;</a>
+    <a href="methodology.html" id="nav-formula" style="font-size:11px;padding:3px 9px;border-radius:4px;border:1px solid rgba(232,149,10,.35);color:#E8950A;text-decoration:none;letter-spacing:.04em;transition:all .15s;" onmouseover="this.style.background='rgba(232,149,10,.12)'" onmouseout="this.style.background='transparent'">Formula &#8599;</a>
     <button class="glossary-btn" onclick="toggleGlossary()">&#9635; Glossary</button>
     <button class="lang-btn" id="lang-btn" onclick="toggleLang()">&#26085;&#26412;&#35486;</button>
   </div>
@@ -270,7 +270,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
             <button class="vt-btn" id="vt-comp" onclick="setView('compass',this)">&#10010; Compass</button>
           </div>
           <div class="timeline-wrap">
-            <span class="tl-label">Year</span>
+            <span class="tl-label" id="tl-label-year">Year</span>
             <span class="tl-year" id="tl-display">2026</span>
             <input type="range" class="tl-range" id="timeline" min="2016" max="2026" value="2026" step="1" oninput="setYear(parseInt(this.value))">
           </div>
@@ -417,17 +417,17 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
 <section id="how-scored" style="background:#F8F5EF;padding:3rem 1.5rem;border-top:4px solid #E8950A;">
   <div style="max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
     <div>
-      <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#E8950A;font-weight:600;margin-bottom:.4rem;">Methodology &amp; Transparency</div>
-      <h2 style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:#0D1B2A;margin-bottom:.4rem;">How countries are positioned</h2>
-      <p style="font-size:13px;color:#6B7280;max-width:520px;line-height:1.7;">Every position is derived from a 30-indicator formula applied to primary governance documents. The formula, all indicator definitions, scoring criteria, worked examples, and the full 79-country scoring table are documented in a dedicated methodology page.</p>
+      <div id="hs-tag" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#E8950A;font-weight:600;margin-bottom:.4rem;">Methodology &amp; Transparency</div>
+      <h2 id="hs-h2" style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:#0D1B2A;margin-bottom:.4rem;">How countries are positioned</h2>
+      <p id="hs-sub" style="font-size:13px;color:#6B7280;max-width:520px;line-height:1.7;">Every position is derived from a 30-indicator formula applied to primary governance documents. The formula, all indicator definitions, scoring criteria, worked examples, and the full 79-country scoring table are documented in a dedicated methodology page.</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem;">
-        <span style="font-size:11px;padding:3px 10px;border-radius:4px;background:#fff;border:1px solid #D4CFC6;color:#6B7280;">30 indicators</span>
-        <span style="font-size:11px;padding:3px 10px;border-radius:4px;background:#fff;border:1px solid #D4CFC6;color:#6B7280;">3 dimensions</span>
-        <span style="font-size:11px;padding:3px 10px;border-radius:4px;background:#fff;border:1px solid #D4CFC6;color:#6B7280;">Primary sources only</span>
-        <span style="font-size:11px;padding:3px 10px;border-radius:4px;background:#fff;border:1px solid #D4CFC6;color:#6B7280;">&plusmn;0.02 precision</span>
+        <span id="hs-pill1" style="font-size:11px;padding:3px 10px;border-radius:4px;background:#fff;border:1px solid #D4CFC6;color:#6B7280;">30 indicators</span>
+        <span id="hs-pill2" style="font-size:11px;padding:3px 10px;border-radius:4px;background:#fff;border:1px solid #D4CFC6;color:#6B7280;">3 dimensions</span>
+        <span id="hs-pill3" style="font-size:11px;padding:3px 10px;border-radius:4px;background:#fff;border:1px solid #D4CFC6;color:#6B7280;">Primary sources only</span>
+        <span id="hs-pill4" style="font-size:11px;padding:3px 10px;border-radius:4px;background:#fff;border:1px solid #D4CFC6;color:#6B7280;">&plusmn;0.02 precision</span>
       </div>
     </div>
-    <a href="methodology.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:7px;background:#0D1B2A;color:#F5F2EC;text-decoration:none;font-size:13px;font-family:'Inter',sans-serif;white-space:nowrap;flex-shrink:0;">Read full methodology &rarr;</a>
+    <a href="methodology.html" id="hs-link" style="display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:7px;background:#0D1B2A;color:#F5F2EC;text-decoration:none;font-size:13px;font-family:'Inter',sans-serif;white-space:nowrap;flex-shrink:0;">Read full methodology &rarr;</a>
   </div>
 </section>
 
@@ -466,15 +466,15 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
 
 <section id="timeline-section">
   <div class="sec-inner">
-    <div class="sec-tag">Historical record</div>
-    <h2 class="sec-h2" style="color: #FFFFFF;">Regulatory Timeline</h2>    
-    <p class="sec-sub">Key events in global AI governance from 2016 to 2026.</p>
+    <div class="sec-tag" id="tl-sec-tag">Historical record</div>
+    <h2 class="sec-h2" id="tl-sec-h2" style="color: #FFFFFF;">Regulatory Timeline</h2>    
+    <p class="sec-sub" id="tl-sec-sub">Key events in global AI governance from 2016 to 2026.</p>
     <div class="tl-filters">
-      <button class="tl-filter active" onclick="filterTimeline('all',this)">All events</button>
-      <button class="tl-filter" onclick="filterTimeline('legislation',this)">Legislation</button>
-      <button class="tl-filter" onclick="filterTimeline('international',this)">International</button>
-      <button class="tl-filter" onclick="filterTimeline('enforcement',this)">Enforcement</button>
-      <button class="tl-filter" onclick="filterTimeline('ai',this)">AI releases</button>
+      <button class="tl-filter active" id="tl-f-all" onclick="filterTimeline('all',this)">All events</button>
+      <button class="tl-filter" id="tl-f-leg" onclick="filterTimeline('legislation',this)">Legislation</button>
+      <button class="tl-filter" id="tl-f-intl" onclick="filterTimeline('international',this)">International</button>
+      <button class="tl-filter" id="tl-f-enf" onclick="filterTimeline('enforcement',this)">Enforcement</button>
+      <button class="tl-filter" id="tl-f-ai" onclick="filterTimeline('ai',this)">AI releases</button>
     </div>
     <div id="tl-entries"></div>
   </div>
@@ -482,21 +482,21 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
 
 <section id="countries">
   <div class="sec-inner">
-    <div class="sec-tag">Full dataset</div>
-    <h2 class="sec-h2">All jurisdictions</h2>
+    <div class="sec-tag" id="ct-sec-tag">Full dataset</div>
+    <h2 class="sec-h2" id="ct-sec-h2">All jurisdictions</h2>
     <div style="display:flex;gap:.8rem;margin-bottom:1.2rem;flex-wrap:wrap;align-items:center;">
-      <span style="font-size:12px;color:var(--text3);flex:1;">Click any row to highlight on map. Click headers to sort.</span>
-      <a class="download-btn" href="#" onclick="downloadCSV(event)">&#8681; Download CSV</a>
+      <span id="ct-hint" style="font-size:12px;color:var(--text3);flex:1;">Click any row to highlight on map. Click headers to sort.</span>
+      <a class="download-btn" href="#" id="ct-download" onclick="downloadCSV(event)">&#8681; Download CSV</a>
     </div>
     <table class="ct-table">
       <thead><tr>
-        <th onclick="sortTable('name')">Jurisdiction &#8597;</th>
-        <th onclick="sortTable('group')">Model &#8597;</th>
-        <th onclick="sortTable('bind')">Binding? &#8597;</th>
-        <th onclick="sortTable('r')">Rights &#8597;</th>
-        <th onclick="sortTable('m')">Market &#8597;</th>
-        <th onclick="sortTable('s')">Sovereign &#8597;</th>
-        <th onclick="sortTable('bind')">Enforcement &#8597;</th>
+        <th id="ct-th-name" onclick="sortTable('name')">Jurisdiction &#8597;</th>
+        <th id="ct-th-model" onclick="sortTable('group')">Model &#8597;</th>
+        <th id="ct-th-binding" onclick="sortTable('bind')">Binding? &#8597;</th>
+        <th id="ct-th-r" onclick="sortTable('r')">Rights &#8597;</th>
+        <th id="ct-th-m" onclick="sortTable('m')">Market &#8597;</th>
+        <th id="ct-th-s" onclick="sortTable('s')">Sovereign &#8597;</th>
+        <th id="ct-th-enf" onclick="sortTable('bind')">Enforcement &#8597;</th>
       </tr></thead>
       <tbody id="ct-body"></tbody>
     </table>
@@ -504,6 +504,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
 </section>
 
 <footer>&copy; 2026 Joohun Kim &middot; Research by Joohun Kim, Brown University (AI Governance Association, Tokyo; Siegel PIT-SF Fellowship, Princeton CITP) &middot; All rights reserved</footer>
+<script src="timeline-i18n.js"></script>
 <script>
 // ── DATA ──────────────────────────────────────────────────────────────────────
 var countries = [
@@ -1733,6 +1734,8 @@ function renderGlossary(filter) {
 function filterGlossary(val) { renderGlossary(val); }
 
 // ── TIMELINE ──────────────────────────────────────────────────────────────────
+var activeTimelineFilter = "all";
+
 var timelineEvents = [
   {year:2016,title:"EU begins AI strategy discussions",body:"European Commission launches AI governance consultations. Early discussions that will eventually lead to the AI Act.",tags:["EU","Strategy"],category:"legislation",color:"#1B6FD4"},
   {year:2017,title:"UAE appoints world first AI Minister",body:"United Arab Emirates appoints Omar Al Olama as Minister of State for Artificial Intelligence — the first such position globally.",tags:["UAE","Government"],category:"legislation",color:"#8B1A1A"},
@@ -1764,10 +1767,22 @@ var timelineEvents = [
   {year:2026,title:"EU AI Act — high-risk enforcement",body:"August 2026: High-risk AI system obligations become fully enforceable. Companies using AI in employment, credit, healthcare must comply or face penalties.",tags:["EU","Enforcement","High-risk"],category:"enforcement",color:"#1B6FD4"}
 ];
 
+function getTimelineText(idx, field) {
+  var e = timelineEvents[idx];
+  if (currentLang === "ja" && window.TIMELINE_JA && window.TIMELINE_JA[idx]) {
+    var ja = window.TIMELINE_JA[idx];
+    if (field === "tags") return ja.tags || e.tags;
+    return ja[field] || e[field];
+  }
+  return e[field];
+}
+
 function buildTimeline(filter) {
+  if (filter != null) activeTimelineFilter = filter;
   var container=document.getElementById("tl-entries");
   if (!container) return;
-  var events=filter==="all"?timelineEvents:timelineEvents.filter(function(e){return e.category===filter;});
+  var isJa = currentLang === "ja";
+  var events=activeTimelineFilter==="all"?timelineEvents:timelineEvents.filter(function(e){return e.category===activeTimelineFilter;});
   var byYear={};
   events.forEach(function(e){if (!byYear[e.year])byYear[e.year]=[];byYear[e.year].push(e);});
   var years=Object.keys(byYear).map(Number).sort(function(a,b){return b-a;});
@@ -1775,10 +1790,15 @@ function buildTimeline(filter) {
     var evts=byYear[year];
     var isRecent=year>=2024;
     var entriesHtml=evts.map(function(e){
-      var tagsHtml=e.tags.map(function(t){return "<span class=\"tl-tag\">"+t+"</span>";}).join("");
-      return "<div class=\"tl-entry\" data-cat=\""+e.category+"\"><div class=\"tl-entry-header\"><div class=\"tl-cat-dot\" style=\"background:"+e.color+"\"></div><div class=\"tl-event-title\">"+e.title+"</div></div><div class=\"tl-event-body\">"+e.body+"</div><div class=\"tl-event-tags\">"+tagsHtml+"</div></div>";
+      var idx = timelineEvents.indexOf(e);
+      var title = getTimelineText(idx, "title");
+      var body = getTimelineText(idx, "body");
+      var tags = getTimelineText(idx, "tags");
+      var tagsHtml=tags.map(function(t){return "<span class=\"tl-tag\">"+t+"</span>";}).join("");
+      return "<div class=\"tl-entry\" data-cat=\""+e.category+"\"><div class=\"tl-entry-header\"><div class=\"tl-cat-dot\" style=\"background:"+e.color+"\"></div><div class=\"tl-event-title\">"+title+"</div></div><div class=\"tl-event-body\">"+body+"</div><div class=\"tl-event-tags\">"+tagsHtml+"</div></div>";
     }).join("");
-    return "<div class=\"tl-year-group\" data-year=\""+year+"\"><div class=\"tl-year-header\" onclick=\"toggleYearGroup("+year+")\"><span class=\"tl-year-num\">"+year+"</span><span class=\"tl-year-count\">"+evts.length+" event"+(evts.length>1?"s":"")+"</span><span class=\"tl-year-toggle\" id=\"tl-toggle-"+year+"\">"+(isRecent?"\u25be":"\u25b8")+"</span></div><div class=\"tl-year-entries"+(isRecent?"":" collapsed")+"\" id=\"tl-group-"+year+"\">"+entriesHtml+"</div></div>";
+    var countLabel = isJa ? evts.length + "\u4ef6\u306e\u30a4\u30d9\u30f3\u30c8" : evts.length + (evts.length > 1 ? " events" : " event");
+    return "<div class=\"tl-year-group\" data-year=\""+year+"\"><div class=\"tl-year-header\" onclick=\"toggleYearGroup("+year+")\"><span class=\"tl-year-num\">"+year+"</span><span class=\"tl-year-count\">"+countLabel+"</span><span class=\"tl-year-toggle\" id=\"tl-toggle-"+year+"\">"+(isRecent?"\u25be":"\u25b8")+"</span></div><div class=\"tl-year-entries"+(isRecent?"":" collapsed")+"\" id=\"tl-group-"+year+"\">"+entriesHtml+"</div></div>";
   }).join("");
 }
 
@@ -1946,6 +1966,17 @@ function sortTable(key) {
   buildTable();
 }
 
+var MODEL_LABELS_JA = { rights: "\u6a29\u5229\u30d9\u30fc\u30b9", market: "\u5e02\u5834\u5fd7\u5411", sovereign: "\u4e3b\u6a29\u91cd\u8996", hybrid: "\u30cf\u30a4\u30d6\u30ea\u30c3\u30c9" };
+
+function getModelLabel(c) {
+  return currentLang === "ja" ? (MODEL_LABELS_JA[c.group] || c.modelLabel) : c.modelLabel;
+}
+
+function getBindLabel(bind) {
+  if (currentLang === "ja") return bind >= 70 ? "\u306f\u3044" : bind >= 30 ? "\u90e8\u5206\u7684" : "\u81ea\u767a\u7684";
+  return bind >= 70 ? "Yes" : bind >= 30 ? "Partial" : "Voluntary";
+}
+
 function buildTable() {
   var tbody=document.getElementById("ct-body");
   var sorted=countries.slice().sort(function(a,b){
@@ -1963,9 +1994,9 @@ function buildTable() {
   sorted.forEach(function(c){
     var pos=getPos(c,currentYear);
     var bCls=pos.bind>=70?"ct-bind-yes":pos.bind>=30?"ct-bind-part":"ct-bind-no";
-    var bStr=pos.bind>=70?"Yes":pos.bind>=30?"Partial":"Voluntary";
+    var bStr=getBindLabel(pos.bind);
     var tr=document.createElement("tr");
-    tr.innerHTML="<td><div class=\"ct-country\">"+c.flag+" "+c.name+"</div></td><td><span class=\"ct-model "+c.ctmClass+"\">"+c.modelLabel+"</span></td><td><span class=\""+bCls+"\">"+bStr+"</span></td><td>"+Math.round(pos.r*100)+"%</td><td>"+Math.round(pos.m*100)+"%</td><td>"+Math.round(pos.s*100)+"%</td><td><div style=\"display:flex;align-items:center;gap:6px\"><div class=\"ct-bar-wrap\"><div class=\"ct-bar\" style=\"width:"+pos.bind+"%\"></div></div></div></td>";
+    tr.innerHTML="<td><div class=\"ct-country\">"+c.flag+" "+c.name+"</div></td><td><span class=\"ct-model "+c.ctmClass+"\">"+getModelLabel(c)+"</span></td><td><span class=\""+bCls+"\">"+bStr+"</span></td><td>"+Math.round(pos.r*100)+"%</td><td>"+Math.round(pos.m*100)+"%</td><td>"+Math.round(pos.s*100)+"%</td><td><div style=\"display:flex;align-items:center;gap:6px\"><div class=\"ct-bar-wrap\"><div class=\"ct-bar\" style=\"width:"+pos.bind+"%\"></div></div></div></td>";
     tr.addEventListener("click",function(){selectedCountry=c;openPanel(c);document.getElementById("hero").scrollIntoView({behavior:"smooth"});setTimeout(function(){draw();},400);});
     tbody.appendChild(tr);
   });
@@ -1988,14 +2019,11 @@ function downloadCSV(e) {
 // ── LANGUAGE ──────────────────────────────────────────────────────────────────
 var i18n = {
   en: {
-    hsTag:"Transparency", hsH2:"How countries are positioned",
-    hsSub:"This index uses a ternary positioning system \u2014 not a score or ranking. Every position reflects analytical judgment based on five measurable governance dimensions, triangulated against primary legislative sources and academic literature.",
-    hsC1t:"Legislative instrument", hsC1b:"What type of governance instrument exists? Binding legislation with penalties \u2192 higher rights/sovereign score. Voluntary guidelines \u2192 higher market score.",
-    hsC2t:"Individual rights provisions", hsC2b:"Does the framework include rights to explainability, human review, or contesting automated decisions? Strong provisions \u2192 higher rights position.",
-    hsC3t:"State content control", hsC3b:"Does the framework require AI outputs to align with state values or national security priorities? State content requirements \u2192 higher sovereignty position.",
-    hsC4t:"Industry self-governance role", hsC4b:"How central is voluntary industry self-governance vs. state regulation? Primary self-governance role \u2192 higher market position.",
-    hsC5t:"Enforcement capacity", hsC5b:"Does a dedicated enforcement institution exist with technical capacity? Dot size encodes this independently \u2014 larger dots = stronger binding enforcement.",
-    hsCallout:"<strong>Important:</strong> Positions are analytical approximations based on publicly available governance documents. They reflect the dominant philosophical orientation of each framework \u2014 not a judgment of quality, effectiveness, or desirability. All positions updated to June 2026.",
+    formulaLink:"Formula \u2197",
+    hsTag:"Methodology & Transparency", hsH2:"How countries are positioned",
+    hsSub:"Every position is derived from a 30-indicator formula applied to primary governance documents. The formula, all indicator definitions, scoring criteria, worked examples, and the full 79-country scoring table are documented in a dedicated methodology page.",
+    hsPill1:"30 indicators", hsPill2:"3 dimensions", hsPill3:"Primary sources only", hsPill4:"\u00b10.02 precision",
+    hsLink:"Read full methodology \u2192",
     methTag:"How it works", methH2:"Methodology",
     methSub:"Each jurisdiction is positioned from the same underlying data in two complementary views: a ternary Triangle and a two-axis Compass. Dot size independently encodes binding enforcement strength in both views.",
     methC1t:"Three governance philosophies", methC1b:"Rights-protective, market-oriented, and sovereignty-centered. These three poles form the analytical foundation for both visualizations. No country is purely one model.",
@@ -2003,17 +2031,18 @@ var i18n = {
     methC3t:"Compass view", methC3b:"Re-projects the same data onto two axes: vertical rx (individual rights vs. state control) and horizontal bx (voluntary soft law vs. binding hard law). The four quadrants show combinations like \u201crights-protective binding law\u201d or \u201cstate control soft law.\u201d",
     methC4t:"Dot size = enforcement", methC4b:"In both views, dot size encodes binding enforcement strength. Larger dots mean stronger legally enforceable mechanisms with meaningful penalties \u2014 independent of where a country sits on either axis.",
     methC5t:"Timeline 2016\u20132026", methC5b:"Drag the year slider to see how positions shift over time in either view. Crisis milestones appear at key years from 2022 onward.",
-    methCallout:"<strong>Key insight:</strong> On the Triangle, the EU and China sit at opposite corners; on the Compass, they land in opposite vertical halves (rights vs. state control) while both lean rightward toward binding law. Enforcement strength and philosophical orientation are independent dimensions."
+    methCallout:"<strong>Key insight:</strong> On the Triangle, the EU and China sit at opposite corners; on the Compass, they land in opposite vertical halves (rights vs. state control) while both lean rightward toward binding law. Enforcement strength and philosophical orientation are independent dimensions.",
+    tlYear:"Year", tlSecTag:"Historical record", tlSecH2:"Regulatory Timeline", tlSecSub:"Key events in global AI governance from 2016 to 2026.",
+    tlFAll:"All events", tlFLeg:"Legislation", tlFIntl:"International", tlFEnf:"Enforcement", tlFAi:"AI releases",
+    ctSecTag:"Full dataset", ctSecH2:"All jurisdictions", ctHint:"Click any row to highlight on map. Click headers to sort.", ctDownload:"\u21e9 Download CSV",
+    ctThName:"Jurisdiction", ctThModel:"Model", ctThBinding:"Binding?", ctThR:"Rights", ctThM:"Market", ctThS:"Sovereign", ctThEnf:"Enforcement"
   },
   ja: {
-    hsTag:"\u900F\u660E\u6027", hsH2:"\u5404\u56FD\u306E\u914D\u7F6E\u306E\u8003\u3048\u65B9",
-    hsSub:"\u672C\u6307\u6570\u306F\u30B9\u30B3\u30A2\u3084\u30E9\u30F3\u30AD\u30F3\u30B0\u3067\u306F\u306A\u304F\u3001\u4E09\u5206\u56F3\u4E0A\u306E\u4F4D\u7F6E\u3065\u3051\u3092\u7528\u3044\u3066\u3044\u307E\u3059\u3002\u5404\u56FD\u306E\u4F4D\u7F6E\u306F\u3001\u4E94\u3064\u306E\u53EF\u91CF\u7684\u306A\u30AC\u30D0\u30CA\u30F3\u30B9\u6307\u6A19\u306B\u57FA\u3065\u304F\u5206\u6790\u7684\u5224\u65AD\u3067\u3042\u308A\u3001\u4E3B\u306A\u6CD5\u4EE4\u30FB\u653F\u7B56\u6587\u66F8\u304A\u3088\u3073\u5B66\u8853\u6587\u732E\u3068\u7167\u5408\u3057\u3066\u8A2D\u5B9A\u3057\u3066\u3044\u307E\u3059\u3002",
-    hsC1t:"\u6CD5\u898F\u5236\u306E\u7A2E\u985E", hsC1b:"\u3069\u306E\u3088\u3046\u306A\u30AC\u30D0\u30CA\u30F3\u30B9\u624B\u6BB5\u304C\u5B58\u5728\u3059\u308B\u304B\u3002\u7F70\u5247\u4ED8\u304D\u306E\u6CD5\u5F8B \u2192 \u6A29\u5229\u30FB\u4E3B\u6A29\u5074\u3078\u3002\u81EA\u767A\u7684\u30AC\u30A4\u30C9\u30E9\u30A4\u30F3 \u2192 \u5E02\u5834\u5074\u3078\u3002",
-    hsC2t:"\u500B\u4EBA\u306E\u6A29\u5229\u4FDD\u969C", hsC2b:"\u8AAC\u660E\u53EF\u80FD\u6027\u3001\u4EBA\u9593\u306E\u5BE9\u67FB\u3001\u81EA\u52D5\u5224\u65AD\u3078\u306E\u7570\u8B70\u7533\u7ACB\u306A\u3069\u306E\u6A29\u5229\u304C\u542B\u307E\u308C\u308B\u304B\u3002\u5145\u5B9F\u3057\u305F\u898F\u5B9A \u2192 \u6A29\u5229\u4FDD\u8B77\u5074\u3078\u3002",
-    hsC3t:"\u56FD\u5BB6\u306B\u3088\u308B\u30B3\u30F3\u30C6\u30F3\u30C4\u898F\u5236", hsC3b:"AI\u51FA\u529B\u7269\u304C\u56FD\u5BB6\u306E\u4FA1\u5024\u89B3\u3084\u5B89\u4FDD\u512A\u5148\u9805\u76EE\u306B\u5408\u81F4\u3059\u308B\u3053\u3068\u3092\u8981\u6C42\u3059\u308B\u304B\u3002\u56FD\u5BB6\u306E\u30B3\u30F3\u30C6\u30F3\u30C4\u898F\u5236 \u2192 \u4E3B\u6A29\u91CD\u8996\u5074\u3078\u3002",
-    hsC4t:"\u696D\u754C\u81EA\u4E3B\u898F\u5236\u306E\u6BD4\u91CD", hsC4b:"\u81EA\u767A\u7684\u306A\u696D\u754C\u81EA\u4E3B\u898F\u5236\u3068\u56FD\u5BB6\u898F\u5236\u306E\u3069\u3061\u3089\u304C\u4E2D\u5FC3\u304B\u3002\u696D\u754C\u81EA\u4E3B\u898F\u5236\u304C\u4E3B\u5F79 \u2192 \u5E02\u5834\u5074\u3078\u3002",
-    hsC5t:"\u57F7\u884C\u80FD\u529B", hsC5b:"\u5C02\u9580\u306E\u57F7\u884C\u6A5F\u95A2\u304C\u6280\u8853\u7684\u80FD\u529B\u3092\u6301\u3063\u3066\u5B58\u5728\u3059\u308B\u304B\u3002\u30C9\u30C3\u30C8\u306E\u5927\u304D\u3055\u306F\u3053\u308C\u3068\u72EC\u7ACB\u3057\u3066\u793A\u3057\u3001\u5927\u304D\u3044\u307BB\u3069\u5F37\u3044\u6CD5\u7684\u626F\u675F\u529B\u3092\u610F\u5473\u3057\u307E\u3059\u3002",
-    hsCallout:"<strong>\u91CD\u8981\uFF1A</strong>\u5404\u56FD\u306E\u4F4D\u7F6E\u306F\u3001\u516C\u958B\u3055\u308C\u305F\u30AC\u30D0\u30CA\u30F3\u30B9\u6587\u66F8\u306B\u57FA\u3065\u304F\u5206\u6790\u7684\u306A\u8FD1\u4F3C\u5024\u3067\u3059\u3002\u5404\u30D5\u30EC\u30FC\u30E0\u30EF\u30FC\u30AF\u306E\u4E3B\u306A\u54F2\u5B66\u7684\u5411\u304D\u3092\u793A\u3057\u3001\u54C1\u8CEA\u3084\u6709\u52B9\u6027\u3001\u5E0C\u671B\u3057\u306A\u3044\u304B\u306E\u5224\u65AD\u3067\u306F\u3042\u308A\u307E\u305B\u3093\u30022026\u5E746\u6708\u6642\u70B9\u306E\u30C7\u30FC\u30BF\u3067\u3059\u3002",
+    formulaLink:"\u7B97\u5F0F \u2197",
+    hsTag:"\u65B9\u6CD5\u8AD6\u3068\u900F\u660E\u6027", hsH2:"\u5404\u56FD\u306E\u914D\u7F6E\u306E\u8003\u3048\u65B9",
+    hsSub:"\u3059\u3079\u3066\u306E\u4F4D\u7F6E\u306F\u3001\u4E3B\u306A\u30AC\u30D0\u30CA\u30F3\u30B9\u6587\u66F8\u306B\u9069\u7528\u3055\u308C\u305F30\u6307\u6A19\u306E\u7B97\u5F0F\u304B\u3089\u5C0E\u51FA\u3055\u308C\u3066\u3044\u307E\u3059\u3002\u7B97\u5F0F\u3001\u5168\u6307\u6A19\u306E\u5B9A\u7FA9\u3001\u63A1\u70B9\u57FA\u6E96\u3001\u8A08\u7B97\u4F8B\u3001\u304A\u3088\u307379\u6CD5\u57DF\u306E\u5B8C\u5168\u30B9\u30B3\u30A2\u8868\u306F\u5C02\u7528\u306E\u65B9\u6CD5\u8AD6\u30DA\u30FC\u30B8\u306B\u8A18\u8F09\u3055\u308C\u3066\u3044\u307E\u3059\u3002",
+    hsPill1:"30\u6307\u6A19", hsPill2:"3\u6B21\u5143", hsPill3:"\u4E00\u6B21\u8CC7\u6599\u306E\u307F", hsPill4:"\u00b10.02\u7CBE\u5EA6",
+    hsLink:"\u65B9\u6CD5\u8AD6\u5168\u6587\u3092\u8AAD\u3080 \u2192",
     methTag:"\u6982\u8981", methH2:"\u65B9\u6CD5\u8AD6",
     methSub:"\u5404\u6CD5\u57DF\u306F\u540C\u3058\u57FA\u790E\u30C7\u30FC\u30BF\u304B\u3089\u3001\u4E09\u5206\u56F3\u306E\u4E09\u89D2\u5F62\u3068\u4E8C\u8EF8\u306E\u30B3\u30F3\u30D1\u30B9\u306E\u4E8C\u3064\u306E\u8868\u793A\u3067\u914D\u7F6E\u3055\u308C\u307E\u3059\u3002\u30C9\u30C3\u30C8\u306E\u5927\u304D\u3055\u306F\u3001\u3069\u3061\u3089\u306E\u8868\u793A\u3067\u3082\u6CD5\u7684\u626F\u675F\u529B\u3092\u72EC\u7ACB\u3057\u3066\u793A\u3057\u307E\u3059\u3002",
     methC1t:"\u4E09\u3064\u306E\u30AC\u30D0\u30CA\u30F3\u30B9\u54F2\u5B66", methC1b:"\u6A29\u5229\u4FDD\u8B77\u578B\u3001\u5E02\u5834\u5FD7\u5411\u578B\u3001\u4E3B\u6A29\u91CD\u8996\u578B\u3002\u3053\u308C\u30893\u3064\u306E\u6975\u304C\u4E21\u8868\u793A\u306E\u5206\u6790\u57FA\u790E\u3067\u3059\u3002\u3044\u3065\u308C\u306E\u56FD\u3082\u5358\u4E00\u306E\u30E2\u30C7\u30EB\u3067\u306F\u3042\u308A\u307E\u305B\u3093\u3002",
@@ -2021,44 +2050,75 @@ var i18n = {
     methC3t:"\u30B3\u30F3\u30D1\u30B9\u8868\u793A", methC3b:"\u540C\u3058\u30C7\u30FC\u30BF\u3092\u4E8C\u8EF8\u306B\u518D\u6295\u5F71\u3057\u307E\u3059\u3002\u7E26\u8EF8rx\uFF08\u500B\u4EBA\u306E\u6A29\u5229 vs \u56FD\u5BB6\u7D71\u5236\uFF09\u3001\u6A2A\u8EF8bx\uFF08\u4EFB\u610F\u7684\u30BD\u30D5\u30C8\u6CD5 vs \u6CD5\u7684\u626F\u675F\u306E\u786C\u6CD5\uFF09\u3002\u56DB\u8C61\u9650\u3067\u300C\u6A29\u5229\u4FDD\u8B77\u30FB\u786C\u6CD5\u300D\u300C\u56FD\u5BB6\u7D71\u5236\u30FB\u30BD\u30D5\u30C8\u6CD5\u300D\u306A\u3069\u3092\u793A\u3057\u307E\u3059\u3002",
     methC4t:"\u30C9\u30C3\u30C8\u30B5\u30A4\u30BA\uFF1D\u57F7\u884C\u529B", methC4b:"\u3069\u3061\u3089\u306E\u8868\u793A\u3067\u3082\u3001\u30C9\u30C3\u30C8\u306E\u5927\u304D\u3055\u306F\u6CD5\u7684\u626F\u675F\u529B\u3092\u793A\u3057\u307E\u3059\u3002\u5927\u304D\u3044\u307BB\u3069\u610F\u5473\u306E\u3042\u308B\u7F70\u5247\u4ED8\u304D\u306E\u6CD5\u7684\u30E1\u30AB\u30CB\u30BA\u30E0\u304C\u5F37\u3044\u3053\u3068\u3092\u610F\u5473\u3057\u3001\u5EA7\u6A19\u3068\u306F\u72EC\u7ACB\u3057\u307E\u3059\u3002",
     methC5t:"\u30BF\u30A4\u30E0\u30E9\u30A4\u30F3\uFF082016\u20132026\u5E74\uFF09", methC5b:"\u5E74\u30B9\u30E9\u30A4\u30C0\u30FC\u3067\u3001\u3069\u3061\u3089\u306E\u8868\u793A\u3067\u3082\u6642\u7CFB\u5217\u306E\u4F4D\u7F6E\u5909\u5316\u3092\u78BA\u8A8D\u3067\u304D\u307E\u3059\u30022022\u5E74\u4EE5\u964D\u306E\u91CD\u8981\u5E74\u306B\u306F\u30DE\u30A4\u30EB\u30B9\u30C8\u30FC\u30F3\u304C\u8868\u793A\u3055\u308C\u307E\u3059\u3002",
-    methCallout:"<strong>\u8981\u70B9\uFF1A</strong>\u4E09\u89D2\u5F62\u3067\u306FEU\u3068\u4E2D\u56FD\u306F\u5BFE\u6975\u306E\u89D2\u306B\u4F4D\u7F6E\u3057\u307E\u3059\u3002\u30B3\u30F3\u30D1\u30B9\u3067\u306F\u7E26\u65B9\u5411\uFF08\u6A29\u5229 vs \u56FD\u5BB6\u7D71\u5236\uFF09\u3067\u306F\u53CD\u5BFE\u5074\u306B\u306A\u308A\u306A\u304C\u3089\u3001\u3069\u3061\u3089\u3082\u6A2A\u65B9\u5411\u306E\u786C\u6CD5\u5074\u306B\u5BC4\u3063\u3066\u3044\u307E\u3059\u3002\u6CD5\u7684\u626F\u675F\u529B\u3068\u54F2\u5B66\u7684\u5411\u304D\u306F\u72EC\u7ACB\u3057\u305F\u6B21\u5143\u3067\u3059\u3002"
+    methCallout:"<strong>\u8981\u70B9\uFF1A</strong>\u4E09\u89D2\u5F62\u3067\u306FEU\u3068\u4E2D\u56FD\u306F\u5BFE\u6975\u306E\u89D2\u306B\u4F4D\u7F6E\u3057\u307E\u3059\u3002\u30B3\u30F3\u30D1\u30B9\u3067\u306F\u7E26\u65B9\u5411\uFF08\u6A29\u5229 vs \u56FD\u5BB6\u7D71\u5236\uFF09\u3067\u306F\u53CD\u5BFE\u5074\u306B\u306A\u308A\u306A\u304C\u3089\u3001\u3069\u3061\u3089\u3082\u6A2A\u65B9\u5411\u306E\u786C\u6CD5\u5074\u306B\u5BC4\u3063\u3066\u3044\u307E\u3059\u3002\u6CD5\u7684\u626F\u675F\u529B\u3068\u54F2\u5B66\u7684\u5411\u304D\u306F\u72EC\u7ACB\u3057\u305F\u6B21\u5143\u3067\u3059\u3002",
+    tlYear:"\u5e74", tlSecTag:"\u6b74\u53f2\u8a18\u9332", tlSecH2:"\u898f\u5236\u30bf\u30a4\u30e0\u30e9\u30a4\u30f3", tlSecSub:"2016\u5e74\u304b\u30892026\u5e74\u306e\u30b0\u30ed\u30fc\u30d0\u30ebAI\u30ac\u30d0\u30ca\u30f3\u30b9\u306e\u4e3b\u8981\u4e8b\u4ef6\u3002",
+    tlFAll:"\u3059\u3079\u3066\u306e\u4e8b\u4ef6", tlFLeg:"\u7acb\u6cd5", tlFIntl:"\u56fd\u969b", tlFEnf:"\u57f7\u884c", tlFAi:"AI\u516c\u958b",
+    ctSecTag:"\u5168\u30c7\u30fc\u30bf", ctSecH2:"\u3059\u3079\u3066\u306e\u6cd5\u57df", ctHint:"\u884c\u3092\u30af\u30ea\u30c3\u30af\u3059\u308b\u3068\u5730\u56f3\u3067\u30cf\u30a4\u30e9\u30a4\u30c8\u3002\u30d8\u30c3\u30c0\u30fc\u30af\u30ea\u30c3\u30af\u3067\u30bd\u30fc\u30c8\u3002", ctDownload:"\u21e9 CSV\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9",
+    ctThName:"\u6cd5\u57df", ctThModel:"\u30e2\u30c7\u30eb", ctThBinding:"\u7d81\u5b9a\uff1f", ctThR:"\u6a29\u5229", ctThM:"\u5e02\u5834", ctThS:"\u4e3b\u6a29", ctThEnf:"\u57f7\u884c\u529b"
   }
 };
 
+function setI18nText(id, text) {
+  var el = document.getElementById(id);
+  if (el && text != null) el.textContent = text;
+}
+
 function applySectionI18n(lang) {
   var t = i18n[lang];
-  document.getElementById("hs-tag").textContent = t.hsTag;
-  document.getElementById("hs-h2").textContent = t.hsH2;
-  document.getElementById("hs-sub").textContent = t.hsSub;
-  document.getElementById("hs-c1t").textContent = t.hsC1t;
-  document.getElementById("hs-c1b").textContent = t.hsC1b;
-  document.getElementById("hs-c2t").textContent = t.hsC2t;
-  document.getElementById("hs-c2b").textContent = t.hsC2b;
-  document.getElementById("hs-c3t").textContent = t.hsC3t;
-  document.getElementById("hs-c3b").textContent = t.hsC3b;
-  document.getElementById("hs-c4t").textContent = t.hsC4t;
-  document.getElementById("hs-c4b").textContent = t.hsC4b;
-  document.getElementById("hs-c5t").textContent = t.hsC5t;
-  document.getElementById("hs-c5b").textContent = t.hsC5b;
-  document.getElementById("hs-callout").innerHTML = t.hsCallout;
-  document.getElementById("meth-tag").textContent = t.methTag;
-  document.getElementById("meth-h2").textContent = t.methH2;
-  document.getElementById("meth-sub").textContent = t.methSub;
-  document.getElementById("meth-c1t").textContent = t.methC1t;
-  document.getElementById("meth-c1b").textContent = t.methC1b;
-  document.getElementById("meth-c2t").textContent = t.methC2t;
-  document.getElementById("meth-c2b").textContent = t.methC2b;
-  document.getElementById("meth-c3t").textContent = t.methC3t;
-  document.getElementById("meth-c3b").textContent = t.methC3b;
-  document.getElementById("meth-c4t").textContent = t.methC4t;
-  document.getElementById("meth-c4b").textContent = t.methC4b;
-  document.getElementById("meth-c5t").textContent = t.methC5t;
-  document.getElementById("meth-c5b").textContent = t.methC5b;
-  document.getElementById("meth-callout").innerHTML = t.methCallout;
+  if (!t) return;
+  setI18nText("hs-tag", t.hsTag);
+  setI18nText("hs-h2", t.hsH2);
+  setI18nText("hs-sub", t.hsSub);
+  setI18nText("hs-pill1", t.hsPill1);
+  setI18nText("hs-pill2", t.hsPill2);
+  setI18nText("hs-pill3", t.hsPill3);
+  setI18nText("hs-pill4", t.hsPill4);
+  setI18nText("hs-link", t.hsLink);
+  setI18nText("nav-formula", t.formulaLink);
+  setI18nText("meth-tag", t.methTag);
+  setI18nText("meth-h2", t.methH2);
+  setI18nText("meth-sub", t.methSub);
+  setI18nText("meth-c1t", t.methC1t);
+  setI18nText("meth-c1b", t.methC1b);
+  setI18nText("meth-c2t", t.methC2t);
+  setI18nText("meth-c2b", t.methC2b);
+  setI18nText("meth-c3t", t.methC3t);
+  setI18nText("meth-c3b", t.methC3b);
+  setI18nText("meth-c4t", t.methC4t);
+  setI18nText("meth-c4b", t.methC4b);
+  setI18nText("meth-c5t", t.methC5t);
+  setI18nText("meth-c5b", t.methC5b);
+  var methCallout = document.getElementById("meth-callout");
+  if (methCallout && t.methCallout) methCallout.innerHTML = t.methCallout;
+  setI18nText("tl-label-year", t.tlYear);
+  setI18nText("tl-sec-tag", t.tlSecTag);
+  setI18nText("tl-sec-h2", t.tlSecH2);
+  setI18nText("tl-sec-sub", t.tlSecSub);
+  setI18nText("tl-f-all", t.tlFAll);
+  setI18nText("tl-f-leg", t.tlFLeg);
+  setI18nText("tl-f-intl", t.tlFIntl);
+  setI18nText("tl-f-enf", t.tlFEnf);
+  setI18nText("tl-f-ai", t.tlFAi);
+  setI18nText("ct-sec-tag", t.ctSecTag);
+  setI18nText("ct-sec-h2", t.ctSecH2);
+  setI18nText("ct-hint", t.ctHint);
+  setI18nText("ct-download", t.ctDownload);
+  setI18nText("ct-th-name", t.ctThName + " \u2195");
+  setI18nText("ct-th-model", t.ctThModel + " \u2195");
+  setI18nText("ct-th-binding", t.ctThBinding + " \u2195");
+  setI18nText("ct-th-r", t.ctThR + " \u2195");
+  setI18nText("ct-th-m", t.ctThM + " \u2195");
+  setI18nText("ct-th-s", t.ctThS + " \u2195");
+  setI18nText("ct-th-enf", t.ctThEnf + " \u2195");
 }
 
 function toggleLang() {
   currentLang=currentLang==="en"?"ja":"en";
+  try { localStorage.setItem("ai_gov_lang", currentLang); } catch(e) {}
+  applyUiLang();
+}
+
+function applyUiLang() {
   var btn=document.getElementById("lang-btn");
   btn.textContent=currentLang==="ja"?"English":"\u65E5\u672C\u8A9E";
   btn.classList.toggle("ja",currentLang==="ja");
@@ -2104,6 +2164,8 @@ function toggleLang() {
   document.getElementById("vt-tri").innerHTML=isJa?"&#9651; \u4E09\u89D2\u5F62":"&#9651; Triangle";
   document.getElementById("vt-comp").innerHTML=isJa?"&#10010; \u30B3\u30F3\u30D1\u30B9":"&#10010; Compass";
   applySectionI18n(currentLang);
+  buildTimeline();
+  buildTable();
   updateCrisisOverlay(currentYear);
   draw();
   if (selectedCountry) openPanel(selectedCountry);
@@ -2152,6 +2214,11 @@ buildTimeline("all");
 renderGlossary("");
 loadAllNews();
 startNewsAutoRefresh();
+try {
+  var savedLang = localStorage.getItem("ai_gov_lang");
+  if (savedLang === "ja" || savedLang === "en") currentLang = savedLang;
+} catch(e) {}
+applyUiLang();
 
 </script>
 </body>

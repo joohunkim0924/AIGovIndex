@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global AI Governance Index</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0D1B2A;--navy2:#162638;--navy3:#1E3450;--blue:#1B6FD4;--amber:#E8950A;--amber2:#F0A830;--rights:#1B6FD4;--market:#1A6B42;--sov:#8B1A1A;--hybrid:#7A4A00;--off:#F5F2EC;--off2:#EDE9E0;--off3:#E0DDD4;--text:#0D1B2A;--text2:#2D3748;--text3:#6B7280;--border:#D4CFC6;}
+*{box-sizing:border-box;margin:0;padding:0;}html,body{height:100%;overflow-x:hidden;}
+body{font-family:"Inter",sans-serif;background:var(--navy);color:var(--off);font-size:14px;line-height:1.65;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,27,42,.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);padding:0 1.5rem;height:52px;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.nav-brand{font-family:"DM Serif Display",serif;font-size:15px;color:var(--amber);white-space:nowrap;}
+.nav-links{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;}
+.nav-links a{font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:.05em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--off);}
+.nav-search{position:relative;display:flex;align-items:center;}
+.nav-search input{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:5px 10px 5px 28px;font-size:12px;color:var(--off);font-family:"Inter",sans-serif;width:150px;outline:none;transition:all .2s;}
+.nav-search input:focus{background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.25);width:190px;}
+.nav-search input::placeholder{color:rgba(255,255,255,.3);}
+.nav-search-icon{position:absolute;left:8px;font-size:12px;color:rgba(255,255,255,.3);pointer-events:none;}
+#search-results{position:absolute;top:36px;left:0;right:0;background:var(--navy2);border:1px solid rgba(255,255,255,.12);border-radius:6px;overflow:hidden;z-index:300;display:none;max-height:200px;overflow-y:auto;}
+.sr-item{padding:7px 12px;cursor:pointer;font-size:12px;color:var(--off);transition:background .15s;display:flex;align-items:center;gap:8px;}
+.sr-item:hover{background:rgba(255,255,255,.08);}
+.lang-btn{padding:4px 10px;border-radius:5px;border:1px solid rgba(255,255,255,.2);background:transparent;color:rgba(255,255,255,.6);font-size:11px;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;}
+.lang-btn.ja{background:rgba(232,149,10,.15);border-color:var(--amber);color:var(--amber);}
+.glossary-btn{padding:4px 10px;border-radius:5px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.45);font-size:11px;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;}
+.glossary-btn:hover{color:var(--off);}
+#hero{margin-top:52px;height:calc(100vh - 52px);height:calc(100dvh - 52px);display:flex;flex-direction:column;position:relative;overflow:hidden;}
+.hero-grid{flex:1;display:grid;grid-template-columns:252px 1fr;grid-template-rows:auto 1fr;min-height:0;}
+.hero-title-cell{padding:.55rem 1rem .35rem;border-right:1px solid rgba(255,255,255,.06);display:flex;align-items:flex-end;}
+.hero-title{font-family:"DM Serif Display",serif;font-size:1.75rem;line-height:1.05;color:var(--off);}
+.hero-title em{color:var(--amber);font-style:italic;}
+.hero-controls-cell{padding:.45rem 1.25rem .35rem;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;gap:5px;min-width:0;}
+.hero-sub{font-size:10px;color:rgba(255,255,255,.35);text-align:right;line-height:1.4;max-width:100%;}
+.controls-stack{display:flex;flex-direction:column;align-items:flex-end;gap:5px;width:100%;max-width:560px;}
+.controls-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+.timeline-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:6px 12px;display:flex;align-items:center;gap:8px;}
+#crisis-banner{position:absolute;top:10px;right:14px;z-index:40;width:auto;max-width:min(440px,calc(100% - 28px));pointer-events:none;opacity:0;transform:translateY(-4px);transition:opacity .25s ease,transform .25s ease;}
+#crisis-banner.visible{opacity:1;transform:translateY(0);pointer-events:auto;}
+.crisis-banner-inner{display:flex;align-items:flex-start;gap:8px;padding:6px 10px;border-radius:7px;background:rgba(13,27,42,.88);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);border-left-width:3px;line-height:1.35;box-shadow:0 4px 20px rgba(0,0,0,.25);}
+.crisis-banner-year{font-family:"DM Serif Display",serif;font-size:1.15rem;line-height:1.1;flex-shrink:0;min-width:42px;padding-top:1px;}
+.crisis-banner-body{flex:1;min-width:0;}
+.crisis-banner-label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-bottom:3px;}
+.crisis-banner-text{font-size:11px;font-weight:500;}
+.tl-label{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;}
+.tl-year{font-family:"DM Serif Display",serif;font-size:1.2rem;color:var(--amber);min-width:36px;text-align:center;}
+input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);cursor:pointer;}
+.view-toggle{display:flex;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:7px;overflow:hidden;}
+.vt-btn{padding:5px 12px;font-size:11px;color:rgba(255,255,255,.45);border:none;background:transparent;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;white-space:nowrap;}
+.vt-btn.active{background:rgba(255,255,255,.12);color:var(--off);}
+#sidebar{grid-column:1;grid-row:2;padding:.5rem 1rem .75rem;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:.85rem;overflow:hidden;min-height:0;}
+.sb-section{flex-shrink:0;}
+.sb-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.35rem;}
+.filter-group{display:flex;flex-direction:column;gap:3px;}
+.region-group{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.region-filter-btn{justify-content:center;padding:5px 6px!important;font-size:11px!important;}
+.filter-btn{display:flex;align-items:center;gap:7px;padding:5px 7px;border-radius:5px;border:none;background:transparent;cursor:pointer;font-size:12px;color:rgba(255,255,255,.5);text-align:left;transition:all .15s;font-family:"Inter",sans-serif;}
+.filter-btn:hover{background:rgba(255,255,255,.06);color:var(--off);}
+.filter-btn.active{background:rgba(255,255,255,.1);color:var(--off);}
+.fdot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.size-rows{display:flex;flex-direction:column;gap:5px;}
+.size-row{display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,.4);}
+.size-circle{border-radius:50%;background:rgba(255,255,255,.85);flex-shrink:0;}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
+.stat-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:5px;padding:7px;text-align:center;}
+.stat-num{font-family:"DM Serif Display",serif;font-size:1.3rem;color:var(--amber);line-height:1;}
+.stat-lbl{font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;letter-spacing:.04em;text-transform:uppercase;}
+.compare-btn{width:100%;padding:5px;border-radius:5px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.5);font-size:11px;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;}
+.compare-btn.on{background:rgba(232,149,10,.15);border-color:var(--amber);color:var(--amber);}
+.compare-selected{font-size:11px;color:rgba(255,255,255,.4);min-height:0;line-height:1.5;margin-top:4px;}
+.compare-selected:empty{display:none;}
+.about-text{font-size:11px;color:rgba(255,255,255,.35);line-height:1.55;}
+.about-text a{color:var(--amber);text-decoration:none;}
+#canvas-wrap{grid-column:2;grid-row:2;position:relative;overflow:hidden;min-height:0;}
+#tri-canvas{width:100%;height:100%;}
+#tooltip{position:absolute;background:rgba(13,27,42,.97);border:1px solid rgba(255,255,255,.13);border-radius:8px;padding:9px 12px;font-size:12px;pointer-events:none;opacity:0;transition:opacity .15s;max-width:195px;z-index:50;line-height:1.6;color:var(--off);}
+.tt-name{font-weight:600;font-size:13px;margin-bottom:3px;}
+.tt-coords{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:3px;}
+.tt-bind{font-size:10px;color:var(--amber);}
+.tt-hint{font-size:10px;color:rgba(255,255,255,.25);margin-top:3px;}
+#search-pin{position:absolute;background:rgba(13,27,42,.97);border:2px solid var(--amber);border-radius:8px;padding:7px 12px;font-size:12px;color:var(--off);pointer-events:none;z-index:60;transform:translateX(-50%);white-space:nowrap;}
+#country-panel{position:fixed;bottom:-100%;left:0;right:0;background:var(--navy2);border-top:1px solid rgba(255,255,255,.1);border-radius:16px 16px 0 0;z-index:90;transition:bottom .4s cubic-bezier(.4,0,.2,1);max-height:58vh;overflow:hidden;}
+#country-panel.open{bottom:0;}
+.panel-drag{width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.12);margin:10px auto 0;}
+.panel-inner{padding:1rem 1.5rem 1.5rem;overflow-y:auto;max-height:calc(58vh - 24px);}
+.panel-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.8rem;}
+.panel-flag{font-size:1.8rem;}.panel-name{font-family:"DM Serif Display",serif;font-size:1.4rem;color:var(--off);}
+.panel-model{font-size:11px;padding:2px 9px;border-radius:3px;margin-top:2px;display:inline-block;font-weight:500;}
+.pm-rights{background:rgba(27,111,212,.2);color:#6BAFF4;}.pm-market{background:rgba(26,107,66,.2);color:#6DBF8C;}.pm-sovereign{background:rgba(139,26,26,.2);color:#F48C8C;}.pm-hybrid{background:rgba(122,74,0,.2);color:#F4B86D;}.pm-inter{background:rgba(100,80,180,.2);color:#B8A8F4;}
+.panel-close{background:rgba(255,255,255,.07);border:none;color:rgba(255,255,255,.5);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.panel-tabs{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:1rem;}
+.panel-tab{padding:6px 14px;font-size:11px;color:rgba(255,255,255,.4);cursor:pointer;border:none;background:transparent;font-family:"Inter",sans-serif;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;}
+.panel-tab.active{color:var(--amber);border-bottom-color:var(--amber);}
+.tab-content{display:none;}.tab-content.active{display:block;}
+.panel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:.8rem;}
+.panel-stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:7px;text-align:center;}
+.ps-num{font-family:"DM Serif Display",serif;font-size:1.2rem;line-height:1;}
+.ps-lbl{font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.05em;margin-top:2px;}
+.ps-rights .ps-num{color:#6BAFF4;}.ps-market .ps-num{color:#6DBF8C;}.ps-sov .ps-num{color:#F48C8C;}
+.bind-bar{margin-bottom:.7rem;}
+.bind-label{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;display:flex;justify-content:space-between;}
+.bind-track{height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.bind-fill{height:100%;border-radius:3px;background:var(--amber);transition:width .5s;}
+.panel-latest{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:10px 12px;margin-bottom:.8rem;font-size:12px;color:rgba(255,255,255,.7);line-height:1.7;}
+.panel-latest-title{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:5px;font-weight:600;}
+.panel-desc{font-size:12px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:.7rem;}
+.panel-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:.7rem;}
+.panel-tag{font-size:10px;padding:2px 8px;border-radius:3px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);}
+.share-btn{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:5px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.5);font-size:11px;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;}
+.share-btn.copied{border-color:var(--amber);color:var(--amber);}
+.explainer-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.exp-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:8px 10px;}
+.exp-label{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3px;}
+.exp-value{font-size:12px;color:rgba(255,255,255,.8);line-height:1.4;}
+.exp-example{background:rgba(232,149,10,.08);border:1px solid rgba(232,149,10,.15);border-radius:6px;padding:8px 10px;font-size:11px;color:rgba(255,255,255,.65);line-height:1.6;margin-top:6px;}
+.exp-example-label{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:3px;}
+.reading-list{display:flex;flex-direction:column;gap:8px;}
+.reading-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:9px 12px;display:flex;flex-direction:column;gap:3px;}
+.reading-item a{color:var(--amber);font-size:12px;font-weight:500;text-decoration:none;}
+.reading-type{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1px;}
+.reading-desc{font-size:11px;color:rgba(255,255,255,.45);line-height:1.5;}
+.annotation-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:7px 10px;font-size:12px;color:var(--off);font-family:"Inter",sans-serif;outline:none;resize:none;min-height:60px;margin-bottom:6px;}
+.annotation-submit{padding:6px 12px;border-radius:5px;border:1px solid var(--amber);background:rgba(232,149,10,.1);color:var(--amber);font-size:11px;cursor:pointer;font-family:"Inter",sans-serif;margin-bottom:8px;}
+.annotation-list{display:flex;flex-direction:column;gap:6px;max-height:180px;overflow-y:auto;}
+.annotation-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:8px 10px;}
+.annotation-text{font-size:12px;color:rgba(255,255,255,.75);line-height:1.55;margin-bottom:4px;}
+.annotation-meta{font-size:10px;color:rgba(255,255,255,.3);display:flex;justify-content:space-between;}
+.annotation-delete{cursor:pointer;color:rgba(255,255,255,.2);font-size:10px;border:none;background:transparent;font-family:"Inter",sans-serif;}
+.annotation-empty{font-size:12px;color:rgba(255,255,255,.25);text-align:center;padding:1rem 0;font-style:italic;}
+#compare-panel{position:fixed;bottom:-100%;left:0;right:0;background:var(--navy2);border-top:1px solid rgba(255,255,255,.1);border-radius:16px 16px 0 0;z-index:90;transition:bottom .4s cubic-bezier(.4,0,.2,1);max-height:60vh;overflow:hidden;}
+#compare-panel.open{bottom:0;}
+.cp-inner{padding:1rem 1.5rem 1.5rem;overflow-y:auto;max-height:calc(60vh - 24px);}
+.cp-title{font-family:"DM Serif Display",serif;font-size:1.2rem;color:var(--off);margin-bottom:.8rem;}
+.cp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.cp-country{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.8rem;}
+.cp-name{display:flex;align-items:center;gap:8px;margin-bottom:.6rem;}
+.cp-flag{font-size:1.3rem;}.cp-cname{font-weight:600;font-size:13px;color:var(--off);}
+.cp-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:12px;}
+.cp-row-label{color:rgba(255,255,255,.4);}.cp-row-val{font-weight:500;color:var(--off);}
+.cp-bar-wrap{width:55px;height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;display:inline-block;vertical-align:middle;margin-right:5px;}
+.cp-bar-fill{height:100%;border-radius:2px;}
+.cp-close{display:block;width:100%;margin-top:.8rem;padding:7px;border-radius:5px;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.4);font-size:12px;cursor:pointer;font-family:"Inter",sans-serif;}
+#glossary-panel{position:fixed;top:52px;right:-380px;width:360px;height:calc(100vh - 52px);background:var(--navy2);border-left:1px solid rgba(255,255,255,.1);z-index:150;transition:right .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow:hidden;}
+#glossary-panel.open{right:0;}
+.glossary-header{padding:1rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.glossary-title{font-family:"DM Serif Display",serif;font-size:1.2rem;color:var(--off);}
+.glossary-close{background:rgba(255,255,255,.07);border:none;color:rgba(255,255,255,.5);width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;}
+.glossary-search{padding:.8rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;}
+.glossary-search input{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:6px 10px;font-size:12px;color:var(--off);font-family:"Inter",sans-serif;outline:none;}
+.glossary-list{flex:1;overflow-y:auto;padding:.8rem 1.2rem;}
+.glossary-item{margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px solid rgba(255,255,255,.05);}
+.glossary-item:last-child{border-bottom:none;}
+.glossary-term{font-size:13px;font-weight:600;color:var(--amber);margin-bottom:4px;}
+.glossary-def{font-size:12px;color:rgba(255,255,255,.65);line-height:1.65;}
+.glossary-example{font-size:11px;color:rgba(255,255,255,.35);margin-top:4px;font-style:italic;}
+.news-filter{font-size:11px;padding:3px 10px;border-radius:4px;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.4);cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;}
+.news-filter.active{background:rgba(255,255,255,.1);color:var(--off);border-color:rgba(255,255,255,.25);}
+.news-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:1rem;display:flex;flex-direction:column;gap:6px;transition:background .15s;}
+.news-card:hover{background:rgba(255,255,255,.07);}
+.news-card-source{font-size:10px;letter-spacing:.08em;text-transform:uppercase;}
+.news-card-title{font-size:13px;font-weight:500;color:var(--off);line-height:1.4;}
+.news-card-title a{color:inherit;text-decoration:none;}
+.news-card-title a:hover{text-decoration:underline;}
+.news-card-date{font-size:10px;color:rgba(255,255,255,.3);}
+.tl-year-group{margin-bottom:.8rem;}
+.tl-year-header{display:flex;align-items:center;gap:10px;cursor:pointer;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:.8rem;user-select:none;}
+.tl-year-num{font-family:"DM Serif Display",serif;font-size:1.4rem;color:var(--amber);min-width:50px;}
+.tl-year-count{font-size:11px;color:rgba(255,255,255,.3);}
+.tl-year-toggle{margin-left:auto;font-size:12px;color:rgba(255,255,255,.3);}
+.tl-year-entries{display:flex;flex-direction:column;gap:.8rem;padding-left:16px;border-left:1px solid rgba(255,255,255,.06);}
+.tl-year-entries.collapsed{display:none;}
+.tl-entry{padding:.8rem;background:rgba(255,255,255,.03);border-radius:6px;border:1px solid rgba(255,255,255,.06);}
+.tl-entry-header{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.tl-cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.tl-event-title{font-size:13px;font-weight:500;color:var(--off);line-height:1.3;}
+.tl-event-body{font-size:12px;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:5px;}
+.tl-event-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.tl-tag{font-size:10px;padding:1px 7px;border-radius:2px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);}
+#click-hint{position:absolute;bottom:50px;left:50%;transform:translateX(-50%);font-size:11px;color:rgba(255,255,255,.25);pointer-events:none;animation:fh 4s ease-in-out 2s forwards;opacity:0;white-space:nowrap;}
+@keyframes fh{0%{opacity:0}15%{opacity:1}80%{opacity:1}100%{opacity:0}}
+#methodology,#how-scored{background:var(--off);color:var(--text);padding:4rem 1.5rem;}
+#how-scored{background:#F8F5EF;border-top:4px solid var(--amber);}
+.sec-inner{max-width:860px;margin:0 auto;}
+.sec-tag{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:.5rem;}
+.sec-h2{font-family:"DM Serif Display",serif;font-size:1.8rem;color:var(--navy);margin-bottom:.4rem;}
+.sec-sub{font-size:13px;color:var(--text3);margin-bottom:2rem;max-width:540px;line-height:1.7;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem;}
+.info-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:1.2rem;}
+.ic-num{font-family:"DM Serif Display",serif;font-size:1.8rem;color:var(--amber);line-height:1;margin-bottom:.4rem;}
+.ic-title{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:.3rem;}
+.ic-body{font-size:12px;color:var(--text3);line-height:1.6;}
+.callout-note{background:var(--off2);border-left:3px solid var(--amber);padding:1rem 1.3rem;border-radius:0 6px 6px 0;font-size:13px;color:var(--text2);line-height:1.7;}
+#countries{background:var(--off2);padding:3.5rem 1.5rem;}
+.ct-table{width:100%;border-collapse:collapse;font-size:12px;}
+.ct-table th{background:var(--navy);color:rgba(255,255,255,.75);padding:8px 10px;text-align:left;font-weight:500;font-size:10px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;user-select:none;white-space:nowrap;}
+.ct-table th:hover{background:var(--navy3);}
+.ct-table td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle;}
+.ct-table tr:hover td{background:var(--off3);cursor:pointer;}
+.ct-country{font-weight:500;color:var(--navy);display:flex;align-items:center;gap:5px;white-space:nowrap;}
+.ct-model{font-size:10px;padding:2px 6px;border-radius:2px;font-weight:500;white-space:nowrap;}
+.ctm-r{background:#DBEAFE;color:#1D4ED8;}.ctm-m{background:#DCFCE7;color:#166534;}.ctm-s{background:#FEE2E2;color:#991B1B;}.ctm-h{background:#FEF3C7;color:#92400E;}.ctm-i{background:#EDE9FE;color:#4C1D95;}
+.ct-bind-yes{color:#166534;font-weight:500;}.ct-bind-no{color:#991B1B;}.ct-bind-part{color:#92400E;}
+.ct-bar-wrap{width:55px;height:4px;background:var(--off3);border-radius:2px;overflow:hidden;}
+.ct-bar{height:100%;border-radius:2px;background:var(--amber);}
+.download-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:5px;border:1px solid var(--border);background:#fff;color:var(--text2);font-size:12px;cursor:pointer;font-family:"Inter",sans-serif;text-decoration:none;}
+#news-section{background:var(--navy);padding:3.5rem 1.5rem;border-top:1px solid rgba(255,255,255,.06);}
+#timeline-section{background:var(--navy);padding:4rem 1.5rem;border-top:1px solid rgba(255,255,255,.06);}
+.tl-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem;}
+.tl-filter{font-size:11px;padding:3px 10px;border-radius:4px;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.4);cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;}
+.tl-filter.active{background:rgba(255,255,255,.1);color:var(--off);border-color:rgba(255,255,255,.25);}
+footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.06);padding:1.5rem;text-align:center;font-size:11px;color:rgba(255,255,255,.25);}
+footer a{color:rgba(255,255,255,.4);text-decoration:none;}
+@media(max-width:640px){
+  .hero-grid{grid-template-columns:1fr;grid-template-rows:auto auto 1fr;}
+  .hero-title-cell{border-right:none;padding:.5rem 1rem .25rem;}
+  .hero-controls-cell{align-items:stretch;padding:.25rem 1rem .4rem;}
+  #sidebar{display:none;}
+  #canvas-wrap{grid-column:1;grid-row:3;}
+  .hero-title{font-size:1.35rem;}
+  .controls-stack{align-items:stretch;max-width:none;}
+  #crisis-banner{top:8px;right:10px;left:10px;max-width:none;}
+  .cp-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">AI Governance Index</div>
+  <div class="nav-search">
+    <span class="nav-search-icon">&#9906;</span>
+    <input type="text" id="search-input" placeholder="Search country..." autocomplete="off" oninput="handleSearch(this.value)" onblur="setTimeout(function(){document.getElementById('search-results').style.display='none'},200)">
+    <div id="search-results"></div>
+  </div>
+  <div class="nav-links">
+    <a href="#hero" id="nav-map">Map</a>
+    <a href="#methodology" id="nav-method">Methodology</a>
+    <a href="#countries" id="nav-data">Data</a>
+    <a href="methodology.html" style="font-size:11px;padding:3px 9px;border-radius:4px;border:1px solid rgba(232,149,10,.35);color:#E8950A;text-decoration:none;letter-spacing:.04em;transition:all .15s;" onmouseover="this.style.background='rgba(232,149,10,.12)'" onmouseout="this.style.background='transparent'">Formula &#8599;</a>
+    <button class="glossary-btn" onclick="toggleGlossary()">&#9635; Glossary</button>
+    <button class="lang-btn" id="lang-btn" onclick="toggleLang()">&#26085;&#26412;&#35486;</button>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-grid">
+    <div class="hero-title-cell">
+      <div class="hero-title" id="hero-title">Global AI Governance</div>
+    </div>
+    <div class="hero-controls-cell">
+      <div class="hero-sub" id="hero-sub">Dot size = binding enforcement. Pick a region to explore. 12 benchmarks shown in color by default.</div>
+      <div class="controls-stack">
+        <div class="controls-row">
+          <div class="view-toggle">
+            <button class="vt-btn active" id="vt-tri" onclick="setView('triangle',this)">&#9651; Triangle</button>
+            <button class="vt-btn" id="vt-comp" onclick="setView('compass',this)">&#10010; Compass</button>
+          </div>
+          <div class="timeline-wrap">
+            <span class="tl-label">Year</span>
+            <span class="tl-year" id="tl-display">2026</span>
+            <input type="range" class="tl-range" id="timeline" min="2016" max="2026" value="2026" step="1" oninput="setYear(parseInt(this.value))">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="sidebar">
+      <div class="sb-section">
+        <div class="sb-label" id="sb-region">Region</div>
+        <div class="filter-group region-group">
+          <button class="filter-btn region-filter-btn active" onclick="setRegion('world',this)"><span id="r-world">World</span></button>
+          <button class="filter-btn region-filter-btn" onclick="setRegion('asia',this)"><span id="r-asia">Asia</span></button>
+          <button class="filter-btn region-filter-btn" onclick="setRegion('europe',this)"><span id="r-europe">Europe</span></button>
+          <button class="filter-btn region-filter-btn" onclick="setRegion('africa',this)"><span id="r-africa">Africa</span></button>
+          <button class="filter-btn region-filter-btn" onclick="setRegion('americas',this)"><span id="r-americas">Americas</span></button>
+          <button class="filter-btn region-filter-btn" onclick="setRegion('oceania',this)"><span id="r-oceania">Oceania</span></button>
+          <button class="filter-btn region-filter-btn" onclick="setRegion('middle_east',this)"><span id="r-middle">Middle East</span></button>
+          <button class="filter-btn region-filter-btn" onclick="setRegion('global',this)"><span id="r-global">Global</span></button>
+        </div>
+      </div>
+      <div class="sb-section">
+        <div class="sb-label" id="sb-filter">Model</div>
+        <div class="filter-group">
+          <button class="filter-btn model-filter-btn active" onclick="setFilter('all',this)"><span class="fdot" style="background:rgba(255,255,255,.35)"></span><span id="f-all">All</span></button>
+          <button class="filter-btn model-filter-btn" onclick="setFilter('rights',this)"><span class="fdot" style="background:#1B6FD4"></span><span id="f-rights">Rights-based</span></button>
+          <button class="filter-btn model-filter-btn" onclick="setFilter('market',this)"><span class="fdot" style="background:#1A6B42"></span><span id="f-market">Market-oriented</span></button>
+          <button class="filter-btn model-filter-btn" onclick="setFilter('sovereign',this)"><span class="fdot" style="background:#8B1A1A"></span><span id="f-sovereign">Sovereignty</span></button>
+          <button class="filter-btn model-filter-btn" onclick="setFilter('hybrid',this)"><span class="fdot" style="background:#7A4A00"></span><span id="f-hybrid">Hybrid</span></button>
+        </div>
+      </div>
+      <div class="sb-section">
+        <div class="sb-label" id="sb-size">Dot size = enforcement</div>
+        <div class="size-rows">
+          <div class="size-row"><div class="size-circle" style="width:18px;height:18px"></div><span id="sz-strong">Strong binding</span></div>
+          <div class="size-row"><div class="size-circle" style="width:12px;height:12px"></div><span id="sz-mod">Moderate</span></div>
+          <div class="size-row"><div class="size-circle" style="width:7px;height:7px"></div><span id="sz-part">Partial</span></div>
+          <div class="size-row"><div class="size-circle" style="width:5px;height:5px"></div><span id="sz-vol">Voluntary</span></div>
+        </div>
+      </div>
+      <div class="sb-section">
+        <div class="sb-label" id="sb-compare">Compare mode</div>
+        <button class="compare-btn" id="compare-toggle" onclick="toggleCompare()">&#9776; <span id="compare-btn-text">Select 2 countries</span></button>
+        <div class="compare-selected" id="compare-selected"></div>
+      </div>
+      <div class="sb-section">
+        <div class="sb-label" id="sb-glance">At a glance</div>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-num" id="stat-mapped">32</div><div class="stat-lbl">Mapped</div></div>
+          <div class="stat-card"><div class="stat-num">4</div><div class="stat-lbl">Models</div></div>
+          <div class="stat-card"><div class="stat-num">72+</div><div class="stat-lbl">AI policies</div></div>
+          <div class="stat-card"><div class="stat-num" id="stat-binding">3</div><div class="stat-lbl">Fully binding</div></div>
+        </div>
+      </div>
+      <div class="sb-section">
+        <div class="sb-label">About</div>
+        <div class="about-text" id="about-text">Research by <a href="#">Joohun Kim</a>, Brown University. Updated June 2026.</div>
+      </div>
+    </div>
+    <div id="canvas-wrap">
+      <canvas id="tri-canvas"></canvas>
+      <div id="crisis-banner" aria-live="polite"></div>
+      <div id="tooltip"><div class="tt-name" id="tt-name"></div><div class="tt-coords" id="tt-coords"></div><div class="tt-bind" id="tt-bind"></div><div class="tt-hint" id="tt-hint"></div></div>
+      <div id="click-hint">Click any dot to explore &middot; toggle Triangle / Compass &middot; drag timeline</div>
+    </div>
+  </div>
+</section>
+
+<div id="glossary-panel">
+  <div class="glossary-header">
+    <div class="glossary-title" id="glossary-title-text">AI Governance Glossary</div>
+    <button class="glossary-close" onclick="toggleGlossary()">&#10005;</button>
+  </div>
+  <div class="glossary-search"><input type="text" id="glossary-search" placeholder="Search terms..." oninput="filterGlossary(this.value)"></div>
+  <div class="glossary-list" id="glossary-list"></div>
+</div>
+
+<div id="country-panel">
+  <div class="panel-drag"></div>
+  <div class="panel-inner">
+    <div class="panel-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="panel-flag" id="p-flag"></div>
+        <div><div class="panel-name" id="p-name"></div><div class="panel-model" id="p-model"></div></div>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <button class="share-btn" id="share-btn" onclick="shareCountry()">&#10138; <span id="share-btn-text">Share</span></button>
+        <button class="panel-close" onclick="closePanel()">&#10005;</button>
+      </div>
+    </div>
+    <div class="panel-tabs">
+      <button class="panel-tab active" onclick="switchTab('overview',this)" id="tab-overview">Overview</button>
+      <button class="panel-tab" onclick="switchTab('explainer',this)" id="tab-explainer">Key Facts</button>
+      <button class="panel-tab" onclick="switchTab('reading',this)" id="tab-reading">Reading List</button>
+      <button class="panel-tab" onclick="switchTab('notes',this)" id="tab-notes">Notes</button>
+    </div>
+    <div class="tab-content active" id="tc-overview">
+      <div class="panel-grid">
+        <div class="panel-stat ps-rights"><div class="ps-num" id="p-rights"></div><div class="ps-lbl">Rights</div></div>
+        <div class="panel-stat ps-market"><div class="ps-num" id="p-market"></div><div class="ps-lbl">Market</div></div>
+        <div class="panel-stat ps-sov"><div class="ps-num" id="p-sov"></div><div class="ps-lbl">Sovereign</div></div>
+      </div>
+      <div class="bind-bar">
+        <div class="bind-label"><span id="bind-label-text">Binding enforcement</span><span id="p-bind-pct"></span></div>
+        <div class="bind-track"><div class="bind-fill" id="p-bind-fill"></div></div>
+      </div>
+      <div class="panel-latest" id="p-latest" style="display:none">
+        <div class="panel-latest-title" id="p-latest-title">Latest development</div>
+        <div id="p-latest-body"></div>
+      </div>
+      <div class="panel-desc" id="p-desc"></div>
+      <div class="panel-tags" id="p-tags"></div>
+    </div>
+    <div class="tab-content" id="tc-explainer">
+      <div class="explainer-grid" id="p-exp-grid"></div>
+      <div class="exp-example" id="p-exp-example" style="display:none">
+        <div class="exp-example-label" id="exp-example-label">Real-world example</div>
+        <div id="p-exp-example-text"></div>
+      </div>
+    </div>
+    <div class="tab-content" id="tc-reading">
+      <div class="reading-list" id="p-reading-list"></div>
+    </div>
+    <div class="tab-content" id="tc-notes">
+      <textarea class="annotation-input" id="annotation-input" placeholder="Add a note about this country&#39;s AI governance..."></textarea>
+      <button class="annotation-submit" onclick="addAnnotation()" id="add-note-btn">Add note</button>
+      <div class="annotation-list" id="annotation-list"></div>
+    </div>
+  </div>
+</div>
+
+<div id="compare-panel">
+  <div class="panel-drag"></div>
+  <div class="cp-inner">
+    <div class="cp-title" id="cp-title">Comparing countries</div>
+    <div class="cp-grid" id="cp-grid"></div>
+    <button class="cp-close" onclick="closeCompare()" id="close-compare-btn">Close comparison</button>
+  </div>
+</div>
+
+<section id="how-scored" style="background:#F8F5EF;padding:3rem 1.5rem;border-top:4px solid #E8950A;">
+  <div style="max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+    <div>
+      <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#E8950A;font-weight:600;margin-bottom:.4rem;">Methodology &amp; Transparency</div>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:#0D1B2A;margin-bottom:.4rem;">How countries are positioned</h2>
+      <p style="font-size:13px;color:#6B7280;max-width:520px;line-height:1.7;">Every position is derived from a 30-indicator formula applied to primary governance documents. The formula, all indicator definitions, scoring criteria, worked examples, and the full 79-country scoring table are documented in a dedicated methodology page.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem;">
+        <span style="font-size:11px;padding:3px 10px;border-radius:4px;background:#fff;border:1px solid #D4CFC6;color:#6B7280;">30 indicators</span>
+        <span style="font-size:11px;padding:3px 10px;border-radius:4px;background:#fff;border:1px solid #D4CFC6;color:#6B7280;">3 dimensions</span>
+        <span style="font-size:11px;padding:3px 10px;border-radius:4px;background:#fff;border:1px solid #D4CFC6;color:#6B7280;">Primary sources only</span>
+        <span style="font-size:11px;padding:3px 10px;border-radius:4px;background:#fff;border:1px solid #D4CFC6;color:#6B7280;">&plusmn;0.02 precision</span>
+      </div>
+    </div>
+    <a href="methodology.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:7px;background:#0D1B2A;color:#F5F2EC;text-decoration:none;font-size:13px;font-family:'Inter',sans-serif;white-space:nowrap;flex-shrink:0;">Read full methodology &rarr;</a>
+  </div>
+</section>
+
+<section id="methodology">
+  <div class="sec-inner">
+    <div class="sec-tag" id="meth-tag">How it works</div>
+    <h2 class="sec-h2" id="meth-h2">Methodology</h2>
+    <p class="sec-sub" id="meth-sub">Each jurisdiction is positioned on a ternary plot based on how strongly its AI governance framework pulls toward each of three philosophical poles. Dot size independently encodes binding enforcement strength.</p>
+    <div class="card-grid">
+      <div class="info-card"><div class="ic-num">01</div><div class="ic-title" id="meth-c1t">Three governance philosophies</div><div class="ic-body" id="meth-c1b">Rights-protective, market-oriented, and sovereignty-centered. Ternary coordinates sum to 1.0. No country is purely one model.</div></div>
+      <div class="info-card"><div class="ic-num">02</div><div class="ic-title" id="meth-c2t">Two views</div><div class="ic-body" id="meth-c2b">Triangle shows three-way tension simultaneously. Compass shows individual rights vs. state control against voluntary vs. binding law &mdash; more intuitive for general audiences.</div></div>
+      <div class="info-card"><div class="ic-num">03</div><div class="ic-title" id="meth-c3t">Dot size = enforcement</div><div class="ic-body" id="meth-c3b">Dot size encodes binding enforcement strength. Larger = stronger legally enforceable mechanisms with meaningful penalties.</div></div>
+      <div class="info-card"><div class="ic-num">04</div><div class="ic-title" id="meth-c4t">Timeline 2016&ndash;2026</div><div class="ic-body" id="meth-c4b">Drag the year slider to see how governance frameworks evolved. Crisis milestones appear at key years.</div></div>
+    </div>
+    <div class="callout-note" id="meth-callout"><strong>Key insight:</strong> EU and China are both large dots (strong binding enforcement) but at opposite corners. Binding enforcement and rights protection are independent dimensions &mdash; China uses binding law to enforce state control, the EU uses it to protect individual rights.</div>
+  </div>
+</section>
+
+<section id="news-section">
+  <div class="sec-inner">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.8rem;">
+      <div>
+        <div class="sec-tag">Live updates</div>
+        <h2 style="font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--off);">Recent AI Governance News</h2>
+        <p style="font-size:12px;color:rgba(255,255,255,.35);margin-top:.3rem;">Links to original sources. Updated on page load via public RSS feeds.</p>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <button class="news-filter active" onclick="filterNews('all',this)">All</button>
+        <button class="news-filter" onclick="filterNews('Guardian',this)">Guardian</button>
+        <button class="news-filter" onclick="filterNews('Reuters',this)">Reuters</button>
+        <button class="news-filter" onclick="filterNews('BBC',this)">BBC</button>
+        <button class="news-filter" onclick="filterNews('MIT',this)">MIT Tech Review</button>
+      </div>
+    </div>
+    <div id="news-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.8rem;"></div>
+    <div id="news-loading" style="text-align:center;padding:2rem;color:rgba(255,255,255,.3);font-size:13px;">Loading latest AI governance news...</div>
+    <p style="font-size:11px;color:rgba(255,255,255,.2);margin-top:1rem;text-align:center;">News sourced from public RSS feeds. Links open original source.</p>
+  </div>
+</section>
+
+<section id="timeline-section">
+  <div class="sec-inner">
+    <div class="sec-tag">Historical record</div>
+    <h2 class="sec-h2" style="color: #FFFFFF;">Regulatory Timeline</h2>    
+    <p class="sec-sub">Key events in global AI governance from 2016 to 2026.</p>
+    <div class="tl-filters">
+      <button class="tl-filter active" onclick="filterTimeline('all',this)">All events</button>
+      <button class="tl-filter" onclick="filterTimeline('legislation',this)">Legislation</button>
+      <button class="tl-filter" onclick="filterTimeline('international',this)">International</button>
+      <button class="tl-filter" onclick="filterTimeline('enforcement',this)">Enforcement</button>
+      <button class="tl-filter" onclick="filterTimeline('ai',this)">AI releases</button>
+    </div>
+    <div id="tl-entries"></div>
+  </div>
+</section>
+
+<section id="countries">
+  <div class="sec-inner">
+    <div class="sec-tag">Full dataset</div>
+    <h2 class="sec-h2">All jurisdictions</h2>
+    <div style="display:flex;gap:.8rem;margin-bottom:1.2rem;flex-wrap:wrap;align-items:center;">
+      <span style="font-size:12px;color:var(--text3);flex:1;">Click any row to highlight on map. Click headers to sort.</span>
+      <a class="download-btn" href="#" onclick="downloadCSV(event)">&#8681; Download CSV</a>
+    </div>
+    <table class="ct-table">
+      <thead><tr>
+        <th onclick="sortTable('name')">Jurisdiction &#8597;</th>
+        <th onclick="sortTable('group')">Model &#8597;</th>
+        <th onclick="sortTable('bind')">Binding? &#8597;</th>
+        <th onclick="sortTable('r')">Rights &#8597;</th>
+        <th onclick="sortTable('m')">Market &#8597;</th>
+        <th onclick="sortTable('s')">Sovereign &#8597;</th>
+        <th onclick="sortTable('bind')">Enforcement &#8597;</th>
+      </tr></thead>
+      <tbody id="ct-body"></tbody>
+    </table>
+  </div>
+</section>
+
+<footer>&copy; 2026 Joohun Kim &middot; Research by Joohun Kim, Brown University (AI Governance Association, Tokyo; Siegel PIT-SF Fellowship, Princeton CITP) &middot; All rights reserved</footer>
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+var countries = [
+  {id:"eu",flag:"🇪🇺",name:"European Union",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.45,m:.40,s:.15,bind:20,rx:.55,bx:-.30},2018:{r:.52,m:.35,s:.13,bind:30,rx:.62,bx:-.10},2020:{r:.58,m:.30,s:.12,bind:45,rx:.68,bx:.20},2022:{r:.65,m:.24,s:.11,bind:60,rx:.72,bx:.45},2024:{r:.70,m:.20,s:.10,bind:85,rx:.76,bx:.75},2026:{r:0.75,m:0.21,s:0.04,bind:95,rx:0.82,bx:.88}},
+   bindText:"Strong — EU AI Act 2024",
+   desc:"The paradigmatic rights-based model. EU AI Act establishes 4-tier risk classification with prohibited uses, GPAI obligations, and penalties up to 35M euros or 7% global turnover. August 2026 high-risk enforcement.",
+   latest:"August 2026: High-risk AI obligations now in force. EU AI Office enforcing GPAI model obligations since August 2025. AI Omnibus amendments extended some deadlines to December 2027.",
+   tags:["EU AI Act 2024","GPAI obligations","4 risk tiers","Brussels Effect","Aug 2026 enforcement"]},
+  {id:"kr",flag:"🇰🇷",name:"South Korea",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.30,m:.50,s:.20,bind:10,rx:.30,bx:-.45},2020:{r:.40,m:.42,s:.18,bind:20,rx:.38,bx:-.20},2022:{r:.46,m:.36,s:.18,bind:35,rx:.42,bx:.10},2024:{r:.50,m:.32,s:.18,bind:60,rx:.48,bx:.42},2026:{r:0.52,m:0.29,s:0.19,bind:75,rx:0.38,bx:.58}},
+   bindText:"Moderate — AI Basic Act Jan 2026",
+   desc:"First binding AI law in Asia-Pacific. Hybrid model balancing binding obligations with innovation promotion. KAISI established with international cooperation.",
+   latest:"January 2026: AI Basic Act took full effect. KAISI actively building international cooperation. Industry raised compliance concerns; government granted some fine suspensions.",
+   tags:["AI Basic Act 2026","High-impact AI","KAISI","First in Asia-Pacific"]},
+  {id:"cn",flag:"🇨🇳",name:"China",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+   timeline:{2016:{r:.10,m:.20,s:.70,bind:40,rx:-.65,bx:.25},2018:{r:.09,m:.16,s:.75,bind:55,rx:-.70,bx:.40},2020:{r:.09,m:.14,s:.77,bind:65,rx:-.72,bx:.50},2022:{r:.08,m:.12,s:.80,bind:78,rx:-.75,bx:.65},2024:{r:.08,m:.11,s:.81,bind:88,rx:-.78,bx:.78},2026:{r:0.05,m:0.1,s:0.85,bind:90,rx:-0.92,bx:.82}},
+   bindText:"Strong — sectoral laws",
+   desc:"Paradigmatic sovereignty-centered model. Binding regulations covering algorithms, deepfakes, generative AI. Mandatory CAC registration. Content must align with state values.",
+   latest:"September 2025: Mandatory AI watermarking fully operational. AI Plus Action Plan targeting 70% AI penetration by 2027. China-ASEAN AI safety network launching 2026.",
+   tags:["Gen AI rules 2023","Algorithm rules 2022","CAC registration","WAICO proposal"]},
+  {id:"us",flag:"🇺🇸",name:"United States",group:"market",modelLabel:"Market-oriented",modelClass:"pm-market",ctmClass:"ctm-m",
+   timeline:{2016:{r:.38,m:.48,s:.14,bind:15,rx:.35,bx:-.40},2018:{r:.36,m:.50,s:.14,bind:18,rx:.32,bx:-.38},2020:{r:.38,m:.48,s:.14,bind:25,rx:.35,bx:-.22},2022:{r:.38,m:.48,s:.14,bind:30,rx:.35,bx:-.12},2024:{r:.35,m:.50,s:.15,bind:38,rx:.28,bx:.02},2026:{r:0.32,m:0.5,s:0.18,bind:35,rx:0.16,bx:-.05}},
+   bindText:"Partial — state laws only",
+   desc:"Fragmented governance under deregulatory federal pressure. No federal AI law. NIST AI RMF voluntary. State laws (Colorado, Texas) binding but federal preemption underway.",
+   latest:"December 2025: EO 14365 created DOJ AI Litigation Task Force to challenge state AI laws. NIST AI RMF revision underway removing references to misinformation and DEI.",
+   tags:["NIST AI RMF","No federal AI law","EO 14365","State patchwork","AI Action Plan 2025"]},
+  {id:"jp",flag:"🇯🇵",name:"Japan",group:"market",modelLabel:"Market-oriented",modelClass:"pm-market",ctmClass:"ctm-m",
+   timeline:{2016:{r:.22,m:.62,s:.16,bind:5,rx:.20,bx:-.78},2020:{r:.20,m:.66,s:.14,bind:8,rx:.18,bx:-.74},2022:{r:.19,m:.67,s:.14,bind:9,rx:.17,bx:-.72},2024:{r:.18,m:.68,s:.14,bind:10,rx:.16,bx:-.70},2026:{r:0.15,m:0.73,s:0.12,bind:12,rx:0.03,bx:-.68}},
+   bindText:"Voluntary only — no AI penalties",
+   desc:"Paradigmatic market-oriented model. AI Promotion Act 2025 uses non-binding duties to endeavor. No AI-specific financial penalties. AIGA self-governance. G7 Hiroshima Process architect.",
+   latest:"September 2025: AI Basic Plan published confirming world-most-AI-friendly-nation goal. AIGA governance navigator operational since April 2025.",
+   tags:["AI Promotion Act 2025","AIGA self-governance","G7 Hiroshima Process","Pluralistic interoperability"]},
+  {id:"sg",flag:"🇸🇬",name:"Singapore",group:"market",modelLabel:"Market-oriented",modelClass:"pm-market",ctmClass:"ctm-m",
+   timeline:{2016:{r:.18,m:.68,s:.14,bind:5,rx:.18,bx:-.80},2020:{r:.19,m:.70,s:.11,bind:10,rx:.20,bx:-.72},2022:{r:.20,m:.70,s:.10,bind:12,rx:.20,bx:-.70},2024:{r:.20,m:.70,s:.10,bind:13,rx:.20,bx:-.68},2026:{r:0.17,m:0.79,s:0.04,bind:14,rx:0.15,bx:-.66}},
+   bindText:"Voluntary only",
+   desc:"World first governance framework for agentic AI (Jan 2026) with 5-tier autonomy classification. AI Verify toolkit. No binding national AI law. ASEAN regional governance leader.",
+   latest:"January 2026: World first agentic AI framework published at WEF — introduces Agent Identity Cards and 5-tier autonomy classification.",
+   tags:["Agentic AI framework 2026","AI Verify toolkit","Model AI Gov. Framework","ASEAN leader"]},
+  {id:"uk",flag:"🇬🇧",name:"United Kingdom",group:"market",modelLabel:"Market-oriented",modelClass:"pm-market",ctmClass:"ctm-m",
+   timeline:{2016:{r:.40,m:.45,s:.15,bind:18,rx:.38,bx:-.35},2020:{r:.43,m:.44,s:.13,bind:22,rx:.40,bx:-.28},2022:{r:.43,m:.45,s:.12,bind:23,rx:.40,bx:-.26},2024:{r:.42,m:.46,s:.12,bind:24,rx:.40,bx:-.24},2026:{r:0.42,m:0.5,s:0.08,bind:25,rx:0.39,bx:-.22}},
+   bindText:"Sector-specific only",
+   desc:"Pro-innovation principles-based approach. No unified AI law. Sector regulators (FCA, ICO, MHRA, CMA). AI Safety Institute after Bletchley Declaration.",
+   latest:"Post-2025 UK government showing openness to some binding rules. AI Safety Institute conducting frontier model evaluations.",
+   tags:["AI Reg. White Paper 2023","AI Safety Institute","Bletchley Declaration","Pro-innovation"]},
+  {id:"br",flag:"🇧🇷",name:"Brazil",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.35,m:.40,s:.25,bind:5,rx:.28,bx:-.75},2020:{r:.45,m:.35,s:.20,bind:12,rx:.38,bx:-.55},2022:{r:.50,m:.32,s:.18,bind:20,rx:.44,bx:-.32},2024:{r:.55,m:.28,s:.17,bind:38,rx:.50,bx:.05},2026:{r:0.59,m:0.29,s:0.12,bind:52,rx:0.54,bx:.22}},
+   bindText:"Pending — Bill 2338 passed Senate",
+   desc:"EU-inspired 4-tier framework adapted for racial justice and social inequality. First Latin American comprehensive AI law. Explicit anti-discrimination provisions.",
+   latest:"December 2024: Bill 2338 passed Senate. Pending final enactment. Would make Brazil the first country in the Americas with a comprehensive AI law.",
+   tags:["Bill 2338","EU-inspired","Racial justice focus","4-tier framework"]},
+  {id:"ca",flag:"🇨🇦",name:"Canada",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.42,m:.44,s:.14,bind:8,rx:.42,bx:-.60},2020:{r:.50,m:.40,s:.10,bind:12,rx:.50,bx:-.55},2022:{r:.54,m:.37,s:.09,bind:25,rx:.54,bx:-.25},2024:{r:.55,m:.37,s:.08,bind:30,rx:.55,bx:-.18},2026:{r:0.44,m:0.5,s:0.06,bind:15,rx:0.44,bx:-.45}},
+   bindText:"Voluntary — AIDA failed 2025",
+   desc:"Proposed binding law (AIDA) failed in Parliament 2025. Soft-law approach. GPAI Secretariat host. AI Safety Institute established.",
+   latest:"June 2025: AIDA failed in Parliament. Canada AI Safety Institute established. Remains active as GPAI Secretariat host.",
+   tags:["AIDA failed 2025","GPAI Secretariat","AI Safety Institute","OECD alignment"]},
+  {id:"au",flag:"🇦🇺",name:"Australia",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.38,m:.45,s:.17,bind:8,rx:.36,bx:-.62},2020:{r:.42,m:.43,s:.15,bind:14,rx:.40,bx:-.52},2022:{r:.44,m:.42,s:.14,bind:16,rx:.42,bx:-.48},2024:{r:.47,m:.40,s:.13,bind:20,rx:.46,bx:-.38},2026:{r:0.38,m:0.52,s:0.1,bind:22,rx:0.32,bx:-.32}},
+   bindText:"Proposed — not yet enacted",
+   desc:"Voluntary AI Ethics Framework (2019). 2024 consultation proposed mandatory rules for high-risk AI. Bletchley Declaration signatory.",
+   latest:"Mid-2024: Government consultation proposed mandatory safeguards for high-risk AI. New legislation expected 2026-2027.",
+   tags:["AI Ethics Framework 2019","Proposed mandatory rules","Bletchley signatory"]},
+  {id:"in",flag:"🇮🇳",name:"India",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.20,m:.62,s:.18,bind:5,rx:.15,bx:-.78},2020:{r:.23,m:.62,s:.15,bind:8,rx:.18,bx:-.72},2022:{r:.24,m:.61,s:.15,bind:10,rx:.20,bx:-.68},2024:{r:.25,m:.60,s:.15,bind:12,rx:.22,bx:-.65},2026:{r:0.22,m:0.61,s:0.17,bind:14,rx:0.06,bx:-.62}},
+   bindText:"Voluntary — sandbox model",
+   desc:"Sandbox-to-regulation model. No binding AI law. RBI FREE-AI framework for finance. Digital India Act pending.",
+   latest:"2026: Digital Personal Data Protection Act being implemented. India AI Mission launched with 1.25 billion USD investment.",
+   tags:["Sandbox-to-regulation","RBI FREE-AI","Digital India Act pending"]},
+  {id:"ae",flag:"🇦🇪",name:"UAE",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+   timeline:{2016:{r:.15,m:.35,s:.50,bind:15,rx:-.38,bx:-.42},2020:{r:.13,m:.31,s:.56,bind:24,rx:-.45,bx:-.28},2022:{r:.12,m:.30,s:.58,bind:28,rx:-.48,bx:-.18},2024:{r:.12,m:.29,s:.59,bind:30,rx:-.50,bx:-.12},2026:{r:0.16,m:0.26,s:0.58,bind:32,rx:-0.48,bx:-.08}},
+   bindText:"Partial — sectoral rules",
+   desc:"AI governance as economic diversification. World first AI Minister 2017. Sector-specific binding rules. Vision 2030 AI hub ambition.",
+   latest:"UAE-US AI dialogue ongoing. AI regulatory sandbox launched. Positioning as neutral AI governance hub between East and West.",
+   tags:["First AI Minister 2017","Vision 2030","Sectoral rules"]},
+  {id:"cl",flag:"🇨🇱",name:"Chile",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.40,m:.40,s:.20,bind:5,rx:.38,bx:-.75},2020:{r:.52,m:.34,s:.14,bind:12,rx:.50,bx:-.58},2022:{r:.58,m:.31,s:.11,bind:16,rx:.56,bx:-.48},2024:{r:.62,m:.29,s:.09,bind:20,rx:.60,bx:-.38},2026:{r:0.64,m:0.36,s:0.0,bind:22,rx:0.74,bx:-.32}},
+   bindText:"Constitutional + proposed AI bill",
+   desc:"World first country to constitutionally protect neuro-rights against AI mental manipulation. Proposed AI bill under consultation.",
+   latest:"AI bill advancing through consultation process modeled on EU approach. Constitutional neuro-rights protection studied by other jurisdictions.",
+   tags:["Constitutional neuro-rights","World first","Proposed AI bill"]},
+  {id:"ke",flag:"🇰🇪",name:"Kenya",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.30,m:.45,s:.25,bind:4,rx:.25,bx:-.82},2020:{r:.40,m:.38,s:.22,bind:8,rx:.35,bx:-.72},2022:{r:.44,m:.36,s:.20,bind:12,rx:.40,bx:-.60},2024:{r:.48,m:.34,s:.18,bind:16,rx:.44,bx:-.50},2026:{r:0.29,m:0.57,s:0.14,bind:18,rx:0.17,bx:-.45}},
+   bindText:"Proposed — Data Protection Act applies",
+   desc:"Most advanced AI governance in sub-Saharan Africa. Proposed AI licensing framework. African Union AI Strategy adopted.",
+   latest:"Data Protection Commissioner actively enforcing DPA. AI licensing framework under parliamentary consideration.",
+   tags:["Sub-Saharan leader","AI licensing proposed","AU AI Strategy"]},
+  {id:"au2",flag:"🌍",name:"African Union",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.30,m:.40,s:.30,bind:2,rx:.22,bx:-.88},2020:{r:.40,m:.35,s:.25,bind:5,rx:.34,bx:-.78},2022:{r:.46,m:.32,s:.22,bind:7,rx:.40,bx:-.72},2024:{r:.52,m:.30,s:.18,bind:9,rx:.46,bx:-.65},2026:{r:0.36,m:0.5,s:0.14,bind:10,rx:0.25,bx:-.62}},
+   bindText:"Voluntary — AU-AI Strategy",
+   desc:"Unique framework classifying environmental harm, structural inequality, and threats to African cultural values as primary risk categories. Anti-digital-colonization focus.",
+   latest:"AU AI Strategy being implemented by member states. Environmental risk categorization influencing other developing country frameworks.",
+   tags:["Environmental risk","Cultural values protection","Anti-digital-colonization"]},
+  {id:"ru",flag:"🇷🇺",name:"Russia",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+   timeline:{2016:{r:.12,m:.20,s:.68,bind:25,rx:-.60,bx:.10},2020:{r:.10,m:.18,s:.72,bind:35,rx:-.65,bx:.22},2022:{r:.09,m:.15,s:.76,bind:45,rx:-.70,bx:.30},2024:{r:.08,m:.14,s:.78,bind:52,rx:-.72,bx:.38},2026:{r:0.06,m:0.06,s:0.88,bind:55,rx:-0.94,bx:.42}},
+   bindText:"Partial — National AI Strategy 2030",
+   desc:"State-directed AI governance under National AI Strategy 2030. Defense and state security emphasis. Limited transparency. Geopolitically isolated from Western governance coordination.",
+   latest:"BRICS AI governance framework proposed as alternative to Western-led initiatives. Domestic AI certification system launched for critical infrastructure.",
+   tags:["National AI Strategy 2030","State-directed","Defense focus","BRICS framework"]},
+  {id:"fr",flag:"🇫🇷",name:"France",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.48,m:.38,s:.14,bind:22,rx:.55,bx:-.28},2020:{r:.55,m:.32,s:.13,bind:40,rx:.62,bx:.15},2022:{r:.60,m:.28,s:.12,bind:55,rx:.66,bx:.35},2024:{r:.65,m:.24,s:.11,bind:75,rx:.70,bx:.60},2026:{r:0.72,m:0.2,s:0.08,bind:88,rx:0.74,bx:.78}},
+   bindText:"Strong — EU AI Act + national regulation",
+   desc:"Subject to EU AI Act with additional national AI strategy. Paris AI Action Summit host (Feb 2025). Strong AI sovereignty emphasis alongside rights protection. Active in GPAI.",
+   latest:"February 2025: Hosted Paris AI Action Summit with 62 signatories. US and UK declined final statement. CNIL published AI healthcare guidelines.",
+   tags:["Paris AI Summit 2025","GPAI member","National AI strategy","EU AI Act applies"]},
+  {id:"de",flag:"🇩🇪",name:"Germany",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.50,m:.36,s:.14,bind:22,rx:.56,bx:-.28},2020:{r:.58,m:.30,s:.12,bind:42,rx:.64,bx:.16},2022:{r:.62,m:.26,s:.12,bind:58,rx:.68,bx:.38},2024:{r:.66,m:.23,s:.11,bind:78,rx:.72,bx:.62},2026:{r:0.72,m:0.2,s:0.08,bind:90,rx:0.74,bx:.80}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"Subject to EU AI Act and one of its most active implementers. Strong GDPR enforcement tradition. BfDI among most active EU AI regulators. Significant AI research capacity (DFKI, Fraunhofer).",
+   latest:"BfDI issued opinion in 2025 that AI systems in employment must comply with both GDPR and EU AI Act high-risk provisions simultaneously.",
+   tags:["EU AI Act applies","GDPR tradition","BfDI enforcement","AI industrial strategy"]},
+  {id:"mx",flag:"🇲🇽",name:"Mexico",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.28,m:.42,s:.30,bind:4,rx:.22,bx:-.80},2020:{r:.32,m:.40,s:.28,bind:6,rx:.28,bx:-.72},2022:{r:.36,m:.38,s:.26,bind:9,rx:.32,bx:-.64},2024:{r:.38,m:.37,s:.25,bind:12,rx:.34,bx:-.58},2026:{r:0.24,m:0.53,s:0.23,bind:15,rx:0.01,bx:-.52}},
+   bindText:"Partial — Federal AI Strategy",
+   desc:"Federal AI Strategy published 2018. Personal data law (LFPDPPP) applies to AI data processing. Growing civil society engagement on algorithmic accountability.",
+   latest:"IFT and COFECE issued sector guidance on AI. Comprehensive AI strategy under development. USMCA proximity shapes technology governance.",
+   tags:["Federal AI Strategy 2018","LFPDPPP","Civil society active","USMCA influence"]},
+  {id:"th",flag:"🇹🇭",name:"Thailand",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.22,m:.50,s:.28,bind:4,rx:.15,bx:-.78},2020:{r:.25,m:.48,s:.27,bind:7,rx:.18,bx:-.68},2022:{r:.28,m:.46,s:.26,bind:10,rx:.22,bx:-.60},2024:{r:.30,m:.45,s:.25,bind:13,rx:.24,bx:-.54},2026:{r:0.25,m:0.44,s:0.31,bind:16,rx:-0.07,bx:-.48}},
+   bindText:"Partial — PDPA + AI strategy",
+   desc:"Thailand Personal Data Protection Act (PDPA) applies to AI data processing. National AI Strategy 2022-2027. Moving toward sector-specific AI governance. ASEAN member.",
+   latest:"National AI Strategy 2022-2027 implementation ongoing. Ministry of Digital Economy developing AI regulatory framework.",
+   tags:["PDPA applies","National AI Strategy 2027","ASEAN alignment","Sector guidance"]},
+  {id:"id",flag:"🇮🇩",name:"Indonesia",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.20,m:.50,s:.30,bind:3,rx:.12,bx:-.82},2020:{r:.24,m:.48,s:.28,bind:5,rx:.16,bx:-.76},2022:{r:.26,m:.47,s:.27,bind:8,rx:.18,bx:-.70},2024:{r:.28,m:.46,s:.26,bind:11,rx:.20,bx:-.64},2026:{r:0.25,m:0.44,s:0.31,bind:14,rx:-0.07,bx:-.58}},
+   bindText:"Partial — PDP Law 2022",
+   desc:"Personal Data Protection Law enacted 2022. National AI Strategy under development. Large and growing AI ecosystem. Potential ASEAN governance leader given population size.",
+   latest:"PDP Law implementation ongoing. BAPPENAS developing National AI Strategy. Deepfake takedown using existing electronic information law.",
+   tags:["PDP Law 2022","National AI Strategy pending","ASEAN member"]},
+  {id:"za",flag:"🇿🇦",name:"South Africa",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.32,m:.40,s:.28,bind:5,rx:.26,bx:-.78},2020:{r:.36,m:.38,s:.26,bind:8,rx:.30,bx:-.70},2022:{r:.38,m:.37,s:.25,bind:11,rx:.32,bx:-.62},2024:{r:.40,m:.36,s:.24,bind:15,rx:.35,bx:-.52},2026:{r:0.4,m:0.47,s:0.13,bind:18,rx:0.31,bx:-.44}},
+   bindText:"Partial — POPIA applies",
+   desc:"Protection of Personal Information Act (POPIA) applies to AI data processing. National AI policy under development. Africa second-largest digital economy.",
+   latest:"2024: Draft National AI Policy Framework published for consultation. POPIA actively enforced by Information Regulator.",
+   tags:["POPIA applies","National AI policy developing","AU AI Strategy"]},
+  {id:"sa",flag:"🇸🇦",name:"Saudi Arabia",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+   timeline:{2016:{r:.12,m:.30,s:.58,bind:10,rx:-.42,bx:-.50},2020:{r:.11,m:.28,s:.61,bind:15,rx:-.48,bx:-.38},2022:{r:.11,m:.27,s:.62,bind:20,rx:-.50,bx:-.28},2024:{r:.11,m:.26,s:.63,bind:25,rx:-.52,bx:-.18},2026:{r:0.13,m:0.22,s:0.65,bind:28,rx:-0.6,bx:-.12}},
+   bindText:"Partial — SDAIA regulations",
+   desc:"Saudi Data and AI Authority (SDAIA) leads AI governance. Vision 2030 positions AI as economic transformation tool. Sector-specific rules in finance and healthcare.",
+   latest:"SDAIA and National Data Management Office expanding frameworks. AI regulatory sandbox launched. Growing presence as Global South AI governance voice.",
+   tags:["SDAIA authority","Vision 2030","Sector-specific rules","AI investment hub"]},
+  {id:"tw",flag:"🇹🇼",name:"Taiwan",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.35,m:.45,s:.20,bind:10,rx:.32,bx:-.58},2020:{r:.40,m:.42,s:.18,bind:18,rx:.38,bx:-.38},2022:{r:.44,m:.38,s:.18,bind:25,rx:.42,bx:-.22},2024:{r:.46,m:.36,s:.18,bind:30,rx:.44,bx:-.12},2026:{r:0.41,m:0.41,s:0.18,bind:35,rx:0.26,bx:-.02}},
+   bindText:"Moderate — AI Basic Act proposed",
+   desc:"Proposed AI Basic Act with risk-based approach. Strong semiconductor industry (TSMC) gives Taiwan unique AI governance leverage. Geopolitical tensions with China shape data governance.",
+   latest:"AI Basic Act advancing through legislative process. NCC issued guidance requiring clear labeling of AI-generated news content.",
+   tags:["AI Basic Act proposed","Semiconductor leverage","Risk-based approach","Geopolitical context"]},
+  {id:"no",flag:"🇳🇴",name:"Norway",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.50,m:.38,s:.12,bind:20,rx:.55,bx:-.30},2020:{r:.58,m:.32,s:.10,bind:38,rx:.62,bx:.08},2022:{r:.62,m:.28,s:.10,bind:58,rx:.66,bx:.38},2024:{r:.66,m:.24,s:.10,bind:82,rx:.70,bx:.65},2026:{r:0.75,m:0.21,s:0.04,bind:88,rx:0.82,bx:.78}},
+   bindText:"Strong — EU AI Act via EEA",
+   desc:"Norway applies the EU AI Act through the EEA Agreement. Datatilsynet is one of Europe most proactive AI regulators. Strong Nordic digital rights tradition.",
+   latest:"Datatilsynet issuing AI-specific enforcement guidance. Active EU AI Act implementation as EEA member.",
+   tags:["EU AI Act via EEA","Datatilsynet","Nordic digital rights","EEA member"]},
+  {id:"nz",flag:"🇳🇿",name:"New Zealand",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.42,m:.44,s:.14,bind:10,rx:.40,bx:-.60},2020:{r:.46,m:.42,s:.12,bind:18,rx:.44,bx:-.44},2022:{r:.48,m:.40,s:.12,bind:22,rx:.46,bx:-.36},2024:{r:.50,m:.38,s:.12,bind:26,rx:.48,bx:-.26},2026:{r:0.37,m:0.58,s:0.05,bind:30,rx:0.37,bx:-.16}},
+   bindText:"Partial — Algorithm Charter + Privacy Act 2020",
+   desc:"New Zealand developed an Algorithm Charter for government AI use (2020) — one of the first government-specific AI accountability frameworks globally. Privacy Act 2020 applies.",
+   latest:"Algorithm Charter adoption expanding. Privacy Act 2020 applied to AI data processing cases. Close alignment with Australian approach.",
+   tags:["Algorithm Charter 2020","Privacy Act 2020","Government AI accountability","Five Eyes"]},
+  {id:"se",flag:"🇸🇪",name:"Sweden",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.50,m:.38,s:.12,bind:20,rx:.55,bx:-.30},2020:{r:.58,m:.32,s:.10,bind:38,rx:.62,bx:.08},2022:{r:.62,m:.28,s:.10,bind:58,rx:.66,bx:.38},2024:{r:.66,m:.24,s:.10,bind:80,rx:.70,bx:.65},2026:{r:0.75,m:0.21,s:0.04,bind:88,rx:0.82,bx:.78}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"Sweden applies the EU AI Act and has a proactive digital governance tradition. IMY (Swedish Privacy Authority) among most active EU data protection authorities. Significant AI research capacity.",
+   latest:"IMY issuing AI enforcement guidance. Active EU AI Act implementation alongside national AI strategy.",
+   tags:["EU AI Act applies","IMY enforcement","National AI strategy","Nordic leadership"]},
+  {id:"co",flag:"🇨🇴",name:"Colombia",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.32,m:.42,s:.26,bind:5,rx:.25,bx:-.78},2020:{r:.38,m:.38,s:.24,bind:9,rx:.32,bx:-.66},2022:{r:.43,m:.35,s:.22,bind:14,rx:.38,bx:-.52},2024:{r:.47,m:.33,s:.20,bind:19,rx:.42,bx:-.40},2026:{r:0.5,m:0.38,s:0.12,bind:23,rx:0.44,bx:-.32}},
+   bindText:"Partial — CONPES 3975 + Habeas Data",
+   desc:"Colombia published a National AI Policy (CONPES 3975) in 2019. Habeas Data law applies to AI. Constitutional Court has ruled on algorithmic decisions. Active Latin American AI governance leader.",
+   latest:"Constitutional Court rulings on algorithmic decisions gaining regional attention. Close OECD and EU engagement continuing.",
+   tags:["CONPES 3975","Habeas Data","Constitutional Court","Latin America leader"]},
+  {id:"eg",flag:"🇪🇬",name:"Egypt",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.20,m:.35,s:.45,bind:5,rx:-.22,bx:-.70},2020:{r:.24,m:.34,s:.42,bind:9,rx:-.18,bx:-.60},2022:{r:.27,m:.34,s:.39,bind:13,rx:-.14,bx:-.50},2024:{r:.30,m:.34,s:.36,bind:17,rx:-.10,bx:-.40},2026:{r:0.13,m:0.33,s:0.54,bind:20,rx:-0.47,bx:-.32}},
+   bindText:"Partial — National AI Strategy 2019",
+   desc:"Egypt published a National AI Strategy in 2019 and is active in AU AI governance. NTRA developing AI framework. Egypt positions itself as an African AI hub.",
+   latest:"NTRA developing sector-specific AI framework. Egypt hosting major AI governance events and positioning as African AI hub.",
+   tags:["National AI Strategy 2019","NTRA regulation","African AI hub","AU AI member"]},
+  {id:"il",flag:"🇮🇱",name:"Israel",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.38,m:.44,s:.18,bind:12,rx:.35,bx:-.55},2020:{r:.42,m:.42,s:.16,bind:20,rx:.40,bx:-.35},2022:{r:.46,m:.38,s:.16,bind:28,rx:.44,bx:-.18},2024:{r:.48,m:.36,s:.16,bind:35,rx:.46,bx:-.05},2026:{r:0.31,m:0.62,s:0.07,bind:40,rx:0.28,bx:.08}},
+   bindText:"Partial — sector-specific guidance",
+   desc:"No comprehensive AI law but sector-specific governance through the Israeli Innovation Authority and Privacy Protection Authority. Strong AI startup ecosystem shapes light-touch regulatory approach.",
+   latest:"Government AI policy framework under development. Privacy Protection Authority issuing AI guidance across sectors.",
+   tags:["Privacy Protection Authority","Innovation Authority","AI startup hub","Sector guidance"]},
+  {id:"oecd",flag:"🌐",name:"OECD",group:"rights",modelLabel:"Intergovernmental",modelClass:"pm-inter",ctmClass:"ctm-i",
+   timeline:{2016:{r:.50,m:.38,s:.12,bind:5,rx:.50,bx:-.80},2018:{r:.54,m:.35,s:.11,bind:6,rx:.54,bx:-.78},2020:{r:.56,m:.33,s:.11,bind:7,rx:.56,bx:-.76},2022:{r:.58,m:.31,s:.11,bind:7,rx:.58,bx:-.74},2024:{r:.59,m:.30,s:.11,bind:8,rx:.59,bx:-.72},2026:{r:0.3,m:0.7,s:0.0,bind:8,rx:0.34,bx:-.72}},
+   bindText:"Voluntary — 49 adherents",
+   desc:"First intergovernmental AI standard. 49 countries adhered to OECD AI Principles. Shaped NIST, ISO, and EU AI Act. De facto secretariat for democratic AI governance.",
+   latest:"February 2026: Due Diligence Guidance for Responsible AI published. December 2025: G7 AI Toolkit for Public Sector published.",
+   tags:["49 adherents","OECD AI Principles 2019","OECD.AI Observatory","Intergovernmental"]},
+  {id:"asean",flag:"🌏",name:"ASEAN",group:"market",modelLabel:"Market-oriented",modelClass:"pm-market",ctmClass:"ctm-m",
+   timeline:{2016:{r:.18,m:.60,s:.22,bind:3,rx:.10,bx:-.84},2020:{r:.20,m:.60,s:.20,bind:5,rx:.14,bx:-.78},2022:{r:.20,m:.60,s:.20,bind:6,rx:.14,bx:-.76},2024:{r:.21,m:.60,s:.19,bind:7,rx:.15,bx:-.74},2026:{r:0.1,m:0.7,s:0.2,bind:8,rx:-0.11,bx:-.72}},
+   bindText:"Voluntary — ASEAN Guide",
+   desc:"ASEAN Guide on AI Governance and Ethics updated 2024 for generative AI. No binding ASEAN-level AI law. Singapore leads regional framework development.",
+   latest:"September 2025: China and ASEAN agreed to launch AI safety network in 2026. ASEAN Digital Masterplan 2025 includes AI components.",
+   tags:["ASEAN Guide 2024","Singapore-led","China-ASEAN network 2026","No binding law"]},
+  {id:"vn",flag:"🇻🇳",name:"Vietnam",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.22,m:.48,s:.30,bind:5,rx:.18,bx:-.82},2020:{r:.28,m:.44,s:.28,bind:8,rx:.24,bx:-.72},2022:{r:.34,m:.40,s:.26,bind:12,rx:.30,bx:-.58},2024:{r:.42,m:.35,s:.23,bind:28,rx:.38,bx:-.22},2026:{r:0.1,m:0.14,s:0.76,bind:72,rx:-0.76,bx:.62}},
+   bindText:"Strong — AI Law effective Mar 2026",
+   desc:"First comprehensive binding AI law in Southeast Asia (effective March 2026). EU-inspired risk-based classification with transparency, labeling, and human oversight. Fines up to 2% of annual revenue.",
+   latest:"May 2026: Decree 142/2026 implementing the AI Law took effect. Three-tier risk classification operational. National AI governance infrastructure established under Ministry of Science and Technology.",
+   tags:["AI Law 2025","First in ASEAN binding","EU-inspired","Decree 142/2026"]},
+  {id:"my",flag:"🇲🇾",name:"Malaysia",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.20,m:.52,s:.28,bind:3,rx:.14,bx:-.85},2020:{r:.21,m:.51,s:.28,bind:5,rx:.15,bx:-.80},2022:{r:.22,m:.50,s:.28,bind:7,rx:.16,bx:-.74},2024:{r:.23,m:.49,s:.28,bind:12,rx:.18,bx:-.62},2026:{r:0.25,m:0.69,s:0.06,bind:20,rx:0.22,bx:-.48}},
+   bindText:"Partial — AIGE guidelines + bill pending",
+   desc:"National AI Office (NAIO) established 2024. AIGE voluntary guidelines among ASEAN's first national-level frameworks. AI Governance Bill expected at Cabinet June 2026. PDPA amendments strengthening data rules.",
+   latest:"March 2026: My-AI Standards platform launched. AI standards framework targeting 12-month progress. Cabinet submission of AI Governance Bill expected mid-2026.",
+   tags:["NAIO 2024","AIGE guidelines","AI Bill pending 2026","ASEAN leader"]},
+  {id:"ph",flag:"🇵🇭",name:"Philippines",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.24,m:.46,s:.30,bind:4,rx:.18,bx:-.84},2020:{r:.25,m:.45,s:.30,bind:6,rx:.20,bx:-.76},2022:{r:.26,m:.44,s:.30,bind:9,rx:.22,bx:-.68},2024:{r:.27,m:.44,s:.29,bind:13,rx:.23,bx:-.56},2026:{r:0.27,m:0.67,s:0.06,bind:18,rx:0.24,bx:-.44}},
+   bindText:"Partial — National AI Strategy + bills pending",
+   desc:"National AI Strategy Roadmap 2.0. Data Privacy Act applies to AI processing. Multiple AI bills pending in 19th Congress including proposed AI Bill of Rights. 2026 ASEAN chair pushing binding framework.",
+   latest:"2026: ASEAN chairmanship prioritizing regional AI safety network. Comprehensive AI legislation under congressional review.",
+   tags:["National AI Strategy","Data Privacy Act","ASEAN chair 2026","AI Bill pending"]},
+  {id:"pk",flag:"🇵🇰",name:"Pakistan",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+   timeline:{2016:{r:.18,m:.42,s:.40,bind:4,rx:-.15,bx:-.82},2020:{r:.17,m:.40,s:.43,bind:6,rx:-.20,bx:-.74},2022:{r:.16,m:.39,s:.45,bind:9,rx:-.24,bx:-.65},2024:{r:.16,m:.38,s:.46,bind:14,rx:-.28,bx:-.48},2026:{r:0.27,m:0.47,s:0.26,bind:24,rx:0.01,bx:-.28}},
+   bindText:"Partial — National AI Policy 2025",
+   desc:"National AI Policy 2025 and Islamabad AI Declaration (Feb 2026) emphasize sovereign, capability-driven AI. Pakistan Digital Authority leads supervisory framework. Pending AI Bill and Data Protection Bill.",
+   latest:"February 2026: Islamabad AI Declaration adopted at Indus AI Summit. PDA directed to operationalize national AI Supervisory Framework.",
+   tags:["Islamabad Declaration 2026","Sovereign AI","National AI Policy 2025","AI Bill pending"]},
+  {id:"bd",flag:"🇧🇩",name:"Bangladesh",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.22,m:.48,s:.30,bind:2,rx:.14,bx:-.88},2020:{r:.24,m:.47,s:.29,bind:4,rx:.16,bx:-.82},2022:{r:.26,m:.46,s:.28,bind:6,rx:.18,bx:-.74},2024:{r:.28,m:.45,s:.27,bind:9,rx:.20,bx:-.64},2026:{r:0.08,m:0.54,s:0.38,bind:12,rx:-0.34,bx:-.55}},
+   bindText:"Partial — ICT Act + AI policy draft",
+   desc:"Digital Bangladesh vision drives AI adoption. Data Protection Act 2024 enacted. National AI policy under development. Focus on agriculture, health, and financial inclusion use cases.",
+   latest:"2025-2026: Data Protection Act implementation ongoing. AI policy framework consultation with development partners.",
+   tags:["Digital Bangladesh","Data Protection Act 2024","AI policy draft","South Asia"]},
+  {id:"lk",flag:"🇱🇰",name:"Sri Lanka",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.26,m:.46,s:.28,bind:3,rx:.20,bx:-.84},2020:{r:.28,m:.45,s:.27,bind:5,rx:.22,bx:-.76},2022:{r:.30,m:.44,s:.26,bind:7,rx:.24,bx:-.68},2024:{r:.32,m:.43,s:.25,bind:10,rx:.26,bx:-.58},2026:{r:0.25,m:0.58,s:0.17,bind:13,rx:0.09,bx:-.50}},
+   bindText:"Partial — Personal Data Protection Act",
+   desc:"Personal Data Protection Act No. 9 of 2022 applies to AI data processing. National AI Strategy under ICT Agency. Growing fintech AI sector under CBSL oversight.",
+   latest:"PDPA enforcement expanding. ICTA developing national AI guidelines aligned with UNESCO Recommendation.",
+   tags:["PDPA 2022","ICTA strategy","UNESCO alignment","Fintech AI"]},
+  {id:"np",flag:"🇳🇵",name:"Nepal",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.24,m:.46,s:.30,bind:2,rx:.18,bx:-.90},2020:{r:.26,m:.45,s:.29,bind:3,rx:.20,bx:-.86},2022:{r:.28,m:.44,s:.28,bind:5,rx:.22,bx:-.78},2024:{r:.30,m:.43,s:.27,bind:7,rx:.24,bx:-.70},2026:{r:0.0,m:0.78,s:0.22,bind:9,rx:-0.25,bx:-.62}},
+   bindText:"Voluntary — draft AI policy",
+   desc:"Early-stage AI governance. Electronic Transactions Act and privacy guidelines apply. Draft National AI Policy under development with UNESCO support.",
+   latest:"2025-2026: Draft AI policy consultation. Focus on digital public infrastructure and inclusive AI access.",
+   tags:["Draft AI policy","UNESCO support","Early stage","South Asia"]},
+  {id:"it",flag:"🇮🇹",name:"Italy",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.48,m:.38,s:.14,bind:20,rx:.54,bx:-.30},2020:{r:.56,m:.32,s:.12,bind:38,rx:.62,bx:.10},2022:{r:.61,m:.28,s:.11,bind:55,rx:.67,bx:.35},2024:{r:.65,m:.24,s:.11,bind:78,rx:.71,bx:.62},2026:{r:0.72,m:0.2,s:0.08,bind:90,rx:0.74,bx:.80}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"EU AI Act applies. Garante per la protezione dei dati personali among active EU DPAs on AI. National AI Strategy 2024-2026. Temporary ChatGPT ban (2023) signaled strong enforcement appetite.",
+   latest:"Active EU AI Act implementation. Garante issuing AI-specific guidance on employment and biometric systems.",
+   tags:["EU AI Act","Garante enforcement","National AI Strategy","G7 member"]},
+  {id:"es",flag:"🇪🇸",name:"Spain",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.47,m:.39,s:.14,bind:20,rx:.53,bx:-.32},2020:{r:.55,m:.33,s:.12,bind:38,rx:.61,bx:.08},2022:{r:.60,m:.29,s:.11,bind:54,rx:.66,bx:.34},2024:{r:.64,m:.25,s:.11,bind:76,rx:.70,bx:.60},2026:{r:0.72,m:0.2,s:0.08,bind:88,rx:0.74,bx:.78}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"EU AI Act applies. AESIA (Spanish AI Supervision Agency) established 2024 as first dedicated EU national AI agency. Strong algorithmic transparency tradition.",
+   latest:"AESIA operational and coordinating EU AI Act implementation. Algorithmic transparency obligations for public sector active.",
+   tags:["EU AI Act","AESIA agency","Algorithmic transparency","EU pioneer agency"]},
+  {id:"nl",flag:"🇳🇱",name:"Netherlands",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.50,m:.37,s:.13,bind:22,rx:.56,bx:-.28},2020:{r:.58,m:.31,s:.11,bind:40,rx:.64,bx:.12},2022:{r:.63,m:.27,s:.10,bind:58,rx:.68,bx:.38},2024:{r:.67,m:.23,s:.10,bind:80,rx:.72,bx:.65},2026:{r:0.75,m:0.21,s:0.04,bind:90,rx:0.82,bx:.80}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"EU AI Act applies. AP (Autoriteit Persoonsgegevens) proactive on AI and GDPR intersection. Algorithm Register for government mandatory since 2022. Strong civil society oversight.",
+   latest:"AP enforcing AI-GDPR intersection cases. Government Algorithm Register expanded to municipalities.",
+   tags:["EU AI Act","Algorithm Register","AP enforcement","Transparency leader"]},
+  {id:"pl",flag:"🇵🇱",name:"Poland",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.46,m:.40,s:.14,bind:18,rx:.52,bx:-.35},2020:{r:.54,m:.34,s:.12,bind:35,rx:.60,bx:.05},2022:{r:.59,m:.30,s:.11,bind:52,rx:.65,bx:.30},2024:{r:.63,m:.26,s:.11,bind:74,rx:.69,bx:.55},2026:{r:0.78,m:0.13,s:0.09,bind:86,rx:0.79,bx:.75}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"EU AI Act applies. UODO (Personal Data Protection Office) active on AI. Polish AI Strategy 2020-2027. Growing AI hub with EU structural funds.",
+   latest:"UODO publishing AI enforcement guidance. National AI strategy mid-term review 2025-2026.",
+   tags:["EU AI Act","UODO","AI Strategy 2027","CEE leader"]},
+  {id:"ie",flag:"🇮🇪",name:"Ireland",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.48,m:.38,s:.14,bind:20,rx:.54,bx:-.30},2020:{r:.56,m:.32,s:.12,bind:38,rx:.62,bx:.10},2022:{r:.61,m:.28,s:.11,bind:55,rx:.67,bx:.35},2024:{r:.65,m:.24,s:.11,bind:78,rx:.71,bx:.62},2026:{r:0.72,m:0.24,s:0.04,bind:90,rx:0.78,bx:.80}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"EU AI Act applies. DPC is lead EU regulator for major tech companies (Meta, Google, Apple, TikTok). AI Ambassador appointed. National AI Strategy refreshing 2025-2026.",
+   latest:"DPC coordinating EU AI Act enforcement for major platforms headquartered in Ireland. AI Advisory Council active.",
+   tags:["EU AI Act","DPC tech hub","AI Ambassador","Big Tech regulator"]},
+  {id:"ch",flag:"🇨🇭",name:"Switzerland",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.44,m:.42,s:.14,bind:15,rx:.48,bx:-.45},2020:{r:.50,m:.38,s:.12,bind:22,rx:.54,bx:-.35},2022:{r:.54,m:.35,s:.11,bind:28,rx:.58,bx:-.22},2024:{r:.58,m:.32,s:.10,bind:35,rx:.62,bx:-.10},2026:{r:0.45,m:0.5,s:0.05,bind:40,rx:0.46,bx:.02}},
+   bindText:"Partial — FADP + sector rules",
+   desc:"Not EU member but FADP revised 2023 aligns with GDPR. Federal Council AI guidelines voluntary. Sector-specific FINMA and FDPIC oversight. Bilateral EU market access shapes alignment.",
+   latest:"2025-2026: Federal Council evaluating need for comprehensive AI legislation. FDPIC active on generative AI guidance.",
+   tags:["FADP 2023","Not EU member","FINMA sectoral","Bilateral alignment"]},
+  {id:"at",flag:"🇦🇹",name:"Austria",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.49,m:.37,s:.14,bind:20,rx:.55,bx:-.28},2020:{r:.57,m:.31,s:.12,bind:38,rx:.63,bx:.10},2022:{r:.62,m:.27,s:.11,bind:56,rx:.68,bx:.36},2024:{r:.66,m:.23,s:.11,bind:78,rx:.72,bx:.63},2026:{r:0.75,m:0.21,s:0.04,bind:88,rx:0.82,bx:.78}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"EU AI Act applies. DSFA (Data Protection Authority) active. Austrian AI Strategy 2024. Strong research tradition (VRVis, TU Wien).",
+   latest:"DSFA coordinating EU AI Act national implementation. AI testing and experimentation facility participation.",
+   tags:["EU AI Act","DSFA","AI Strategy 2024","Research hub"]},
+  {id:"fi",flag:"🇫🇮",name:"Finland",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.50,m:.37,s:.13,bind:20,rx:.56,bx:-.28},2020:{r:.58,m:.31,s:.11,bind:38,rx:.64,bx:.10},2022:{r:.63,m:.27,s:.10,bind:56,rx:.68,bx:.36},2024:{r:.67,m:.23,s:.10,bind:78,rx:.72,bx:.63},2026:{r:0.72,m:0.24,s:0.04,bind:88,rx:0.78,bx:.78}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"EU AI Act applies. Traficom and Office of the Data Protection Ombudsman active. Elements of AI program. Leading EU digital government and AI ethics research.",
+   latest:"Finland leading EU discussion on trustworthy AI in public services. Active EU AI Act implementation.",
+   tags:["EU AI Act","Elements of AI","Digital government","Nordic model"]},
+  {id:"dk",flag:"🇩🇰",name:"Denmark",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.50,m:.37,s:.13,bind:20,rx:.56,bx:-.28},2020:{r:.58,m:.31,s:.11,bind:38,rx:.64,bx:.10},2022:{r:.63,m:.27,s:.10,bind:56,rx:.68,bx:.36},2024:{r:.67,m:.23,s:.10,bind:78,rx:.72,bx:.63},2026:{r:0.75,m:0.21,s:0.04,bind:88,rx:0.82,bx:.78}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"EU AI Act applies. Danish Data Protection Agency proactive on AI. National Strategy for Artificial Intelligence. Strong public sector digitalization.",
+   latest:"Datatilsynet model influencing Nordic AI enforcement approaches. Government AI use guidelines updated 2025.",
+   tags:["EU AI Act","Datatilsynet","National AI Strategy","Public sector AI"]},
+  {id:"pt",flag:"🇵🇹",name:"Portugal",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.47,m:.39,s:.14,bind:18,rx:.53,bx:-.32},2020:{r:.55,m:.33,s:.12,bind:35,rx:.61,bx:.05},2022:{r:.60,m:.29,s:.11,bind:52,rx:.66,bx:.30},2024:{r:.64,m:.25,s:.11,bind:74,rx:.70,bx:.55},2026:{r:0.78,m:0.17,s:0.05,bind:86,rx:0.84,bx:.75}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"EU AI Act applies. CNPD active on AI data protection. Portugal AI Strategy 2030. EU presidency contributions to AI Act negotiations.",
+   latest:"CNPD issuing AI guidance. National AI hub initiatives expanding in Lisbon and Porto tech ecosystems.",
+   tags:["EU AI Act","CNPD","AI Strategy 2030","EU presidency legacy"]},
+  {id:"be",flag:"🇧🇪",name:"Belgium",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.48,m:.38,s:.14,bind:20,rx:.54,bx:-.30},2020:{r:.56,m:.32,s:.12,bind:38,rx:.62,bx:.10},2022:{r:.61,m:.28,s:.11,bind:55,rx:.67,bx:.35},2024:{r:.65,m:.24,s:.11,bind:77,rx:.71,bx:.62},2026:{r:0.72,m:0.2,s:0.08,bind:88,rx:0.74,bx:.78}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"EU AI Act applies. APD-GBA (Belgian DPA) bilingual enforcement. EU institutional host (Brussels). AI ethics research hub.",
+   latest:"APD coordinating EU AI Act implementation across federal and regional competencies.",
+   tags:["EU AI Act","APD-GBA","Brussels hub","Federal structure"]},
+  {id:"ee",flag:"🇪🇪",name:"Estonia",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.48,m:.38,s:.14,bind:18,rx:.54,bx:-.35},2020:{r:.56,m:.32,s:.12,bind:35,rx:.62,bx:.05},2022:{r:.61,m:.28,s:.11,bind:52,rx:.67,bx:.28},2024:{r:.65,m:.24,s:.11,bind:74,rx:.71,bx:.52},2026:{r:0.67,m:0.3,s:0.03,bind:86,rx:0.74,bx:.72}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"EU AI Act applies. E-estonia digital government pioneer. AI strategy integrated with digital society vision. Data Inspectorate active.",
+   latest:"Estonia testing AI in government services under EU AI Act framework. Burokratt AI assistant expanding.",
+   tags:["EU AI Act","E-estonia","Digital government","Baltic leader"]},
+  {id:"ua",flag:"🇺🇦",name:"Ukraine",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.35,m:.40,s:.25,bind:8,rx:.30,bx:-.65},2020:{r:.38,m:.38,s:.24,bind:12,rx:.34,bx:-.55},2022:{r:.40,m:.36,s:.24,bind:18,rx:.36,bx:-.42},2024:{r:.42,m:.35,s:.23,bind:22,rx:.38,bx:-.32},2026:{r:0.28,m:0.5,s:0.22,bind:26,rx:0.07,bx:-.22}},
+   bindText:"Partial — Concept of AI Regulation 2024",
+   desc:"Concept of AI Regulation approved 2024. Wartime governance prioritizes security and defense AI. Growing tech sector with EU alignment aspirations. Diia digital government platform.",
+   latest:"2024-2026: AI regulation concept advancing. Defense and cybersecurity AI governance prioritized. EU candidacy shapes regulatory alignment.",
+   tags:["AI Regulation Concept 2024","Wartime context","Diia platform","EU alignment"]},
+  {id:"tr",flag:"🇹🇷",name:"Turkey",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.28,m:.42,s:.30,bind:8,rx:.18,bx:-.72},2020:{r:.30,m:.40,s:.30,bind:12,rx:.20,bx:-.62},2022:{r:.32,m:.39,s:.29,bind:16,rx:.22,bx:-.52},2024:{r:.34,m:.38,s:.28,bind:20,rx:.24,bx:-.40},2026:{r:0.27,m:0.4,s:0.33,bind:24,rx:-0.07,bx:-.30}},
+   bindText:"Partial — National AI Strategy 2021-2025",
+   desc:"National AI Strategy 2021-2025. KVKK (personal data law) applies to AI. Content moderation requirements for platforms. Bridge between EU and Middle East governance models.",
+   latest:"2025-2026: New AI strategy period expected. KVKK issuing AI processing guidance. Domestic LLM initiatives under state oversight.",
+   tags:["KVKK applies","National AI Strategy","Content moderation","Regional bridge"]},
+  {id:"ng",flag:"🇳🇬",name:"Nigeria",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.28,m:.42,s:.30,bind:3,rx:.22,bx:-.86},2020:{r:.34,m:.38,s:.28,bind:6,rx:.28,bx:-.78},2022:{r:.40,m:.35,s:.25,bind:10,rx:.34,bx:-.65},2024:{r:.46,m:.32,s:.22,bind:18,rx:.40,bx:-.48},2026:{r:0.29,m:0.57,s:0.14,bind:24,rx:0.17,bx:-.35}},
+   bindText:"Partial — NAIS 2024 + bills pending",
+   desc:"National AI Strategy 2024 and Nigeria Data Protection Act 2023. Multiple AI bills consolidated in National Assembly. NITDA Draft Code of Practice for AI (2025). Continental leadership ambition.",
+   latest:"2025-2026: National AI Commission bill advancing. NITDA Code of Practice under finalization. NDPC actively enforcing on AI data cases.",
+   tags:["NAIS 2024","NDPA 2023","AI Commission bill","Africa leader"]},
+  {id:"gh",flag:"🇬🇭",name:"Ghana",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.30,m:.42,s:.28,bind:3,rx:.24,bx:-.84},2020:{r:.34,m:.40,s:.26,bind:6,rx:.28,bx:-.74},2022:{r:.38,m:.38,s:.24,bind:9,rx:.32,bx:-.62},2024:{r:.42,m:.36,s:.22,bind:13,rx:.36,bx:-.50},2026:{r:0.27,m:0.6,s:0.13,bind:16,rx:0.16,bx:-.42}},
+   bindText:"Partial — Data Protection Act 2012",
+   desc:"Data Protection Act 2012 (Act 843) applies. National AI Strategy under development. AU AI Strategy alignment. Growing West African tech hub.",
+   latest:"Data Protection Commission expanding AI guidance. National AI policy consultation 2025-2026.",
+   tags:["Data Protection Act","West Africa hub","AU alignment","Policy developing"]},
+  {id:"ma",flag:"🇲🇦",name:"Morocco",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.30,m:.40,s:.30,bind:4,rx:.24,bx:-.80},2020:{r:.34,m:.38,s:.28,bind:7,rx:.28,bx:-.70},2022:{r:.38,m:.36,s:.26,bind:10,rx:.32,bx:-.58},2024:{r:.42,m:.34,s:.24,bind:14,rx:.36,bx:-.46},2026:{r:0.27,m:0.4,s:0.33,bind:17,rx:-0.07,bx:-.38}},
+   bindText:"Partial — Law 09-08 + AI strategy",
+   desc:"Law 09-08 on personal data protection. National AI strategy and CNDP oversight. Francophone Africa AI governance influence. EU partnership on digital transition.",
+   latest:"CNDP developing AI-specific guidance. National digital strategy integrating AI governance components.",
+   tags:["CNDP oversight","Law 09-08","Francophone Africa","EU partnership"]},
+  {id:"tn",flag:"🇹🇳",name:"Tunisia",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.32,m:.40,s:.28,bind:4,rx:.26,bx:-.82},2020:{r:.36,m:.38,s:.26,bind:7,rx:.30,bx:-.72},2022:{r:.40,m:.36,s:.24,bind:10,rx:.34,bx:-.60},2024:{r:.44,m:.34,s:.22,bind:13,rx:.38,bx:-.48},2026:{r:0.27,m:0.47,s:0.26,bind:16,rx:0.01,bx:-.40}},
+   bindText:"Partial — Organic Law 2004-63",
+   desc:"Organic Law on personal data protection. National AI strategy under ANPR. Strong civil society on digital rights. Post-revolution constitutional protections influence governance.",
+   latest:"ANPR and Ministry of ICT developing AI framework. Focus on employment and public service AI accountability.",
+   tags:["ANPR","Data protection law","Civil society active","North Africa"]},
+  {id:"rw",flag:"🇷🇼",name:"Rwanda",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.32,m:.40,s:.28,bind:4,rx:.26,bx:-.84},2020:{r:.38,m:.37,s:.25,bind:8,rx:.32,bx:-.70},2022:{r:.42,m:.35,s:.23,bind:12,rx:.36,bx:-.56},2024:{r:.46,m:.33,s:.21,bind:16,rx:.40,bx:-.42},2026:{r:0.22,m:0.5,s:0.28,bind:19,rx:-0.07,bx:-.35}},
+   bindText:"Partial — Data protection law 2021",
+   desc:"Law No. 058/2021 on data protection. National AI policy aligned with AU strategy. Smart Africa agenda. Strong state-led digital transformation.",
+   latest:"2025-2026: AI policy implementation in health and agriculture sectors. Kigali Innovation City AI initiatives.",
+   tags:["Data protection 2021","Smart Africa","State-led digital","AU alignment"]},
+  {id:"et",flag:"🇪🇹",name:"Ethiopia",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.26,m:.42,s:.32,bind:3,rx:.18,bx:-.86},2020:{r:.28,m:.41,s:.31,bind:5,rx:.20,bx:-.80},2022:{r:.30,m:.40,s:.30,bind:7,rx:.22,bx:-.72},2024:{r:.32,m:.39,s:.29,bind:10,rx:.24,bx:-.62},2026:{r:0.0,m:0.46,s:0.54,bind:12,rx:-0.62,bx:-.55}},
+   bindText:"Partial — draft data protection proclamation",
+   desc:"Draft Data Protection Proclamation advancing. National AI policy under development. AU AI Strategy member. State-led digital Ethiopia 2025 strategy.",
+   latest:"Data protection legislation advancing in parliament. AI governance embedded in digital transformation agenda.",
+   tags:["Draft data law","Digital Ethiopia 2025","AU member","Early stage"]},
+  {id:"mu",flag:"🇲🇺",name:"Mauritius",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.34,m:.40,s:.26,bind:5,rx:.28,bx:-.78},2020:{r:.38,m:.38,s:.24,bind:9,rx:.32,bx:-.66},2022:{r:.42,m:.36,s:.22,bind:13,rx:.36,bx:-.54},2024:{r:.46,m:.34,s:.20,bind:17,rx:.40,bx:-.42},2026:{r:0.29,m:0.65,s:0.06,bind:20,rx:0.26,bx:-.35}},
+   bindText:"Partial — DPA 2017 + AI roadmap",
+   desc:"Data Protection Act 2017 among Africa's earliest. AI Ethics Framework 2023. Positioning as African fintech and AI hub.",
+   latest:"AI Ethics Framework guiding public sector adoption. Financial services AI under Bank of Mauritius oversight.",
+   tags:["DPA 2017 pioneer","AI Ethics Framework 2023","Fintech hub","Island digital strategy"]},
+  {id:"ar",flag:"🇦🇷",name:"Argentina",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.32,m:.40,s:.28,bind:5,rx:.26,bx:-.78},2020:{r:.36,m:.38,s:.26,bind:8,rx:.30,bx:-.68},2022:{r:.40,m:.36,s:.24,bind:12,rx:.34,bx:-.55},2024:{r:.44,m:.34,s:.22,bind:16,rx:.38,bx:-.42},2026:{r:0.53,m:0.4,s:0.07,bind:19,rx:0.53,bx:-.35}},
+   bindText:"Partial — PDPA draft + AI bill",
+   desc:"Personal Data Protection Act under legislative debate. AI regulatory framework bill introduced. Strong academic AI community. MERCOSUR digital agenda.",
+   latest:"2025-2026: AI bill and data protection legislation advancing in Congress. Agency for Access to Public Information active on algorithmic transparency.",
+   tags:["AI bill pending","PDPA debate","MERCOSUR","Academic AI hub"]},
+  {id:"pe",flag:"🇵🇪",name:"Peru",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.30,m:.42,s:.28,bind:4,rx:.24,bx:-.80},2020:{r:.34,m:.40,s:.26,bind:7,rx:.28,bx:-.70},2022:{r:.38,m:.38,s:.24,bind:10,rx:.32,bx:-.58},2024:{r:.42,m:.36,s:.22,bind:14,rx:.36,bx:-.45},2026:{r:0.31,m:0.62,s:0.07,bind:17,rx:0.28,bx:-.38}},
+   bindText:"Partial — Law 29733 + AI strategy",
+   desc:"Personal Data Protection Law 29733 applies. National AI Strategy 2021-2026. Growing focus on public sector algorithmic accountability.",
+   latest:"National AI Strategy mid-term review. Ministry of Justice developing AI governance guidelines for judiciary.",
+   tags:["Law 29733","AI Strategy 2026","Public sector focus","Andean region"]},
+  {id:"uy",flag:"🇺🇾",name:"Uruguay",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.38,m:.38,s:.24,bind:6,rx:.32,bx:-.72},2020:{r:.44,m:.35,s:.21,bind:10,rx:.38,bx:-.58},2022:{r:.48,m:.33,s:.19,bind:14,rx:.42,bx:-.45},2024:{r:.52,m:.31,s:.17,bind:18,rx:.46,bx:-.35},2026:{r:0.5,m:0.43,s:0.07,bind:21,rx:0.49,bx:-.28}},
+   bindText:"Partial — Law 18331 + AI ethics code",
+   desc:"Law 18331 on data protection. AI Ethics Code for public administration. Latin American digital government pioneer. Agile governance approach.",
+   latest:"AGESIC expanding AI ethics code to additional agencies. Regional model for government AI accountability.",
+   tags:["AGESIC ethics code","Data protection law","Digital government","Latin America model"]},
+  {id:"ec",flag:"🇪🇨",name:"Ecuador",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.30,m:.42,s:.28,bind:4,rx:.24,bx:-.82},2020:{r:.34,m:.40,s:.26,bind:7,rx:.28,bx:-.72},2022:{r:.38,m:.38,s:.24,bind:10,rx:.32,bx:-.60},2024:{r:.42,m:.36,s:.22,bind:13,rx:.36,bx:-.48},2026:{r:0.33,m:0.58,s:0.09,bind:16,rx:0.28,bx:-.40}},
+   bindText:"Partial — Organic Law on data 2021",
+   desc:"Organic Law on Personal Data Protection 2021. National AI agenda under SNIE. Constitutional rights influence governance approach.",
+   latest:"Data protection authority developing AI processing guidance. National innovation agenda integrating AI ethics.",
+   tags:["Data law 2021","Constitutional rights","SNIE agenda","Andean community"]},
+  {id:"cr",flag:"🇨🇷",name:"Costa Rica",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.36,m:.40,s:.24,bind:5,rx:.30,bx:-.76},2020:{r:.42,m:.37,s:.21,bind:9,rx:.36,bx:-.62},2022:{r:.46,m:.35,s:.19,bind:13,rx:.40,bx:-.50},2024:{r:.50,m:.33,s:.17,bind:17,rx:.44,bx:-.38},2026:{r:0.5,m:0.5,s:0.0,bind:20,rx:0.57,bx:-.30}},
+   bindText:"Partial — Law 8968 + AI strategy",
+   desc:"Law 8968 on data protection. National AI Strategy 2024-2027. Strong environmental and human rights framing. PRODHAB oversight.",
+   latest:"2024-2027 AI Strategy implementation. Focus on sustainable AI and biodiversity data governance.",
+   tags:["Law 8968","AI Strategy 2027","Environmental framing","Central America leader"]},
+  {id:"qa",flag:"🇶🇦",name:"Qatar",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+   timeline:{2016:{r:.14,m:.32,s:.54,bind:10,rx:-.40,bx:-.48},2020:{r:.13,m:.30,s:.57,bind:14,rx:-.44,bx:-.38},2022:{r:.12,m:.29,s:.59,bind:18,rx:-.48,bx:-.28},2024:{r:.12,m:.28,s:.60,bind:22,rx:-.50,bx:-.18},2026:{r:0.19,m:0.31,s:0.5,bind:26,rx:-0.36,bx:-.10}},
+   bindText:"Partial — QFZA + sector rules",
+   desc:"National AI Strategy under MCIT. Qatar Financial Centre regulatory sandbox. State-led AI investment through Qatar Investment Authority. Content alignment expectations.",
+   latest:"Qatar AI strategy implementation in smart city and World Cup legacy infrastructure. QFC fintech AI rules expanding.",
+   tags:["National AI Strategy","QFC sandbox","State investment","Gulf hub"]},
+  {id:"bh",flag:"🇧🇭",name:"Bahrain",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+   timeline:{2016:{r:.16,m:.34,s:.50,bind:8,rx:-.35,bx:-.52},2020:{r:.15,m:.32,s:.53,bind:12,rx:-.40,bx:-.42},2022:{r:.14,m:.31,s:.55,bind:16,rx:-.44,bx:-.32},2024:{r:.13,m:.30,s:.57,bind:20,rx:-.48,bx:-.22},2026:{r:0.19,m:0.44,s:0.37,bind:23,rx:-0.21,bx:-.14}},
+   bindText:"Partial — PDPL 2018 + cloud policy",
+   desc:"Personal Data Protection Law 2018 (PDPL). Cloud-first policy enabling AI. CBB fintech regulations. Regional financial AI hub ambition.",
+   latest:"CBB expanding AI governance for financial institutions. PDPL enforcement on AI data processing cases.",
+   tags:["PDPL 2018","CBB fintech","Cloud-first","Gulf finance hub"]},
+  {id:"jo",flag:"🇯🇴",name:"Jordan",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.28,m:.40,s:.32,bind:5,rx:.20,bx:-.78},2020:{r:.30,m:.39,s:.31,bind:8,rx:.22,bx:-.68},2022:{r:.32,m:.38,s:.30,bind:11,rx:.24,bx:-.58},2024:{r:.34,m:.37,s:.29,bind:14,rx:.26,bx:-.48},2026:{r:0.25,m:0.56,s:0.19,bind:17,rx:0.07,bx:-.40}},
+   bindText:"Partial — Data protection law 2023",
+   desc:"Personal Data Protection Law enacted 2023. National AI strategy and charter of AI ethics for government. Growing tech sector with EU partnership.",
+   latest:"2023 data protection law implementation. AI ethics charter guiding government deployments.",
+   tags:["Data law 2023","AI ethics charter","EU partnership","MENA tech hub"]},
+  {id:"ir",flag:"🇮🇷",name:"Iran",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+   timeline:{2016:{r:.10,m:.22,s:.68,bind:20,rx:-.58,bx:.05},2020:{r:.09,m:.19,s:.72,bind:30,rx:-.64,bx:.15},2022:{r:.08,m:.17,s:.75,bind:40,rx:-.68,bx:.25},2024:{r:.08,m:.15,s:.77,bind:48,rx:-.70,bx:.32},2026:{r:0.05,m:0.05,s:0.9,bind:52,rx:-0.98,bx:.38}},
+   bindText:"Partial — High Council of Virtual Space",
+   desc:"State-controlled AI development under High Council of Virtual Space. National AI Strategy 2026-2031. Content filtering and platform control requirements. Sanctions-isolated governance model.",
+   latest:"2026-2031 National AI Strategy launched. Domestic LLM development under state oversight. Cyber sovereignty framework expanding.",
+   tags:["Virtual Space Council","State-controlled","National AI Strategy 2031","Cyber sovereignty"]},
+  {id:"kz",flag:"🇰🇿",name:"Kazakhstan",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+   timeline:{2016:{r:.16,m:.34,s:.50,bind:10,rx:-.35,bx:-.45},2020:{r:.15,m:.32,s:.53,bind:15,rx:-.40,bx:-.32},2022:{r:.14,m:.30,s:.56,bind:22,rx:-.45,bx:-.18},2024:{r:.13,m:.29,s:.58,bind:28,rx:-.48,bx:-.05},2026:{r:0.22,m:0.22,s:0.56,bind:32,rx:-0.39,bx:.08}},
+   bindText:"Partial — AI law draft + data law",
+   desc:"Draft Law on Artificial Intelligence under consideration. Data protection law applies. Astana Hub tech ecosystem. Central Asian regional influence.",
+   latest:"AI law draft in parliament. Astana International Forum discussions on regional AI governance.",
+   tags:["AI law draft","Astana Hub","Central Asia leader","Data protection law"]},
+  {id:"uz",flag:"🇺🇿",name:"Uzbekistan",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+   timeline:{2016:{r:.14,m:.36,s:.50,bind:6,rx:-.32,bx:-.55},2020:{r:.13,m:.34,s:.53,bind:10,rx:-.38,bx:-.42},2022:{r:.12,m:.32,s:.56,bind:15,rx:-.42,bx:-.28},2024:{r:.11,m:.31,s:.58,bind:20,rx:-.46,bx:-.15},2026:{r:0.17,m:0.33,s:0.5,bind:24,rx:-0.38,bx:-.05}},
+   bindText:"Partial — AI strategy 2024-2030",
+   desc:"AI Development Strategy 2024-2030. Personal data law enacted 2019. State-led digital transformation (Digital Uzbekistan 2030). Growing tech park ecosystem.",
+   latest:"AI Strategy 2024-2030 implementation. IT Park expanding AI startup ecosystem under state coordination.",
+   tags:["AI Strategy 2030","Digital Uzbekistan","IT Park","Central Asia"]},
+  {id:"unesco",flag:"🏛️",name:"UNESCO",group:"rights",modelLabel:"Intergovernmental",modelClass:"pm-inter",ctmClass:"ctm-i",
+   timeline:{2016:{r:.45,m:.38,s:.17,bind:3,rx:.42,bx:-.88},2020:{r:.52,m:.34,s:.14,bind:4,rx:.48,bx:-.85},2022:{r:.56,m:.32,s:.12,bind:5,rx:.52,bx:-.82},2024:{r:.58,m:.30,s:.12,bind:6,rx:.54,bx:-.80},2026:{r:0.32,m:0.68,s:0.0,bind:7,rx:0.37,bx:-.78}},
+   bindText:"Voluntary — 193 member states",
+   desc:"Recommendation on the Ethics of AI (2021) adopted by all 193 member states. Broadest global consensus on AI ethics. Readiness Assessment Methodology deployed in 50+ countries.",
+   latest:"2025-2026: Readiness assessments expanding in Global South. Business Council for Ethics of AI active. Monitoring implementation of 2021 Recommendation.",
+   tags:["193 member states","Ethics Recommendation 2021","RAM assessments","Global consensus"]},
+  {id:"cz",flag:"🇨🇿",name:"Czech Republic",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.47,m:.39,s:.14,bind:18,rx:.53,bx:-.32},2020:{r:.55,m:.33,s:.12,bind:35,rx:.61,bx:.05},2022:{r:.60,m:.29,s:.11,bind:52,rx:.66,bx:.30},2024:{r:.64,m:.25,s:.11,bind:74,rx:.70,bx:.55},2026:{r:0.75,m:0.17,s:0.08,bind:86,rx:0.77,bx:.75}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"EU AI Act applies. UOOU (Office for Personal Data Protection) active. National AI Strategy of the Czech Republic 2030. Central European tech hub (Prague).",
+   latest:"UOOU coordinating EU AI Act implementation. AI Strategy 2030 mid-term progress review.",
+   tags:["EU AI Act","UOOU","AI Strategy 2030","CEE tech hub"]},
+  {id:"gr",flag:"🇬🇷",name:"Greece",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.46,m:.40,s:.14,bind:16,rx:.52,bx:-.35},2020:{r:.54,m:.34,s:.12,bind:32,rx:.60,bx:.02},2022:{r:.59,m:.30,s:.11,bind:48,rx:.65,bx:.25},2024:{r:.63,m:.26,s:.11,bind:70,rx:.69,bx:.50},2026:{r:0.78,m:0.17,s:0.05,bind:84,rx:0.84,bx:.72}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"EU AI Act applies. HDPA active on AI data protection. National AI Strategy 2020-2025 extended. EU recovery funds driving AI investment.",
+   latest:"HDPA issuing AI guidance. National digital transformation strategy integrating EU AI Act compliance.",
+   tags:["EU AI Act","HDPA","Recovery funds AI","Southern Europe"]},
+  {id:"ro",flag:"🇷🇴",name:"Romania",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.45,m:.41,s:.14,bind:15,rx:.51,bx:-.38},2020:{r:.53,m:.35,s:.12,bind:30,rx:.59,bx:.00},2022:{r:.58,m:.31,s:.11,bind:46,rx:.64,bx:.22},2024:{r:.62,m:.27,s:.11,bind:68,rx:.68,bx:.48},2026:{r:0.75,m:0.17,s:0.08,bind:82,rx:0.77,bx:.70}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"EU AI Act applies. ANSPDCP oversight. Growing Bucharest tech ecosystem. National AI Strategy 2024-2027.",
+   latest:"ANSPDCP developing AI enforcement capacity. EU AI Act national coordination office established.",
+   tags:["EU AI Act","ANSPDCP","Bucharest tech","AI Strategy 2027"]},
+  {id:"hu",flag:"🇭🇺",name:"Hungary",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+   timeline:{2016:{r:.44,m:.42,s:.14,bind:16,rx:.50,bx:-.35},2020:{r:.52,m:.36,s:.12,bind:32,rx:.58,bx:.00},2022:{r:.57,m:.32,s:.11,bind:48,rx:.63,bx:.22},2024:{r:.61,m:.28,s:.11,bind:68,rx:.67,bx:.45},2026:{r:0.69,m:0.15,s:0.16,bind:80,rx:0.61,bx:.65}},
+   bindText:"Strong — EU AI Act applies",
+   desc:"EU AI Act applies. NAIH (National Authority for Data Protection) oversight. National AI Strategy 2020-2030. Sovereignty rhetoric but EU legal obligations apply.",
+   latest:"NAIH coordinating EU AI Act implementation. Government AI strategy balancing innovation and EU compliance.",
+   tags:["EU AI Act","NAIH","AI Strategy 2030","EU member"]},
+  {id:"ao",flag:"🇦🇴",name:"Angola",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.24,m:.44,s:.32,bind:2,rx:.16,bx:-.90},2020:{r:.28,m:.42,s:.30,bind:4,rx:.20,bx:-.84},2022:{r:.32,m:.40,s:.28,bind:7,rx:.24,bx:-.74},2024:{r:.36,m:.38,s:.26,bind:10,rx:.28,bx:-.62},2026:{r:0.0,m:0.5,s:0.5,bind:13,rx:-0.57,bx:-.55}},
+   bindText:"Partial — data protection law 2011",
+   desc:"Data Protection Law (Law 22/11) among Africa's earlier frameworks. National AI strategy development with AU alignment. Oil economy digital diversification.",
+   latest:"Data protection agency expanding mandate to cover AI processing. AU AI Strategy implementation planning.",
+   tags:["Law 22/11","AU alignment","Early adopter Africa","Digital diversification"]},
+  {id:"kh",flag:"🇰🇭",name:"Cambodia",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.18,m:.52,s:.30,bind:2,rx:.10,bx:-.92},2020:{r:.19,m:.51,s:.30,bind:3,rx:.11,bx:-.88},2022:{r:.20,m:.50,s:.30,bind:5,rx:.12,bx:-.82},2024:{r:.21,m:.49,s:.30,bind:7,rx:.13,bx:-.74},2026:{r:0.0,m:0.33,s:0.67,bind:9,rx:-0.77,bx:-.68}},
+   bindText:"Voluntary — ASEAN alignment",
+   desc:"No dedicated AI law. ASEAN Guide on AI Governance alignment. Growing digital economy under Cambodia Digital Economy and Society Policy Framework 2021-2035.",
+   latest:"ASEAN AI governance guide adoption. Digital policy framework integrating AI components.",
+   tags:["ASEAN alignment","Digital policy 2035","Voluntary","Early stage"]},
+  {id:"la",flag:"🇱🇦",name:"Laos",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+   timeline:{2016:{r:.16,m:.54,s:.30,bind:1,rx:.08,bx:-.94},2020:{r:.17,m:.53,s:.30,bind:2,rx:.09,bx:-.90},2022:{r:.18,m:.52,s:.30,bind:3,rx:.10,bx:-.86},2024:{r:.19,m:.51,s:.30,bind:5,rx:.11,bx:-.78},2026:{r:0.0,m:0.24,s:0.76,bind:7,rx:-0.87,bx:-.72}},
+   bindText:"Voluntary — digital strategy only",
+   desc:"Digital Economy Strategy under development. No dedicated AI or data protection law. ASEAN regional frameworks primary reference.",
+   latest:"Early-stage digital transformation. ASEAN AI governance guide as primary reference framework.",
+   tags:["Digital strategy","ASEAN reference","Early stage","No AI law"]}
+];
+
+var groupColor = {rights:"#1B6FD4",market:"#1A6B42",sovereign:"#8B1A1A",hybrid:"#7A4A00"};
+var GREY_DOT = "#5C6370";
+
+// Default colored benchmarks on World view
+var FEATURED_BENCHMARKS = {eu:1,kr:1,cn:1,us:1,jp:1,sg:1,uk:1,br:1,ca:1,au:1,au2:1,cl:1};
+
+var countryRegions = {
+  eu:"europe",kr:"asia",cn:"asia",us:"americas",jp:"asia",sg:"asia",uk:"europe",br:"americas",ca:"americas",
+  au:"oceania",in:"asia",ae:"middle_east",cl:"americas",ke:"africa",au2:"africa",ru:"europe",fr:"europe",
+  de:"europe",mx:"americas",th:"asia",id:"asia",za:"africa",sa:"middle_east",tw:"asia",no:"europe",nz:"oceania",
+  se:"europe",co:"americas",eg:"africa",il:"middle_east",oecd:"global",asean:"global",vn:"asia",my:"asia",
+  ph:"asia",pk:"asia",bd:"asia",lk:"asia",np:"asia",it:"europe",es:"europe",nl:"europe",pl:"europe",ie:"europe",
+  ch:"europe",at:"europe",fi:"europe",dk:"europe",pt:"europe",be:"europe",ee:"europe",ua:"europe",tr:"europe",
+  ng:"africa",gh:"africa",ma:"africa",tn:"africa",rw:"africa",et:"africa",mu:"africa",ar:"americas",pe:"americas",
+  uy:"americas",ec:"americas",cr:"americas",qa:"middle_east",bh:"middle_east",jo:"middle_east",ir:"middle_east",
+  kz:"asia",uz:"asia",unesco:"global",cz:"europe",gr:"europe",ro:"europe",hu:"europe",ao:"africa",kh:"asia",la:"asia"
+};
+
+function isRegionHighlighted(c) {
+  if (activeRegion === "world") return !!FEATURED_BENCHMARKS[c.id];
+  return countryRegions[c.id] === activeRegion;
+}
+
+function isCountryEmphasized(c, isH, isS, isCmp, isHL) {
+  return isRegionHighlighted(c) || isH || isS || isCmp || isHL;
+}
+
+function getDotRadius(c, emphasized) {
+  var r = bindRadius(getPos(c, currentYear).bind);
+  return emphasized ? r : Math.max(3, r * 0.55);
+}
+
+function shouldShowCountryLabel(c, isH, isS, isCmp, isHL) {
+  if (isH || isS || isCmp || isHL) return true;
+  if (isRegionHighlighted(c)) return true;
+  if (activeFilter !== "all" && c.group === activeFilter && isRegionHighlighted(c)) return true;
+  return false;
+}
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+var W = 0, H = 0;
+var currentYear = 2026;
+var activeFilter = "all";
+var activeRegion = "world";
+var selectedCountry = null;
+var hoveredCountry = null;
+var highlightedCountry = null;
+var compareMode = false;
+var compareList = [];
+var sortKey = "name";
+var sortAsc = true;
+var viewMode = "triangle";
+var currentLang = "en";
+var glossaryOpen = false;
+var annotations = {};
+try { annotations = JSON.parse(localStorage.getItem("ai_gov_notes") || "{}"); } catch(e) {}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+function getPos(c, year) {
+  var keys = Object.keys(c.timeline).map(Number).sort(function(a,b){return a-b;});
+  if (year <= keys[0]) return c.timeline[keys[0]];
+  if (year >= keys[keys.length-1]) return c.timeline[keys[keys.length-1]];
+  var lo = keys[0], hi = keys[keys.length-1];
+  for (var i = 0; i < keys.length-1; i++) {
+    if (keys[i] <= year && year <= keys[i+1]) { lo = keys[i]; hi = keys[i+1]; break; }
+  }
+  var t = (year-lo)/(hi-lo);
+  var a = c.timeline[lo], b = c.timeline[hi];
+  return {r:a.r+(b.r-a.r)*t, m:a.m+(b.m-a.m)*t, s:a.s+(b.s-a.s)*t,
+          bind:a.bind+(b.bind-a.bind)*t, rx:a.rx+(b.rx-a.rx)*t, bx:a.bx+(b.bx-a.bx)*t};
+}
+
+function bindRadius(bind) {
+  if (bind>=85) return 16; if (bind>=65) return 13; if (bind>=40) return 10; if (bind>=20) return 7; return 5;
+}
+
+// ── CANVAS ────────────────────────────────────────────────────────────────────
+var canvas = document.getElementById("tri-canvas");
+var ctx = canvas.getContext("2d");
+
+function getVerts() {
+  var isMobile = window.innerWidth < 768;
+  var topLabelH = isMobile ? 26 : 30;
+  var cornerLabelH = isMobile ? 26 : 30;
+  var cornerOff = Math.min(26, cornerLabelH - 6);
+  var topLblOff = -(topLabelH - 4);
+  var minSideInset = isMobile ? 16 : 20;
+  var dotPad = isMobile ? 14 : 18;
+  var topReserve = Math.abs(topLblOff) + 12 + 4;
+  var botReserve = cornerOff + 14 + dotPad;
+  var maxH = Math.max(80, H - topReserve - botReserve);
+  var maxW = Math.max(80, W - minSideInset * 2);
+  var triH = maxH;
+  var triW = triH * 2 / Math.sqrt(3);
+  if (triW > maxW) {
+    triW = maxW;
+    triH = triW * Math.sqrt(3) / 2;
+  }
+  var left = (W - triW) / 2;
+  var topY = topReserve;
+  var botY = topY + triH;
+  return {
+    top: [W / 2, topY],
+    bl: [left, botY],
+    br: [left + triW, botY],
+    pad: { top: topY, left: left, right: W - left - triW, bot: H - botY, topLabelH: topLabelH, cornerLabelH: cornerLabelH }
+  };
+}
+
+function getCompassLayout() {
+  var isMobile = window.innerWidth < 768;
+  var sidePad = isMobile ? 28 : 52;
+  var topPad = isMobile ? 28 : 36;
+  var botPad = isMobile ? 44 : 52;
+  var cx = W / 2;
+  var cy = topPad + (H - topPad - botPad) / 2;
+  var rng = Math.min(W / 2 - sidePad, (H - topPad - botPad) / 2);
+  return {cx: cx, cy: cy, rng: rng, sidePad: sidePad, botPad: botPad};
+}
+
+function ternaryToXY(r,m,s) {
+  var v = getVerts();
+  return [r*v.top[0]+m*v.bl[0]+s*v.br[0], r*v.top[1]+m*v.bl[1]+s*v.br[1]];
+}
+
+function compassToXY(rx,bx) {
+  var L = getCompassLayout();
+  return [L.cx + bx * L.rng, L.cy - rx * L.rng];
+}
+
+function getXY(c, year) {
+  var pos = getPos(c, year);
+  if (viewMode==="triangle") return ternaryToXY(pos.r,pos.m,pos.s);
+  return compassToXY(pos.rx,pos.bx);
+}
+
+function drawTriangle() {
+  var v = getVerts();
+  var cx = (v.top[0]+v.bl[0]+v.br[0])/3;
+  var cy = (v.top[1]+v.bl[1]+v.br[1])/3;
+  var zones = [[v.top,v.bl,[cx,cy],"#1B6FD4"],[v.top,v.br,[cx,cy],"#8B1A1A"],[v.bl,v.br,[cx,cy],"#1A6B42"]];
+  for (var zi=0;zi<zones.length;zi++) {
+    var z=zones[zi];
+    ctx.beginPath(); ctx.moveTo(z[0][0],z[0][1]); ctx.lineTo(z[1][0],z[1][1]); ctx.lineTo(z[2][0],z[2][1]); ctx.closePath();
+    ctx.fillStyle=z[3]; ctx.globalAlpha=0.04; ctx.fill(); ctx.globalAlpha=1;
+  }
+  var g=[[ternaryToXY(.33,.67,0),ternaryToXY(.33,0,.67)],[ternaryToXY(.67,.33,0),ternaryToXY(0,.33,.67)],[ternaryToXY(0,.67,.33),ternaryToXY(.67,0,.33)]];
+  for (var gi=0;gi<g.length;gi++) {
+    ctx.beginPath(); ctx.moveTo(g[gi][0][0],g[gi][0][1]); ctx.lineTo(g[gi][1][0],g[gi][1][1]);
+    ctx.strokeStyle="rgba(255,255,255,0.05)"; ctx.lineWidth=0.5; ctx.setLineDash([4,4]); ctx.stroke(); ctx.setLineDash([]);
+  }
+  ctx.beginPath(); ctx.moveTo(v.top[0],v.top[1]); ctx.lineTo(v.bl[0],v.bl[1]); ctx.lineTo(v.br[0],v.br[1]); ctx.closePath();
+  ctx.strokeStyle="rgba(255,255,255,0.18)"; ctx.lineWidth=1.5; ctx.stroke();
+  ctx.font="600 11px Inter,sans-serif"; ctx.fillStyle="rgba(232,149,10,0.55)"; ctx.textAlign="center";
+  ctx.fillText(currentYear+" snapshot",cx,cy+4);
+  var topLblOff = -(v.pad.topLabelH - 4);
+  var cornerOff = Math.min(26, v.pad.cornerLabelH - 6);
+  var labels=[
+    [v.top,currentLang==="ja"?"自由・権利型モデル":"Liberal-rights model","#5AABF8",topLblOff,0],
+    [v.bl,currentLang==="ja"?"市場志向型":"Market-oriented","#5DBF88",cornerOff,-8],
+    [v.br,currentLang==="ja"?"主権重視型":"Sovereignty-centered","#E87878",cornerOff,8]
+  ];
+  for (var li=0;li<labels.length;li++) {
+    var lbl=labels[li];
+    ctx.font="500 12px Inter,sans-serif"; ctx.fillStyle=lbl[2]; ctx.textAlign="center"; ctx.globalAlpha=1;
+    ctx.fillText(lbl[1],lbl[0][0]+(lbl[4]||0),lbl[0][1]+lbl[3]);
+  }
+}
+
+function drawCompass() {
+  var L = getCompassLayout();
+  var cx = L.cx, cy = L.cy, rng = L.rng;
+  var isJa = currentLang === "ja";
+  ctx.fillStyle="#1B6FD4"; ctx.globalAlpha=0.05; ctx.fillRect(cx-rng,cy-rng,rng,rng);
+  ctx.fillStyle="#1B6FD4"; ctx.globalAlpha=0.08; ctx.fillRect(cx,cy-rng,rng,rng);
+  ctx.fillStyle="#8B1A1A"; ctx.globalAlpha=0.04; ctx.fillRect(cx-rng,cy,rng,rng);
+  ctx.fillStyle="#8B1A1A"; ctx.globalAlpha=0.06; ctx.fillRect(cx,cy,rng,rng);
+  ctx.globalAlpha=1;
+  ctx.strokeStyle="rgba(255,255,255,0.15)"; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(cx-rng-10,cy); ctx.lineTo(cx+rng+10,cy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx,cy-rng-10); ctx.lineTo(cx,cy+rng+10); ctx.stroke();
+  ctx.strokeStyle="rgba(255,255,255,0.05)"; ctx.lineWidth=0.5; ctx.setLineDash([3,4]);
+  [-0.5,0.5].forEach(function(v2){
+    ctx.beginPath(); ctx.moveTo(cx+v2*rng,cy-rng); ctx.lineTo(cx+v2*rng,cy+rng); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx-rng,cy+v2*rng); ctx.lineTo(cx+rng,cy+v2*rng); ctx.stroke();
+  });
+  ctx.setLineDash([]);
+  var qLabels=isJa?[
+    [cx-rng*.55,cy-rng*.85,"権利保護・ソフト法","#5AABF8"],
+    [cx+rng*.55,cy-rng*.85,"権利保護・硬法","#5AABF8"],
+    [cx-rng*.55,cy+rng*.78,"国家統制・ソフト法","#E87878"],
+    [cx+rng*.55,cy+rng*.78,"国家統制・硬法","#E87878"]
+  ]:[
+    [cx-rng*.55,cy-rng*.85,"rights-protective soft law","#5AABF8"],
+    [cx+rng*.55,cy-rng*.85,"rights-protective binding law","#5AABF8"],
+    [cx-rng*.55,cy+rng*.78,"state control soft law","#E87878"],
+    [cx+rng*.55,cy+rng*.78,"state control binding law","#E87878"]
+  ];
+  for (var qi=0;qi<qLabels.length;qi++) {
+    ctx.font="11px Inter,sans-serif"; ctx.fillStyle=qLabels[qi][3]; ctx.globalAlpha=0.45; ctx.textAlign="center";
+    ctx.fillText(qLabels[qi][2],qLabels[qi][0],qLabels[qi][1]);
+  }
+  ctx.globalAlpha=1;
+  ctx.font="500 13px Inter,sans-serif"; ctx.textAlign="center";
+  ctx.fillStyle="#5AABF8"; ctx.fillText(isJa?"個人の権利": "Individual rights",cx,cy-rng-18);
+  ctx.fillStyle="#E87878"; ctx.fillText(isJa?"国家統制":"State control",cx,cy+rng+18);
+  ctx.fillStyle="#5DBF88"; ctx.textAlign="start"; ctx.fillText(isJa?"任意のソフト法":"Voluntary soft law",cx-rng-10,cy-5);
+  ctx.fillStyle="#F4B86D"; ctx.textAlign="end"; ctx.fillText(isJa?"拘束力のある硬法":"Binding hard law",cx+rng+10,cy-5);
+  ctx.textAlign="center";
+  ctx.font="600 11px Inter,sans-serif"; ctx.fillStyle="rgba(232,149,10,0.55)";
+  ctx.fillText(isJa?currentYear+"年時点のスナップショット":currentYear+" snapshot",cx,cy+14);
+}
+
+function drawCountryDot(c) {
+  var xy=getXY(c,currentYear);
+  var isH=hoveredCountry&&hoveredCountry.id===c.id;
+  var isS=selectedCountry&&selectedCountry.id===c.id;
+  var isCmp=compareList.some(function(cc){return cc.id===c.id;});
+  var isHL=highlightedCountry&&highlightedCountry.id===c.id;
+  var emphasized=isCountryEmphasized(c,isH,isS,isCmp,isHL);
+  var passesModel=activeFilter==="all"||c.group===activeFilter;
+  var r=getDotRadius(c,emphasized);
+  var col=emphasized?(groupColor[c.group]||"#666"):GREY_DOT;
+  if (!passesModel) {
+    ctx.beginPath(); ctx.arc(xy[0],xy[1],r,0,Math.PI*2);
+    ctx.fillStyle=col; ctx.globalAlpha=0.04; ctx.fill(); ctx.globalAlpha=1;
+    return;
+  }
+  if (isH||isS||isCmp||isHL) {
+    ctx.beginPath(); ctx.arc(xy[0],xy[1],r+8,0,Math.PI*2);
+    ctx.fillStyle=isHL?"#E8950A":col; ctx.globalAlpha=isHL?0.30:0.18; ctx.fill(); ctx.globalAlpha=1;
+  }
+  ctx.beginPath(); ctx.arc(xy[0],xy[1],r,0,Math.PI*2);
+  ctx.fillStyle=isHL?"#E8950A":col;
+  ctx.globalAlpha=emphasized?(isH||isS||isCmp||isHL?1:0.92):0.26;
+  ctx.fill();
+  if (isS||isCmp) { ctx.strokeStyle="rgba(255,255,255,0.85)"; ctx.lineWidth=2; ctx.stroke(); }
+  ctx.globalAlpha=1;
+  if (shouldShowCountryLabel(c,isH,isS,isCmp,isHL)) {
+    ctx.font=(isH||isS?"600":"400")+" 11px Inter,sans-serif";
+    ctx.fillStyle=isH||isS?"rgba(255,255,255,0.95)":(emphasized?"rgba(255,255,255,0.68)":"rgba(255,255,255,0.35)");
+    ctx.textAlign="center"; ctx.fillText(c.name,xy[0],xy[1]-r-5);
+  }
+}
+
+function draw() {
+  ctx.clearRect(0,0,W,H);
+  if (viewMode==="triangle") drawTriangle(); else drawCompass();
+  var back=[], front=[];
+  for (var di=0;di<countries.length;di++) {
+    var c=countries[di];
+    var isH=hoveredCountry&&hoveredCountry.id===c.id;
+    var isS=selectedCountry&&selectedCountry.id===c.id;
+    var isCmp=compareList.some(function(cc){return cc.id===c.id;});
+    var isHL=highlightedCountry&&highlightedCountry.id===c.id;
+    if (isCountryEmphasized(c,isH,isS,isCmp,isHL)) front.push(c);
+    else back.push(c);
+  }
+  for (var bi=0;bi<back.length;bi++) drawCountryDot(back[bi]);
+  for (var fi=0;fi<front.length;fi++) drawCountryDot(front[fi]);
+}
+
+function resize() {
+  var wrap=document.getElementById("canvas-wrap");
+  W=wrap.clientWidth; H=wrap.clientHeight;
+  canvas.width=W*devicePixelRatio; canvas.height=H*devicePixelRatio;
+  canvas.style.width=W+"px"; canvas.style.height=H+"px";
+  ctx.scale(devicePixelRatio,devicePixelRatio); draw();
+}
+
+// ── INTERACTION ───────────────────────────────────────────────────────────────
+function getCountryAt(ex,ey) {
+  var rect=canvas.getBoundingClientRect(), x=ex-rect.left, y=ey-rect.top;
+  var best=null, bestD=Infinity;
+  for (var i=0;i<countries.length;i++) {
+    var c=countries[i];
+    var xy=getXY(c,currentYear);
+    var isH=hoveredCountry&&hoveredCountry.id===c.id;
+    var isS=selectedCountry&&selectedCountry.id===c.id;
+    var isCmp=compareList.some(function(cc){return cc.id===c.id;});
+    var isHL=highlightedCountry&&highlightedCountry.id===c.id;
+    var emphasized=isCountryEmphasized(c,isH,isS,isCmp,isHL);
+    var r=getDotRadius(c,emphasized);
+    var d=Math.hypot(x-xy[0],y-xy[1]);
+    if (d<=r+6&&d<bestD) { best=c; bestD=d; }
+  }
+  return best;
+}
+
+canvas.addEventListener("mousemove",function(e){
+  var c=getCountryAt(e.clientX,e.clientY);
+  canvas.style.cursor=c?"pointer":"default";
+  hoveredCountry=c;
+  var tt=document.getElementById("tooltip");
+  if (c) {
+    var pos=getPos(c,currentYear);
+    document.getElementById("tt-name").textContent=c.flag+"  "+c.name;
+    if (viewMode==="triangle") {
+      document.getElementById("tt-coords").textContent="Rights "+Math.round(pos.r*100)+"%  \u00b7  Market "+Math.round(pos.m*100)+"%  \u00b7  Sovereign "+Math.round(pos.s*100)+"%";
+    } else {
+      var rLabel=pos.rx>0?"Individual rights":"State control";
+      var bLabel=pos.bx>0?"Binding law":"Voluntary";
+      document.getElementById("tt-coords").textContent=rLabel+" "+Math.round(Math.abs(pos.rx)*100)+"%  \u00b7  "+bLabel+" "+Math.round(Math.abs(pos.bx)*100)+"%";
+    }
+    document.getElementById("tt-bind").textContent=c.bindText;
+    document.getElementById("tt-hint").textContent=compareMode?"Click to compare":"Click to explore";
+    var rect=canvas.getBoundingClientRect();
+    var lx=e.clientX-rect.left+14, ly=e.clientY-rect.top-10;
+    if (lx+205>W) lx=e.clientX-rect.left-215;
+    if (ly<0) ly=4;
+    tt.style.left=lx+"px"; tt.style.top=ly+"px"; tt.style.opacity="1";
+  } else {
+    tt.style.opacity="0";
+  }
+  draw();
+});
+
+canvas.addEventListener("mouseleave",function(){
+  hoveredCountry=null; document.getElementById("tooltip").style.opacity="0"; draw();
+});
+
+canvas.addEventListener("click",function(e){
+  var c=getCountryAt(e.clientX,e.clientY);
+  if (compareMode) {
+    if (c) {
+      if (compareList.some(function(cc){return cc.id===c.id;})) {
+        compareList=compareList.filter(function(cc){return cc.id!==c.id;});
+      } else if (compareList.length<2) {
+        compareList.push(c);
+      }
+      updateCompareSidebar();
+      if (compareList.length===2) showCompare();
+    }
+  } else {
+    if (c) { selectedCountry=c; openPanel(c); }
+    else { selectedCountry=null; closePanel(); }
+  }
+  draw();
+});
+
+// ── CONTROLS ──────────────────────────────────────────────────────────────────
+function setView(v,btn) {
+  viewMode=v;
+  document.querySelectorAll(".vt-btn").forEach(function(b){b.classList.remove("active");});
+  btn.classList.add("active");
+  draw();
+}
+
+var crisisMilestones = {
+  2022:{text:"\uD83D\uDCA5 ChatGPT launches \u2014 global regulatory acceleration",color:"#E8950A"},
+  2023:{text:"\uD83D\uDCDC EU AI Act agreed \u00b7 Bletchley Declaration \u00b7 G7 Hiroshima",color:"#1B6FD4"},
+  2024:{text:"\u2696\uFE0F EU AI Act enters into force \u00b7 Binding era begins",color:"#1B6FD4"},
+  2025:{text:"\uD83C\uDDFA\uD83C\uDDF8 Trump EO revokes Biden AI safety order \u00b7 Paris Summit",color:"#1A6B42"},
+  2026:{text:"\uD83D\uDD34 EU high-risk enforcement \u00b7 Korea AI Basic Act active",color:"#E87878"}
+};
+
+function updateCrisisOverlay(year) {
+  var banner=document.getElementById("crisis-banner");
+  if (!banner) return;
+  var m=crisisMilestones[year];
+  var milestoneLbl=currentLang==="ja"?"\u91CC\u7A0B\u7891":"Milestone";
+  if (m) {
+    banner.innerHTML="<div class=\"crisis-banner-inner\" style=\"border-left-color:"+m.color+"\"><span class=\"crisis-banner-year\" style=\"color:"+m.color+"\">"+year+"</span><div class=\"crisis-banner-body\"><span class=\"crisis-banner-label\" id=\"crisis-label\">"+milestoneLbl+"</span><span class=\"crisis-banner-text\" style=\"color:"+m.color+"\">"+m.text+"</span></div></div>";
+    banner.classList.add("visible");
+  } else {
+    banner.innerHTML="";
+    banner.classList.remove("visible");
+  }
+}
+
+function setYear(y) {
+  currentYear=y;
+  document.getElementById("tl-display").textContent=y;
+  updateCrisisOverlay(y);
+  draw();
+  buildTable();
+}
+
+function setFilter(f,btn) {
+  activeFilter=f;
+  document.querySelectorAll(".model-filter-btn").forEach(function(b){b.classList.remove("active");});
+  btn.classList.add("active"); draw();
+}
+
+function setRegion(r,btn) {
+  activeRegion=r;
+  document.querySelectorAll(".region-filter-btn").forEach(function(b){b.classList.remove("active");});
+  btn.classList.add("active"); draw();
+}
+
+// ── SEARCH ────────────────────────────────────────────────────────────────────
+function handleSearch(val) {
+  var sr=document.getElementById("search-results");
+  if (!val.trim()) { sr.style.display="none"; return; }
+  var matches=countries.filter(function(c){return c.name.toLowerCase().indexOf(val.toLowerCase())!==-1;});
+  if (!matches.length) { sr.style.display="none"; return; }
+  sr.innerHTML=matches.map(function(c){
+    return "<div class=\"sr-item\" onmousedown=\"selectFromSearch('"+c.id+"')\">"+c.flag+" "+c.name+"</div>";
+  }).join("");
+  sr.style.display="block";
+}
+
+function selectFromSearch(id) {
+  var c=countries.find(function(cc){return cc.id===id;});
+  if (!c) return;
+  document.getElementById("search-input").value=c.name;
+  document.getElementById("search-results").style.display="none";
+  highlightedCountry=c;
+  selectedCountry=null;
+  document.getElementById("hero").scrollIntoView({behavior:"smooth"});
+  draw();
+  showSearchPin(c);
+  setTimeout(function(){
+    document.getElementById("search-input").value="";
+    highlightedCountry=null;
+    draw();
+  },4000);
+}
+
+function showSearchPin(c) {
+  var oldPin=document.getElementById("search-pin");
+  if (oldPin) oldPin.remove();
+  var xy=getXY(c,currentYear);
+  var pin=document.createElement("div");
+  pin.id="search-pin";
+  pin.style.left=xy[0]+"px";
+  pin.style.top=Math.max(10,xy[1]-50)+"px";
+  pin.innerHTML=c.flag+" <strong>"+c.name+"</strong> \u2014 click dot to explore";
+  document.getElementById("canvas-wrap").appendChild(pin);
+  setTimeout(function(){if(pin.parentNode)pin.remove();},4000);
+}
+
+// ── PANEL ─────────────────────────────────────────────────────────────────────
+var countryJa = {
+  "eu":{desc:"権利保護型AIガバナンスの世界的モデル。EU AI法は4段階リスク分類、禁止用途リスト、GPAI義務、最大3,500万ユーロまたは全世界売上高7%の罰則を定める包括的拘束法制。",latest:"2026年8月：高リスクAIシステム義務が発効。EU AIオフィスが2025年8月よりGPAIモデル義務を執行中。AI法改正（2026年5月）により一部期限を2027年12月まで延長。",tags:["EU AI法2024", "GPAI義務", "4段階リスク分類", "ブリュッセル効果", "2026年8月執行"]},
+  "kr":{desc:"アジア太平洋初の拘束力あるAI法。AI基本法は高影響力AIに義務を課しつつ革新促進を明文化したハイブリッドモデル。韓国AI安全研究所（KAISI）が国際協力を積極推進。",latest:"2026年1月：AI基本法が完全施行。MSITとPIPCが連携課題を調整中。産業界のコンプライアンス懸念を受け一部罰則が猶予。",tags:["AI基本法2026", "高影響力AI", "KAISI", "アジア太平洋初"]},
+  "cn":{desc:"主権中心型AIガバナンスの典型例。アルゴリズム・ディープフェイク・生成AIを対象とした拘束力ある部門別規制。CAC登録必須、AIコンテンツは国家的価値観への適合が義務付けられる。",latest:"2025年9月：AI生成コンテンツへの電子透かし義務化が完全実施。AIプラスアクションプランにより2027年までの主要部門70%AI普及を目標。中国-ASEAN AI安全ネットワークが2026年に発足予定。",tags:["生成AI規則2023", "アルゴリズム規則2022", "CAC登録必須", "WAICO提案"]},
+  "us":{desc:"連邦レベルでは規制緩和が進む一方、州レベルでは拘束力ある規制が拡大。NIST AI RMFが自主的ベースライン。コロラド・テキサス等の州法が連邦規制の空白を埋めているが、連邦政府による先取りの動きも顕在化。",latest:"2025年12月：EO 14365により州AI法への異議申し立てを目的としたDOJ AIタスクフォースが設置。NIST AI RMFの改訂作業が進行中。",tags:["NIST AI RMF", "連邦AI法なし", "EO 14365", "州法パッチワーク", "AI行動計画2025"]},
+  "jp":{desc:"市場志向型ガバナンスの典型例。2025年6月施行のAI推進法は罰則のない努力義務で構成。AIGAによる自主ガバナンスが中核。G7広島AIプロセスの発案者として国際規範形成をリード。",latest:"2025年9月：「世界で最もAIフレンドリーな国」を目標とするAI基本計画草案を公表。AI戦略本部および推進会議が設置。AIGAのAIガバナンスナビが2025年4月より運用開始。",tags:["AI推進法2025", "AIGA自主ガバナンス", "G7広島AIプロセス", "罰則なし", "多元的相互運用性"]},
+  "sg":{desc:"世界初のエージェント型AIガバナンス枠組みを2026年1月に公表。AI Verifyテストツールキットも世界初。完全自主ベースでASEANの地域ガバナンスをリード。",latest:"2026年1月：WEFにてエージェント型AI枠組み（世界初）を公表。エージェントIDカードと5段階自律性分類を導入。",tags:["エージェント型AI枠組み2026", "AI Verify", "モデルAIガバナンス枠組み", "ASEANリーダー"]},
+  "uk":{desc:"プロイノベーション原則ベースのアプローチ。統一AI法はなく、FCA・ICO・MHRAなど部門別規制当局が独自に対応。ブレッチリー宣言後にAI安全研究所を設立。",latest:"2025年以降：政府は一部拘束力ある規制に前向きな姿勢。AI安全研究所がフロンティアモデルの評価を実施中。",tags:["AI規制白書2023", "AI安全研究所", "ブレッチリー宣言", "プロイノベーション"]},
+  "br":{desc:"EU AI法にインスパイアされた4段階枠組みをブラジルの社会的不平等・人種差別対応に適合。上院を2024年12月に通過し、制定されれば南北アメリカ初の包括的AI法となる。",latest:"2024年12月：法案2338が上院を通過。下院での最終可決を待つ状況。制定されれば南北アメリカ初の包括的AI法。",tags:["法案2338", "EU法にインスパイア", "人種的公正重視", "4段階枠組み"]},
+  "ca":{desc:"包括的AI法（AIDA）が2025年に議会で否決。現在はソフトローアプローチ。GPAIの事務局ホストとして国際ガバナンス調整に積極参加。AI安全研究所も設立済み。",latest:"2025年6月：AI・データ法（AIDA）が議会で否決。カナダAI安全研究所は設立。GPAIの事務局ホストとして国際調整は継続中。",tags:["AIDA否決2025", "GPAI事務局", "AI安全研究所", "OECD連携"]},
+  "au":{desc:"2019年のAI倫理フレームワークを自主的ベースラインとして活用。2024年の諮問では高リスクAIへの義務的保護措置を提案。ブレッチリー宣言に署名し、拘束力ある規制への移行が見込まれる。",latest:"2024年中頃：重要部門の高リスクAIへの義務的保護措置案を提示。2026〜2027年に新法制定の見通し。",tags:["AI倫理枠組み2019", "義務的規則を提案中", "ブレッチリー署名国"]},
+  "in":{desc:"サンドボックスから規制へのモデルを採用。拘束力あるAI法はなく、RBIのFREE-AIが金融分野を先行規制。デジタルインド法（2026年末予定）にAI条項が含まれる見通し。インドAIミッション始動。",latest:"2026年：デジタル個人データ保護法（2023年）の実施が進む。インドAIミッション（12.5億ドル投資）始動。",tags:["サンドボックス型モデル", "RBI FREE-AI", "デジタルインド法（予定）"]},
+  "ae":{desc:"経済多様化ツールとしてのAIガバナンス。2017年に世界初のAI担当大臣を任命。金融・医療分野に部門別拘束規制。ビジョン2030に基づきAIハブを目指す。",latest:"UAE-米国AIダイアログが進行中。AIサンドボックスを開始。東西の中立的なAIガバナンスハブとして存在感を強化。",tags:["世界初のAI担当大臣2017", "ビジョン2030", "部門別規制"]},
+  "cl":{desc:"AIによる精神的操作からニューロ権を守る世界初の憲法的保護を有する。AI法案は諮問段階でEU方式を参考に国内実情に適合した内容となる見通し。",latest:"AI法案が諮問プロセスで進行中。憲法的ニューロ権保護は他の法域でも研究対象となっている。",tags:["憲法的ニューロ権", "世界初", "AI法案（諮問中）"]},
+  "ke":{desc:"サブサハラアフリカで最も進んだAIガバナンス枠組み。AIライセンス枠組みを提案中。2019年データ保護法が執行中。アフリカ連合のAIガバナンスにも積極参加。",latest:"データ保護委員会（ODPC）がデータ保護法を積極執行。AIライセンス枠組み案が議会で審議中。",tags:["サブサハラアフリカのリーダー", "AIライセンス案", "AU AI戦略"]},
+  "au2":{desc:"環境害（電子廃棄物・炭素・水）、構造的不平等、アフリカ文化的価値観への脅威を主要リスクカテゴリとする独自の枠組み。デジタル植民地化への対抗姿勢も鮮明。",latest:"アフリカ連合AI戦略が加盟国で実施中。環境リスクと文化的価値観リスクを主要リスクカテゴリとする独自枠組みが他の途上国にも影響を与え始めている。",tags:["環境リスクカテゴリ", "文化的価値観の保護", "デジタル植民地化への対抗"]},
+  "ru":{desc:"国家AI戦略2030に基づく国家主導型ガバナンス。防衛・国家安全保障への活用を優先。規制の透明性は低く、西側ガバナンス協調から孤立。BRICSのAIガバナンス枠組みを代替案として提唱。",latest:"BRICSのAIガバナンス枠組みを西側主導イニシアティブの代替案として提唱。重要インフラ向け国内AI認証システムを開始。",tags:["国家AI戦略2030", "国家主導型", "透明性低い", "防衛重視"]},
+  "fr":{desc:"EU AI法が適用されるとともに、独自の国家AI戦略も推進。2025年2月のパリAIアクションサミット（62カ国署名）を主催。GPAIに積極参加。AI主権を重視しつつ権利保護も推進。",latest:"2025年2月：パリAIアクションサミットを主催（62カ国署名、ただし米英は最終声明に署名せず）。CNILが医療AI向けガイダンスを発行。",tags:["パリAIサミット2025", "GPAI積極参加", "国家AI戦略", "EU AI法適用"]},
+  "de":{desc:"EU AI法が適用され、最も積極的な実施国の一つ。連邦データ保護委員会（BfDI）がAI規制指針を積極発行。強固なGDPR執行の伝統。DFKI・フラウンホーファーなど世界有数のAI研究機関を有する。",latest:"BfDIが2025年に「雇用分野のAIシステムはGDPRとEU AI法の高リスク条項の両方に同時に準拠する必要がある」との意見を発表。",tags:["EU AI法適用", "強固なGDPR執行", "BfDI執行", "AI産業戦略"]},
+  "mx":{desc:"連邦AI戦略（2018年）を自主的ベースラインとして活用。LFPDPPP（個人データ保護法）がAIデータ処理に適用。USMCA加盟により米・加のAIアプローチから強い影響を受ける。",latest:"IFT（連邦通信委員会）とCOFECE（競争委員会）がAI部門別指針を発行。包括的AI戦略を策定中。",tags:["連邦AI戦略2018", "LFPDPPP", "市民社会", "米国技術の影響"]},
+  "th":{desc:"タイ個人情報保護法（PDPA）が2022年から完全施行。国家AI戦略2022〜2027が実施中。シンガポール主導のASEAN AIガバナンスガイドラインに沿って部門別規制を整備中。",latest:"国家AI戦略2022〜2027の実施が進む。デジタル経済省がAI規制枠組みを策定中。",tags:["PDPA適用", "国家AI戦略2027", "ASEAN連携", "部門別ガイダンス"]},
+  "id":{desc:"2022年10月に個人データ保護（PDP）法を制定。ASEANで最大の経済規模を持ち、地域AIガバナンスリーダーとしての可能性を秘める。国家AI戦略を策定中。",latest:"PDP法実施が進む。BAPPENASが国家AI戦略を策定中。Kominfo省が既存電子情報法を用いてディープフェイク動画の削除命令を発令。",tags:["PDP法2022", "国家AI戦略（予定）", "ASEAN加盟国"]},
+  "za":{desc:"個人情報保護法（POPIA）が情報規制当局により積極執行。2024年に国家AIポリシー枠組み草案を公表。アフリカ連合AIガバナンスに積極参加。アフリカ第2位のデジタル経済規模。",latest:"2024年：国家AIポリシー枠組み草案を諮問向けに公表。POPIA（個人情報保護法）が情報規制当局により積極執行中。",tags:["POPIA適用", "国家AIポリシー策定中", "AU AI戦略"]},
+  "sa":{desc:"サウジデータ・AI局（SDAIA）がAIガバナンスをリード。ビジョン2030がAIを経済変革ツールと位置付け。金融・医療分野の部門別規制。NEOMスマートシティプロジェクトで大規模AI統合が進む。",latest:"SDAIA・国家データ管理局がAIガバナンス枠組みを拡充中。AIサンドボックスを開始。世界南側のAIガバナンスの声として存在感を高める。",tags:["SDAIA", "ビジョン2030", "部門別規制"]},
+  "tw":{desc:"リスクベースアプローチに基づくAI基本法を立法プロセスで推進中。世界の半導体シェアを占めるTSMCの存在が台湾のAIガバナンスに独自の影響力を付与。中国との地政学的緊張がデータローカライゼーションの方針に影響。",latest:"AI基本法を立法プロセスで推進中。NCC（国家通信委員会）がAI生成ニュースコンテンツへの明確なラベル表示を義務付けるガイダンスを発行。",tags:["AI基本法（提案中）", "半導体の優位性", "リスクベースアプローチ", "地政学的文脈"]},
+  "no":{desc:"EEA協定を通じてEU AI法を適用。Datatilsynet（データ保護局）はヨーロッパで最も積極的なAI規制当局の一つ。強固な北欧デジタル権利保護の伝統を持つ。",latest:"DatatilsynetがAI執行ガイダンスを積極的に発行。EEA加盟国としてEU AI法を実施中。",tags:["EU AI法（EEA経由）", "Datatilsynet", "北欧デジタル権利", "EEA加盟国"]},
+  "nz":{desc:"政府AI活用向けアルゴリズム憲章（2020年）を策定した世界初の国の一つ。プライバシー法2020がAIデータ処理に適用。オーストラリアのアプローチと緊密に連携。",latest:"アルゴリズム憲章の採用が拡大中。プライバシー・コミッショナーがAIデータ処理事案を積極的に処理。",tags:["アルゴリズム憲章2020", "プライバシー法2020", "政府AI説明責任", "ファイブアイズ"]},
+  "se":{desc:"EU AI法が適用され、積極的なデジタルガバナンスの伝統を持つ。IMY（スウェーデンプライバシー局）はEU加盟国の中で最も積極的なAI規制当局の一つ。KTHやチャルマース大学など世界有数のAI研究機関を有する。",latest:"IMYがAI執行ガイダンスを積極発行。EU AI法の積極的な実施国として、国家AI戦略とも連携して取り組む。",tags:["EU AI法適用", "IMY執行", "国家AI戦略", "北欧リーダーシップ"]},
+  "co":{desc:"コロンビアは国家AI政策（CONPES 3975、2019年）を公表。ハベアスデータ法がAIに適用。憲法裁判所がアルゴリズムによる決定について判決。ラテンアメリカにおけるAIガバナンスの積極的なリーダー。",latest:"アルゴリズムによる決定に関する憲法裁判所の判決が地域的な注目を集めている。OECDおよびEUとの連携を継続。",tags:["CONPES 3975", "ハベアスデータ", "憲法裁判所", "ラテンアメリカリーダー"]},
+  "eg":{desc:"2019年に国家AI戦略を発表し、AFリカ連合のAIガバナンスに積極参加。NTRA（国家電気通信規制局）がAI枠組みを開発中。アフリカのAIハブとしての地位確立を目指す。",latest:"NTRAが部門別AI枠組みを開発中。エジプトは主要AIガバナンスイベントを主催し、アフリカのAIハブとして存在感を強化。",tags:["国家AI戦略2019", "NTRA規制", "アフリカAIハブ", "AU AIメンバー"]},
+  "il":{desc:"包括的なAI法はないが、イスラエル革新庁とプライバシー保護局を通じた部門別ガバナンスを発展させている。強固なAIスタートアップエコシステムが軽規制的なアプローチを形成。",latest:"政府のAI政策枠組みが開発中。プライバシー保護局が各部門向けのAIガイダンスを発行。",tags:["プライバシー保護局", "革新庁", "AIスタートアップハブ", "部門別ガイダンス"]},
+  "oecd":{desc:"政府間AI規範の最初の標準を策定。49カ国がOECD AI原則に賛同。NIST・ISO・EU AI法の定義に影響を与えた。OECD.AI政策オブザーバトリーが70か国以上をトラッキング。民主主義国家のAIガバナンスにおける事実上の事務局。",latest:"2026年2月：責任あるAIのためのデューデリジェンスガイダンスを公表。2025年12月：公共部門向けG7 AIツールキットを発行。",tags:["49カ国賛同", "OECD AI原則2019", "OECD.AIオブザーバトリー", "政府間機関"]},
+  "asean":{desc:"ASEANのAIガバナンス・倫理ガイド（2024年版）が生成AI時代に対応。シンガポールが地域フレームワーク開発をリード。中国-ASEANのAI安全ネットワークが2026年に発足予定。加盟国ごとの規制能力に大きな差がある。",latest:"2025年9月：中国とASEANが2026年のAI安全ネットワーク発足に合意。ASEANデジタルマスタープラン2025のAI要素が実施中。",tags:["ASEANガイド2024", "シンガポール主導", "中国-ASEANネットワーク2026", "拘束力なし"]},
+  "it":{desc:"EU AI法が適用され、AGCOM（通信規制局）がデジタル規制において積極的な役割を果たす。国家AI戦略が策定済みで、研究・イノベーション重視のアプローチを採用。",latest:"EU AI法の国内実施が進行中。AGCOMがデジタルプラットフォームの監督を強化し、AI関連事案を処理中。",tags:["EU AI法適用", "AGCOM監督", "国家AI戦略", "研究イノベーション重視"]},
+  "es":{desc:"EU AI法が適用される中、スペインは2022年に世界初の国家AI監督機関AESIA（スペインAI監督局）を設立。規制サンドボックスも早期に導入し、EU内で最も積極的な実施国の一つ。",latest:"AESIA（スペインAI監督局）がEU AI法の国内監督を本格化。部門別AI規制ガイダンスを発行中。",tags:["EU AI法適用", "AESIA（世界初のAI専門監督局）", "規制サンドボックス", "積極的な実施国"]},
+  "nl":{desc:"EU AI法が適用され、AP（オランダデータ保護局）はEU内で最も積極的なAI規制当局の一つ。GDPR執行実績が豊富で、AI・データ保護の先進的な法解釈でも知られる。",latest:"APがAIシステムの透明性要件に関するガイダンスを発行。EU AI法の積極的な実施国として注目を集める。",tags:["EU AI法適用", "AP積極執行", "強固なGDPR執行", "AI透明性重視"]},
+  "pl":{desc:"EU AI法が適用される。ウクライナ戦争に隣接する地政学的文脈から、国家安全保障AI条項が他のEU加盟国より強調される傾向がある。UODO（データ保護局）が監督機能を担う。",latest:"EU AI法の国内実施を進めながら、国家安全保障分野のAI活用も強化。UODOがAI関連の監督業務を開始。",tags:["EU AI法適用", "UODO監督", "国家安全保障重視", "地政学的文脈"]},
+  "ie":{desc:"EU AI法が適用される中、アイルランドはメタ・グーグルなど主要テック企業のEU拠点を多数誘致。DPC（データ保護委員会）はGDPR執行の観点で最重要機関の一つ。テックハブとしての産業的役割と強固な規制執行が共存。",latest:"DPCがAIシステムのデータ処理に関する調査を複数実施中。メタなど主要プラットフォームへのAI規制適用が注目されている。",tags:["EU AI法適用", "DPC積極執行", "テックハブ", "GDPR執行最前線"]},
+  "ch":{desc:"EU非加盟のため EU AI法は直接適用されない。連邦データ保護法（nDSG）とAI諮問委員会が枠組みの中核。プロイノベーション原則ベースのアプローチを採用。OECD・ISO 42001に積極的に準拠。",latest:"AI諮問委員会がAIガバナンスの国内枠組みに関する勧告を発表。EU AI法への自主的な対応を進める企業も増加。",tags:["nDSG（連邦データ保護法）", "AI諮問委員会", "プロイノベーション", "OECD/ISO準拠"]},
+  "at":{desc:"EU AI法が適用され、DSB（オーストリアデータ保護局）が監督機能を担う。技術・AI分野における研究拠点としての地位を確立しつつある。",latest:"DSBがEU AI法の国内実施に向けた執行ガイダンスを発行。AI研究エコシステムの強化にも取り組む。",tags:["EU AI法適用", "DSB監督", "研究拠点", "EU実施先進国"]},
+  "fi":{desc:"EU AI法が適用される中、フィンランドは「世界で最もAIフレンドリーな国」を明示的に目標として掲げるなど、プロイノベーションの姿勢が強い。TSVIが監督機能を担う。",latest:"国家AI戦略のアップデートにおいてプロイノベーションを強調。TSVIがEU AI法の国内実施を牽引。",tags:["EU AI法適用", "プロイノベーション重視", "TSVI監督", "北欧デジタルリーダー"]},
+  "dk":{desc:"EU AI法が適用され、Datatilsynet（データ監督局）が監督機能を担う。デジタルガバナンスにおける北欧の先進的アプローチを反映し、市民中心のAI活用を推進。",latest:"DatatilsynetがAI・個人データに関するガイダンスを発行。公共部門でのAI活用の透明性確保に取り組む。",tags:["EU AI法適用", "Datatilsynet監督", "市民中心AI", "北欧デジタルリーダー"]},
+  "pt":{desc:"EU AI法が適用され、CNPD（個人データ保護委員会）が監督機能を担う。ポルトガルは比較的小規模なAI産業を持つが、EU加盟国として高水準の権利保護枠組みが適用される。",latest:"CNPDがAIデータ処理に関するガイダンスを発行。EU AI法の国内実施を着実に進行中。",tags:["EU AI法適用", "CNPD監督", "EU権利保護枠組み"]},
+  "be":{desc:"EU AI法が適用され、GBA（データ保護局）が監督機能を担う。ベルギーはNATO・EU機関の本拠地としてデジタル安全保障AI条項が強調される傾向がある。",latest:"GBAがEU AI法の国内実施に向けた執行ガイダンスを発行。NATO関連のAI安全保障枠組みとの連携も注目される。",tags:["EU AI法適用", "GBA監督", "NATO/EU機関本拠地", "デジタル安全保障重視"]},
+  "ee":{desc:"EU AI法が適用される中、エストニアは世界最先端の電子政府システム（X-Road）を有する。デジタルイノベーション重視のアプローチが強く、EU内で最も技術的に進んだデジタル社会の一つ。",latest:"X-Roadを活用した公共部門AI導入が拡大中。EU AI法をデジタルイノベーションの枠組みとして積極活用する方針を表明。",tags:["EU AI法適用", "X-Road電子政府", "デジタルイノベーション重視", "世界最先端の電子政府"]},
+  "cz":{desc:"EU AI法が適用され、UOOU（個人データ保護局）が監督機能を担う。中欧における技術産業の中心地として、AI研究・開発エコシステムが発展しつつある。",latest:"UOOUがEU AI法の国内実施に向けた執行ガイダンスを発行。AIスタートアップエコシステムの育成にも取り組む。",tags:["EU AI法適用", "UOOU監督", "中欧技術産業", "AI研究拠点"]},
+  "gr":{desc:"EU AI法が適用され、HDPA（個人データ保護局）が監督機能を担う。ギリシャはEU内での経済・デジタルの復興を背景にAI活用を推進している。",latest:"HDPAがAI関連の個人データ保護に関するガイダンスを発行。公共部門でのAI活用拡大に向けた国家戦略を策定中。",tags:["EU AI法適用", "HDPA監督", "デジタル復興戦略", "公共部門AI活用"]},
+  "ro":{desc:"EU AI法が適用され、ANSPDCP（個人データ監督局）が監督機能を担う。ルーマニアはIT・テクノロジー部門が急成長しており、EU枠組みの下でのAI産業育成を目指す。",latest:"ANSPDCPがEU AI法の国内実施に向けた執行準備を進行中。ITアウトソーシング産業の急成長がAI活用の基盤を形成。",tags:["EU AI法適用", "ANSPDCP監督", "IT産業急成長", "EU枠組み下でのAI育成"]},
+  "hu":{desc:"EU AI法は法的に適用されるが、オルバン政権下での国家主導型AI方針がEU枠組みとの緊張を生み出している。国家AI戦略では国家主導の方向性が明確。NAIH（個人データ保護・情報公開局）が監督機能を担う。",latest:"NAIHがEU AI法の国内実施を進めながらも、国家AI投資戦略との調整が課題となっている。",tags:["EU AI法適用（緊張関係あり）", "国家主導AI投資", "NAIH監督", "政治的文脈"]},
+  "ua":{desc:"戦時下という特殊な文脈でAIガバナンスが発展。個人データ保護法とAI活用の実践的ガイドラインが存在するが、国家安全保障目的のAI活用が全体を規定。EU加盟候補国として将来的なEU AI法の適用も見据える。",latest:"戦時における国防AI活用が加速。EU加盟候補国としてのAIガバナンス整備が急務となっている。",tags:["戦時下AIガバナンス", "EU加盟候補国", "個人データ保護法", "国防AI重視"]},
+  "tr":{desc:"KVKK（個人データ保護法）がAIデータ処理に適用。AI固有の法制度はなく、市場志向と国家管理の間で揺れる。海外プラットフォームへの制限やコンテンツモデレーション規制が国家主権的要素を生み出している。",latest:"KVKKがAIを活用したデータ処理に関する調査を開始。国家AI戦略の策定が検討されている。",tags:["KVKK（個人データ保護法）", "海外プラットフォーム制限", "コンテンツ規制", "国家AI戦略（検討中）"]},
+  "vn":{desc:"サイバーセキュリティ法と個人データ保護令（令第13号）が包括的なAI関連データ規制を形成。AIコンテンツは党の指針に沿う必要があり、プラットフォームへのデータローカライゼーション要件も課される。東南アジアで最も主権中心型AIガバナンスに近いモデル。",latest:"個人データ保護令が完全施行。国家AI戦略2030に基づくAI活用推進と国家コンテンツ管理の強化が並行して進む。",tags:["サイバーセキュリティ法", "個人データ保護令", "コンテンツ管理義務", "国家AI戦略2030"]},
+  "my":{desc:"個人情報保護法（PDPA、2010年）を基盤とし、マレーシアデジタル経済公社（MDEC）主導の自主的AI国家ロードマップを運用。プロイノベーションの姿勢が強く、ASEAN加盟国として地域ガバナンスにも積極参加。",latest:"MDECが主導するAI国家ロードマップの実施が進行中。マレーシアはASEANのAIガバナンス枠組み策定に積極的に関与。",tags:["PDPA（個人情報保護法）", "MDEC主導", "自主的AI国家ロードマップ", "ASEANガバナンス参加"]},
+  "ph":{desc:"データプライバシー法（2012年）とNPC（国家プライバシー委員会）が枠組みの中核。AI固有の法制度はなく、自主的AIロードマップを策定。中小企業へのAI普及と公共サービスへのAI活用を政策目標とする。",latest:"NPCがAIデータ処理に関するガイドラインを発行。国家AI戦略の実施に向けた省庁横断的な検討が進む。",tags:["データプライバシー法2012", "NPC監督", "自主的AIロードマップ", "中小企業AI普及"]},
+  "pk":{desc:"個人データ保護法（2023年）が施行中。国家AI政策（草案）が検討されている。デジタル分野への国家投資とコンテンツモデレーションの政治的側面が共存する複合的なガバナンス構造。",latest:"個人データ保護法の実施準備が進行中。国家AI政策草案に対するパブリックコメントが実施された。",tags:["個人データ保護法2023", "国家AI政策（草案）", "国家デジタル投資", "コンテンツ規制"]},
+  "bd":{desc:"デジタルセキュリティ法が広範なコンテンツ制限と国家監視権限を規定。AI固有の法制度は未整備。デジタルバングラデシュ構想に基づくAI活用推進と表現規制の緊張関係が続く。",latest:"サイバーセキュリティ法（デジタルセキュリティ法を改称）の運用が継続中。国家AI戦略の策定に向けた議論が開始された。",tags:["サイバーセキュリティ法", "コンテンツ制限", "デジタルバングラデシュ", "国家AI戦略（検討中）"]},
+  "lk":{desc:"個人データ保護法（2022年）が施行中。AI固有の法制度は未整備だが、データ保護の枠組みが整いつつある。スリランカは経済再建の文脈でAI活用推進を国家目標として位置付けている。",latest:"個人データ保護委員会の設立準備が進行中。政府のデジタル変革計画においてAI活用が重要な柱として位置付けられている。",tags:["個人データ保護法2022", "経済再建とAI活用", "データ保護委員会（設立中）"]},
+  "np":{desc:"AI固有の法制度やデータ保護法は未整備。国家AI戦略の策定が初期段階にある。ヒマラヤの小国ながら、地理情報・医療・農業分野でのAI活用可能性が注目されている。",latest:"国家AI戦略の策定に向けた検討が開始された。政府のデジタルトランスフォーメーション計画においてAIが言及されている。",tags:["AI法制度未整備", "国家AI戦略（策定中）", "農業・医療AI活用の可能性"]},
+  "ng":{desc:"NDPR（2019年）とデータ保護法（2023年）を基盤に、NITDAが監督機能を担う。国家AI戦略を策定し、アフリカ最大の経済規模を活かしてアフリカのAIリーダーを目指している。市場指向の強いガバナンスアプローチ。",latest:"データ保護法の実施が進行中。NITDAがAIガバナンス枠組みを策定中。ラゴスを中心にアフリカのAIスタートアップ集積地としての地位を強化。",tags:["NDPR/データ保護法", "NITDA監督", "国家AI戦略", "アフリカ最大の経済"]},
+  "gh":{desc:"データ保護法（2012年）とGIPC（投資促進センター）が枠組みの核心。国家AI政策を策定中で、プロイノベーションの姿勢が強い。西アフリカのAIガバナンスリーダーとしての地位を確立しつつある。",latest:"国家AI政策の最終化に向けた作業が進行中。アクラを中心にAIスタートアップエコシステムが急成長。",tags:["データ保護法2012", "GIPC", "国家AI政策（策定中）", "西アフリカリーダー"]},
+  "ma":{desc:"CNDP（個人データ保護委員会）がデータ保護を監督。デジタルモロッコ2030戦略に基づいてAI活用を推進。コンテンツモデレーションと政治的なプレッシャーが混在する複合的なガバナンス構造。",latest:"デジタルモロッコ2030の実施が進行中。CNDPがAIを活用したデータ処理への適用ガイドラインを発行。",tags:["CNDP監督", "デジタルモロッコ2030", "北アフリカAIハブ", "コンテンツ規制"]},
+  "tn":{desc:"INPDP（個人データ保護局）がデータ保護を監督。革命後の民主主義的権利保護の伝統を持つが、近年の政治動向により一部の権利保護が後退している。AIガバナンスの枠組みは発展段階にある。",latest:"チュニジアの政治・デジタルガバナンスの文脈でAI規制の議論が始まっている。INPDPがデータ保護の観点からAI活用を監視中。",tags:["INPDP監督", "民主主義的権利保護の伝統", "ガバナンス移行期", "北アフリカ"]},
+  "rw":{desc:"スマートルワンダ戦略に基づき、国家AIポリシーが革新促進を明確に掲げる。ルワンダ開発委員会（RDB）の強力なリーダーシップの下、カガメ大統領のビジョンを実現するための国家主導型AIガバナンスを展開。",latest:"国家AIポリシーの実施が進行中。キガリをアフリカのテックハブとして位置付けるRDB主導の取り組みが加速。",tags:["スマートルワンダ", "国家AIポリシー", "RDB主導", "アフリカテックハブ"]},
+  "et":{desc:"AIガバナンスの枠組みは初期段階。国家デジタルトランスフォーメーション戦略においてAIが言及されているが、具体的な法制度は未整備。国家主導の大規模インフラ投資がAI活用の文脈を規定している。",latest:"デジタルエチオピア戦略2025の実施が進行中。国家主導のAI活用プロジェクトが開始されているが、ガバナンス枠組みの整備は遅れている。",tags:["デジタルエチオピア戦略", "国家主導AI投資", "ガバナンス枠組み（初期段階）", "東アフリカ"]},
+  "mu":{desc:"データ保護法（2017年）とICTA（情報通信技術局）が枠組みの核心。アフリカ最高水準のガバナンス枠組みの一つで、プロイノベーションの姿勢が強い。国際金融・ビジネスハブとしての地位を活かし、AIフレンドリーな規制環境を整備。",latest:"ICTAがAIガバナンスのベストプラクティスを策定中。モーリシャスはアフリカにおけるAI規制の先進事例として注目される。",tags:["データ保護法2017", "ICTA監督", "アフリカ最高水準", "国際金融ハブ"]},
+  "ar":{desc:"個人データ保護法（PDPA）とハベアスデータ憲法上の権利を基盤とする。国家AI計画が策定中。強い権利保護の伝統を持つラテンアメリカ第2位の経済大国として、AIガバナンスの地域的リーダーを目指している。",latest:"国家AI計画の最終化に向けた作業が進行中。ハベアスデータの権利がAIによる個人データ処理に適用された初の判例が登場。",tags:["PDPA（個人データ保護法）", "ハベアスデータ憲法上の権利", "国家AI計画", "ラテンアメリカ第2の経済"]},
+  "pe":{desc:"個人データ保護法（LPDP）が施行中。国家AI戦略が自主的ベースラインとして機能。ペルーはラテンアメリカにおける民主的なAIガバナンスの発展に積極的に取り組んでいる。",latest:"国家AI戦略の実施が進行中。SBSがAI活用の金融部門への適用ガイドラインを発行。",tags:["LPDP（個人データ保護法）", "国家AI戦略", "SBS金融AI規制", "ラテンアメリカ"]},
+  "uy":{desc:"URCDP（個人データ保護・透明性局）がラテンアメリカで最も強固なデータ保護執行を実施。国家AIプランを策定中。ウルグアイはラテンアメリカにおけるAIガバナンスの最も発展した枠組みの一つを持つ。",latest:"国家AIプランの策定が最終段階。URCDPがAIデータ処理に関するガイドラインを発行。",tags:["URCDP積極執行", "国家AIプラン", "ラテンアメリカ最高水準", "強固な権利保護"]},
+  "ec":{desc:"個人データ保護法が施行中。早期段階のAIガバナンス枠組みを整備中。エクアドルはラテンアメリカにおけるデジタル変革のモデル国を目指している。",latest:"個人データ保護委員会の設立準備が進行中。国家AI戦略の策定に向けた初期的な検討が開始された。",tags:["個人データ保護法", "データ保護委員会（設立中）", "デジタル変革", "ラテンアメリカ"]},
+  "cr":{desc:"PRODHAB（データ保護局）が積極的に監督機能を担う。国家AI戦略が策定済みで、権利保護の憲法的伝統を重視したアプローチを採用。中米における先進的なAIガバナンスモデルを形成しつつある。",latest:"国家AI戦略の実施が進行中。PRODHABがAIデータ処理に関するガイドラインを発行。",tags:["PRODHAB積極執行", "国家AI戦略", "憲法的権利保護", "中米リーダー"]},
+  "qa":{desc:"PDPPLがデータ保護を規定。国家ビジョン2030に基づいてAIを経済多様化の核心として位置付け。強力な国家主導型AI投資と部門別規制が共存。2022年ワールドカップを通じてAI活用の実績を蓄積。",latest:"QCRIがAI研究・開発を推進。国家AI戦略の実施が加速し、QFを通じた国際研究機関との連携も強化されている。",tags:["PDPPL", "国家ビジョン2030", "QCRI研究", "国家主導AI投資"]},
+  "bh":{desc:"PDPL（個人データ保護法）が施行中。フィンテックハブとして市場指向のAIガバナンスを推進。PDPLを域内最高水準の法制度として活用し、国際競争力の強化を図っている。",latest:"CBB（中央銀行）がAI活用の金融部門向けガイダンスを発行。フィンテックベイを通じたAIスタートアップ支援が拡充。",tags:["PDPL", "CBB金融AI規制", "フィンテックハブ", "プロイノベーション"]},
+  "jo":{desc:"PDPL（個人データ保護法、2023年）が施行中。国家AI戦略がプロイノベーションの枠組みを規定。ヨルダンは中東における比較的開かれたデジタルガバナンスで知られ、コンテンツ規制も他国より穏やか。",latest:"国家AI戦略の実施が進行中。PDPLの実施に向けたDPC（データ保護委員会）の設立準備が進む。",tags:["PDPL2023", "国家AI戦略", "DPC（設立準備中）", "中東の開かれたガバナンス"]},
+  "ir":{desc:"AIガバナンスにおいて中国・ロシアモデルに最も近い国の一つ。包括的なインターネット検閲、コンテンツ管理義務、データローカライゼーションが国内AIシステムの運用を規定。国家承認なしの展開は実質的に不可能。",latest:"国内インターネット（イントラネット）の整備が進行中。AI開発は国家戦略的分野として優先投資対象となっているが、民間企業の自律性は極めて限定的。",tags:["包括的なコンテンツ管理", "国家AI承認義務", "データローカライゼーション", "インターネット制限"]},
+  "kz":{desc:"個人データ保護法（2023年）が施行中。国家AI戦略が拘束的な戦略的方向性を規定。ロシアのガバナンスモデルの影響下にある中央アジアの主要な経済大国として、主権中心型AIガバナンスを採用。",latest:"国家AI戦略の実施が進行中。デジタルカザフスタンプログラムにおけるAI活用が加速。ロシアとの技術連携がガバナンス枠組みに影響。",tags:["個人データ保護法2023", "国家AI戦略", "デジタルカザフスタン", "ロシアモデルの影響"]},
+  "uz":{desc:"デジタルウズベキスタン2030戦略に基づいてAI活用を推進。一定の改革は進んでいるが、国家主導型の方向性が強く残る。中央アジアにおけるデジタル変革の先導役として注目される。",latest:"デジタルウズベキスタン2030の実施が加速。AI活用による行政サービスのデジタル化が進んでいる。",tags:["デジタルウズベキスタン2030", "国家主導デジタル変革", "行政AIデジタル化", "中央アジア"]},
+  "ao":{desc:"AIガバナンスは初期段階。石油経済に依存する経済多様化の文脈でデジタル変革が推進されており、国家主導型のAI投資戦略が形成されつつある。具体的な権利保護枠組みは未整備。",latest:"国家デジタル変革戦略の策定が進行中。国家主導のAI活用プロジェクトが開始されているが、独立した規制枠組みは未整備。",tags:["デジタル変革戦略", "国家主導AI投資", "石油依存経済の多様化", "ガバナンス枠組み（未整備）"]},
+  "kh":{desc:"インターネットゲートウェイ法が国家によるインターネット・AIコンテンツの包括的な管理を可能にする。コンテンツ制限と事前登録義務が実質的にAI展開を国家管理下に置く。東南アジアにおいて最も主権中心型のガバナンスモデルに近い国の一つ。",latest:"インターネットゲートウェイを通じたデジタルコンテンツの監視が強化されている。AIを活用した政府サービスの展開が進む一方、民間AIの自律的な運用は制限的。",tags:["インターネットゲートウェイ法", "コンテンツ管理義務", "国家AI監視", "東南アジア主権モデル"]},
+  "la":{desc:"AIガバナンス枠組みは実質的に未整備。国家通信政策においてAIが言及されているが、具体的な規制は存在しない。中国の影響下にある最も権威主義的なAIガバナンスモデルの一つ。",latest:"中国支援によるデジタルインフラ整備が進行中。政府のデジタルトランスフォーメーション計画においてAIが言及されているが、ガバナンス枠組みの整備は最低水準にある。",tags:["AIガバナンス枠組み（未整備）", "中国モデルの影響", "国家通信政策", "最初期段階"]},
+  "unesco":{desc:"AI倫理勧告（2021年）は193の全UNESCO加盟国が採択した最も広範な国際的AIガバナンスコンセンサス。人権・インクルージョン・平和・持続可能な開発を中心に置く哲学的指針。拘束力はないが、多くの国の国家AI政策の参照点となっている。",latest:"AI倫理勧告の実施状況のモニタリングが進行中。UNESCO加盟国の多くが同勧告を国家AI政策の参照枠組みとして採用。",tags:["AI倫理勧告2021", "193カ国採択", "人権中心", "国際コンセンサス", "拘束力なし"]},
+};
+
+function openPanel(c) {
+  var pos=getPos(c,currentYear);
+  document.getElementById("p-flag").textContent=c.flag;
+  document.getElementById("p-name").textContent=c.name;
+  var pm=document.getElementById("p-model"); pm.textContent=c.modelLabel; pm.className="panel-model "+c.modelClass;
+  document.getElementById("p-rights").textContent=Math.round(pos.r*100)+"%";
+  document.getElementById("p-market").textContent=Math.round(pos.m*100)+"%";
+  document.getElementById("p-sov").textContent=Math.round(pos.s*100)+"%";
+  document.getElementById("p-bind-pct").textContent=Math.round(pos.bind)+"%";
+  document.getElementById("p-bind-fill").style.width=pos.bind+"%";
+  var latestBox=document.getElementById("p-latest");
+  if (c.latest) {
+    latestBox.style.display="block";
+    document.getElementById("p-latest-title").textContent=currentLang==="ja"?"\u6700\u65B0\u52D5\u5411":"Latest development";
+    var jaData=countryJa[c.id];
+    document.getElementById("p-latest-body").textContent=(currentLang==="ja"&&jaData&&jaData.latest)?jaData.latest:c.latest;
+  } else {
+    latestBox.style.display="none";
+  }
+  var jaData2=countryJa[c.id];
+  document.getElementById("p-desc").textContent=(currentLang==="ja"&&jaData2&&jaData2.desc)?jaData2.desc:c.desc;
+  var activeTags=(currentLang==="ja"&&jaData2&&jaData2.tags)?jaData2.tags:c.tags;
+  document.getElementById("p-tags").innerHTML=activeTags.map(function(t){return "<span class=\"panel-tag\">"+t+"</span>";}).join("");
+  populatePanelTabs(c);
+  document.querySelectorAll(".panel-tab").forEach(function(b){b.classList.remove("active");});
+  document.querySelectorAll(".tab-content").forEach(function(cc){cc.classList.remove("active");});
+  document.getElementById("tab-overview").classList.add("active");
+  document.getElementById("tc-overview").classList.add("active");
+  document.getElementById("country-panel").classList.add("open");
+  document.getElementById("compare-panel").classList.remove("open");
+}
+
+function closePanel() {
+  document.getElementById("country-panel").classList.remove("open");
+  selectedCountry=null; draw();
+}
+
+function shareCountry() {
+  var btn=document.getElementById("share-btn");
+  var url=window.location.href.split("#")[0]+(selectedCountry?"#"+selectedCountry.id:"");
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(function(){
+      document.getElementById("share-btn-text").textContent="\u2713 Copied!";
+      btn.classList.add("copied");
+      setTimeout(function(){document.getElementById("share-btn-text").textContent="Share";btn.classList.remove("copied");},2000);
+    });
+  }
+}
+
+function switchTab(tab,btn) {
+  document.querySelectorAll(".panel-tab").forEach(function(b){b.classList.remove("active");});
+  document.querySelectorAll(".tab-content").forEach(function(c){c.classList.remove("active");});
+  btn.classList.add("active");
+  document.getElementById("tc-"+tab).classList.add("active");
+}
+
+// ── COMPARE ───────────────────────────────────────────────────────────────────
+function toggleCompare() {
+  compareMode=!compareMode; compareList=[];
+  var btn=document.getElementById("compare-toggle");
+  btn.classList.toggle("on",compareMode);
+  document.getElementById("compare-btn-text").textContent=compareMode?"Select 2 countries":"Select 2 countries";
+  updateCompareSidebar();
+  if (!compareMode) closeCompare();
+  closePanel(); draw();
+}
+
+function updateCompareSidebar() {
+  var el=document.getElementById("compare-selected");
+  if (!compareMode||!compareList.length) { el.textContent=compareMode?"Click 2 dots on the map":""; return; }
+  el.innerHTML=compareList.map(function(c){return "<div>"+c.flag+" "+c.name+"</div>";}).join("")+(compareList.length<2?"<div style=\"opacity:.4\">select one more...</div>":"");
+}
+
+function showCompare() {
+  var a=compareList[0], b=compareList[1];
+  var pa=getPos(a,currentYear), pb=getPos(b,currentYear);
+  document.getElementById("cp-title").textContent=a.flag+" "+a.name+"  vs  "+b.flag+" "+b.name;
+  var cards=[a,b].map(function(c,i){
+    var p=i===0?pa:pb;
+    var col=groupColor[c.group]||"#888";
+    var rows=[["Rights",p.r,"#6BAFF4"],["Market",p.m,"#6DBF8C"],["Sovereign",p.s,"#F48C8C"]];
+    var rowsHtml=rows.map(function(row){
+      return "<div class=\"cp-row\"><span class=\"cp-row-label\">"+row[0]+"</span><span class=\"cp-row-val\"><div class=\"cp-bar-wrap\"><div class=\"cp-bar-fill\" style=\"width:"+Math.round(row[1]*100)+"%;background:"+row[2]+"\"></div></div>"+Math.round(row[1]*100)+"%</span></div>";
+    }).join("");
+    return "<div class=\"cp-country\"><div class=\"cp-name\"><div class=\"cp-flag\">"+c.flag+"</div><div class=\"cp-cname\">"+c.name+"</div></div>"+rowsHtml+"<div class=\"cp-row\"><span class=\"cp-row-label\">Enforcement</span><span class=\"cp-row-val\">"+Math.round(p.bind)+"%</span></div><div style=\"font-size:11px;color:rgba(255,255,255,.4);margin-top:6px;line-height:1.5\">"+c.desc.substring(0,110)+"...</div></div>";
+  });
+  document.getElementById("cp-grid").innerHTML=cards.join("");
+  document.getElementById("compare-panel").classList.add("open");
+  document.getElementById("country-panel").classList.remove("open");
+}
+
+function closeCompare() {
+  document.getElementById("compare-panel").classList.remove("open");
+  compareMode=false; compareList=[];
+  document.getElementById("compare-toggle").classList.remove("on");
+  document.getElementById("compare-selected").textContent="";
+  draw();
+}
+
+// ── EXPLAINER & READING DATA ──────────────────────────────────────────────────
+var explainerData = {
+  eu:{law:"EU AI Act (Regulation 2024/1689)",year:"2024",enforcer:"EU AI Office + national authorities",penalty:"Up to 35M EUR or 7% global turnover",status:"Enforcing — high-risk from Aug 2026",example:"In 2025, the EU AI Office began investigating an HR software provider for deploying an AI hiring tool allegedly violating transparency obligations under high-risk provisions."},
+  kr:{law:"AI Basic Act (Framework Act on AI)",year:"2026",enforcer:"MSIT + PIPC + KAISI",penalty:"Moderate fines — phased penalties",status:"Active since January 2026",example:"Korea KAISI conducted its first AI safety evaluation of a domestic large language model in February 2026."},
+  cn:{law:"Generative AI Measures + Algorithm Rules",year:"2023",enforcer:"Cyberspace Administration of China (CAC)",penalty:"Admin + criminal penalties",status:"Fully active — mandatory watermarking Sep 2025",example:"In 2024, the CAC fined a major Chinese tech company for deploying a generative AI service without mandatory registration."},
+  us:{law:"No federal AI law — NIST AI RMF + state laws",year:"2023 (NIST)",enforcer:"FTC, EEOC, state AGs",penalty:"Up to 20K USD per violation (state laws)",status:"Federal voluntary; state laws active",example:"The FTC took action against a company for deceptive AI claims under existing consumer protection law in 2024."},
+  jp:{law:"AI Promotion Act (AI Promotion Law)",year:"2025",enforcer:"AI Strategic Headquarters (Cabinet Office)",penalty:"No AI-specific financial penalties",status:"Active — naming and shaming only",example:"AIGA governance navigator was used by 47 companies in its first three months demonstrating voluntary uptake of Japan soft-law approach."},
+  sg:{law:"Model AI Governance Framework + Agentic AI Framework",year:"2019/2026",enforcer:"IMDA + MAS (financial sector)",penalty:"Sector-specific enforcement only",status:"Active — world-first agentic AI framework Jan 2026",example:"MAS Project MindForge (2024) evaluated risks of LLMs in financial services."},
+  uk:{law:"AI Regulation White Paper (principles-based)",year:"2023",enforcer:"FCA, ICO, MHRA, CMA (sector-specific)",penalty:"Sector regulator penalties under existing law",status:"Active — sector enforcement ongoing",example:"The ICO issued guidance on generative AI and data protection in 2024."},
+  br:{law:"Bill 2338 (AI Bill) — pending enactment",year:"2024 (Senate passage)",enforcer:"ANPD + sector authorities (proposed)",penalty:"Proposed — not yet in force",status:"Pending — passed Senate Dec 2024",example:"Brazil AI bill includes specific provisions targeting algorithmic discrimination in Afro-Brazilian communities — a globally unique adaptation of the EU risk framework."},
+  ca:{law:"No binding AI law — AIDA failed",year:"2025 (failure)",enforcer:"PIPEDA + OPC + sector regulators",penalty:"Privacy law penalties only",status:"Voluntary — AIDA failed in Parliament 2025",example:"Canada AIDA failure in 2025 demonstrated the political difficulty of passing comprehensive AI legislation even in sympathetic environments."},
+  au:{law:"AI Ethics Framework (voluntary) + proposed rules",year:"2019/2024 (proposed)",enforcer:"ACCC + OAIC",penalty:"Consumer law + privacy law penalties",status:"Voluntary — mandatory rules proposed but not enacted",example:"The ACCC investigated an Australian insurance company in 2024 for using AI in pricing decisions under consumer protection law."}
+};
+
+var readingData = {
+  eu:[
+    {type:"Primary law",title:"EU AI Act — Official Text (EUR-Lex)",url:"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689",desc:"Full text of Regulation 2024/1689. The foundational primary source."},
+    {type:"Best explainer",title:"AI Act Explorer (artificialintelligenceact.eu)",url:"https://artificialintelligenceact.eu/",desc:"Article-by-article navigator with commentary. Best tool for navigating the Act."},
+    {type:"Academic",title:"Comparative Global AI Regulation (arXiv 2410.21279)",url:"https://arxiv.org/abs/2410.21279",desc:"Peer-reviewed comparison of EU, U.S., and China frameworks."},
+    {type:"Legal analysis",title:"White & Case — EU AI Act Becomes Law",url:"https://www.whitecase.com/insight-alert/long-awaited-eu-ai-act-becomes-law",desc:"Authoritative legal analysis of enforcement timeline and penalties."}
+  ],
+  kr:[
+    {type:"Official translation",title:"Korea AI Basic Act — CSET Georgetown",url:"https://cset.georgetown.edu/publication/south-korea-ai-law-2025/",desc:"Most authoritative English translation with legal analysis notes."},
+    {type:"Policy analysis",title:"FPF — Korea AI Framework Act Analysis",url:"https://fpf.org/blog/south-koreas-new-ai-framework-act-a-balancing-act-between-innovation-and-regulation/",desc:"Section-by-section analysis of the AI Basic Act."},
+    {type:"Critical analysis",title:"ITIF — One Law Sets South Korea AI Policy",url:"https://itif.org/publications/2025/09/29/one-law-sets-south-koreas-ai-policy-one-weak-link-could-break-it/",desc:"Critical analysis of implementation challenges."}
+  ],
+  jp:[
+    {type:"Primary",title:"Japan AI Promotion Act (Cabinet Office)",url:"https://www.cas.go.jp/jp/seisaku/ai_senryaku/index.html",desc:"Official Cabinet Office page for the AI Promotion Act."},
+    {type:"Think tank",title:"Habuka — Japan Agile AI Governance (CSIS)",url:"https://www.csis.org/analysis/japans-agile-ai-governance-action-fostering-global-nexus-through-pluralistic",desc:"Essential paper on pluralistic interoperability by AIGA co-founder Hiroki Habuka."},
+    {type:"Policy analysis",title:"FPF — Understanding Japan AI Promotion Act",url:"https://fpf.org/blog/understanding-japans-ai-promotion-act-an-innovation-first-blueprint-for-ai-regulation/",desc:"Detailed analysis of institutional structure and governance approach."}
+  ],
+  us:[
+    {type:"Primary",title:"NIST AI Risk Management Framework",url:"https://doi.org/10.6028/NIST.AI.100-1",desc:"The primary U.S. AI governance instrument. GOVERN-MAP-MEASURE-MANAGE structure."},
+    {type:"Primary",title:"U.S. AI Action Plan (White House, July 2025)",url:"https://www.whitehouse.gov/wp-content/uploads/2025/07/Americas-AI-Action-Plan.pdf",desc:"Trump administration comprehensive AI policy roadmap."}
+  ],
+  default:[
+    {type:"Global tracker",title:"IAPP Global AI Law and Policy Tracker",url:"https://iapp.org/resources/article/global-ai-legislation-tracker/",desc:"Most comprehensive country-by-country AI law tracker. Updated regularly."},
+    {type:"Data source",title:"OECD AI Policy Observatory",url:"https://oecd.ai/en/dashboards/overview",desc:"Official OECD database of AI policies across 70+ jurisdictions."},
+    {type:"Annual report",title:"Stanford HAI AI Index 2026",url:"https://hai.stanford.edu/ai-index/2026-ai-index-report",desc:"Comprehensive annual report including governance chapter with global statistics."}
+  ]
+};
+
+function populatePanelTabs(c) {
+  var exp=explainerData[c.id];
+  if (exp) {
+    var fields=[["Key law",exp.law],["Year enacted",exp.year],["Enforcer",exp.enforcer],["Max penalty",exp.penalty],["Current status",exp.status]];
+    document.getElementById("p-exp-grid").innerHTML=fields.map(function(f){
+      return "<div class=\"exp-card\"><div class=\"exp-label\">"+f[0]+"</div><div class=\"exp-value\">"+f[1]+"</div></div>";
+    }).join("");
+    var exBox=document.getElementById("p-exp-example");
+    if (exp.example) { exBox.style.display="block"; document.getElementById("p-exp-example-text").textContent=exp.example; }
+    else exBox.style.display="none";
+  } else {
+    document.getElementById("p-exp-grid").innerHTML="<div style=\"font-size:12px;color:rgba(255,255,255,.4);padding:.5rem;\">Detailed key facts not yet available for this jurisdiction.</div>";
+    document.getElementById("p-exp-example").style.display="none";
+  }
+  var reads=readingData[c.id]||readingData.default;
+  document.getElementById("p-reading-list").innerHTML=reads.map(function(r){
+    return "<div class=\"reading-item\"><div class=\"reading-type\">"+r.type+"</div><a href=\""+r.url+"\" target=\"_blank\" rel=\"noopener\">"+r.title+" &#8599;</a><div class=\"reading-desc\">"+r.desc+"</div></div>";
+  }).join("");
+  renderAnnotations(c.id);
+}
+
+// ── ANNOTATIONS ───────────────────────────────────────────────────────────────
+function addAnnotation() {
+  var input=document.getElementById("annotation-input");
+  var text=input.value.trim();
+  if (!text||!selectedCountry) return;
+  var id=selectedCountry.id;
+  if (!annotations[id]) annotations[id]=[];
+  annotations[id].push({text:text,date:new Date().toLocaleDateString(),id:Date.now()});
+  try{localStorage.setItem("ai_gov_notes",JSON.stringify(annotations));}catch(e){}
+  input.value=""; renderAnnotations(id);
+}
+
+function deleteAnnotation(cId,noteId) {
+  if (!annotations[cId]) return;
+  annotations[cId]=annotations[cId].filter(function(n){return n.id!==noteId;});
+  try{localStorage.setItem("ai_gov_notes",JSON.stringify(annotations));}catch(e){}
+  renderAnnotations(cId);
+}
+
+function renderAnnotations(cId) {
+  var list=document.getElementById("annotation-list");
+  if (!list) return;
+  var notes=annotations[cId]||[];
+  if (!notes.length) { list.innerHTML="<div class=\"annotation-empty\">No notes yet. Add your research observations above.</div>"; return; }
+  list.innerHTML=notes.map(function(n){
+    return "<div class=\"annotation-item\"><div class=\"annotation-text\">"+n.text+"</div><div class=\"annotation-meta\"><span>"+n.date+"</span><button class=\"annotation-delete\" onclick=\"deleteAnnotation('"+cId+"',"+n.id+")\">Delete</button></div></div>";
+  }).join("");
+}
+
+// ── GLOSSARY ──────────────────────────────────────────────────────────────────
+var glossaryTerms = [
+  {term:"AI Act",def:"The European Union comprehensive binding regulation on artificial intelligence, entered into force August 2024. Establishes a four-tier risk classification system with prohibited uses, high-risk obligations, and financial penalties.",example:"Example: A company using AI to screen job applicants must comply with EU AI Act high-risk obligations including bias testing and human oversight."},
+  {term:"Brussels Effect",def:"The tendency of EU regulatory standards to become de facto global standards because multinational companies find it more efficient to apply the strictest standard globally rather than maintain jurisdiction-specific systems.",example:"Example: A U.S. company serving EU customers implements EU AI Act compliance globally, effectively exporting EU standards to the U.S. market."},
+  {term:"GPAI (General-Purpose AI)",def:"AI models trained on large amounts of data capable of serving a wide range of tasks such as GPT-4, Claude, or Gemini. The EU AI Act imposes specific obligations on GPAI model providers including documentation and transparency requirements.",example:"Example: OpenAI must provide technical documentation for GPT-4 to comply with EU GPAI obligations."},
+  {term:"Risk-based governance",def:"A regulatory approach that calibrates obligations according to the potential harm posed by an AI system rather than treating all AI equally. Most major governance frameworks use this logic.",example:"Example: A spam filter faces minimal requirements while an AI used in criminal sentencing faces strict human oversight obligations."},
+  {term:"Binding enforcement",def:"A governance framework backed by legally enforceable obligations meaning organizations can face fines, sanctions, or legal liability for non-compliance, as opposed to voluntary guidelines.",example:"Example: The EU AI Act is binding with fines up to 35M euros. Japan AI Promotion Act is non-binding with no financial penalties."},
+  {term:"Soft law",def:"Governance through voluntary guidelines, principles, and codes of conduct rather than legally binding legislation. Relies on reputational accountability and industry goodwill.",example:"Example: Japan METI AI Business Operator Guidelines are soft law — companies are encouraged but not legally required to follow them."},
+  {term:"Pacing problem",def:"The challenge that technology evolves exponentially while legislation moves incrementally, meaning laws risk becoming obsolete before they take effect. Often used to argue against binding AI regulation.",example:"Example: Rules written for narrow AI in 2019 were inadequate for generative AI by 2022."},
+  {term:"Conformity assessment",def:"A formal process by which an AI system is evaluated against legal requirements before deployment. Required for high-risk AI systems under the EU AI Act.",example:"Example: A hospital must conduct a conformity assessment before deploying an AI diagnostic tool under EU AI Act high-risk obligations."},
+  {term:"Foundation model",def:"A large-scale AI system trained on vast datasets that serves as the infrastructure for thousands of downstream applications. Examples include GPT-4, Claude, Gemini, and Llama.",example:"Example: Rather than regulating each individual chatbot, the EU AI Act regulates the foundation models that power thousands of chatbots simultaneously."},
+  {term:"Pluralistic interoperability",def:"Japan concept that different national AI governance frameworks can coexist and work together without forcing countries to choose between EU, U.S., or Chinese governance models. Developed by Prof. Hiroki Habuka at CSIS.",example:"Example: A company using ISO/IEC 42001 certification achieves pluralistic interoperability satisfying EU, U.S., and Japanese regulators with one framework."},
+  {term:"ISO/IEC 42001",def:"The international standard for AI management systems (2023). Functions as a global compliance passport. Companies certified under this standard can demonstrate AI governance quality to regulators across multiple jurisdictions simultaneously.",example:"Example: A company certified under ISO/IEC 42001 can demonstrate responsible AI governance to EU, U.S., and Singapore regulators without three separate compliance systems."},
+  {term:"Enforcement gap",def:"The distance between what a governance framework promises in its text and what it actually delivers in practice. Almost universal across all AI governance systems due to capacity constraints and standards delays.",example:"Example: The EU AI Act promises strong enforcement but faces a standards gap — technical standards for conformity assessment were not finalized before the August 2026 deadline."},
+  {term:"Agentic AI",def:"AI systems capable of independent planning, executing multi-step workflows, accessing external services, and taking consequential actions without continuous human oversight. The next frontier of AI governance.",example:"Example: An AI agent that autonomously manages a calendar, sends emails, and makes bookings without human review is an agentic AI system."},
+  {term:"Sovereignty-centered governance",def:"An AI governance philosophy prioritizing national strategic control. Characterized by mandatory registration, content alignment requirements, and state direction of AI development.",example:"Example: China AI governance requires that generative AI outputs align with state values and must be registered with CAC before public release."},
+  {term:"Regulatory arbitrage",def:"The practice of locating AI development in lower-regulation jurisdictions to minimize compliance costs.",example:"Example: A company might consider basing AI development outside the EU to avoid AI Act obligations but would still need to comply if serving EU users."},
+  {term:"NIST AI RMF",def:"The U.S. National Institute of Standards and Technology AI Risk Management Framework (2023). A voluntary framework organizing AI risk management around four functions: GOVERN, MAP, MEASURE, and MANAGE.",example:"Example: Texas AI law explicitly recognizes NIST AI RMF compliance as a safe harbor, giving this voluntary framework quasi-regulatory significance."},
+  {term:"High-impact AI",def:"South Korea AI Basic Act terminology for AI systems deployed in sensitive sectors (healthcare, education, employment, finance) that require additional governance obligations.",example:"Example: An AI system used by a Korean bank to approve loans is classified as high-impact AI and must meet transparency and human oversight requirements."},
+  {term:"Ethics washing",def:"The practice of publicly endorsing voluntary AI ethics principles without making meaningful operational changes, exploiting the lack of enforcement in voluntary governance frameworks.",example:"Example: A company signs an AI ethics pledge promising fairness but continues to deploy discriminatory hiring algorithms without modification."},
+  {term:"Neuro-rights",def:"Legal rights protecting mental privacy, cognitive liberty, and mental integrity from AI-powered neurotechnological manipulation. Chile became the world first country to constitutionally protect neuro-rights in 2021.",example:"Example: Chile constitutional neuro-rights protection means AI systems that read or manipulate brainwave data without consent may be unconstitutional."},
+  {term:"Extraterritoriality",def:"The principle that a regulation applies beyond the jurisdiction that enacted it, typically when a company provides services to users in that jurisdiction regardless of where the company is based.",example:"Example: The EU AI Act extraterritorial reach means a U.S. company with no EU office must still comply if it sells AI products to EU customers."}
+];
+
+function toggleGlossary() {
+  glossaryOpen=!glossaryOpen;
+  document.getElementById("glossary-panel").classList.toggle("open",glossaryOpen);
+  if (glossaryOpen) renderGlossary("");
+}
+
+function renderGlossary(filter) {
+  var list=document.getElementById("glossary-list");
+  var terms=filter?glossaryTerms.filter(function(t){return t.term.toLowerCase().indexOf(filter.toLowerCase())!==-1||t.def.toLowerCase().indexOf(filter.toLowerCase())!==-1;}):glossaryTerms;
+  list.innerHTML=terms.map(function(t){
+    return "<div class=\"glossary-item\"><div class=\"glossary-term\">"+t.term+"</div><div class=\"glossary-def\">"+t.def+"</div>"+(t.example?"<div class=\"glossary-example\">"+t.example+"</div>":"")+"</div>";
+  }).join("");
+}
+
+function filterGlossary(val) { renderGlossary(val); }
+
+// ── TIMELINE ──────────────────────────────────────────────────────────────────
+var timelineEvents = [
+  {year:2016,title:"EU begins AI strategy discussions",body:"European Commission launches AI governance consultations. Early discussions that will eventually lead to the AI Act.",tags:["EU","Strategy"],category:"legislation",color:"#1B6FD4"},
+  {year:2017,title:"UAE appoints world first AI Minister",body:"United Arab Emirates appoints Omar Al Olama as Minister of State for Artificial Intelligence — the first such position globally.",tags:["UAE","Government"],category:"legislation",color:"#8B1A1A"},
+  {year:2018,title:"GDPR enters into force",body:"EU General Data Protection Regulation becomes enforceable, establishing the first major binding framework applied to AI data processing.",tags:["EU","Data protection","Binding"],category:"enforcement",color:"#1B6FD4"},
+  {year:2019,title:"OECD AI Principles adopted",body:"First intergovernmental AI standard adopted by 42 countries. Five principles for trustworthy AI. Influences NIST, ISO, and the EU AI Act.",tags:["OECD","International","Voluntary"],category:"international",color:"#4C1D95"},
+  {year:2019,title:"Singapore Model AI Governance Framework",body:"Singapore publishes the world first national Model AI Governance Framework — voluntary but highly influential regionally.",tags:["Singapore","Voluntary","First"],category:"legislation",color:"#1A6B42"},
+  {year:2020,title:"EU White Paper on AI published",body:"European Commission publishes White Paper on AI proposing risk-based regulation — the conceptual foundation of the future AI Act.",tags:["EU","Risk-based"],category:"legislation",color:"#1B6FD4"},
+  {year:2021,title:"UNESCO AI Ethics Recommendation",body:"All 193 UNESCO member states adopt the Recommendation on the Ethics of Artificial Intelligence — the broadest international AI governance consensus.",tags:["UNESCO","International","Ethics"],category:"international",color:"#4C1D95"},
+  {year:2021,title:"Chile constitutionalizes neuro-rights",body:"Chile becomes the first country in the world to constitutionally protect neuro-rights against AI-powered mental manipulation.",tags:["Chile","Constitutional","First"],category:"legislation",color:"#1B6FD4"},
+  {year:2021,title:"EU AI Act — Commission proposal",body:"European Commission publishes its proposed Artificial Intelligence Act — the first comprehensive binding AI regulation proposal globally.",tags:["EU","Binding","Landmark"],category:"legislation",color:"#1B6FD4"},
+  {year:2022,title:"China Algorithm Recommendation Rules",body:"China CAC enforces rules on algorithmic recommendations — first major binding AI-specific regulation globally.",tags:["China","Binding","Algorithms"],category:"enforcement",color:"#8B1A1A"},
+  {year:2022,title:"NIST AI RMF published",body:"U.S. National Institute of Standards and Technology publishes the AI Risk Management Framework — voluntary but becomes the most cited AI governance tool globally.",tags:["USA","NIST","Voluntary"],category:"legislation",color:"#1A6B42"},
+  {year:2022,title:"ChatGPT released — governance shock",body:"OpenAI releases ChatGPT, triggering global regulatory acceleration. The scale and accessibility of generative AI disrupts existing governance frameworks designed for narrow AI.",tags:["AI Release","Generative AI","Turning point"],category:"ai",color:"#E8950A"},
+  {year:2023,title:"China Generative AI Measures",body:"China enforces binding rules for generative AI services — requiring CAC registration, content alignment with state values, and mandatory safety assessments.",tags:["China","Binding","Generative AI"],category:"enforcement",color:"#8B1A1A"},
+  {year:2023,title:"G7 Hiroshima AI Process launched",body:"Japan launches the G7 Hiroshima AI Process at the G7 Summit — producing the Hiroshima AI Principles and HAIP Code of Conduct for frontier AI.",tags:["Japan","G7","International"],category:"international",color:"#4C1D95"},
+  {year:2023,title:"Bletchley Declaration on AI Safety",body:"28 countries including U.S., EU, China, and UK sign the Bletchley Declaration at the UK AI Safety Summit — first international consensus on frontier AI risks.",tags:["International","AI Safety","Frontier AI"],category:"international",color:"#4C1D95"},
+  {year:2023,title:"EU AI Act political agreement",body:"European Parliament and Council reach political agreement on the EU AI Act after extensive negotiations — particularly on GPAI and biometric surveillance.",tags:["EU","Binding","Landmark"],category:"legislation",color:"#1B6FD4"},
+  {year:2023,title:"ISO/IEC 42001 published",body:"International Organization for Standardization publishes ISO/IEC 42001 — the AI management system standard that becomes a global compliance passport.",tags:["ISO","International","Standard"],category:"international",color:"#4C1D95"},
+  {year:2024,title:"EU AI Act enters into force",body:"EU AI Act officially published in Official Journal and enters into force August 1, 2024. Prohibited practices enforcement begins February 2025.",tags:["EU","Binding","Landmark"],category:"enforcement",color:"#1B6FD4"},
+  {year:2024,title:"Brazil AI Bill passes Senate",body:"Brazil AI Bill 2338 passes the Senate in December 2024 — would make Brazil the first country in the Americas with a comprehensive AI law.",tags:["Brazil","Legislation","Americas first"],category:"legislation",color:"#7A4A00"},
+  {year:2025,title:"EU AI Act — prohibited practices enforced",body:"February 2025: EU prohibited AI practices (social scoring, certain biometric surveillance) become legally enforceable across all 27 member states.",tags:["EU","Enforcement","Binding"],category:"enforcement",color:"#1B6FD4"},
+  {year:2025,title:"Paris AI Action Summit",body:"February 2025: Largest AI governance convening to date with 62 signatories. U.S. and UK decline to sign final statement. France hosts.",tags:["International","France","Paris"],category:"international",color:"#4C1D95"},
+  {year:2025,title:"Japan AI Promotion Act passed",body:"June 2025: Japan AI Promotion Act passes the Diet establishing non-binding duties to endeavor with no financial penalties.",tags:["Japan","Soft law","Voluntary"],category:"legislation",color:"#1A6B42"},
+  {year:2025,title:"Trump admin revokes Biden AI EO",body:"January 2025: EO 14179 revokes Biden AI safety executive order. AI policy shifts toward competitiveness over safety.",tags:["USA","Deregulation","EO 14179"],category:"legislation",color:"#1A6B42"},
+  {year:2025,title:"EU GPAI Code of Practice effective",body:"August 2025: EU AI Act GPAI Code of Practice takes effect — requiring foundation model providers to comply.",tags:["EU","GPAI","Foundation models"],category:"enforcement",color:"#1B6FD4"},
+  {year:2025,title:"China mandatory AI watermarking",body:"September 2025: China mandatory watermarking system for AI-generated content becomes fully operational.",tags:["China","Watermarking","Binding"],category:"enforcement",color:"#8B1A1A"},
+  {year:2025,title:"Korea AI Basic Act — effective",body:"January 2026: South Korea AI Basic Act enters into force — the first binding AI law in Asia-Pacific. KAISI established.",tags:["Korea","Binding","Asia first"],category:"enforcement",color:"#7A4A00"},
+  {year:2026,title:"Singapore Agentic AI Framework",body:"January 2026: Singapore publishes world first governance framework for agentic AI — introducing Agent Identity Cards and 5-tier autonomy classification.",tags:["Singapore","Agentic AI","First"],category:"legislation",color:"#1A6B42"},
+  {year:2026,title:"EU AI Act — high-risk enforcement",body:"August 2026: High-risk AI system obligations become fully enforceable. Companies using AI in employment, credit, healthcare must comply or face penalties.",tags:["EU","Enforcement","High-risk"],category:"enforcement",color:"#1B6FD4"}
+];
+
+function buildTimeline(filter) {
+  var container=document.getElementById("tl-entries");
+  if (!container) return;
+  var events=filter==="all"?timelineEvents:timelineEvents.filter(function(e){return e.category===filter;});
+  var byYear={};
+  events.forEach(function(e){if (!byYear[e.year])byYear[e.year]=[];byYear[e.year].push(e);});
+  var years=Object.keys(byYear).map(Number).sort(function(a,b){return b-a;});
+  container.innerHTML=years.map(function(year){
+    var evts=byYear[year];
+    var isRecent=year>=2024;
+    var entriesHtml=evts.map(function(e){
+      var tagsHtml=e.tags.map(function(t){return "<span class=\"tl-tag\">"+t+"</span>";}).join("");
+      return "<div class=\"tl-entry\" data-cat=\""+e.category+"\"><div class=\"tl-entry-header\"><div class=\"tl-cat-dot\" style=\"background:"+e.color+"\"></div><div class=\"tl-event-title\">"+e.title+"</div></div><div class=\"tl-event-body\">"+e.body+"</div><div class=\"tl-event-tags\">"+tagsHtml+"</div></div>";
+    }).join("");
+    return "<div class=\"tl-year-group\" data-year=\""+year+"\"><div class=\"tl-year-header\" onclick=\"toggleYearGroup("+year+")\"><span class=\"tl-year-num\">"+year+"</span><span class=\"tl-year-count\">"+evts.length+" event"+(evts.length>1?"s":"")+"</span><span class=\"tl-year-toggle\" id=\"tl-toggle-"+year+"\">"+(isRecent?"\u25be":"\u25b8")+"</span></div><div class=\"tl-year-entries"+(isRecent?"":" collapsed")+"\" id=\"tl-group-"+year+"\">"+entriesHtml+"</div></div>";
+  }).join("");
+}
+
+function toggleYearGroup(year) {
+  var group=document.getElementById("tl-group-"+year);
+  var toggle=document.getElementById("tl-toggle-"+year);
+  if (!group) return;
+  var collapsed=group.classList.toggle("collapsed");
+  toggle.textContent=collapsed?"\u25b8":"\u25be";
+}
+
+function filterTimeline(cat,btn) {
+  document.querySelectorAll(".tl-filter").forEach(function(b){b.classList.remove("active");});
+  btn.classList.add("active");
+  buildTimeline(cat);
+}
+
+// ── NEWS FEED ─────────────────────────────────────────────────────────────────
+var RSS_SOURCES = [
+  {name:"Guardian",url:"https://www.theguardian.com/technology/artificialintelligenceai/rss",color:"#0052CC"},
+  {name:"MIT",url:"https://www.technologyreview.com/feed/",color:"#E8950A"},
+  {name:"BBC",url:"http://feeds.bbci.co.uk/news/technology/rss.xml",color:"#BB1919"},
+  {name:"Reuters",url:"https://feeds.reuters.com/reuters/technologyNews",color:"#FF8000"}
+];
+var AI_KEYWORDS = ["AI","artificial intelligence","regulation","governance","policy","law","legislation","EU AI Act","OpenAI","Anthropic","algorithm","LLM","ChatGPT","machine learning"];
+var allNewsItems = [];
+var activeNewsFilter = "all";
+
+function fetchNewsFeed(source) {
+  var proxyUrl="https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(source.url)+"&count=6";
+  return fetch(proxyUrl).then(function(res){return res.json();}).then(function(data){
+    if (data.status!=="ok") return [];
+    return (data.items||[]).map(function(item){
+      return {source:source.name,color:source.color,title:item.title,link:item.link,
+              date:item.pubDate?new Date(item.pubDate).toLocaleDateString():"",
+              relevant:AI_KEYWORDS.some(function(kw){return (item.title+" "+(item.description||"")).toLowerCase().indexOf(kw.toLowerCase())!==-1;})};
+    }).filter(function(i){return i.relevant;});
+  }).catch(function(){return [];});
+}
+
+function loadAllNews() {
+  allNewsItems=[];
+  Promise.all(RSS_SOURCES.map(function(s){return fetchNewsFeed(s);})).then(function(results){
+    results.forEach(function(items){allNewsItems=allNewsItems.concat(items);});
+    allNewsItems=allNewsItems.slice(0,24);
+    var loading=document.getElementById("news-loading");
+    if (!allNewsItems.length) {
+      loading.innerHTML="Unable to load live news. <a href=\"https://www.theguardian.com/technology/artificialintelligenceai\" target=\"_blank\" style=\"color:#E8950A\">Browse Guardian AI coverage</a>";
+      return;
+    }
+    loading.style.display="none";
+    renderNews();
+  });
+}
+
+function renderNews() {
+  var grid=document.getElementById("news-grid");
+  var items=activeNewsFilter==="all"?allNewsItems:allNewsItems.filter(function(i){return i.source===activeNewsFilter;});
+  if (!items.length) { grid.innerHTML="<div style=\"color:rgba(255,255,255,.3);font-size:13px;padding:1rem\">No articles from this source yet.</div>"; return; }
+  grid.innerHTML=items.map(function(item){
+    return "<div class=\"news-card\" data-source=\""+item.source+"\"><div class=\"news-card-source\" style=\"color:"+item.color+"\">"+item.source+"</div><div class=\"news-card-title\"><a href=\""+item.link+"\" target=\"_blank\" rel=\"noopener\">"+item.title+"</a></div><div class=\"news-card-date\">"+item.date+"</div></div>";
+  }).join("");
+}
+
+function filterNews(source,btn) {
+  activeNewsFilter=source;
+  document.querySelectorAll(".news-filter").forEach(function(b){b.classList.remove("active");});
+  btn.classList.add("active");
+  renderNews();
+}
+
+// ── TABLE ─────────────────────────────────────────────────────────────────────
+function sortTable(key) {
+  if (sortKey===key) sortAsc=!sortAsc; else { sortKey=key; sortAsc=true; }
+  buildTable();
+}
+
+function buildTable() {
+  var tbody=document.getElementById("ct-body");
+  var sorted=countries.slice().sort(function(a,b){
+    var pa=getPos(a,currentYear), pb=getPos(b,currentYear);
+    var va,vb;
+    if (sortKey==="name"){va=a.name;vb=b.name;}
+    else if (sortKey==="group"){va=a.group;vb=b.group;}
+    else if (sortKey==="r"){va=pa.r;vb=pb.r;}
+    else if (sortKey==="m"){va=pa.m;vb=pb.m;}
+    else if (sortKey==="s"){va=pa.s;vb=pb.s;}
+    else{va=pa.bind;vb=pb.bind;}
+    if (va<vb)return sortAsc?-1:1; if (va>vb)return sortAsc?1:-1; return 0;
+  });
+  tbody.innerHTML="";
+  sorted.forEach(function(c){
+    var pos=getPos(c,currentYear);
+    var bCls=pos.bind>=70?"ct-bind-yes":pos.bind>=30?"ct-bind-part":"ct-bind-no";
+    var bStr=pos.bind>=70?"Yes":pos.bind>=30?"Partial":"Voluntary";
+    var tr=document.createElement("tr");
+    tr.innerHTML="<td><div class=\"ct-country\">"+c.flag+" "+c.name+"</div></td><td><span class=\"ct-model "+c.ctmClass+"\">"+c.modelLabel+"</span></td><td><span class=\""+bCls+"\">"+bStr+"</span></td><td>"+Math.round(pos.r*100)+"%</td><td>"+Math.round(pos.m*100)+"%</td><td>"+Math.round(pos.s*100)+"%</td><td><div style=\"display:flex;align-items:center;gap:6px\"><div class=\"ct-bar-wrap\"><div class=\"ct-bar\" style=\"width:"+pos.bind+"%\"></div></div></div></td>";
+    tr.addEventListener("click",function(){selectedCountry=c;openPanel(c);document.getElementById("hero").scrollIntoView({behavior:"smooth"});setTimeout(function(){draw();},400);});
+    tbody.appendChild(tr);
+  });
+}
+
+function downloadCSV(e) {
+  e.preventDefault();
+  var rows=[["Country","Flag","Model","Rights","Market","Sovereign","Enforcement","Binding"]];
+  countries.forEach(function(c){
+    var pos=getPos(c,currentYear);
+    rows.push([c.name,c.flag,c.modelLabel,Math.round(pos.r*100),Math.round(pos.m*100),Math.round(pos.s*100),Math.round(pos.bind),c.bindText]);
+  });
+  var csv=rows.map(function(r){return r.map(function(v){return "\""+v+"\"";}).join(",");}).join("\n");
+  var a=document.createElement("a");
+  a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv);
+  a.download="ai-governance-index-"+currentYear+".csv";
+  a.click();
+}
+
+// ── LANGUAGE ──────────────────────────────────────────────────────────────────
+var i18n = {
+  en: {
+    hsTag:"Transparency", hsH2:"How countries are positioned",
+    hsSub:"This index uses a ternary positioning system \u2014 not a score or ranking. Every position reflects analytical judgment based on five measurable governance dimensions, triangulated against primary legislative sources and academic literature.",
+    hsC1t:"Legislative instrument", hsC1b:"What type of governance instrument exists? Binding legislation with penalties \u2192 higher rights/sovereign score. Voluntary guidelines \u2192 higher market score.",
+    hsC2t:"Individual rights provisions", hsC2b:"Does the framework include rights to explainability, human review, or contesting automated decisions? Strong provisions \u2192 higher rights position.",
+    hsC3t:"State content control", hsC3b:"Does the framework require AI outputs to align with state values or national security priorities? State content requirements \u2192 higher sovereignty position.",
+    hsC4t:"Industry self-governance role", hsC4b:"How central is voluntary industry self-governance vs. state regulation? Primary self-governance role \u2192 higher market position.",
+    hsC5t:"Enforcement capacity", hsC5b:"Does a dedicated enforcement institution exist with technical capacity? Dot size encodes this independently \u2014 larger dots = stronger binding enforcement.",
+    hsCallout:"<strong>Important:</strong> Positions are analytical approximations based on publicly available governance documents. They reflect the dominant philosophical orientation of each framework \u2014 not a judgment of quality, effectiveness, or desirability. All positions updated to June 2026.",
+    methTag:"How it works", methH2:"Methodology",
+    methSub:"Each jurisdiction is positioned on a ternary plot based on how strongly its AI governance framework pulls toward each of three philosophical poles. Dot size independently encodes binding enforcement strength.",
+    methC1t:"Three governance philosophies", methC1b:"Rights-protective, market-oriented, and sovereignty-centered. Ternary coordinates sum to 1.0. No country is purely one model.",
+    methC2t:"Two views", methC2b:"Triangle shows three-way tension simultaneously. Compass shows individual rights vs. state control against voluntary vs. binding law \u2014 more intuitive for general audiences.",
+    methC3t:"Dot size = enforcement", methC3b:"Dot size encodes binding enforcement strength. Larger = stronger legally enforceable mechanisms with meaningful penalties.",
+    methC4t:"Timeline 2016\u20132026", methC4b:"Drag the year slider to see how governance frameworks evolved. Crisis milestones appear at key years.",
+    methCallout:"<strong>Key insight:</strong> EU and China are both large dots (strong binding enforcement) but at opposite corners. Binding enforcement and rights protection are independent dimensions \u2014 China uses binding law to enforce state control, the EU uses it to protect individual rights."
+  },
+  ja: {
+    hsTag:"\u900F\u660E\u6027", hsH2:"\u5404\u56FD\u306E\u914D\u7F6E\u306E\u8003\u3048\u65B9",
+    hsSub:"\u672C\u6307\u6570\u306F\u30B9\u30B3\u30A2\u3084\u30E9\u30F3\u30AD\u30F3\u30B0\u3067\u306F\u306A\u304F\u3001\u4E09\u5206\u56F3\u4E0A\u306E\u4F4D\u7F6E\u3065\u3051\u3092\u7528\u3044\u3066\u3044\u307E\u3059\u3002\u5404\u56FD\u306E\u4F4D\u7F6E\u306F\u3001\u4E94\u3064\u306E\u53EF\u91CF\u7684\u306A\u30AC\u30D0\u30CA\u30F3\u30B9\u6307\u6A19\u306B\u57FA\u3065\u304F\u5206\u6790\u7684\u5224\u65AD\u3067\u3042\u308A\u3001\u4E3B\u306A\u6CD5\u4EE4\u30FB\u653F\u7B56\u6587\u66F8\u304A\u3088\u3073\u5B66\u8853\u6587\u732E\u3068\u7167\u5408\u3057\u3066\u8A2D\u5B9A\u3057\u3066\u3044\u307E\u3059\u3002",
+    hsC1t:"\u6CD5\u898F\u5236\u306E\u7A2E\u985E", hsC1b:"\u3069\u306E\u3088\u3046\u306A\u30AC\u30D0\u30CA\u30F3\u30B9\u624B\u6BB5\u304C\u5B58\u5728\u3059\u308B\u304B\u3002\u7F70\u5247\u4ED8\u304D\u306E\u6CD5\u5F8B \u2192 \u6A29\u5229\u30FB\u4E3B\u6A29\u5074\u3078\u3002\u81EA\u767A\u7684\u30AC\u30A4\u30C9\u30E9\u30A4\u30F3 \u2192 \u5E02\u5834\u5074\u3078\u3002",
+    hsC2t:"\u500B\u4EBA\u306E\u6A29\u5229\u4FDD\u969C", hsC2b:"\u8AAC\u660E\u53EF\u80FD\u6027\u3001\u4EBA\u9593\u306E\u5BE9\u67FB\u3001\u81EA\u52D5\u5224\u65AD\u3078\u306E\u7570\u8B70\u7533\u7ACB\u306A\u3069\u306E\u6A29\u5229\u304C\u542B\u307E\u308C\u308B\u304B\u3002\u5145\u5B9F\u3057\u305F\u898F\u5B9A \u2192 \u6A29\u5229\u4FDD\u8B77\u5074\u3078\u3002",
+    hsC3t:"\u56FD\u5BB6\u306B\u3088\u308B\u30B3\u30F3\u30C6\u30F3\u30C4\u898F\u5236", hsC3b:"AI\u51FA\u529B\u7269\u304C\u56FD\u5BB6\u306E\u4FA1\u5024\u89B3\u3084\u5B89\u4FDD\u512A\u5148\u9805\u76EE\u306B\u5408\u81F4\u3059\u308B\u3053\u3068\u3092\u8981\u6C42\u3059\u308B\u304B\u3002\u56FD\u5BB6\u306E\u30B3\u30F3\u30C6\u30F3\u30C4\u898F\u5236 \u2192 \u4E3B\u6A29\u91CD\u8996\u5074\u3078\u3002",
+    hsC4t:"\u696D\u754C\u81EA\u4E3B\u898F\u5236\u306E\u6BD4\u91CD", hsC4b:"\u81EA\u767A\u7684\u306A\u696D\u754C\u81EA\u4E3B\u898F\u5236\u3068\u56FD\u5BB6\u898F\u5236\u306E\u3069\u3061\u3089\u304C\u4E2D\u5FC3\u304B\u3002\u696D\u754C\u81EA\u4E3B\u898F\u5236\u304C\u4E3B\u5F79 \u2192 \u5E02\u5834\u5074\u3078\u3002",
+    hsC5t:"\u57F7\u884C\u80FD\u529B", hsC5b:"\u5C02\u9580\u306E\u57F7\u884C\u6A5F\u95A2\u304C\u6280\u8853\u7684\u80FD\u529B\u3092\u6301\u3063\u3066\u5B58\u5728\u3059\u308B\u304B\u3002\u30C9\u30C3\u30C8\u306E\u5927\u304D\u3055\u306F\u3053\u308C\u3068\u72EC\u7ACB\u3057\u3066\u793A\u3057\u3001\u5927\u304D\u3044\u307BB\u3069\u5F37\u3044\u6CD5\u7684\u626F\u675F\u529B\u3092\u610F\u5473\u3057\u307E\u3059\u3002",
+    hsCallout:"<strong>\u91CD\u8981\uFF1A</strong>\u5404\u56FD\u306E\u4F4D\u7F6E\u306F\u3001\u516C\u958B\u3055\u308C\u305F\u30AC\u30D0\u30CA\u30F3\u30B9\u6587\u66F8\u306B\u57FA\u3065\u304F\u5206\u6790\u7684\u306A\u8FD1\u4F3C\u5024\u3067\u3059\u3002\u5404\u30D5\u30EC\u30FC\u30E0\u30EF\u30FC\u30AF\u306E\u4E3B\u306A\u54F2\u5B66\u7684\u5411\u304D\u3092\u793A\u3057\u3001\u54C1\u8CEA\u3084\u6709\u52B9\u6027\u3001\u5E0C\u671B\u3057\u306A\u3044\u304B\u306E\u5224\u65AD\u3067\u306F\u3042\u308A\u307E\u305B\u3093\u30022026\u5E746\u6708\u6642\u70B9\u306E\u30C7\u30FC\u30BF\u3067\u3059\u3002",
+    methTag:"\u6982\u8981", methH2:"\u65B9\u6CD5\u8AD6",
+    methSub:"\u5404\u6CD5\u57DF\u3092\u3001AI\u30AC\u30D0\u30CA\u30F3\u30B9\u30FB\u30D5\u30EC\u30FC\u30E0\u30EF\u30FC\u30AF\u304C\u4E09\u3064\u306E\u54F2\u5B66\u7684\u6975\uFF08\u6A29\u5229\u4FDD\u8B77\u30FB\u5E02\u5834\u5FD7\u5411\u30FB\u4E3B\u6A29\u91CD\u8996\uFF09\u306E\u3044\u305A\u308C\u306B\u3069\u308C\u3060\u3051\u5F15\u304D\u5BC4\u305B\u3089\u308C\u3066\u3044\u308B\u304B\u306B\u57FA\u3065\u304D\u4E09\u5206\u56F3\u4E0A\u306B\u914D\u7F6E\u3057\u307E\u3059\u3002\u30C9\u30C3\u30C8\u306E\u5927\u304D\u3055\u306F\u3001\u6CD5\u7684\u626F\u675F\u529B\u306E\u5F37\u3055\u3092\u72EC\u7ACB\u3057\u305F\u6B21\u5143\u3068\u3057\u3066\u793A\u3057\u307E\u3059\u3002",
+    methC1t:"\u4E09\u3064\u306E\u30AC\u30D0\u30CA\u30F3\u30B9\u54F2\u5B66", methC1b:"\u6A29\u5229\u4FDD\u8B77\u578B\u3001\u5E02\u5834\u5FD7\u5411\u578B\u3001\u4E3B\u6A29\u91CD\u8996\u578B\u3002\u4E09\u5206\u56F3\u306E\u5EA7\u6A19\u306E\u5408\u8A08\u306F1.0\u3002\u3044\u3065\u308C\u306E\u56FD\u3082\u5358\u4E00\u306E\u30E2\u30C7\u30EB\u3067\u306F\u3042\u308A\u307E\u305B\u3093\u3002",
+    methC2t:"\u4E8C\u3064\u306E\u8868\u793A\u30E2\u30FC\u30C9", methC2b:"\u4E09\u89D2\u5F62\u306F\u4E09\u65B9\u5411\u306E\u5F35\u529B\u3092\u540C\u6642\u306B\u8868\u793A\u3057\u307E\u3059\u3002\u30B3\u30F3\u30D1\u30B9\u306F\u300C\u500B\u4EBA\u306E\u6A29\u5229 vs \u56FD\u5BB6\u7D71\u5236\u300D\u3068\u300C\u4EFB\u610F\u7684\u6CD5 vs \u6CD5\u7684\u626F\u675F\u300D\u3092\u4E8C\u6B21\u5143\u3067\u793A\u3057\u3001\u4E00\u822C\u7684\u306A\u8AAD\u8005\u306B\u3088\u308A\u76F4\u611F\u7684\u3067\u3059\u3002",
+    methC3t:"\u30C9\u30C3\u30C8\u30B5\u30A4\u30BA\uFF1D\u57F7\u884C\u529B", methC3b:"\u30C9\u30C3\u30C8\u306E\u5927\u304D\u3055\u306F\u6CD5\u7684\u626F\u675F\u529B\u306E\u5F37\u3055\u3092\u793A\u3057\u307E\u3059\u3002\u5927\u304D\u3044\u307BB\u3069\u3001\u610F\u5473\u306E\u3042\u308B\u7F70\u5247\u4ED8\u304D\u306E\u6CD5\u7684\u30E1\u30AB\u30CB\u30BA\u30E0\u304C\u5F37\u3044\u3053\u3068\u3092\u610F\u5473\u3057\u307E\u3059\u3002",
+    methC4t:"\u30BF\u30A4\u30E0\u30E9\u30A4\u30F3\uFF082016\u20132026\u5E74\uFF09", methC4b:"\u5E74\u30B9\u30E9\u30A4\u30C0\u30FC\u3092\u52D5\u304B\u3059\u3068\u3001\u30AC\u30D0\u30CA\u30F3\u30B9\u30FB\u30D5\u30EC\u30FC\u30E0\u30EF\u30FC\u30AF\u306E\u6F14\u5909\u3092\u78BA\u8A8D\u3067\u304D\u307E\u3059\u3002\u91CD\u8981\u306A\u5E74\u306B\u306F\u30DE\u30A4\u30EB\u30B9\u30C8\u30FC\u30F3\u304C\u8868\u793A\u3055\u308C\u307E\u3059\u3002",
+    methCallout:"<strong>\u8981\u70B9\uFF1A</strong>EU\u3068\u4E2D\u56FD\u306F\u3069\u3061\u3089\u3082\u5927\u304D\u306A\u30C9\u30C3\u30C8\uFF08\u5F37\u3044\u6CD5\u7684\u626F\u675F\u529B\uFF09\u3067\u3059\u304C\u3001\u56F3\u4E0A\u3067\u306F\u5BFE\u6975\u306E\u89D2\u306B\u4F4D\u7F6E\u3057\u307E\u3059\u3002\u6CD5\u7684\u626F\u675F\u529B\u3068\u6A29\u5229\u4FDD\u8B77\u306F\u72EC\u7ACB\u3057\u305F\u6B21\u5143\u3067\u3042\u308A\u3001\u4E2D\u56FD\u306F\u6CD5\u3092\u56FD\u5BB6\u7D71\u5236\u306B\u3001EU\u306F\u500B\u4EBA\u306E\u6A29\u5229\u4FDD\u8B77\u306B\u7528\u3044\u3066\u3044\u307E\u3059\u3002"
+  }
+};
+
+function applySectionI18n(lang) {
+  var t = i18n[lang];
+  document.getElementById("hs-tag").textContent = t.hsTag;
+  document.getElementById("hs-h2").textContent = t.hsH2;
+  document.getElementById("hs-sub").textContent = t.hsSub;
+  document.getElementById("hs-c1t").textContent = t.hsC1t;
+  document.getElementById("hs-c1b").textContent = t.hsC1b;
+  document.getElementById("hs-c2t").textContent = t.hsC2t;
+  document.getElementById("hs-c2b").textContent = t.hsC2b;
+  document.getElementById("hs-c3t").textContent = t.hsC3t;
+  document.getElementById("hs-c3b").textContent = t.hsC3b;
+  document.getElementById("hs-c4t").textContent = t.hsC4t;
+  document.getElementById("hs-c4b").textContent = t.hsC4b;
+  document.getElementById("hs-c5t").textContent = t.hsC5t;
+  document.getElementById("hs-c5b").textContent = t.hsC5b;
+  document.getElementById("hs-callout").innerHTML = t.hsCallout;
+  document.getElementById("meth-tag").textContent = t.methTag;
+  document.getElementById("meth-h2").textContent = t.methH2;
+  document.getElementById("meth-sub").textContent = t.methSub;
+  document.getElementById("meth-c1t").textContent = t.methC1t;
+  document.getElementById("meth-c1b").textContent = t.methC1b;
+  document.getElementById("meth-c2t").textContent = t.methC2t;
+  document.getElementById("meth-c2b").textContent = t.methC2b;
+  document.getElementById("meth-c3t").textContent = t.methC3t;
+  document.getElementById("meth-c3b").textContent = t.methC3b;
+  document.getElementById("meth-c4t").textContent = t.methC4t;
+  document.getElementById("meth-c4b").textContent = t.methC4b;
+  document.getElementById("meth-callout").innerHTML = t.methCallout;
+}
+
+function toggleLang() {
+  currentLang=currentLang==="en"?"ja":"en";
+  var btn=document.getElementById("lang-btn");
+  btn.textContent=currentLang==="ja"?"English":"\u65E5\u672C\u8A9E";
+  btn.classList.toggle("ja",currentLang==="ja");
+  var isJa=currentLang==="ja";
+  document.getElementById("hero-title").textContent=isJa?"\u30B0\u30ED\u30FC\u30D0\u30EBAI\u30AC\u30D0\u30CA\u30F3\u30B9\u6307\u6570":"Global AI Governance";
+  document.getElementById("hero-sub").textContent=isJa?"\u30C9\u30C3\u30C8\u306E\u5927\u304D\u3055\uFF1D\u6CD5\u7684\u626F\u675F\u529B\u3002\u5730\u57DF\u3092\u9078\u3073\u3066\u8868\u793A\u300212\u57FA\u6E96\u56FD\u306F\u5E38\u6642\u30AB\u30E9\u30FC\u3002":"Dot size = binding enforcement. Pick a region to explore. 12 benchmarks shown in color by default.";
+  document.getElementById("sb-region").textContent=isJa?"\u5730\u57DF":"Region";
+  document.getElementById("r-world").textContent=isJa?"\u4E16\u754C":"World";
+  document.getElementById("r-asia").textContent=isJa?"\u30A2\u30B8\u30A2":"Asia";
+  document.getElementById("r-europe").textContent=isJa?"\u30E8\u30FC\u30ED\u30C3\u30D1":"Europe";
+  document.getElementById("r-africa").textContent=isJa?"\u30A2\u30D5\u30EA\u30AB":"Africa";
+  document.getElementById("r-americas").textContent=isJa?"\u7C73\u6D32":"Americas";
+  document.getElementById("r-oceania").textContent=isJa?"\u30AA\u30BB\u30A2\u30CB\u30A2":"Oceania";
+  document.getElementById("r-middle").textContent=isJa?"\u4E2D\u6771":"Middle East";
+  document.getElementById("r-global").textContent=isJa?"\u56FD\u969B":"Global";
+  document.getElementById("sb-filter").textContent=isJa?"\u30E2\u30C7\u30EB":"Model";
+  document.getElementById("sb-size").textContent=isJa?"\u30C9\u30C3\u30C8\u30B5\u30A4\u30BA\uFF1D\u57F7\u884C\u529B":"Dot size = enforcement";
+  document.getElementById("sb-compare").textContent=isJa?"\u6BD4\u8F03\u30E2\u30FC\u30C9":"Compare mode";
+  document.getElementById("sb-glance").textContent=isJa?"\u6982\u8981":"At a glance";
+  document.getElementById("f-all").textContent=isJa?"\u3059\u3079\u3066":"All";
+  document.getElementById("f-rights").textContent=isJa?"\u6A29\u5229\u30D9\u30FC\u30B9":"Rights-based";
+  document.getElementById("f-market").textContent=isJa?"\u5E02\u5834\u5FD7\u5411":"Market-oriented";
+  document.getElementById("f-sovereign").textContent=isJa?"\u4E3B\u6A29\u91CD\u8996":"Sovereignty";
+  document.getElementById("f-hybrid").textContent=isJa?"\u30CF\u30A4\u30D6\u30EA\u30C3\u30C9":"Hybrid";
+  document.getElementById("sz-strong").textContent=isJa?"\u5F37\u3044\u6CD5\u7684\u626F\u675F\u529B":"Strong binding";
+  document.getElementById("compare-btn-text").textContent=isJa?"2\u56FD\u3092\u9078\u629E":"Select 2 countries";
+  document.getElementById("sz-mod").textContent=isJa?"\u4E2D\u7A0B\u5EA6":"Moderate";
+  document.getElementById("sz-part").textContent=isJa?"\u90E8\u5206\u7684":"Partial";
+  document.getElementById("sz-vol").textContent=isJa?"\u81EA\u767A\u7684":"Voluntary";
+  document.getElementById("nav-map").textContent=isJa?"\u5730\u56F3":"Map";
+  document.getElementById("nav-method").textContent=isJa?"\u65B9\u6CD5\u8AD6":"Methodology";
+  document.getElementById("nav-data").textContent=isJa?"\u30C7\u30FC\u30BF":"Data";
+  document.getElementById("glossary-title-text").textContent=isJa?"AI\u30AC\u30D0\u30CA\u30F3\u30B9\u7528\u8A9E\u96C6":"AI Governance Glossary";
+  document.getElementById("vt-tri").innerHTML=isJa?"&#9651; \u4E09\u89D2\u5F62":"&#9651; Triangle";
+  document.getElementById("vt-comp").innerHTML=isJa?"&#10010; \u30B3\u30F3\u30D1\u30B9":"&#10010; Compass";
+  applySectionI18n(currentLang);
+  updateCrisisOverlay(currentYear);
+  draw();
+  if (selectedCountry) openPanel(selectedCountry);
+}
+
+function updateStats() {
+  var mapped = document.getElementById("stat-mapped");
+  var binding = document.getElementById("stat-binding");
+  if (mapped) mapped.textContent = countries.length;
+  if (binding) {
+    var n = 0;
+    for (var i = 0; i < countries.length; i++) {
+      if (getPos(countries[i], currentYear).bind >= 70) n++;
+    }
+    binding.textContent = n;
+  }
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+window.addEventListener("resize",resize);
+var canvasWrapEl=document.getElementById("canvas-wrap");
+if (typeof ResizeObserver!=="undefined"&&canvasWrapEl) {
+  new ResizeObserver(resize).observe(canvasWrapEl);
+}
+updateCrisisOverlay(currentYear);
+resize();
+updateStats();
+buildTable();
+buildTimeline("all");
+renderGlossary("");
+loadAllNews();
+
+</script>
+</body>
+</html>

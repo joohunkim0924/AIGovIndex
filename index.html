@@ -265,7 +265,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
 <section id="hero">
   <div class="hero-grid">
     <div class="hero-title-cell">
-      <div class="hero-title" id="hero-title">Global AI Governance</div>
+      <div class="hero-title" id="hero-title">Global AI Governance <em>Philosophy</em></div>
     </div>
     <div class="hero-controls-cell">
       <div class="hero-sub" id="hero-sub">Dot size = binding enforcement. Pick a region to explore. Benchmarks highlights 12 jurisdictions with the most comprehensive AI governance laws.</div>
@@ -2238,7 +2238,7 @@ function applyUiLang() {
   btn.textContent=currentLang==="ja"?"English":"\u65E5\u672C\u8A9E";
   btn.classList.toggle("ja",currentLang==="ja");
   var isJa=currentLang==="ja";
-  document.getElementById("hero-title").textContent=isJa?"\u30B0\u30ED\u30FC\u30D0\u30EBAI\u30AC\u30D0\u30CA\u30F3\u30B9\u6307\u6570":"Global AI Governance";
+  document.getElementById("hero-title").innerHTML=isJa?"\u30B0\u30ED\u30FC\u30D0\u30EBAI\u30AC\u30D0\u30CA\u30F3\u30B9<em>\u54F2\u5B66</em>":"Global AI Governance <em>Philosophy</em>";
   document.getElementById("hero-sub").textContent=isJa?"\u30C9\u30C3\u30C8\u306E\u5927\u304D\u3055\uFF1D\u6CD5\u7684\u626F\u675F\u529B\u3002\u5730\u57DF\u3092\u9078\u3073\u3066\u8868\u793A\u3002\u30D9\u30F3\u30C1\u30DE\u30FC\u30AF\u306FAI\u6CD5\u5236\u304C\u5145\u5B9F\u306A12\u56FD\u3002":"Dot size = binding enforcement. Pick a region to explore. Benchmarks highlights 12 jurisdictions with the most comprehensive AI governance laws.";
   document.getElementById("sb-region").textContent=isJa?"\u5730\u57DF":"Region";
   document.getElementById("r-all").textContent=isJa?"\u3059\u3079\u3066":"All";

@@ -27,6 +27,7 @@
       toc10: "10. Primary source basis",
       s1tag: "Section 1",
       s1h2: "Overview & core formula",
+      s1scope: "This index measures governance philosophy as expressed in binding primary legal documents and official policy instruments, not enforcement outcomes or regulatory effectiveness.",
       s1precision: "<strong>Precision.</strong> With 10 indicators per dimension scored 0\u20132, each raw score ranges from 0 to 20. The maximum total is 60, giving a minimum step size of 1/60 \u2248 0.017 after normalization. Coordinates are rounded to two decimal places. The honest uncertainty at that precision is <strong>\u00b10.02</strong>, corresponding to a single indicator being scored one level differently by another researcher applying the same rubric to the same document. All indicators are weighted equally to minimize researcher subjectivity.",
       s2tag: "Section 2",
       s2h2: "The three-level scoring scale",
@@ -93,7 +94,7 @@
       src6: "National AI strategies where adopted by formal government decision (not consultation documents)",
       src7: "OECD AI Policy Observatory database for cross-verification",
       src8: "Stanford HAI AI Index 2026 for secondary validation of key facts",
-      callout: "<strong>Position \u2260 ranking.</strong> The formula produces a location in three-dimensional governance space, not a score from good to bad. A country positioned near the sovereignty corner is not worse than one near the rights corner \u2014 it reflects a different philosophy about what AI governance is for. The formula makes that philosophy visible and contestable, which is the point.",
+      callout: "<strong>Position \u2260 ranking.</strong> The formula produces a location in three-dimensional governance space, not a score from good to bad. A country positioned near the sovereignty corner is not worse than one near the rights corner \u2014 it reflects a different stated philosophy about what AI governance is for, as expressed in primary legal documents. The formula makes that philosophy visible and contestable, which is the point.",
       backBtn: "\u2190 Back to the map",
       pageTitle: "Methodology \u2014 Global AI Governance Index"
     },
@@ -122,6 +123,7 @@
       toc10: "10. \u4e00\u6b21\u8cc7\u6599\u306e\u57fa\u6e96",
       s1tag: "\u7b2c1\u7ae0",
       s1h2: "\u6982\u8981\u3068\u6838\u5fc3\u7b97\u5f0f",
+      s1scope: "\u672c\u6307\u6570\u306f\u3001\u7d81\u5b9a\u529b\u306e\u3042\u308b\u4e00\u6b21\u6cd5\u4ee4\u304a\u3088\u3073\u516c\u5f0f\u306e\u653f\u7b56\u6587\u66f8\u306b\u8868\u308c\u305f\u30ac\u30d0\u30ca\u30f3\u30b9\u54f2\u5b66\u3092\u6e2c\u5b9a\u3059\u308b\u3082\u306e\u3067\u3042\u308a\u3001\u57f7\u884c\u306e\u6210\u679c\u3084\u898f\u5236\u306e\u5b9f\u52b9\u6027\u3092\u6e2c\u5b9a\u3059\u308b\u3082\u306e\u3067\u306f\u3042\u308a\u307e\u305b\u3093\u3002",
       s1precision: "<strong>\u7cbe\u5ea6\u3002</strong>\u6b21\u5143\u3054\u3068\u306b10\u6307\u6a19\u30920\u301c2\u3067\u63a1\u70b9\u3059\u308b\u3068\u3001\u5404\u751f\u30b9\u30b3\u30a2\u306f0\u301c20\u306e\u7bc4\u56f2\u306b\u306a\u308a\u307e\u3059\u3002\u5408\u8a08\u306e\u6700\u5927\u5024\u306f60\u3067\u3001\u6b63\u898f\u5316\u5f8c\u306e\u6700\u5c0f\u6b65\u9577\u306f1/60\u22480.017\u3067\u3059\u3002\u5ea7\u6a19\u306f\u5c0f\u6570\u7b2c2\u4f4d\u307e\u3067\u4e38\u3081\u307e\u3059\u3002\u305d\u306e\u7cbe\u5ea6\u3067\u306e\u5b9f\u8cea\u7684\u306a\u4e0d\u78ba\u5b9f\u6027\u306f<strong>\u00b10.02</strong>\u3067\u3001\u540c\u3058\u30eb\u30fc\u30d6\u30ea\u30c3\u30af\u3092\u9069\u7528\u3057\u305f\u5225\u306e\u7814\u7a76\u8005\u304c1\u6307\u6a19\u3060\u30511\u6bb5\u968e\u7570\u306a\u308b\u63a1\u70b9\u3092\u3057\u305f\u5834\u5408\u306b\u5bfe\u5fdc\u3057\u307e\u3059\u3002\u3059\u3079\u3066\u306e\u6307\u6a19\u306f\u540c\u91cd\u307f\u3067\u3001\u7814\u7a76\u8005\u306e\u4e3b\u89b3\u6027\u3092\u6700\u5c0f\u5316\u3059\u308b\u305f\u3081\u306e\u610f\u56f3\u7684\u306a\u9078\u629e\u3067\u3059\u3002",
       s2tag: "\u7b2c2\u7ae0",
       s2h2: "3\u6bb5\u968e\u306e\u63a1\u70b9\u30b9\u30b1\u30fc\u30eb",
@@ -188,7 +190,7 @@
       src6: "\u653f\u5e9c\u6c7a\u5b9a\u306b\u3088\u308a\u63a1\u629e\u3055\u308c\u305f\u56fd\u5225AI\u6226\u7565\uff08\u30d1\u30d6\u30ea\u30c3\u30af\u30b3\u30e1\u30f3\u30c8\u9664\u304f\uff09",
       src7: "OECD AI Policy Observatory\u30c7\u30fc\u30bf\u30d9\u30fc\u30b9\uff08\u4e92\u63db\u691c\u8a3c\uff09",
       src8: "Stanford HAI AI Index 2026\uff08\u4e8b\u5b9f\u306e\u4e8c\u6b21\u691c\u8a3c\uff09",
-      callout: "<strong>\u4f4d\u7f6e \u2260 \u30e9\u30f3\u30ad\u30f3\u30b0\u3002</strong>\u7b97\u5f0f\u304c\u751f\u307f\u51fa\u3059\u306e\u306f\u826f\u3044\u304b\u60aa\u3044\u304b\u306e\u30b9\u30b3\u30a2\u3067\u306f\u306a\u304f\u3001\u4e09\u6b21\u5143\u306e\u30ac\u30d0\u30ca\u30f3\u30b9\u7a7a\u9593\u3067\u306e\u4f4d\u7f6e\u3067\u3059\u3002\u4e3b\u6a29\u5074\u306b\u914d\u7f6e\u3055\u308c\u305f\u56fd\u304c\u6a29\u5229\u5074\u3088\u308a\u60aa\u3044\u308f\u3051\u3067\u306f\u3042\u308a\u307e\u305b\u3093\u3002AI\u30ac\u30d0\u30ca\u30f3\u30b9\u306e\u76ee\u7684\u306b\u95a2\u3059\u308b\u7570\u306a\u308b\u54f2\u5b66\u3092\u53cd\u6620\u3057\u3066\u3044\u307e\u3059\u3002\u7b97\u5f0f\u306f\u305d\u306e\u54f2\u5b66\u3092\u53ef\u8996\u5316\u3057\u3001\u8ad6\u629b\u306e\u5bfe\u8c61\u306b\u3059\u308b\u3053\u3068\u304c\u76ee\u7684\u3067\u3059\u3002",
+      callout: "<strong>\u4f4d\u7f6e \u2260 \u30e9\u30f3\u30ad\u30f3\u30b0\u3002</strong>\u7b97\u5f0f\u304c\u751f\u307f\u51fa\u3059\u306e\u306f\u826f\u3044\u304b\u60aa\u3044\u304b\u306e\u30b9\u30b3\u30a2\u3067\u306f\u306a\u304f\u3001\u4e09\u6b21\u5143\u306e\u30ac\u30d0\u30ca\u30f3\u30b9\u7a7a\u9593\u3067\u306e\u4f4d\u7f6e\u3067\u3059\u3002\u4e3b\u6a29\u5074\u306b\u914d\u7f6e\u3055\u308c\u305f\u56fd\u304c\u6a29\u5229\u5074\u3088\u308a\u60aa\u3044\u308f\u3051\u3067\u306f\u3042\u308a\u307e\u305b\u3093\u3002\u4e00\u6b21\u6cd5\u4ee4\u306b\u8868\u308c\u305fAI\u30ac\u30d0\u30ca\u30f3\u30b9\u306e\u76ee\u7684\u306b\u95a2\u3059\u308b\u7570\u306a\u308b\u6587\u66f8\u4e0a\u306e\u54f2\u5b66\u3092\u53cd\u6620\u3057\u3066\u3044\u307e\u3059\u3002\u7b97\u5f0f\u306f\u305d\u306e\u54f2\u5b66\u3092\u53ef\u8996\u5316\u3057\u3001\u8ad6\u629b\u306e\u5bfe\u8c61\u306b\u3059\u308b\u3053\u3068\u304c\u76ee\u7684\u3067\u3059\u3002",
       backBtn: "\u2190 \u5730\u56f3\u306b\u623b\u308b",
       pageTitle: "\u65b9\u6cd5\u8ad6 \u2014 \u30b0\u30ed\u30fc\u30d0\u30ebAI\u30ac\u30d0\u30ca\u30f3\u30b9\u6307\u6570"
     }

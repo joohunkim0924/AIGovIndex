@@ -79,6 +79,7 @@ input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);curs
 .compare-btn.on{background:rgba(232,149,10,.15);border-color:var(--amber);color:var(--amber);}
 .compare-selected{font-size:11px;color:rgba(255,255,255,.4);min-height:0;line-height:1.5;margin-top:4px;}
 .compare-selected:empty{display:none;}
+.hero-attribution{font-size:9px;color:rgba(255,255,255,.28);text-align:right;line-height:1.45;width:100%;max-width:560px;}
 .about-text{font-size:11px;color:rgba(255,255,255,.35);line-height:1.55;}
 .about-text a{color:var(--amber);text-decoration:none;}
 #canvas-wrap{grid-column:2;grid-row:2;position:relative;overflow:hidden;min-height:0;}
@@ -238,6 +239,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
   .hero-title{font-size:1.35rem;}
   .controls-stack{align-items:stretch;max-width:none;}
   #crisis-banner{width:min(168px,calc(100% - 20px));top:8px;right:8px;}
+  .hero-attribution{text-align:right;max-width:none;}
   .cp-grid{grid-template-columns:1fr;}
 }
 </style>
@@ -279,6 +281,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
             <input type="range" class="tl-range" id="timeline" min="2016" max="2026" value="2026" step="1" oninput="setYear(parseInt(this.value))">
           </div>
         </div>
+        <div class="hero-attribution" id="about-text">Joohun Kim, Brown University (AI Governance Association Japan, Princeton University PIT-SF). Updated June 2026.</div>
       </div>
     </div>
     <div id="sidebar">
@@ -336,10 +339,6 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
           <div class="stat-card"><div class="stat-num" id="stat-indicators">30</div><div class="stat-lbl" id="stat-lbl-indicators">Indicators</div></div>
         </div>
         <p class="stat-footnote" id="stat-footnote-docs"><span id="stat-footnote-docs-text">32 jurisdictions have full primary-source scoring documentation.</span> <a href="methodology.html#all-scores" id="stat-footnote-docs-link">View methodology &rarr;</a></p>
-      </div>
-      <div class="sb-section">
-        <div class="sb-label">About</div>
-        <div class="about-text" id="about-text">Joohun Kim, Brown University (AI Governance Association Japan, Princeton University PIT-SF). Updated June 2026.</div>
       </div>
     </div>
     <div id="canvas-wrap">

@@ -65,4 +65,6 @@
   }
 
   window.renderMethIndicatorTables = renderIndicatorTables;
+  window.INDICATOR_ROWS = ROWS;
+  window.INDICATOR_DIMS = DIMS;
 })();

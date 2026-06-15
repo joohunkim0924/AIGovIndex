@@ -77,8 +77,11 @@ input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);curs
 .stat-footnote a:hover{text-decoration:underline;}
 .compare-btn{width:100%;padding:5px;border-radius:5px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.5);font-size:11px;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;}
 .compare-btn.on{background:rgba(232,149,10,.15);border-color:var(--amber);color:var(--amber);}
-.compare-selected{font-size:11px;color:rgba(255,255,255,.4);min-height:0;line-height:1.5;margin-top:4px;}
+.compare-selected{font-size:11px;color:rgba(255,255,255,.4);min-height:0;line-height:1.5;margin-top:4px;display:flex;flex-direction:column;gap:3px;}
 .compare-selected:empty{display:none;}
+.cp-chip{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:11px;color:rgba(255,255,255,.5);padding:3px 6px;background:rgba(255,255,255,.04);border-radius:4px;}
+.cp-chip-x{background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;font-size:13px;padding:0;line-height:1;}
+.cp-chip-x:hover{color:var(--off);}
 .hero-attribution{font-size:9px;color:rgba(255,255,255,.28);text-align:right;line-height:1.45;width:100%;max-width:560px;}
 .about-text{font-size:11px;color:rgba(255,255,255,.35);line-height:1.55;}
 .about-text a{color:var(--amber);text-decoration:none;}
@@ -117,6 +120,31 @@ input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);curs
 .panel-desc{font-size:12px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:.7rem;}
 .panel-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:.7rem;}
 .panel-tag{font-size:10px;padding:2px 8px;border-radius:3px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);}
+.panel-indicators{margin-top:.2rem;border-top:1px solid rgba(255,255,255,.08);padding-top:.6rem;}
+.ind-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;padding:6px 8px;border-radius:5px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:rgba(255,255,255,.55);font-size:11px;cursor:pointer;font-family:"Inter",sans-serif;text-align:left;}
+.ind-toggle:hover{color:var(--off);border-color:rgba(255,255,255,.18);}
+.ind-toggle-arrow{font-size:10px;opacity:.5;transition:transform .2s;}
+.ind-toggle.open .ind-toggle-arrow{transform:rotate(180deg);}
+.ind-body{display:none;margin-top:.6rem;max-height:220px;overflow-y:auto;padding-right:4px;}
+.ind-body.open{display:block;}
+.ind-dim{margin-bottom:.65rem;}
+.ind-dim-hd{font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.35rem;font-weight:600;}
+.ind-dim-hd.r{color:#6BAFF4;}.ind-dim-hd.m{color:#6DBF8C;}.ind-dim-hd.s{color:#E8950A;}
+.ind-row{display:flex;align-items:flex-start;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px;}
+.ind-code{font-weight:700;min-width:26px;flex-shrink:0;}
+.ind-code.r{color:#6BAFF4;}.ind-code.m{color:#6DBF8C;}.ind-code.s{color:#E8950A;}
+.ind-name{flex:1;color:rgba(255,255,255,.5);line-height:1.35;min-width:0;}
+.ind-dots{display:flex;gap:3px;flex-shrink:0;padding-top:2px;}
+.ind-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.1);}
+.ind-dot.on.r{background:#6BAFF4;}.ind-dot.on.m{background:#6DBF8C;}.ind-dot.on.s{background:#E8950A;}
+.ind-agg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:.5rem;}
+.ind-agg-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:8px;text-align:center;}
+.ind-agg-num{font-family:"DM Serif Display",serif;font-size:1.3rem;line-height:1;}
+.ind-agg-lbl{font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;text-transform:uppercase;}
+.ind-agg-card.r .ind-agg-num{color:#6BAFF4;}.ind-agg-card.m .ind-agg-num{color:#6DBF8C;}.ind-agg-card.s .ind-agg-num{color:#E8950A;}
+.ind-pdf-note{font-size:10px;color:rgba(255,255,255,.4);line-height:1.55;margin-top:.5rem;}
+.ind-pdf-note a{color:var(--amber);text-decoration:none;}
+.ind-pdf-note a:hover{text-decoration:underline;}
 .share-btn{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:5px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.5);font-size:11px;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;}
 .share-btn.copied{border-color:var(--amber);color:var(--amber);}
 .explainer-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
@@ -138,18 +166,26 @@ input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);curs
 .annotation-meta{font-size:10px;color:rgba(255,255,255,.3);display:flex;justify-content:space-between;}
 .annotation-delete{cursor:pointer;color:rgba(255,255,255,.2);font-size:10px;border:none;background:transparent;font-family:"Inter",sans-serif;}
 .annotation-empty{font-size:12px;color:rgba(255,255,255,.25);text-align:center;padding:1rem 0;font-style:italic;}
-#compare-panel{position:fixed;bottom:-100%;left:0;right:0;background:var(--navy2);border-top:1px solid rgba(255,255,255,.1);border-radius:16px 16px 0 0;z-index:90;transition:bottom .4s cubic-bezier(.4,0,.2,1);max-height:60vh;overflow:hidden;}
+#compare-panel{position:fixed;bottom:-100%;left:0;right:0;background:var(--navy2);border-top:1px solid rgba(255,255,255,.1);border-radius:16px 16px 0 0;z-index:90;transition:bottom .4s cubic-bezier(.4,0,.2,1);max-height:62vh;overflow:hidden;}
 #compare-panel.open{bottom:0;}
-.cp-inner{padding:1rem 1.5rem 1.5rem;overflow-y:auto;max-height:calc(60vh - 24px);}
-.cp-title{font-family:"DM Serif Display",serif;font-size:1.2rem;color:var(--off);margin-bottom:.8rem;}
-.cp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.cp-inner{padding:1rem 1.5rem 1.5rem;overflow-y:auto;max-height:calc(62vh - 24px);}
+.cp-header{display:flex;justify-content:space-between;align-items:flex-start;gap:.8rem;margin-bottom:.8rem;}
+.cp-title{font-family:"DM Serif Display",serif;font-size:1.15rem;color:var(--off);line-height:1.3;}
+.cp-year{font-size:11px;color:var(--amber);margin-top:3px;letter-spacing:.04em;}
+.cp-reset{padding:4px 10px;border-radius:5px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.45);font-size:10px;cursor:pointer;font-family:"Inter",sans-serif;white-space:nowrap;flex-shrink:0;}
+.cp-reset:hover{color:var(--off);border-color:rgba(255,255,255,.22);}
+.cp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.8rem;}
 .cp-country{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:.8rem;}
-.cp-name{display:flex;align-items:center;gap:8px;margin-bottom:.6rem;}
-.cp-flag{font-size:1.3rem;}.cp-cname{font-weight:600;font-size:13px;color:var(--off);}
-.cp-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:12px;}
-.cp-row-label{color:rgba(255,255,255,.4);}.cp-row-val{font-weight:500;color:var(--off);}
-.cp-bar-wrap{width:55px;height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;display:inline-block;vertical-align:middle;margin-right:5px;}
-.cp-bar-fill{height:100%;border-radius:2px;}
+.cp-name{display:flex;align-items:center;gap:8px;margin-bottom:.35rem;width:100%;}
+.cp-flag{font-size:1.3rem;flex-shrink:0;}.cp-cname{font-weight:600;font-size:13px;color:var(--off);flex:1;min-width:0;}
+.cp-remove{margin-left:auto;background:transparent;border:none;color:rgba(255,255,255,.35);font-size:16px;cursor:pointer;line-height:1;padding:0 4px;flex-shrink:0;}
+.cp-remove:hover{color:var(--off);}
+.cp-start{font-size:10px;color:rgba(255,255,255,.35);margin-bottom:.45rem;}
+.cp-unmapped{font-size:11px;color:rgba(255,255,255,.32);font-style:italic;padding:.3rem 0;line-height:1.45;}
+.cp-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:12px;gap:6px;}
+.cp-row-label{color:rgba(255,255,255,.4);flex-shrink:0;}.cp-row-val{font-weight:500;color:var(--off);display:flex;align-items:center;gap:5px;min-width:0;}
+.cp-bar-wrap{width:52px;height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;flex-shrink:0;}
+.cp-bar-fill{height:100%;border-radius:2px;transition:width .25s ease;}
 .cp-close{display:block;width:100%;margin-top:.8rem;padding:7px;border-radius:5px;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.4);font-size:12px;cursor:pointer;font-family:"Inter",sans-serif;}
 #glossary-panel{position:fixed;top:52px;right:-380px;width:360px;height:calc(100vh - 52px);background:var(--navy2);border-left:1px solid rgba(255,255,255,.1);z-index:150;transition:right .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow:hidden;}
 #glossary-panel.open{right:0;}
@@ -326,8 +362,8 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
         </div>
       </div>
       <div class="sb-section">
-        <div class="sb-label" id="sb-compare">Compare mode</div>
-        <button class="compare-btn" id="compare-toggle" onclick="toggleCompare()">&#9776; <span id="compare-btn-text">Select 2 countries</span></button>
+        <div class="sb-label" id="sb-compare">Compare</div>
+        <button class="compare-btn" id="compare-toggle" onclick="toggleCompare()"><span id="compare-btn-text">Compare</span></button>
         <div class="compare-selected" id="compare-selected"></div>
       </div>
       <div class="sb-section">
@@ -396,6 +432,13 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
       </div>
       <div class="panel-desc" id="p-desc"></div>
       <div class="panel-tags" id="p-tags"></div>
+      <div class="panel-indicators" id="panel-indicators">
+        <button type="button" class="ind-toggle" id="ind-toggle" onclick="toggleIndicatorPanel()">
+          <span id="ind-toggle-label">Show indicator scores</span>
+          <span class="ind-toggle-arrow" id="ind-toggle-arrow">&#9660;</span>
+        </button>
+        <div class="ind-body" id="ind-body"></div>
+      </div>
     </div>
     <div class="tab-content" id="tc-explainer">
       <div class="explainer-grid" id="p-exp-grid"></div>
@@ -418,9 +461,15 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
 <div id="compare-panel">
   <div class="panel-drag"></div>
   <div class="cp-inner">
-    <div class="cp-title" id="cp-title">Comparing countries</div>
+    <div class="cp-header">
+      <div>
+        <div class="cp-title" id="cp-title">Comparing countries</div>
+        <div class="cp-year" id="cp-year"></div>
+      </div>
+      <button type="button" class="cp-reset" id="cp-reset-btn" onclick="resetCompare()">Clear all</button>
+    </div>
     <div class="cp-grid" id="cp-grid"></div>
-    <button class="cp-close" onclick="closeCompare()" id="close-compare-btn">Close comparison</button>
+    <button class="cp-close" onclick="exitCompareMode()" id="close-compare-btn">Exit compare mode</button>
   </div>
 </div>
 
@@ -514,6 +563,8 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
 </section>
 
 <footer>&copy; 2026 Joohun Kim &middot; Research by Joohun Kim, Brown University (AI Governance Association, Tokyo; Siegel PIT-SF Fellowship, Princeton CITP) &middot; All rights reserved</footer>
+<script src="meth-indicators.js"></script>
+<script src="country-scoring-data.js"></script>
 <script src="timeline-i18n.js"></script>
 <script>
 // ── DATA ──────────────────────────────────────────────────────────────────────
@@ -1045,6 +1096,8 @@ var hoveredCountry = null;
 var highlightedCountry = null;
 var compareMode = false;
 var compareList = [];
+var MAX_COMPARE = 3;
+var indicatorsPanelOpen = false;
 var sortKey = "name";
 var sortAsc = true;
 var viewMode = "triangle";
@@ -1331,7 +1384,7 @@ canvas.addEventListener("mousemove",function(e){
     document.getElementById("tt-bind").textContent=c.bindText;
     document.getElementById("tt-doc").textContent=c.documented?"✓ Fully documented":"◌ Preliminary score";
     document.getElementById("tt-doc").style.color=c.documented?"rgba(100,220,100,0.8)":"rgba(255,200,80,0.8)";
-    document.getElementById("tt-hint").textContent=compareMode?"Click to compare":"Click to explore";
+    document.getElementById("tt-hint").textContent=compareMode?(compareList.length>=MAX_COMPARE?(currentLang==="ja"?"最大3国まで":"Maximum 3 countries"):(currentLang==="ja"?"クリックして比較に追加":"Click to add to comparison")):"Click to explore";
     var rect=canvas.getBoundingClientRect();
     var lx=e.clientX-rect.left+14, ly=e.clientY-rect.top-10;
     if (lx+205>W) lx=e.clientX-rect.left-215;
@@ -1353,11 +1406,11 @@ canvas.addEventListener("click",function(e){
     if (c) {
       if (compareList.some(function(cc){return cc.id===c.id;})) {
         compareList=compareList.filter(function(cc){return cc.id!==c.id;});
-      } else if (compareList.length<2) {
+      } else if (compareList.length<MAX_COMPARE) {
         compareList.push(c);
       }
       updateCompareSidebar();
-      if (compareList.length===2) showCompare();
+      updateComparePanel();
     }
   } else {
     if (c) { selectedCountry=c; openPanel(c); }
@@ -1372,6 +1425,7 @@ function setView(v,btn) {
   document.querySelectorAll(".vt-btn").forEach(function(b){b.classList.remove("active");});
   btn.classList.add("active");
   draw();
+  if (compareList.length>=2) updateComparePanel();
 }
 
 var crisisMilestones = {
@@ -1482,6 +1536,7 @@ function setYear(y) {
   draw();
   buildTable();
   updateStats();
+  if (compareList.length>=2) updateComparePanel();
 }
 
 function setFilter(f,btn) {
@@ -1644,6 +1699,7 @@ function openPanel(c) {
   document.getElementById("p-desc").textContent=(currentLang==="ja"&&jaData2&&jaData2.desc)?jaData2.desc:c.desc;
   var activeTags=(currentLang==="ja"&&jaData2&&jaData2.tags)?jaData2.tags:c.tags;
   document.getElementById("p-tags").innerHTML=activeTags.map(function(t){return "<span class=\"panel-tag\">"+t+"</span>";}).join("");
+  populateIndicatorSection(c);
   populatePanelTabs(c);
   document.querySelectorAll(".panel-tab").forEach(function(b){b.classList.remove("active");});
   document.querySelectorAll(".tab-content").forEach(function(cc){cc.classList.remove("active");});
@@ -1677,48 +1733,217 @@ function switchTab(tab,btn) {
   document.getElementById("tc-"+tab).classList.add("active");
 }
 
+function getIndicatorPanelLabels() {
+  var isJa=currentLang==="ja";
+  return {
+    show:isJa?"指標スコアを表示":"Show indicator scores",
+    hide:isJa?"指標スコアを隠す":"Hide indicator scores",
+    dimR:isJa?"権利次元":"Rights Dimension",
+    dimM:isJa?"市場次元":"Market Dimension",
+    dimS:isJa?"主権次元":"Sovereign Dimension",
+    rawR:isJa?"R 合計":"R raw",
+    rawM:isJa?"M 合計":"M raw",
+    rawS:isJa?"S 合計":"S raw",
+    aggregateNote:isJa?"指標別の内訳はスコアリング文書で公開（該当する場合）:":"Full indicator breakdown available in the scoring documentation PDF",
+    pdfFull:isJa?"完全な指標別スコアカード:":"Full indicator scorecard:",
+    pdfLink:isJa?"PDFを開く":"Open PDF",
+    methodLink:isJa?"方法論を見る":"View methodology",
+    noData:isJa?"この法域の集計スコアはまだありません。":"Aggregate scores not yet available for this jurisdiction."
+  };
+}
+
+function renderScoreDots(score,dim) {
+  var html="";
+  for (var i=0;i<2;i++) html+="<span class=\"ind-dot"+(i<score?" on "+dim:"")+"\"></span>";
+  return html;
+}
+
+function toggleIndicatorPanel() {
+  indicatorsPanelOpen=!indicatorsPanelOpen;
+  var btn=document.getElementById("ind-toggle");
+  var body=document.getElementById("ind-body");
+  var L=getIndicatorPanelLabels();
+  btn.classList.toggle("open",indicatorsPanelOpen);
+  body.classList.toggle("open",indicatorsPanelOpen);
+  document.getElementById("ind-toggle-label").textContent=indicatorsPanelOpen?L.hide:L.show;
+}
+
+function populateIndicatorSection(c) {
+  indicatorsPanelOpen=false;
+  document.getElementById("ind-toggle").classList.remove("open");
+  document.getElementById("ind-body").classList.remove("open");
+  var body=document.getElementById("ind-body");
+  var isJa=currentLang==="ja";
+  var L=getIndicatorPanelLabels();
+  document.getElementById("ind-toggle-label").textContent=L.show;
+  var raw=window.COUNTRY_RAW_BY_ID&&window.COUNTRY_RAW_BY_ID[c.id];
+  var full=window.COUNTRY_INDICATOR_SCORES&&window.COUNTRY_INDICATOR_SCORES[c.id];
+  var pdf=window.COUNTRY_SCORE_PDFS&&window.COUNTRY_SCORE_PDFS[c.id];
+  if (!raw) {
+    body.innerHTML="<div class=\"ind-pdf-note\">"+L.noData+"</div>";
+    return;
+  }
+  if (full&&window.INDICATOR_ROWS) {
+    var html="";
+    ["R","M","S"].forEach(function(dim){
+      var scores=full[dim];
+      var dimLower=dim.toLowerCase();
+      html+="<div class=\"ind-dim\"><div class=\"ind-dim-hd "+dimLower+"\">"+L["dim"+dim]+" ("+dim+"1\u2013"+dim+"10)</div>";
+      window.INDICATOR_ROWS[dim].forEach(function(row,idx){
+        var t=row[isJa?"ja":"en"];
+        html+="<div class=\"ind-row\"><span class=\"ind-code "+dimLower+"\">"+row.code+"</span><span class=\"ind-name\">"+t.n+"</span><span class=\"ind-dots\">"+renderScoreDots(scores[idx],dimLower)+"</span></div>";
+      });
+      html+="</div>";
+    });
+    if (pdf) html+="<div class=\"ind-pdf-note\">"+L.pdfFull+" <a href=\""+pdf+"\" target=\"_blank\" rel=\"noopener\">"+L.pdfLink+"</a></div>";
+    body.innerHTML=html;
+    return;
+  }
+  var aggHtml="<div class=\"ind-agg\">"+
+    "<div class=\"ind-agg-card r\"><div class=\"ind-agg-num\">"+raw.R+"</div><div class=\"ind-agg-lbl\">"+L.rawR+" / 20</div></div>"+
+    "<div class=\"ind-agg-card m\"><div class=\"ind-agg-num\">"+raw.M+"</div><div class=\"ind-agg-lbl\">"+L.rawM+" / 20</div></div>"+
+    "<div class=\"ind-agg-card s\"><div class=\"ind-agg-num\">"+raw.S+"</div><div class=\"ind-agg-lbl\">"+L.rawS+" / 20</div></div>"+
+    "</div><div class=\"ind-pdf-note\">"+L.aggregateNote+" ";
+  if (pdf) aggHtml+="<a href=\""+pdf+"\" target=\"_blank\" rel=\"noopener\">"+L.pdfLink+"</a>";
+  else aggHtml+="<a href=\"methodology.html#all-scores\">"+L.methodLink+"</a>";
+  aggHtml+="</div>";
+  body.innerHTML=aggHtml;
+}
+
 // ── COMPARE ───────────────────────────────────────────────────────────────────
+function getCompareLabels() {
+  var isJa=currentLang==="ja";
+  return {
+    comparing:isJa?"比較":"Comparing",
+    onMapSince:isJa?"マップ上":"On map since",
+    notMapped:isJa?"年まで未マッピング":"Not on map until",
+    rights:isJa?"権利 (r)":"Rights (r)",
+    market:isJa?"市場 (m)":"Market (m)",
+    sovereign:isJa?"主権 (s)":"Sovereign (s)",
+    enforcement:isJa?"拘束力":"Enforcement",
+    clearAll:isJa?"すべて解除":"Clear all",
+    exitMode:isJa?"比較モードを終了":"Exit compare mode",
+    selectHint:isJa?"マップで最大3国をクリック":"Click up to 3 countries on the map",
+    selectMore:isJa?"あと1国選択…":"select one more…",
+    remove:isJa?"削除":"Remove",
+    yearSuffix:isJa?"年":""
+  };
+}
+
+function updateCompareBtnText() {
+  var isJa=currentLang==="ja";
+  document.getElementById("compare-btn-text").textContent=compareMode?(isJa?"比較中…":"Comparing…"):(isJa?"比較":"Compare");
+}
+
 function toggleCompare() {
-  compareMode=!compareMode; compareList=[];
+  compareMode=!compareMode;
   var btn=document.getElementById("compare-toggle");
   btn.classList.toggle("on",compareMode);
-  document.getElementById("compare-btn-text").textContent=compareMode?"Select 2 countries":"Select 2 countries";
-  updateCompareSidebar();
-  if (!compareMode) closeCompare();
-  closePanel(); draw();
+  if (!compareMode) {
+    compareList=[];
+    document.getElementById("compare-panel").classList.remove("open");
+    document.getElementById("compare-selected").textContent="";
+    draw();
+  } else {
+    compareList=[];
+    updateCompareSidebar();
+    closePanel();
+    draw();
+  }
+  updateCompareBtnText();
 }
 
 function updateCompareSidebar() {
   var el=document.getElementById("compare-selected");
-  if (!compareMode||!compareList.length) { el.textContent=compareMode?"Click 2 dots on the map":""; return; }
-  el.innerHTML=compareList.map(function(c){return "<div>"+c.flag+" "+c.name+"</div>";}).join("")+(compareList.length<2?"<div style=\"opacity:.4\">select one more...</div>":"");
+  var L=getCompareLabels();
+  if (!compareMode) { el.textContent=""; return; }
+  if (!compareList.length) { el.textContent=L.selectHint; return; }
+  var html=compareList.map(function(c){
+    return "<div class=\"cp-chip\"><span>"+c.flag+" "+c.name+"</span><button type=\"button\" class=\"cp-chip-x\" onclick=\"removeCompareCountry('"+c.id+"')\" title=\""+L.remove+"\">×</button></div>";
+  }).join("");
+  if (compareList.length<2) html+="<div style=\"opacity:.4;font-size:10px\">"+L.selectMore+"</div>";
+  el.innerHTML=html;
 }
 
-function showCompare() {
-  var a=compareList[0], b=compareList[1];
-  var pa=getPos(a,currentYear), pb=getPos(b,currentYear);
-  document.getElementById("cp-title").textContent=a.flag+" "+a.name+"  vs  "+b.flag+" "+b.name;
-  var cards=[a,b].map(function(c,i){
-    var p=i===0?pa:pb;
-    var col=groupColor[c.group]||"#888";
-    var rows=[["Rights",p.r,"#6BAFF4"],["Market",p.m,"#6DBF8C"],["Sovereign",p.s,"#F48C8C"]];
-    var rowsHtml=rows.map(function(row){
-      return "<div class=\"cp-row\"><span class=\"cp-row-label\">"+row[0]+"</span><span class=\"cp-row-val\"><div class=\"cp-bar-wrap\"><div class=\"cp-bar-fill\" style=\"width:"+Math.round(row[1]*100)+"%;background:"+row[2]+"\"></div></div>"+Math.round(row[1]*100)+"%</span></div>";
-    }).join("");
-    return "<div class=\"cp-country\"><div class=\"cp-name\"><div class=\"cp-flag\">"+c.flag+"</div><div class=\"cp-cname\">"+c.name+"</div></div>"+rowsHtml+"<div class=\"cp-row\"><span class=\"cp-row-label\">Enforcement</span><span class=\"cp-row-val\">"+Math.round(p.bind)+"%</span></div><div style=\"font-size:11px;color:rgba(255,255,255,.4);margin-top:6px;line-height:1.5\">"+c.desc.substring(0,110)+"...</div></div>";
+function compareMetricRow(label,val,maxVal,color) {
+  var pct=Math.round(val*100);
+  var rel=Math.round((val/Math.max(maxVal,0.01))*100);
+  return "<div class=\"cp-row\"><span class=\"cp-row-label\">"+label+"</span><span class=\"cp-row-val\"><span class=\"cp-bar-wrap\"><span class=\"cp-bar-fill\" style=\"width:"+rel+"%;background:"+color+"\"></span></span>"+pct+"%</span></div>";
+}
+
+function compareBindRow(label,val,maxVal) {
+  var pct=Math.round(val);
+  var rel=Math.round((val/Math.max(maxVal,1))*100);
+  return "<div class=\"cp-row\"><span class=\"cp-row-label\">"+label+"</span><span class=\"cp-row-val\"><span class=\"cp-bar-wrap\"><span class=\"cp-bar-fill\" style=\"width:"+rel+"%;background:var(--amber)\"></span></span>"+pct+"%</span></div>";
+}
+
+function updateComparePanel() {
+  var panel=document.getElementById("compare-panel");
+  if (!compareList.length||compareList.length<2) {
+    panel.classList.remove("open");
+    return;
+  }
+  var L=getCompareLabels();
+  var positions=compareList.map(function(c){return getPos(c,currentYear);});
+  var mapped=compareList.map(function(c){return !c.start||currentYear>=c.start;});
+  var rVals=positions.map(function(p,i){return mapped[i]?p.r:0;});
+  var mVals=positions.map(function(p,i){return mapped[i]?p.m:0;});
+  var sVals=positions.map(function(p,i){return mapped[i]?p.s:0;});
+  var bVals=positions.map(function(p,i){return mapped[i]?p.bind:0;});
+  var maxR=Math.max.apply(null,rVals.concat([0.01]));
+  var maxM=Math.max.apply(null,mVals.concat([0.01]));
+  var maxS=Math.max.apply(null,sVals.concat([0.01]));
+  var maxB=Math.max.apply(null,bVals.concat([1]));
+  var titleNames=compareList.map(function(c){return c.flag+" "+c.name;}).join("  ·  ");
+  document.getElementById("cp-title").textContent=L.comparing+": "+titleNames;
+  document.getElementById("cp-year").textContent=currentYear+L.yearSuffix;
+  document.getElementById("cp-reset-btn").textContent=L.clearAll;
+  document.getElementById("close-compare-btn").textContent=L.exitMode;
+  var cards=compareList.map(function(c,i){
+    var p=positions[i];
+    var startY=c.start||2016;
+    var header="<div class=\"cp-name\"><span class=\"cp-flag\">"+c.flag+"</span><span class=\"cp-cname\">"+c.name+"</span><button type=\"button\" class=\"cp-remove\" onclick=\"removeCompareCountry('"+c.id+"')\" title=\""+L.remove+"\">×</button></div>";
+    if (!mapped[i]) {
+      return "<div class=\"cp-country\">"+header+"<div class=\"cp-unmapped\">"+L.notMapped+" "+startY+"</div></div>";
+    }
+    return "<div class=\"cp-country\">"+header+
+      "<div class=\"cp-start\">"+L.onMapSince+" "+startY+"</div>"+
+      compareMetricRow(L.rights,p.r,maxR,"#6BAFF4")+
+      compareMetricRow(L.market,p.m,maxM,"#6DBF8C")+
+      compareMetricRow(L.sovereign,p.s,maxS,"#F48C8C")+
+      compareBindRow(L.enforcement,p.bind,maxB)+
+      "</div>";
   });
   document.getElementById("cp-grid").innerHTML=cards.join("");
-  document.getElementById("compare-panel").classList.add("open");
+  panel.classList.add("open");
   document.getElementById("country-panel").classList.remove("open");
 }
 
-function closeCompare() {
-  document.getElementById("compare-panel").classList.remove("open");
-  compareMode=false; compareList=[];
-  document.getElementById("compare-toggle").classList.remove("on");
-  document.getElementById("compare-selected").textContent="";
+function removeCompareCountry(id) {
+  compareList=compareList.filter(function(c){return c.id!==id;});
+  updateCompareSidebar();
+  updateComparePanel();
   draw();
 }
+
+function resetCompare() {
+  compareList=[];
+  updateCompareSidebar();
+  updateComparePanel();
+  draw();
+}
+
+function exitCompareMode() {
+  compareMode=false;
+  compareList=[];
+  document.getElementById("compare-toggle").classList.remove("on");
+  document.getElementById("compare-panel").classList.remove("open");
+  document.getElementById("compare-selected").textContent="";
+  updateCompareBtnText();
+  draw();
+}
+
+function closeCompare() { exitCompareMode(); }
 
 // ── EXPLAINER & READING DATA ──────────────────────────────────────────────────
 var explainerData = {
@@ -2259,7 +2484,10 @@ function applyUiLang() {
   document.getElementById("r-global").textContent=isJa?"\u56FD\u969B":"Global";
   document.getElementById("sb-filter").textContent=isJa?"\u30E2\u30C7\u30EB":"Model";
   document.getElementById("sb-size").textContent=isJa?"\u30C9\u30C3\u30C8\u30B5\u30A4\u30BA\uFF1D\u57F7\u884C\u529B":"Dot size = enforcement";
-  document.getElementById("sb-compare").textContent=isJa?"\u6BD4\u8F03\u30E2\u30FC\u30C9":"Compare mode";
+  document.getElementById("sb-compare").textContent=isJa?"\u6BD4\u8F03":"Compare";
+  updateCompareBtnText();
+  if (compareList.length>=2) updateComparePanel();
+  else updateCompareSidebar();
   document.getElementById("sb-glance").textContent=isJa?"\u6982\u8981":"At a glance";
   document.getElementById("stat-lbl-mapped").textContent=isJa?"\u6CD5\u57DF\u6570":"Jurisdictions";
   document.getElementById("stat-lbl-documented").textContent=isJa?"\u5B8C\u5168\u8A3C\u660E":"Fully documented";
@@ -2275,7 +2503,6 @@ function applyUiLang() {
   document.getElementById("f-sovereign").textContent=isJa?"\u4E3B\u6A29\u91CD\u8996":"Sovereignty";
   document.getElementById("f-hybrid").textContent=isJa?"\u30CF\u30A4\u30D6\u30EA\u30C3\u30C9":"Hybrid";
   document.getElementById("sz-strong").textContent=isJa?"\u5F37\u3044\u6CD5\u7684\u626F\u675F\u529B":"Strong binding";
-  document.getElementById("compare-btn-text").textContent=isJa?"2\u56FD\u3092\u9078\u629E":"Select 2 countries";
   document.getElementById("sz-mod").textContent=isJa?"\u4E2D\u7A0B\u5EA6":"Moderate";
   document.getElementById("sz-part").textContent=isJa?"\u90E8\u5206\u7684":"Partial";
   document.getElementById("sz-vol").textContent=isJa?"\u81EA\u767A\u7684":"Voluntary";

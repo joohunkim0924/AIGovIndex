@@ -225,6 +225,8 @@ input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);curs
 .download-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:5px;border:1px solid var(--border);background:#fff;color:var(--text2);font-size:12px;cursor:pointer;font-family:"Inter",sans-serif;text-decoration:none;}
 #news-section{background:var(--navy);padding:3.5rem 1.5rem;border-top:1px solid rgba(255,255,255,.06);}
 #timeline-section{background:var(--navy);padding:4rem 1.5rem;border-top:1px solid rgba(255,255,255,.06);}
+#timeline-section .sec-sub{color:rgba(255,255,255,.45);margin-bottom:.75rem;}
+#timeline-section .tl-sec-note{font-size:12px;color:rgba(255,255,255,.42);line-height:1.65;max-width:640px;margin-bottom:1.5rem;padding:.75rem 1rem;background:rgba(255,255,255,.04);border-left:2px solid rgba(232,149,10,.45);border-radius:0 6px 6px 0;}
 .tl-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem;}
 .tl-filter{font-size:11px;padding:3px 10px;border-radius:4px;border:1px solid rgba(255,255,255,.1);background:transparent;color:rgba(255,255,255,.4);cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;}
 .tl-filter.active{background:rgba(255,255,255,.1);color:var(--off);border-color:rgba(255,255,255,.25);}
@@ -476,6 +478,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
     <div class="sec-tag" id="tl-sec-tag">Historical record</div>
     <h2 class="sec-h2" id="tl-sec-h2" style="color: #FFFFFF;">Regulatory Timeline</h2>    
     <p class="sec-sub" id="tl-sec-sub">Key events in global AI governance from 2016 to 2026.</p>
+    <p class="tl-sec-note" id="tl-sec-note">The 2025&ndash;2026 cluster reflects the global shift from voluntary principles to binding enforcement. Most countries&rsquo; scores move when laws take effect, not when they are proposed.</p>
     <div class="tl-filters">
       <button class="tl-filter active" id="tl-f-all" onclick="filterTimeline('all',this)">All events</button>
       <button class="tl-filter" id="tl-f-leg" onclick="filterTimeline('legislation',this)">Legislation</button>
@@ -1872,14 +1875,15 @@ var timelineEvents = [
   {year:2023,title:"ISO/IEC 42001 published",body:"International Organization for Standardization publishes ISO/IEC 42001 — the AI management system standard that becomes a global compliance passport.",tags:["ISO","International","Standard"],category:"international",color:"#4C1D95"},
   {year:2024,title:"EU AI Act enters into force",body:"EU AI Act officially published in Official Journal and enters into force August 1, 2024. Prohibited practices enforcement begins February 2025.",tags:["EU","Binding","Landmark"],category:"enforcement",color:"#1B6FD4"},
   {year:2024,title:"Brazil AI Bill passes Senate",body:"Brazil AI Bill 2338 passes the Senate in December 2024 — would make Brazil the first country in the Americas with a comprehensive AI law.",tags:["Brazil","Legislation","Americas first"],category:"legislation",color:"#7A4A00"},
-  {year:2025,title:"EU AI Act — prohibited practices enforced",body:"February 2025: EU prohibited AI practices (social scoring, certain biometric surveillance) become legally enforceable across all 27 member states.",tags:["EU","Enforcement","Binding"],category:"enforcement",color:"#1B6FD4"},
-  {year:2025,title:"Paris AI Action Summit",body:"February 2025: Largest AI governance convening to date with 62 signatories. U.S. and UK decline to sign final statement. France hosts.",tags:["International","France","Paris"],category:"international",color:"#4C1D95"},
-  {year:2025,title:"Japan AI Promotion Act passed",body:"June 2025: Japan AI Promotion Act passes the Diet establishing non-binding duties to endeavor with no financial penalties.",tags:["Japan","Soft law","Voluntary"],category:"legislation",color:"#1A6B42"},
   {year:2025,title:"Trump admin revokes Biden AI EO",body:"January 2025: EO 14179 revokes Biden AI safety executive order. AI policy shifts toward competitiveness over safety.",tags:["USA","Deregulation","EO 14179"],category:"legislation",color:"#1A6B42"},
-  {year:2025,title:"EU GPAI Code of Practice effective",body:"August 2025: EU AI Act GPAI Code of Practice takes effect — requiring foundation model providers to comply.",tags:["EU","GPAI","Foundation models"],category:"enforcement",color:"#1B6FD4"},
+  {year:2025,title:"EU AI Act: Prohibited practices enforceable",body:"February 2025 — EU AI Act: Prohibited practices enforceable (Article 5). Real-time biometric surveillance, social scoring, subliminal manipulation banned across all 27 EU member states.",tags:["EU","Enforcement","Article 5"],category:"enforcement",color:"#1B6FD4"},
+  {year:2025,title:"Paris AI Action Summit",body:"February 2025: Largest AI governance convening to date with 62 signatories. U.S. and UK decline to sign final statement. France hosts.",tags:["International","France","Paris"],category:"international",color:"#4C1D95"},
+  {year:2025,title:"Japan AI Promotion Act passed",body:"Japan AI Promotion Act passed — first dedicated AI governance instrument, explicitly voluntary and ex-post.",tags:["Japan","Soft law","Voluntary"],category:"legislation",color:"#1A6B42"},
+  {year:2025,title:"EU AI Act: High-risk & GPAI rules take effect",body:"August 2025 — EU AI Act: High-risk AI obligations and GPAI model rules take effect. Conformity assessments, transparency requirements, and human oversight mandates become binding.",tags:["EU","High-risk","GPAI"],category:"enforcement",color:"#1B6FD4"},
   {year:2025,title:"China mandatory AI watermarking",body:"September 2025: China mandatory watermarking system for AI-generated content becomes fully operational.",tags:["China","Watermarking","Binding"],category:"enforcement",color:"#8B1A1A"},
-  {year:2025,title:"Korea AI Basic Act — effective",body:"January 2026: South Korea AI Basic Act enters into force — the first binding AI law in Asia-Pacific. KAISI established.",tags:["Korea","Binding","Asia first"],category:"enforcement",color:"#7A4A00"},
+  {year:2026,title:"South Korea AI Basic Act enters into force",body:"January 22, 2026 — South Korea AI Basic Act enters into force. First binding comprehensive AI law in Asia. High-impact AI obligations, 2-tier risk system, designated enforcement authority.",tags:["Korea","Binding","Asia first"],category:"enforcement",color:"#7A4A00"},
   {year:2026,title:"Singapore Agentic AI Framework",body:"January 2026: Singapore publishes world first governance framework for agentic AI — introducing Agent Identity Cards and 5-tier autonomy classification.",tags:["Singapore","Agentic AI","First"],category:"legislation",color:"#1A6B42"},
+  {year:2026,title:"Colorado SB 205 takes effect",body:"July 1, 2026 — Colorado SB 205 takes effect — first binding state-level AI law in the United States. Applies to developers and deployers of high-risk AI systems affecting Colorado residents.",tags:["USA","Colorado","Binding"],category:"enforcement",color:"#1A6B42"},
   {year:2026,title:"EU AI Act — high-risk enforcement",body:"August 2026: High-risk AI system obligations become fully enforceable. Companies using AI in employment, credit, healthcare must comply or face penalties.",tags:["EU","Enforcement","High-risk"],category:"enforcement",color:"#1B6FD4"}
 ];
 
@@ -2151,6 +2155,7 @@ var i18n = {
     methC5t:"Timeline 2016\u20132026", methC5b:"Drag the year slider to see how positions shift over time in either view. Crisis milestones appear at key years from 2022 onward.",
     methCallout:"<strong>Key insight:</strong> On the Triangle, the EU and China sit at opposite corners; on the Compass, they land in opposite vertical halves (rights vs. state control) while both lean rightward toward binding law. Enforcement strength and philosophical orientation are independent dimensions.",
     tlYear:"Year", tlSecTag:"Historical record", tlSecH2:"Regulatory Timeline", tlSecSub:"Key events in global AI governance from 2016 to 2026.",
+    tlSecNote:"The 2025\u20132026 cluster reflects the global shift from voluntary principles to binding enforcement. Most countries\u2019 scores move when laws take effect, not when they are proposed.",
     tlFAll:"All events", tlFLeg:"Legislation", tlFIntl:"International", tlFEnf:"Enforcement", tlFAi:"AI releases",
     ctSecTag:"Full dataset", ctSecH2:"All jurisdictions", ctHint:"Click any row to highlight on map. Click headers to sort.", ctDownload:"\u21e9 Download CSV",
     ctThName:"Jurisdiction", ctThModel:"Model", ctThBinding:"Binding?", ctThR:"Rights", ctThM:"Market", ctThS:"Sovereign", ctThEnf:"Enforcement"
@@ -2169,6 +2174,7 @@ var i18n = {
     methC5t:"\u30BF\u30A4\u30E0\u30E9\u30A4\u30F3\uFF082016\u20132026\u5E74\uFF09", methC5b:"\u5E74\u30B9\u30E9\u30A4\u30C0\u30FC\u3067\u3001\u3069\u3061\u3089\u306E\u8868\u793A\u3067\u3082\u6642\u7CFB\u5217\u306E\u4F4D\u7F6E\u5909\u5316\u3092\u78BA\u8A8D\u3067\u304D\u307E\u3059\u30022022\u5E74\u4EE5\u964D\u306E\u91CD\u8981\u5E74\u306B\u306F\u30DE\u30A4\u30EB\u30B9\u30C8\u30FC\u30F3\u304C\u8868\u793A\u3055\u308C\u307E\u3059\u3002",
     methCallout:"<strong>\u8981\u70B9\uFF1A</strong>\u4E09\u89D2\u5F62\u3067\u306FEU\u3068\u4E2D\u56FD\u306F\u5BFE\u6975\u306E\u89D2\u306B\u4F4D\u7F6E\u3057\u307E\u3059\u3002\u30B3\u30F3\u30D1\u30B9\u3067\u306F\u7E26\u65B9\u5411\uFF08\u6A29\u5229 vs \u56FD\u5BB6\u7D71\u5236\uFF09\u3067\u306F\u53CD\u5BFE\u5074\u306B\u306A\u308A\u306A\u304C\u3089\u3001\u3069\u3061\u3089\u3082\u6A2A\u65B9\u5411\u306E\u786C\u6CD5\u5074\u306B\u5BC4\u3063\u3066\u3044\u307E\u3059\u3002\u6CD5\u7684\u626F\u675F\u529B\u3068\u54F2\u5B66\u7684\u5411\u304D\u306F\u72EC\u7ACB\u3057\u305F\u6B21\u5143\u3067\u3059\u3002",
     tlYear:"\u5e74", tlSecTag:"\u6b74\u53f2\u8a18\u9332", tlSecH2:"\u898f\u5236\u30bf\u30a4\u30e0\u30e9\u30a4\u30f3", tlSecSub:"2016\u5e74\u304b\u30892026\u5e74\u306e\u30b0\u30ed\u30fc\u30d0\u30ebAI\u30ac\u30d0\u30ca\u30f3\u30b9\u306e\u4e3b\u8981\u4e8b\u4ef6\u3002",
+    tlSecNote:"2025\u20132026\u5e74\u306e\u96c6\u7d04\u306f\u3001\u81ea\u767a\u7684\u306a\u539f\u5247\u304b\u3089\u7d81\u5b9a\u7684\u306a\u57f7\u884c\u3078\u3068\u79fb\u884c\u3059\u308b\u5168\u7403\u7684\u306a\u8ee2\u63db\u3092\u53cd\u6620\u3057\u3066\u3044\u307e\u3059\u3002\u5927\u90e8\u5206\u306e\u56fd\u306e\u30b9\u30b3\u30a2\u306f\u6cd5\u6848\u63d0\u6848\u6642\u3067\u306f\u306a\u304f\u3001\u6cd5\u304c\u767a\u52b9\u3057\u305f\u3068\u304d\u306b\u52d5\u304d\u307e\u3059\u3002",
     tlFAll:"\u3059\u3079\u3066\u306e\u4e8b\u4ef6", tlFLeg:"\u7acb\u6cd5", tlFIntl:"\u56fd\u969b", tlFEnf:"\u57f7\u884c", tlFAi:"AI\u516c\u958b",
     ctSecTag:"\u5168\u30c7\u30fc\u30bf", ctSecH2:"\u3059\u3079\u3066\u306e\u6cd5\u57df", ctHint:"\u884c\u3092\u30af\u30ea\u30c3\u30af\u3059\u308b\u3068\u5730\u56f3\u3067\u30cf\u30a4\u30e9\u30a4\u30c8\u3002\u30d8\u30c3\u30c0\u30fc\u30af\u30ea\u30c3\u30af\u3067\u30bd\u30fc\u30c8\u3002", ctDownload:"\u21e9 CSV\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9",
     ctThName:"\u6cd5\u57df", ctThModel:"\u30e2\u30c7\u30eb", ctThBinding:"\u7d81\u5b9a\uff1f", ctThR:"\u6a29\u5229", ctThM:"\u5e02\u5834", ctThS:"\u4e3b\u6a29", ctThEnf:"\u57f7\u884c\u529b"
@@ -2210,6 +2216,7 @@ function applySectionI18n(lang) {
   setI18nText("tl-sec-tag", t.tlSecTag);
   setI18nText("tl-sec-h2", t.tlSecH2);
   setI18nText("tl-sec-sub", t.tlSecSub);
+  setI18nText("tl-sec-note", t.tlSecNote);
   setI18nText("tl-f-all", t.tlFAll);
   setI18nText("tl-f-leg", t.tlFLeg);
   setI18nText("tl-f-intl", t.tlFIntl);

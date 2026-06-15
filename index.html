@@ -6,13 +6,13 @@
 <title>Global AI Governance Index</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0D1B2A;--navy2:#162638;--navy3:#1E3450;--blue:#1B6FD4;--amber:#E8950A;--amber2:#F0A830;--rights:#1B6FD4;--market:#1A6B42;--sov:#8B1A1A;--hybrid:#7A4A00;--off:#F5F2EC;--off2:#EDE9E0;--off3:#E0DDD4;--text:#0D1B2A;--text2:#2D3748;--text3:#6B7280;--border:#D4CFC6;}
+:root{--navy:#0D1B2A;--navy2:#162638;--navy3:#1E3450;--blue:#1B6FD4;--amber:#F0A830;--amber2:#FFC04D;--rights:#1B6FD4;--market:#1A6B42;--sov:#8B1A1A;--hybrid:#7A4A00;--off:#FAFAF8;--off2:#EDE9E0;--off3:#E0DDD4;--text:#0D1B2A;--text2:#2D3748;--text3:#6B7280;--border:#D4CFC6;--muted:rgba(255,255,255,.72);--muted2:rgba(255,255,255,.55);--ui-border:rgba(255,255,255,.16);}
 *{box-sizing:border-box;margin:0;padding:0;}html,body{height:100%;overflow-x:hidden;}
 body{font-family:"Inter",sans-serif;background:var(--navy);color:var(--off);font-size:14px;line-height:1.65;}
 nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,27,42,.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);padding:0 1.5rem;height:52px;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
 .nav-brand{font-family:"DM Serif Display",serif;font-size:15px;color:var(--amber);white-space:nowrap;}
 .nav-links{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;}
-.nav-links a{font-size:11px;color:rgba(255,255,255,.45);text-decoration:none;letter-spacing:.05em;text-transform:uppercase;transition:color .2s;}
+.nav-links a{font-size:11px;color:var(--muted2);text-decoration:none;letter-spacing:.05em;text-transform:uppercase;transition:color .2s;}
 .nav-links a:hover{color:var(--off);}
 .nav-search{position:relative;display:flex;align-items:center;}
 .nav-search input{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:5px 10px 5px 28px;font-size:12px;color:var(--off);font-family:"Inter",sans-serif;width:150px;outline:none;transition:all .2s;}
@@ -32,46 +32,46 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,27,42,.95
 .hero-title{font-family:"DM Serif Display",serif;font-size:1.75rem;line-height:1.05;color:var(--off);}
 .hero-title em{color:var(--amber);font-style:italic;}
 .hero-controls-cell{padding:.45rem 1.25rem .35rem;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;gap:5px;min-width:0;}
-.hero-sub{font-size:10px;color:rgba(255,255,255,.35);text-align:right;line-height:1.4;max-width:100%;}
+.hero-sub{font-size:10px;color:var(--muted2);text-align:right;line-height:1.4;max-width:100%;}
 .controls-stack{display:flex;flex-direction:column;align-items:flex-end;gap:5px;width:100%;max-width:560px;}
 .controls-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
 .timeline-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:6px 12px;display:flex;align-items:center;gap:8px;}
 #crisis-banner{position:absolute;top:10px;right:12px;z-index:40;width:min(188px,calc(100% - 24px));pointer-events:none;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .22s ease,transform .22s ease,visibility .22s;}
 #crisis-banner.visible{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto;}
-.crisis-banner-inner{display:flex;flex-direction:column;align-items:stretch;gap:5px;padding:8px 10px;border-radius:7px;background:rgba(13,27,42,.88);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);border-left-width:3px;line-height:1.4;box-shadow:0 4px 20px rgba(0,0,0,.25);}
+.crisis-banner-inner{display:flex;flex-direction:column;align-items:stretch;gap:5px;padding:8px 10px;border-radius:7px;background:rgba(8,16,28,.94);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.22);border-left-width:3px;line-height:1.4;box-shadow:0 4px 20px rgba(0,0,0,.35);}
 .crisis-banner-year{font-family:"DM Serif Display",serif;font-size:1.2rem;line-height:1.1;}
 .crisis-banner-body{flex:1;min-width:0;}
-.crisis-banner-label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-bottom:3px;}
-.crisis-banner-text{font-size:11px;font-weight:500;}
-.crisis-banner-growth{margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,.08);font-size:10px;color:rgba(255,255,255,.52);line-height:1.45;}
+.crisis-banner-label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);display:block;margin-bottom:3px;}
+.crisis-banner-text{font-size:11px;font-weight:600;color:var(--off);}
+.crisis-banner-growth{margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,.12);font-size:10px;color:var(--muted);line-height:1.45;}
 .crisis-banner-growth.has-milestone{margin-top:6px;}
 .crisis-banner-dotcount{font-weight:600;color:var(--amber);display:block;margin-bottom:2px;}
 .crisis-banner-growth-text{display:block;}
-.tl-label{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;}
-.tl-year{font-family:"DM Serif Display",serif;font-size:1.2rem;color:var(--amber);min-width:36px;text-align:center;}
+.tl-label{font-size:10px;color:var(--muted2);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;}
+.tl-year{font-family:"DM Serif Display",serif;font-size:1.2rem;color:var(--amber);min-width:36px;text-align:center;font-weight:600;}
 input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);cursor:pointer;}
 .view-toggle{display:flex;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:7px;overflow:hidden;}
-.vt-btn{padding:5px 12px;font-size:11px;color:rgba(255,255,255,.45);border:none;background:transparent;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;white-space:nowrap;}
-.vt-btn.active{background:rgba(255,255,255,.12);color:var(--off);}
+.vt-btn{padding:5px 12px;font-size:11px;color:var(--muted2);border:none;background:transparent;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;white-space:nowrap;}
+.vt-btn.active{background:rgba(255,255,255,.16);color:var(--off);font-weight:600;}
 #sidebar{grid-column:1;grid-row:2;padding:.5rem 1rem .75rem;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:.85rem;overflow:hidden;min-height:0;}
 .sb-section{flex-shrink:0;}
-.sb-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.35rem;}
+.sb-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);margin-bottom:.35rem;font-weight:600;}
 .filter-group{display:flex;flex-direction:column;gap:3px;}
 .region-group{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
 .region-all-btn{grid-column:1/-1;}
 .region-filter-btn{justify-content:center;padding:5px 6px!important;font-size:11px!important;}
-.filter-btn{display:flex;align-items:center;gap:7px;padding:5px 7px;border-radius:5px;border:none;background:transparent;cursor:pointer;font-size:12px;color:rgba(255,255,255,.5);text-align:left;transition:all .15s;font-family:"Inter",sans-serif;}
-.filter-btn:hover{background:rgba(255,255,255,.06);color:var(--off);}
-.filter-btn.active{background:rgba(255,255,255,.1);color:var(--off);}
+.filter-btn{display:flex;align-items:center;gap:7px;padding:5px 7px;border-radius:5px;border:none;background:transparent;cursor:pointer;font-size:12px;color:var(--muted);text-align:left;transition:all .15s;font-family:"Inter",sans-serif;}
+.filter-btn:hover{background:rgba(255,255,255,.08);color:var(--off);}
+.filter-btn.active{background:rgba(255,255,255,.14);color:var(--off);font-weight:600;}
 .fdot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .size-rows{display:flex;flex-direction:column;gap:5px;}
-.size-row{display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,.4);}
-.size-circle{border-radius:50%;background:rgba(255,255,255,.85);flex-shrink:0;}
+.size-row{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);}
+.size-circle{border-radius:50%;background:#fff;flex-shrink:0;box-shadow:0 0 0 1px rgba(0,0,0,.25);}
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
 .stat-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:5px;padding:7px;text-align:center;}
 .stat-num{font-family:"DM Serif Display",serif;font-size:1.3rem;color:var(--amber);line-height:1;}
-.stat-lbl{font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;letter-spacing:.04em;text-transform:uppercase;line-height:1.25;}
-.stat-footnote{font-size:10px;color:rgba(255,255,255,.32);line-height:1.5;margin-top:5px;}
+.stat-lbl{font-size:9px;color:var(--muted2);margin-top:2px;letter-spacing:.04em;text-transform:uppercase;line-height:1.25;}
+.stat-footnote{font-size:10px;color:var(--muted2);line-height:1.5;margin-top:5px;}
 .stat-footnote+.stat-footnote{margin-top:3px;}
 .stat-footnote a{color:var(--amber);text-decoration:none;}
 .stat-footnote a:hover{text-decoration:underline;}
@@ -87,11 +87,11 @@ input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);curs
 .about-text a{color:var(--amber);text-decoration:none;}
 #canvas-wrap{grid-column:2;grid-row:2;position:relative;overflow:hidden;min-height:0;}
 #tri-canvas{width:100%;height:100%;}
-#tooltip{position:absolute;background:rgba(13,27,42,.97);border:1px solid rgba(255,255,255,.13);border-radius:8px;padding:9px 12px;font-size:12px;pointer-events:none;opacity:0;transition:opacity .15s;max-width:195px;z-index:50;line-height:1.6;color:var(--off);}
+#tooltip{position:absolute;background:rgba(8,16,28,.98);border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:9px 12px;font-size:12px;pointer-events:none;opacity:0;transition:opacity .15s;max-width:195px;z-index:50;line-height:1.6;color:var(--off);box-shadow:0 4px 16px rgba(0,0,0,.4);}
 .tt-name{font-weight:600;font-size:13px;margin-bottom:3px;}
-.tt-coords{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:3px;}
+.tt-coords{font-size:10px;color:var(--muted);margin-bottom:3px;}
 .tt-bind{font-size:10px;color:var(--amber);}
-.tt-hint{font-size:10px;color:rgba(255,255,255,.25);margin-top:3px;}
+.tt-hint{font-size:10px;color:var(--muted2);margin-top:3px;}
 #search-pin{position:absolute;background:rgba(13,27,42,.97);border:2px solid var(--amber);border-radius:8px;padding:7px 12px;font-size:12px;color:var(--off);pointer-events:none;z-index:60;transform:translateX(-50%);white-space:nowrap;}
 #country-panel{position:fixed;bottom:-100%;left:0;right:0;background:var(--navy2);border-top:1px solid rgba(255,255,255,.1);border-radius:16px 16px 0 0;z-index:90;transition:bottom .4s cubic-bezier(.4,0,.2,1);max-height:58vh;overflow:hidden;}
 #country-panel.open{bottom:0;}
@@ -1046,8 +1046,8 @@ var countries = [
    tags:["Digital strategy","ASEAN reference","Early stage","No AI law"]}
 ];
 
-var groupColor = {rights:"#1B6FD4",market:"#1A6B42",sovereign:"#8B1A1A",hybrid:"#7A4A00"};
-var GREY_DOT = "#5C6370";
+var groupColor = {rights:"#3D8EF0",market:"#2ECC71",sovereign:"#E05555",hybrid:"#F0A830"};
+var GREY_DOT = "#9CA8B8";
 
 // Default colored benchmarks on Benchmarks view (activeRegion === "world")
 var FEATURED_BENCHMARKS = {eu:1,kr:1,cn:1,us:1,jp:1,sg:1,uk:1,br:1,ca:1,au:1,au2:1,cl:1};
@@ -1194,28 +1194,32 @@ function drawTriangle() {
   for (var zi=0;zi<zones.length;zi++) {
     var z=zones[zi];
     ctx.beginPath(); ctx.moveTo(z[0][0],z[0][1]); ctx.lineTo(z[1][0],z[1][1]); ctx.lineTo(z[2][0],z[2][1]); ctx.closePath();
-    ctx.fillStyle=z[3]; ctx.globalAlpha=0.04; ctx.fill(); ctx.globalAlpha=1;
+    ctx.fillStyle=z[3]; ctx.globalAlpha=0.07; ctx.fill(); ctx.globalAlpha=1;
   }
   var g=[[ternaryToXY(.33,.67,0),ternaryToXY(.33,0,.67)],[ternaryToXY(.67,.33,0),ternaryToXY(0,.33,.67)],[ternaryToXY(0,.67,.33),ternaryToXY(.67,0,.33)]];
   for (var gi=0;gi<g.length;gi++) {
     ctx.beginPath(); ctx.moveTo(g[gi][0][0],g[gi][0][1]); ctx.lineTo(g[gi][1][0],g[gi][1][1]);
-    ctx.strokeStyle="rgba(255,255,255,0.05)"; ctx.lineWidth=0.5; ctx.setLineDash([4,4]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.strokeStyle="rgba(255,255,255,0.14)"; ctx.lineWidth=0.75; ctx.setLineDash([4,4]); ctx.stroke(); ctx.setLineDash([]);
   }
   ctx.beginPath(); ctx.moveTo(v.top[0],v.top[1]); ctx.lineTo(v.bl[0],v.bl[1]); ctx.lineTo(v.br[0],v.br[1]); ctx.closePath();
-  ctx.strokeStyle="rgba(255,255,255,0.18)"; ctx.lineWidth=1.5; ctx.stroke();
-  ctx.font="600 11px Inter,sans-serif"; ctx.fillStyle="rgba(232,149,10,0.55)"; ctx.textAlign="center";
+  ctx.strokeStyle="rgba(255,255,255,0.38)"; ctx.lineWidth=2; ctx.stroke();
+  ctx.font="600 11px Inter,sans-serif"; ctx.fillStyle="rgba(255,200,80,0.95)"; ctx.textAlign="center";
+  ctx.shadowColor="rgba(0,0,0,0.55)"; ctx.shadowBlur=4;
   ctx.fillText(currentYear+" snapshot",cx,cy+4);
+  ctx.shadowBlur=0;
   var topLblOff = -(v.pad.topLabelH - 4);
   var cornerOff = Math.min(26, v.pad.cornerLabelH - 6);
   var labels=[
-    [v.top,currentLang==="ja"?"自由・権利型モデル":"Liberal-rights model","#5AABF8",topLblOff,0],
-    [v.bl,currentLang==="ja"?"市場志向型":"Market-oriented","#5DBF88",cornerOff,-8],
-    [v.br,currentLang==="ja"?"主権重視型":"Sovereignty-centered","#E87878",cornerOff,8]
+    [v.top,currentLang==="ja"?"自由・権利型モデル":"Liberal-rights model","#7EC8FF",topLblOff,0],
+    [v.bl,currentLang==="ja"?"市場志向型":"Market-oriented","#7AE8A8",cornerOff,-8],
+    [v.br,currentLang==="ja"?"主権重視型":"Sovereignty-centered","#FF9999",cornerOff,8]
   ];
   for (var li=0;li<labels.length;li++) {
     var lbl=labels[li];
-    ctx.font="500 12px Inter,sans-serif"; ctx.fillStyle=lbl[2]; ctx.textAlign="center"; ctx.globalAlpha=1;
+    ctx.font="600 12px Inter,sans-serif"; ctx.fillStyle=lbl[2]; ctx.textAlign="center"; ctx.globalAlpha=1;
+    ctx.shadowColor="rgba(0,0,0,0.55)"; ctx.shadowBlur=4;
     ctx.fillText(lbl[1],lbl[0][0]+(lbl[4]||0),lbl[0][1]+lbl[3]);
+    ctx.shadowBlur=0;
   }
 }
 
@@ -1223,44 +1227,50 @@ function drawCompass() {
   var L = getCompassLayout();
   var cx = L.cx, cy = L.cy, rng = L.rng;
   var isJa = currentLang === "ja";
-  ctx.fillStyle="#1B6FD4"; ctx.globalAlpha=0.05; ctx.fillRect(cx-rng,cy-rng,rng,rng);
-  ctx.fillStyle="#1B6FD4"; ctx.globalAlpha=0.08; ctx.fillRect(cx,cy-rng,rng,rng);
-  ctx.fillStyle="#8B1A1A"; ctx.globalAlpha=0.04; ctx.fillRect(cx-rng,cy,rng,rng);
-  ctx.fillStyle="#8B1A1A"; ctx.globalAlpha=0.06; ctx.fillRect(cx,cy,rng,rng);
+  ctx.fillStyle="#1B6FD4"; ctx.globalAlpha=0.08; ctx.fillRect(cx-rng,cy-rng,rng,rng);
+  ctx.fillStyle="#1B6FD4"; ctx.globalAlpha=0.12; ctx.fillRect(cx,cy-rng,rng,rng);
+  ctx.fillStyle="#8B1A1A"; ctx.globalAlpha=0.07; ctx.fillRect(cx-rng,cy,rng,rng);
+  ctx.fillStyle="#8B1A1A"; ctx.globalAlpha=0.10; ctx.fillRect(cx,cy,rng,rng);
   ctx.globalAlpha=1;
-  ctx.strokeStyle="rgba(255,255,255,0.15)"; ctx.lineWidth=1;
+  ctx.strokeStyle="rgba(255,255,255,0.32)"; ctx.lineWidth=1.5;
   ctx.beginPath(); ctx.moveTo(cx-rng-10,cy); ctx.lineTo(cx+rng+10,cy); ctx.stroke();
   ctx.beginPath(); ctx.moveTo(cx,cy-rng-10); ctx.lineTo(cx,cy+rng+10); ctx.stroke();
-  ctx.strokeStyle="rgba(255,255,255,0.05)"; ctx.lineWidth=0.5; ctx.setLineDash([3,4]);
+  ctx.strokeStyle="rgba(255,255,255,0.12)"; ctx.lineWidth=0.75; ctx.setLineDash([3,4]);
   [-0.5,0.5].forEach(function(v2){
     ctx.beginPath(); ctx.moveTo(cx+v2*rng,cy-rng); ctx.lineTo(cx+v2*rng,cy+rng); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(cx-rng,cy+v2*rng); ctx.lineTo(cx+rng,cy+v2*rng); ctx.stroke();
   });
   ctx.setLineDash([]);
   var qLabels=isJa?[
-    [cx-rng*.55,cy-rng*.85,"権利保護・ソフト法","#5AABF8"],
-    [cx+rng*.55,cy-rng*.85,"権利保護・硬法","#5AABF8"],
-    [cx-rng*.55,cy+rng*.78,"国家統制・ソフト法","#E87878"],
-    [cx+rng*.55,cy+rng*.78,"国家統制・硬法","#E87878"]
+    [cx-rng*.55,cy-rng*.85,"権利保護・ソフト法","#7EC8FF"],
+    [cx+rng*.55,cy-rng*.85,"権利保護・硬法","#7EC8FF"],
+    [cx-rng*.55,cy+rng*.78,"国家統制・ソフト法","#FF9999"],
+    [cx+rng*.55,cy+rng*.78,"国家統制・硬法","#FF9999"]
   ]:[
-    [cx-rng*.55,cy-rng*.85,"rights-protective soft law","#5AABF8"],
-    [cx+rng*.55,cy-rng*.85,"rights-protective binding law","#5AABF8"],
-    [cx-rng*.55,cy+rng*.78,"state control soft law","#E87878"],
-    [cx+rng*.55,cy+rng*.78,"state control binding law","#E87878"]
+    [cx-rng*.55,cy-rng*.85,"rights-protective soft law","#7EC8FF"],
+    [cx+rng*.55,cy-rng*.85,"rights-protective binding law","#7EC8FF"],
+    [cx-rng*.55,cy+rng*.78,"state control soft law","#FF9999"],
+    [cx+rng*.55,cy+rng*.78,"state control binding law","#FF9999"]
   ];
   for (var qi=0;qi<qLabels.length;qi++) {
-    ctx.font="11px Inter,sans-serif"; ctx.fillStyle=qLabels[qi][3]; ctx.globalAlpha=0.45; ctx.textAlign="center";
+    ctx.font="600 11px Inter,sans-serif"; ctx.fillStyle=qLabels[qi][3]; ctx.globalAlpha=0.88; ctx.textAlign="center";
+    ctx.shadowColor="rgba(0,0,0,0.5)"; ctx.shadowBlur=3;
     ctx.fillText(qLabels[qi][2],qLabels[qi][0],qLabels[qi][1]);
+    ctx.shadowBlur=0;
   }
   ctx.globalAlpha=1;
-  ctx.font="500 13px Inter,sans-serif"; ctx.textAlign="center";
-  ctx.fillStyle="#5AABF8"; ctx.fillText(isJa?"個人の権利": "Individual rights",cx,cy-rng-18);
-  ctx.fillStyle="#E87878"; ctx.fillText(isJa?"国家統制":"State control",cx,cy+rng+18);
-  ctx.fillStyle="#5DBF88"; ctx.textAlign="start"; ctx.fillText(isJa?"任意のソフト法":"Voluntary soft law",cx-rng-10,cy-5);
-  ctx.fillStyle="#F4B86D"; ctx.textAlign="end"; ctx.fillText(isJa?"拘束力のある硬法":"Binding hard law",cx+rng+10,cy-5);
+  ctx.font="600 13px Inter,sans-serif"; ctx.textAlign="center";
+  ctx.shadowColor="rgba(0,0,0,0.55)"; ctx.shadowBlur=4;
+  ctx.fillStyle="#7EC8FF"; ctx.fillText(isJa?"個人の権利": "Individual rights",cx,cy-rng-18);
+  ctx.fillStyle="#FF9999"; ctx.fillText(isJa?"国家統制":"State control",cx,cy+rng+18);
+  ctx.fillStyle="#7AE8A8"; ctx.textAlign="start"; ctx.fillText(isJa?"任意のソフト法":"Voluntary soft law",cx-rng-10,cy-5);
+  ctx.fillStyle="#FFC870"; ctx.textAlign="end"; ctx.fillText(isJa?"拘束力のある硬法":"Binding hard law",cx+rng+10,cy-5);
+  ctx.shadowBlur=0;
   ctx.textAlign="center";
-  ctx.font="600 11px Inter,sans-serif"; ctx.fillStyle="rgba(232,149,10,0.55)";
+  ctx.font="600 11px Inter,sans-serif"; ctx.fillStyle="rgba(255,200,80,0.95)";
+  ctx.shadowColor="rgba(0,0,0,0.55)"; ctx.shadowBlur=4;
   ctx.fillText(isJa?currentYear+"年時点のスナップショット":currentYear+" snapshot",cx,cy+14);
+  ctx.shadowBlur=0;
 }
 
 function drawCountryDot(c) {
@@ -1278,7 +1288,7 @@ function drawCountryDot(c) {
 
   if (!passesModel) {
     ctx.beginPath(); ctx.arc(xy[0],xy[1],r,0,Math.PI*2);
-    ctx.fillStyle=col; ctx.globalAlpha=0.04; ctx.fill(); ctx.globalAlpha=1;
+    ctx.fillStyle=col; ctx.globalAlpha=0.08; ctx.fill(); ctx.globalAlpha=1;
     return;
   }
   if (isH||isS||isCmp||isHL) {
@@ -1290,22 +1300,23 @@ function drawCountryDot(c) {
     // Fully documented: solid filled dot (existing behaviour)
     ctx.beginPath(); ctx.arc(xy[0],xy[1],r,0,Math.PI*2);
     ctx.fillStyle=isHL?"#E8950A":col;
-    ctx.globalAlpha=emphasized?(isH||isS||isCmp||isHL?1:0.92):0.26;
+    ctx.globalAlpha=emphasized?(isH||isS||isCmp||isHL?1:0.96):0.48;
     ctx.fill();
+    ctx.strokeStyle="rgba(0,0,0,0.35)"; ctx.lineWidth=0.75; ctx.stroke();
     if (isS||isCmp) { ctx.strokeStyle="rgba(255,255,255,0.85)"; ctx.lineWidth=2; ctx.stroke(); }
   } else {
     // Preliminary score: hollow ring with dashed stroke
     ctx.beginPath(); ctx.arc(xy[0],xy[1],r,0,Math.PI*2);
     // Faint fill so it's still visible but clearly different
     ctx.fillStyle=isHL?"#E8950A":col;
-    ctx.globalAlpha=emphasized?(isH||isS||isCmp||isHL?0.18:0.10):0.06;
+    ctx.globalAlpha=emphasized?(isH||isS||isCmp||isHL?0.28:0.18):0.12;
     ctx.fill();
     ctx.globalAlpha=1;
     // Dashed ring
     ctx.beginPath(); ctx.arc(xy[0],xy[1],r,0,Math.PI*2);
-    ctx.strokeStyle=isHL?"#E8950A":col;
-    ctx.lineWidth=emphasized?1.5:1;
-    ctx.globalAlpha=emphasized?(isH||isS||isCmp||isHL?0.90:0.55):0.20;
+    ctx.strokeStyle=isHL?"#FFC04D":col;
+    ctx.lineWidth=emphasized?2:1.25;
+    ctx.globalAlpha=emphasized?(isH||isS||isCmp||isHL?1:0.72):0.38;
     ctx.setLineDash([3,3]);
     ctx.stroke();
     ctx.setLineDash([]);
@@ -1317,9 +1328,11 @@ function drawCountryDot(c) {
   }
   ctx.globalAlpha=1;
   if (shouldShowCountryLabel(c,isH,isS,isCmp,isHL)) {
-    ctx.font=(isH||isS?"600":"400")+" 11px Inter,sans-serif";
-    ctx.fillStyle=isH||isS?"rgba(255,255,255,0.95)":(emphasized?"rgba(255,255,255,0.68)":"rgba(255,255,255,0.35)");
+    ctx.font=(isH||isS?"700":"600")+" 11px Inter,sans-serif";
+    ctx.fillStyle=isH||isS?"#FFFFFF":(emphasized?"rgba(255,255,255,0.92)":"rgba(255,255,255,0.62)");
+    ctx.shadowColor="rgba(0,0,0,0.65)"; ctx.shadowBlur=3;
     ctx.textAlign="center"; ctx.fillText(c.name,xy[0],xy[1]-r-5);
+    ctx.shadowBlur=0;
   }
 }
 

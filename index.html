@@ -53,8 +53,10 @@ input[type=range].tl-range{flex:1;min-width:110px;accent-color:var(--amber);curs
 .view-toggle{display:flex;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:7px;overflow:hidden;}
 .vt-btn{padding:5px 12px;font-size:11px;color:var(--muted2);border:none;background:transparent;cursor:pointer;font-family:"Inter",sans-serif;transition:all .15s;white-space:nowrap;}
 .vt-btn.active{background:rgba(255,255,255,.16);color:var(--off);font-weight:600;}
-#sidebar{grid-column:1;grid-row:2;padding:.5rem 1rem .75rem;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:.85rem;overflow:hidden;min-height:0;}
+#sidebar{grid-column:1;grid-row:2;padding:.5rem 1rem .75rem;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;height:100%;overflow:hidden;min-height:0;gap:.85rem;}
+.sb-scroll{flex:1;overflow-y:auto;min-height:0;display:flex;flex-direction:column;gap:.85rem;}
 .sb-section{flex-shrink:0;}
+.sb-glance{flex-shrink:0;}
 .sb-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);margin-bottom:.35rem;font-weight:600;}
 .filter-group{display:flex;flex-direction:column;gap:3px;}
 .region-group{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
@@ -323,6 +325,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
       </div>
     </div>
     <div id="sidebar">
+      <div class="sb-scroll">
       <div class="sb-section">
         <div class="sb-label" id="sb-region">Region</div>
         <div class="filter-group region-group">
@@ -367,7 +370,8 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
         <button class="compare-btn" id="compare-toggle" onclick="toggleCompare()"><span id="compare-btn-text">Compare</span></button>
         <div class="compare-selected" id="compare-selected"></div>
       </div>
-      <div class="sb-section">
+      </div>
+      <div class="sb-section sb-glance">
         <div class="sb-label" id="sb-glance">At a glance</div>
         <div class="stats-grid">
           <div class="stat-card"><div class="stat-num" id="stat-mapped">79</div><div class="stat-lbl" id="stat-lbl-mapped">Jurisdictions</div></div>
@@ -588,7 +592,7 @@ var countries = [
    desc:"Paradigmatic sovereignty-centered model. Binding regulations covering algorithms, deepfakes, generative AI. Mandatory CAC registration. Content must align with state values.",
    latest:"September 2025: Mandatory AI watermarking fully operational. AI Plus Action Plan targeting 70% AI penetration by 2027. China-ASEAN AI safety network launching 2026.",
    tags:["Gen AI rules 2023","Algorithm rules 2022","CAC registration","WAICO proposal"]},
-  {id:"us",documented:true,start:2016,flag:"🇺🇸",name:"United States",group:"market",modelLabel:"Market-oriented",modelClass:"pm-market",ctmClass:"ctm-m",
+  {id:"us",documented:true,start:2016,flag:"🇺🇸",name:"United States",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.38,m:.48,s:.14,bind:15,rx:.35,bx:-.40},2018:{r:.36,m:.50,s:.14,bind:18,rx:.32,bx:-.38},2020:{r:.38,m:.48,s:.14,bind:25,rx:.35,bx:-.22},2022:{r:.38,m:.48,s:.14,bind:30,rx:.35,bx:-.12},2024:{r:.35,m:.50,s:.15,bind:38,rx:.28,bx:.02},2026:{r:0.32,m:0.5,s:0.18,bind:35,rx:0.16,bx:-.05}},
    bindText:"Partial — state laws only",
    desc:"Fragmented governance under deregulatory federal pressure. No federal AI law. NIST AI RMF voluntary. State laws (Colorado, Texas) binding but federal preemption underway.",
@@ -606,7 +610,7 @@ var countries = [
    desc:"World first governance framework for agentic AI (Jan 2026) with 5-tier autonomy classification. AI Verify toolkit. No binding national AI law. ASEAN regional governance leader.",
    latest:"January 2026: World first agentic AI framework published at WEF — introduces Agent Identity Cards and 5-tier autonomy classification.",
    tags:["Agentic AI framework 2026","AI Verify toolkit","Model AI Gov. Framework","ASEAN leader"]},
-  {id:"uk",documented:true,start:2019,flag:"🇬🇧",name:"United Kingdom",group:"market",modelLabel:"Market-oriented",modelClass:"pm-market",ctmClass:"ctm-m",
+  {id:"uk",documented:true,start:2019,flag:"🇬🇧",name:"United Kingdom",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.40,m:.45,s:.15,bind:18,rx:.38,bx:-.35},2020:{r:.43,m:.44,s:.13,bind:22,rx:.40,bx:-.28},2022:{r:.43,m:.45,s:.12,bind:23,rx:.40,bx:-.26},2024:{r:.42,m:.46,s:.12,bind:24,rx:.40,bx:-.24},2026:{r:0.42,m:0.5,s:0.08,bind:25,rx:0.39,bx:-.22}},
    bindText:"Sector-specific only",
    desc:"Pro-innovation principles-based approach. No unified AI law. Sector regulators (FCA, ICO, MHRA, CMA). AI Safety Institute after Bletchley Declaration.",
@@ -636,25 +640,25 @@ var countries = [
    desc:"Sandbox-to-regulation model. No binding AI law. RBI FREE-AI framework for finance. Digital India Act pending.",
    latest:"2026: Digital Personal Data Protection Act being implemented. India AI Mission launched with 1.25 billion USD investment.",
    tags:["Sandbox-to-regulation","RBI FREE-AI","Digital India Act pending"]},
-  {id:"ae",documented:true,start:2017,flag:"🇦🇪",name:"UAE",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+  {id:"ae",documented:true,start:2017,flag:"🇦🇪",name:"UAE",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.15,m:.35,s:.50,bind:15,rx:-.38,bx:-.42},2020:{r:.13,m:.31,s:.56,bind:24,rx:-.45,bx:-.28},2022:{r:.12,m:.30,s:.58,bind:28,rx:-.48,bx:-.18},2024:{r:.12,m:.29,s:.59,bind:30,rx:-.50,bx:-.12},2026:{r:0.16,m:0.26,s:0.58,bind:32,rx:-0.48,bx:-.08}},
    bindText:"Partial — sectoral rules",
    desc:"AI governance as economic diversification. World first AI Minister 2017. Sector-specific binding rules. Vision 2030 AI hub ambition.",
    latest:"UAE-US AI dialogue ongoing. AI regulatory sandbox launched. Positioning as neutral AI governance hub between East and West.",
    tags:["First AI Minister 2017","Vision 2030","Sectoral rules"]},
-  {id:"cl",documented:true,start:2019,flag:"🇨🇱",name:"Chile",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+  {id:"cl",documented:true,start:2019,flag:"🇨🇱",name:"Chile",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.40,m:.40,s:.20,bind:5,rx:.38,bx:-.75},2020:{r:.50,m:.45,s:.05,bind:8,rx:.52,bx:-.58},2022:{r:.55,m:.42,s:.03,bind:10,rx:.60,bx:-.48},2024:{r:.60,m:.38,s:.02,bind:14,rx:.67,bx:-.38},2026:{r:0.64,m:0.36,s:0,bind:18,rx:0.74,bx:-0.32}},
    bindText:"Constitutional + proposed AI bill",
    desc:"World first country to constitutionally protect neuro-rights against AI mental manipulation. Proposed AI bill under consultation.",
    latest:"AI bill advancing through consultation process modeled on EU approach. Constitutional neuro-rights protection studied by other jurisdictions.",
    tags:["Constitutional neuro-rights","World first","Proposed AI bill"]},
-  {id:"ke",documented:true,start:2019,flag:"🇰🇪",name:"Kenya",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+  {id:"ke",documented:true,start:2019,flag:"🇰🇪",name:"Kenya",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.30,m:.45,s:.25,bind:4,rx:.25,bx:-.82},2020:{r:.40,m:.38,s:.22,bind:8,rx:.35,bx:-.72},2022:{r:.44,m:.36,s:.20,bind:12,rx:.40,bx:-.60},2024:{r:.48,m:.34,s:.18,bind:16,rx:.44,bx:-.50},2026:{r:0.29,m:0.57,s:0.14,bind:18,rx:0.17,bx:-.45}},
    bindText:"Proposed — Data Protection Act applies",
    desc:"Most advanced AI governance in sub-Saharan Africa. Proposed AI licensing framework. African Union AI Strategy adopted.",
    latest:"Data Protection Commissioner actively enforcing DPA. AI licensing framework under parliamentary consideration.",
    tags:["Sub-Saharan leader","AI licensing proposed","AU AI Strategy"]},
-  {id:"au2",documented:true,start:2020,flag:"🌍",name:"African Union",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+  {id:"au2",documented:true,start:2020,flag:"🌍",name:"African Union",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.30,m:.40,s:.30,bind:2,rx:.22,bx:-.88},2020:{r:.40,m:.35,s:.25,bind:5,rx:.34,bx:-.78},2022:{r:.46,m:.32,s:.22,bind:7,rx:.40,bx:-.72},2024:{r:.52,m:.30,s:.18,bind:9,rx:.46,bx:-.65},2026:{r:0.36,m:0.5,s:0.14,bind:10,rx:0.25,bx:-.62}},
    bindText:"Voluntary — AU-AI Strategy",
    desc:"Unique framework classifying environmental harm, structural inequality, and threats to African cultural values as primary risk categories. Anti-digital-colonization focus.",
@@ -702,7 +706,7 @@ var countries = [
    desc:"Protection of Personal Information Act (POPIA) applies to AI data processing. National AI policy under development. Africa second-largest digital economy.",
    latest:"2024: Draft National AI Policy Framework published for consultation. POPIA actively enforced by Information Regulator.",
    tags:["POPIA applies","National AI policy developing","AU AI Strategy"]},
-  {id:"sa",documented:true,start:2020,flag:"🇸🇦",name:"Saudi Arabia",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+  {id:"sa",documented:true,start:2020,flag:"🇸🇦",name:"Saudi Arabia",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.12,m:.30,s:.58,bind:10,rx:-.42,bx:-.50},2020:{r:.11,m:.28,s:.61,bind:15,rx:-.48,bx:-.38},2022:{r:.11,m:.27,s:.62,bind:20,rx:-.50,bx:-.28},2024:{r:.11,m:.26,s:.63,bind:25,rx:-.52,bx:-.18},2026:{r:0.14,m:0.24,s:0.62,bind:28,rx:-0.55,bx:-0.12}},
    bindText:"Partial — SDAIA regulations",
    desc:"Saudi Data and AI Authority (SDAIA) leads AI governance. Vision 2030 positions AI as economic transformation tool. Sector-specific rules in finance and healthcare.",
@@ -732,7 +736,7 @@ var countries = [
    desc:"Sweden applies the EU AI Act and has a proactive digital governance tradition. IMY (Swedish Privacy Authority) among most active EU data protection authorities. Significant AI research capacity.",
    latest:"IMY issuing AI enforcement guidance. Active EU AI Act implementation alongside national AI strategy.",
    tags:["EU AI Act applies","IMY enforcement","National AI strategy","Nordic leadership"]},
-  {id:"co",documented:true,start:2019,flag:"🇨🇴",name:"Colombia",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+  {id:"co",documented:true,start:2019,flag:"🇨🇴",name:"Colombia",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.32,m:.42,s:.26,bind:5,rx:.25,bx:-.78},2020:{r:.38,m:.38,s:.24,bind:9,rx:.32,bx:-.66},2022:{r:.43,m:.35,s:.22,bind:14,rx:.38,bx:-.52},2024:{r:.47,m:.33,s:.20,bind:19,rx:.42,bx:-.40},2026:{r:0.5,m:0.38,s:0.12,bind:23,rx:0.44,bx:-.32}},
    bindText:"Partial — CONPES 3975 + Habeas Data",
    desc:"Colombia published a National AI Policy (CONPES 3975) in 2019. Habeas Data law applies to AI. Constitutional Court has ruled on algorithmic decisions. Active Latin American AI governance leader.",
@@ -750,7 +754,7 @@ var countries = [
    desc:"No comprehensive AI law but sector-specific governance through the Israeli Innovation Authority and Privacy Protection Authority. Strong AI startup ecosystem shapes light-touch regulatory approach.",
    latest:"Government AI policy framework under development. Privacy Protection Authority issuing AI guidance across sectors.",
    tags:["Privacy Protection Authority","Innovation Authority","AI startup hub","Sector guidance"]},
-  {id:"oecd",documented:true,start:2019,flag:"🌐",name:"OECD",group:"rights",modelLabel:"Intergovernmental",modelClass:"pm-inter",ctmClass:"ctm-i",
+  {id:"oecd",documented:true,start:2019,flag:"🌐",name:"OECD",group:"market",modelLabel:"Market-oriented",modelClass:"pm-market",ctmClass:"ctm-m",
    timeline:{2016:{r:.50,m:.38,s:.12,bind:5,rx:.50,bx:-.80},2018:{r:.54,m:.35,s:.11,bind:6,rx:.54,bx:-.78},2020:{r:.56,m:.33,s:.11,bind:7,rx:.56,bx:-.76},2022:{r:.58,m:.31,s:.11,bind:7,rx:.58,bx:-.74},2024:{r:.59,m:.30,s:.11,bind:8,rx:.59,bx:-.72},2026:{r:0.28,m:0.72,s:0,bind:8,rx:0.32,bx:-0.72}},
    bindText:"Voluntary — 49 adherents",
    desc:"First intergovernmental AI standard. 49 countries adhered to OECD AI Principles. Shaped NIST, ISO, and EU AI Act. De facto secretariat for democratic AI governance.",
@@ -762,25 +766,25 @@ var countries = [
    desc:"ASEAN Guide on AI Governance and Ethics updated 2024 for generative AI. No binding ASEAN-level AI law. Singapore leads regional framework development.",
    latest:"September 2025: China and ASEAN agreed to launch AI safety network in 2026. ASEAN Digital Masterplan 2025 includes AI components.",
    tags:["ASEAN Guide 2024","Singapore-led","China-ASEAN network 2026","No binding law"]},
-  {id:"vn",documented:false,start:2021,flag:"🇻🇳",name:"Vietnam",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+  {id:"vn",documented:false,start:2021,flag:"🇻🇳",name:"Vietnam",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
    timeline:{2016:{r:.22,m:.48,s:.30,bind:5,rx:.18,bx:-.82},2020:{r:.28,m:.44,s:.28,bind:8,rx:.24,bx:-.72},2022:{r:.34,m:.40,s:.26,bind:12,rx:.30,bx:-.58},2024:{r:.42,m:.35,s:.23,bind:28,rx:.38,bx:-.22},2026:{r:0.1,m:0.14,s:0.76,bind:72,rx:-0.76,bx:.62}},
    bindText:"Strong — AI Law effective Mar 2026",
    desc:"First comprehensive binding AI law in Southeast Asia (effective March 2026). EU-inspired risk-based classification with transparency, labeling, and human oversight. Fines up to 2% of annual revenue.",
    latest:"May 2026: Decree 142/2026 implementing the AI Law took effect. Three-tier risk classification operational. National AI governance infrastructure established under Ministry of Science and Technology.",
    tags:["AI Law 2025","First in ASEAN binding","EU-inspired","Decree 142/2026"]},
-  {id:"my",documented:false,start:2019,flag:"🇲🇾",name:"Malaysia",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+  {id:"my",documented:false,start:2019,flag:"🇲🇾",name:"Malaysia",group:"market",modelLabel:"Market-oriented",modelClass:"pm-market",ctmClass:"ctm-m",
    timeline:{2016:{r:.20,m:.52,s:.28,bind:3,rx:.14,bx:-.85},2020:{r:.21,m:.51,s:.28,bind:5,rx:.15,bx:-.80},2022:{r:.22,m:.50,s:.28,bind:7,rx:.16,bx:-.74},2024:{r:.23,m:.49,s:.28,bind:12,rx:.18,bx:-.62},2026:{r:0.25,m:0.69,s:0.06,bind:20,rx:0.22,bx:-.48}},
    bindText:"Partial — AIGE guidelines + bill pending",
    desc:"National AI Office (NAIO) established 2024. AIGE voluntary guidelines among ASEAN's first national-level frameworks. AI Governance Bill expected at Cabinet June 2026. PDPA amendments strengthening data rules.",
    latest:"March 2026: My-AI Standards platform launched. AI standards framework targeting 12-month progress. Cabinet submission of AI Governance Bill expected mid-2026.",
    tags:["NAIO 2024","AIGE guidelines","AI Bill pending 2026","ASEAN leader"]},
-  {id:"ph",documented:false,start:2021,flag:"🇵🇭",name:"Philippines",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+  {id:"ph",documented:false,start:2021,flag:"🇵🇭",name:"Philippines",group:"market",modelLabel:"Market-oriented",modelClass:"pm-market",ctmClass:"ctm-m",
    timeline:{2016:{r:.24,m:.46,s:.30,bind:4,rx:.18,bx:-.84},2020:{r:.25,m:.45,s:.30,bind:6,rx:.20,bx:-.76},2022:{r:.26,m:.44,s:.30,bind:9,rx:.22,bx:-.68},2024:{r:.27,m:.44,s:.29,bind:13,rx:.23,bx:-.56},2026:{r:0.27,m:0.67,s:0.06,bind:18,rx:0.24,bx:-.44}},
    bindText:"Partial — National AI Strategy + bills pending",
    desc:"National AI Strategy Roadmap 2.0. Data Privacy Act applies to AI processing. Multiple AI bills pending in 19th Congress including proposed AI Bill of Rights. 2026 ASEAN chair pushing binding framework.",
    latest:"2026: ASEAN chairmanship prioritizing regional AI safety network. Comprehensive AI legislation under congressional review.",
    tags:["National AI Strategy","Data Privacy Act","ASEAN chair 2026","AI Bill pending"]},
-  {id:"pk",documented:false,start:2022,flag:"🇵🇰",name:"Pakistan",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+  {id:"pk",documented:false,start:2022,flag:"🇵🇰",name:"Pakistan",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.18,m:.42,s:.40,bind:4,rx:-.15,bx:-.82},2020:{r:.17,m:.40,s:.43,bind:6,rx:-.20,bx:-.74},2022:{r:.16,m:.39,s:.45,bind:9,rx:-.24,bx:-.65},2024:{r:.16,m:.38,s:.46,bind:14,rx:-.28,bx:-.48},2026:{r:0.27,m:0.47,s:0.26,bind:24,rx:0.01,bx:-.28}},
    bindText:"Partial — National AI Policy 2025",
    desc:"National AI Policy 2025 and Islamabad AI Declaration (Feb 2026) emphasize sovereign, capability-driven AI. Pakistan Digital Authority leads supervisory framework. Pending AI Bill and Data Protection Bill.",
@@ -798,7 +802,7 @@ var countries = [
    desc:"Personal Data Protection Act No. 9 of 2022 applies to AI data processing. National AI Strategy under ICT Agency. Growing fintech AI sector under CBSL oversight.",
    latest:"PDPA enforcement expanding. ICTA developing national AI guidelines aligned with UNESCO Recommendation.",
    tags:["PDPA 2022","ICTA strategy","UNESCO alignment","Fintech AI"]},
-  {id:"np",documented:false,start:2024,flag:"🇳🇵",name:"Nepal",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+  {id:"np",documented:false,start:2024,flag:"🇳🇵",name:"Nepal",group:"market",modelLabel:"Market-oriented",modelClass:"pm-market",ctmClass:"ctm-m",
    timeline:{2016:{r:.24,m:.46,s:.30,bind:2,rx:.18,bx:-.90},2020:{r:.26,m:.45,s:.29,bind:3,rx:.20,bx:-.86},2022:{r:.28,m:.44,s:.28,bind:5,rx:.22,bx:-.78},2024:{r:.30,m:.43,s:.27,bind:7,rx:.24,bx:-.70},2026:{r:0.0,m:0.78,s:0.22,bind:9,rx:-0.25,bx:-.62}},
    bindText:"Voluntary — draft AI policy",
    desc:"Early-stage AI governance. Electronic Transactions Act and privacy guidelines apply. Draft National AI Policy under development with UNESCO support.",
@@ -888,7 +892,7 @@ var countries = [
    desc:"National AI Strategy 2021-2025. KVKK (personal data law) applies to AI. Content moderation requirements for platforms. Bridge between EU and Middle East governance models.",
    latest:"2025-2026: New AI strategy period expected. KVKK issuing AI processing guidance. Domestic LLM initiatives under state oversight.",
    tags:["KVKK applies","National AI Strategy","Content moderation","Regional bridge"]},
-  {id:"ng",documented:false,start:2019,flag:"🇳🇬",name:"Nigeria",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+  {id:"ng",documented:false,start:2019,flag:"🇳🇬",name:"Nigeria",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.28,m:.42,s:.30,bind:3,rx:.22,bx:-.86},2020:{r:.34,m:.38,s:.28,bind:6,rx:.28,bx:-.78},2022:{r:.40,m:.35,s:.25,bind:10,rx:.34,bx:-.65},2024:{r:.46,m:.32,s:.22,bind:18,rx:.40,bx:-.48},2026:{r:0.29,m:0.57,s:0.14,bind:24,rx:0.17,bx:-.35}},
    bindText:"Partial — NAIS 2024 + bills pending",
    desc:"National AI Strategy 2024 and Nigeria Data Protection Act 2023. Multiple AI bills consolidated in National Assembly. NITDA Draft Code of Practice for AI (2025). Continental leadership ambition.",
@@ -942,7 +946,7 @@ var countries = [
    desc:"Personal Data Protection Law 29733 applies. National AI Strategy 2021-2026. Growing focus on public sector algorithmic accountability.",
    latest:"National AI Strategy mid-term review. Ministry of Justice developing AI governance guidelines for judiciary.",
    tags:["Law 29733","AI Strategy 2026","Public sector focus","Andean region"]},
-  {id:"uy",documented:false,start:2019,flag:"🇺🇾",name:"Uruguay",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+  {id:"uy",documented:false,start:2019,flag:"🇺🇾",name:"Uruguay",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.38,m:.38,s:.24,bind:6,rx:.32,bx:-.72},2020:{r:.44,m:.35,s:.21,bind:10,rx:.38,bx:-.58},2022:{r:.48,m:.33,s:.19,bind:14,rx:.42,bx:-.45},2024:{r:.52,m:.31,s:.17,bind:18,rx:.46,bx:-.35},2026:{r:0.5,m:0.43,s:0.07,bind:21,rx:0.49,bx:-.28}},
    bindText:"Partial — Law 18331 + AI ethics code",
    desc:"Law 18331 on data protection. AI Ethics Code for public administration. Latin American digital government pioneer. Agile governance approach.",
@@ -954,19 +958,19 @@ var countries = [
    desc:"Organic Law on Personal Data Protection 2021. National AI agenda under SNIE. Constitutional rights influence governance approach.",
    latest:"Data protection authority developing AI processing guidance. National innovation agenda integrating AI ethics.",
    tags:["Data law 2021","Constitutional rights","SNIE agenda","Andean community"]},
-  {id:"cr",documented:false,start:2020,flag:"🇨🇷",name:"Costa Rica",group:"rights",modelLabel:"Rights-based",modelClass:"pm-rights",ctmClass:"ctm-r",
+  {id:"cr",documented:false,start:2020,flag:"🇨🇷",name:"Costa Rica",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.36,m:.40,s:.24,bind:5,rx:.30,bx:-.76},2020:{r:.42,m:.37,s:.21,bind:9,rx:.36,bx:-.62},2022:{r:.46,m:.35,s:.19,bind:13,rx:.40,bx:-.50},2024:{r:.50,m:.33,s:.17,bind:17,rx:.44,bx:-.38},2026:{r:0.5,m:0.5,s:0.0,bind:20,rx:0.57,bx:-.30}},
    bindText:"Partial — Law 8968 + AI strategy",
    desc:"Law 8968 on data protection. National AI Strategy 2024-2027. Strong environmental and human rights framing. PRODHAB oversight.",
    latest:"2024-2027 AI Strategy implementation. Focus on sustainable AI and biodiversity data governance.",
    tags:["Law 8968","AI Strategy 2027","Environmental framing","Central America leader"]},
-  {id:"qa",documented:false,start:2019,flag:"🇶🇦",name:"Qatar",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+  {id:"qa",documented:false,start:2019,flag:"🇶🇦",name:"Qatar",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.14,m:.32,s:.54,bind:10,rx:-.40,bx:-.48},2020:{r:.13,m:.30,s:.57,bind:14,rx:-.44,bx:-.38},2022:{r:.12,m:.29,s:.59,bind:18,rx:-.48,bx:-.28},2024:{r:.12,m:.28,s:.60,bind:22,rx:-.50,bx:-.18},2026:{r:0.19,m:0.31,s:0.5,bind:26,rx:-0.36,bx:-.10}},
    bindText:"Partial — QFZA + sector rules",
    desc:"National AI Strategy under MCIT. Qatar Financial Centre regulatory sandbox. State-led AI investment through Qatar Investment Authority. Content alignment expectations.",
    latest:"Qatar AI strategy implementation in smart city and World Cup legacy infrastructure. QFC fintech AI rules expanding.",
    tags:["National AI Strategy","QFC sandbox","State investment","Gulf hub"]},
-  {id:"bh",documented:false,start:2019,flag:"🇧🇭",name:"Bahrain",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+  {id:"bh",documented:false,start:2019,flag:"🇧🇭",name:"Bahrain",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.16,m:.34,s:.50,bind:8,rx:-.35,bx:-.52},2020:{r:.15,m:.32,s:.53,bind:12,rx:-.40,bx:-.42},2022:{r:.14,m:.31,s:.55,bind:16,rx:-.44,bx:-.32},2024:{r:.13,m:.30,s:.57,bind:20,rx:-.48,bx:-.22},2026:{r:0.19,m:0.44,s:0.37,bind:23,rx:-0.21,bx:-.14}},
    bindText:"Partial — PDPL 2018 + cloud policy",
    desc:"Personal Data Protection Law 2018 (PDPL). Cloud-first policy enabling AI. CBB fintech regulations. Regional financial AI hub ambition.",
@@ -984,19 +988,19 @@ var countries = [
    desc:"State-controlled AI development under High Council of Virtual Space. National AI Strategy 2026-2031. Content filtering and platform control requirements. Sanctions-isolated governance model.",
    latest:"2026-2031 National AI Strategy launched. Domestic LLM development under state oversight. Cyber sovereignty framework expanding.",
    tags:["Virtual Space Council","State-controlled","National AI Strategy 2031","Cyber sovereignty"]},
-  {id:"kz",documented:false,start:2020,flag:"🇰🇿",name:"Kazakhstan",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+  {id:"kz",documented:false,start:2020,flag:"🇰🇿",name:"Kazakhstan",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.16,m:.34,s:.50,bind:10,rx:-.35,bx:-.45},2020:{r:.15,m:.32,s:.53,bind:15,rx:-.40,bx:-.32},2022:{r:.14,m:.30,s:.56,bind:22,rx:-.45,bx:-.18},2024:{r:.13,m:.29,s:.58,bind:28,rx:-.48,bx:-.05},2026:{r:0.22,m:0.22,s:0.56,bind:32,rx:-0.39,bx:.08}},
    bindText:"Partial — AI law draft + data law",
    desc:"Draft Law on Artificial Intelligence under consideration. Data protection law applies. Astana Hub tech ecosystem. Central Asian regional influence.",
    latest:"AI law draft in parliament. Astana International Forum discussions on regional AI governance.",
    tags:["AI law draft","Astana Hub","Central Asia leader","Data protection law"]},
-  {id:"uz",documented:false,start:2020,flag:"🇺🇿",name:"Uzbekistan",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
+  {id:"uz",documented:false,start:2020,flag:"🇺🇿",name:"Uzbekistan",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
    timeline:{2016:{r:.14,m:.36,s:.50,bind:6,rx:-.32,bx:-.55},2020:{r:.13,m:.34,s:.53,bind:10,rx:-.38,bx:-.42},2022:{r:.12,m:.32,s:.56,bind:15,rx:-.42,bx:-.28},2024:{r:.11,m:.31,s:.58,bind:20,rx:-.46,bx:-.15},2026:{r:0.17,m:0.33,s:0.5,bind:24,rx:-0.38,bx:-.05}},
    bindText:"Partial — AI strategy 2024-2030",
    desc:"AI Development Strategy 2024-2030. Personal data law enacted 2019. State-led digital transformation (Digital Uzbekistan 2030). Growing tech park ecosystem.",
    latest:"AI Strategy 2024-2030 implementation. IT Park expanding AI startup ecosystem under state coordination.",
    tags:["AI Strategy 2030","Digital Uzbekistan","IT Park","Central Asia"]},
-  {id:"unesco",documented:true,start:2021,flag:"🏛️",name:"UNESCO",group:"rights",modelLabel:"Intergovernmental",modelClass:"pm-inter",ctmClass:"ctm-i",
+  {id:"unesco",documented:true,start:2021,flag:"🏛️",name:"UNESCO",group:"market",modelLabel:"Market-oriented",modelClass:"pm-market",ctmClass:"ctm-m",
    timeline:{2016:{r:.45,m:.38,s:.17,bind:3,rx:.42,bx:-.88},2020:{r:.52,m:.34,s:.14,bind:4,rx:.48,bx:-.85},2022:{r:.56,m:.32,s:.12,bind:5,rx:.52,bx:-.82},2024:{r:.58,m:.30,s:.12,bind:6,rx:.54,bx:-.80},2026:{r:0.32,m:0.68,s:0,bind:7,rx:0.37,bx:-0.78}},
    bindText:"Voluntary — 193 member states",
    desc:"Recommendation on the Ethics of AI (2021) adopted by all 193 member states. Broadest global consensus on AI ethics. Readiness Assessment Methodology deployed in 50+ countries.",
@@ -1032,13 +1036,13 @@ var countries = [
    desc:"Data Protection Law (Law 22/11) among Africa's earlier frameworks. National AI strategy development with AU alignment. Oil economy digital diversification.",
    latest:"Data protection agency expanding mandate to cover AI processing. AU AI Strategy implementation planning.",
    tags:["Law 22/11","AU alignment","Early adopter Africa","Digital diversification"]},
-  {id:"kh",documented:false,start:2021,flag:"🇰🇭",name:"Cambodia",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+  {id:"kh",documented:false,start:2021,flag:"🇰🇭",name:"Cambodia",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
    timeline:{2016:{r:.18,m:.52,s:.30,bind:2,rx:.10,bx:-.92},2020:{r:.19,m:.51,s:.30,bind:3,rx:.11,bx:-.88},2022:{r:.20,m:.50,s:.30,bind:5,rx:.12,bx:-.82},2024:{r:.21,m:.49,s:.30,bind:7,rx:.13,bx:-.74},2026:{r:0.0,m:0.33,s:0.67,bind:9,rx:-0.77,bx:-.68}},
    bindText:"Voluntary — ASEAN alignment",
    desc:"No dedicated AI law. ASEAN Guide on AI Governance alignment. Growing digital economy under Cambodia Digital Economy and Society Policy Framework 2021-2035.",
    latest:"ASEAN AI governance guide adoption. Digital policy framework integrating AI components.",
    tags:["ASEAN alignment","Digital policy 2035","Voluntary","Early stage"]},
-  {id:"la",documented:false,start:2022,flag:"🇱🇦",name:"Laos",group:"hybrid",modelLabel:"Hybrid",modelClass:"pm-hybrid",ctmClass:"ctm-h",
+  {id:"la",documented:false,start:2022,flag:"🇱🇦",name:"Laos",group:"sovereign",modelLabel:"Sovereignty-centered",modelClass:"pm-sovereign",ctmClass:"ctm-s",
    timeline:{2016:{r:.16,m:.54,s:.30,bind:1,rx:.08,bx:-.94},2020:{r:.17,m:.53,s:.30,bind:2,rx:.09,bx:-.90},2022:{r:.18,m:.52,s:.30,bind:3,rx:.10,bx:-.86},2024:{r:.19,m:.51,s:.30,bind:5,rx:.11,bx:-.78},2026:{r:0.0,m:0.24,s:0.76,bind:7,rx:-0.87,bx:-.72}},
    bindText:"Voluntary — digital strategy only",
    desc:"Digital Economy Strategy under development. No dedicated AI or data protection law. ASEAN regional frameworks primary reference.",
@@ -1520,7 +1524,7 @@ function updateCrisisOverlay(year) {
   var accent=crisis?crisis.color:"#E8950A";
   var dots=countMappedAtYear(year);
   var dotLbl=isJa?(dots+"\u4ef6\u306e\u30c9\u30c3\u30c8"):(dots+" dot"+(dots!==1?"s":""));
-  var milestoneLbl=isJa?"\u91cc\u7a0b\u7891":"Milestone";
+  var milestoneLbl=isJa?"\u30DE\u30A4\u30EB\u30B9\u30C8\u30FC\u30F3":"Milestone";
   var buildLbl=isJa?"\u30de\u30c3\u30d7\u306e\u62e1\u5927":"Map build-up";
   var html="<div class=\"crisis-banner-inner\" style=\"border-left-color:"+accent+"\">";
   html+="<span class=\"crisis-banner-year\" style=\"color:"+accent+"\">"+year+"</span>";
@@ -1834,7 +1838,7 @@ function getCompareLabels() {
     rights:isJa?"権利 (r)":"Rights (r)",
     market:isJa?"市場 (m)":"Market (m)",
     sovereign:isJa?"主権 (s)":"Sovereign (s)",
-    enforcement:isJa?"拘束力":"Enforcement",
+    enforcement:isJa?"\u6CD5\u7684\u57F7\u884C\u529B":"Enforcement",
     clearAll:isJa?"すべて解除":"Clear all",
     exitMode:isJa?"比較モードを終了":"Exit compare mode",
     selectHint:isJa?"マップで最大3国をクリック":"Click up to 3 countries on the map",
@@ -2332,7 +2336,7 @@ function getModelLabel(c) {
 }
 
 function getBindLabel(bind) {
-  if (currentLang === "ja") return bind >= 70 ? "\u306f\u3044" : bind >= 30 ? "\u90e8\u5206\u7684" : "\u81ea\u767a\u7684";
+  if (currentLang === "ja") return bind >= 70 ? "\u6709" : bind >= 30 ? "\u90e8\u5206\u7684" : "\u7121";
   return bind >= 70 ? "Yes" : bind >= 30 ? "Partial" : "Voluntary";
 }
 
@@ -2409,14 +2413,14 @@ var i18n = {
     methC1t:"\u4E09\u3064\u306E\u30AC\u30D0\u30CA\u30F3\u30B9\u54F2\u5B66", methC1b:"\u6A29\u5229\u4FDD\u8B77\u578B\u3001\u5E02\u5834\u5FD7\u5411\u578B\u3001\u4E3B\u6A29\u91CD\u8996\u578B\u3002\u3053\u308C\u30893\u3064\u306E\u6975\u304C\u4E21\u8868\u793A\u306E\u5206\u6790\u57FA\u790E\u3067\u3059\u3002\u3044\u3065\u308C\u306E\u56FD\u3082\u5358\u4E00\u306E\u30E2\u30C7\u30EB\u3067\u306F\u3042\u308A\u307E\u305B\u3093\u3002",
     methC2t:"\u4E09\u89D2\u5F62\u8868\u793A", methC2b:"r\u30FBm\u30B7s\uFF08\u6A29\u5229\u30FB\u5E02\u5834\u30FB\u4E3B\u6A29\uFF09\u306E\u4E09\u5206\u56F3\u5EA7\u6A19\u3067\u914D\u7F6E\u3057\u3001\u5408\u8A08\u306F1.0\u3002\u4E09\u3064\u306E\u54F2\u5B66\u7684\u5F35\u529B\u3092\u540C\u6642\u306B\u898B\u308B\u306E\u306B\u6700\u9069\u3067\u3059\u3002",
     methC3t:"\u30B3\u30F3\u30D1\u30B9\u8868\u793A", methC3b:"\u540C\u3058\u30C7\u30FC\u30BF\u3092\u4E8C\u8EF8\u306B\u518D\u6295\u5F71\u3057\u307E\u3059\u3002\u7E26\u8EF8rx\uFF08\u500B\u4EBA\u306E\u6A29\u5229 vs \u56FD\u5BB6\u7D71\u5236\uFF09\u3001\u6A2A\u8EF8bx\uFF08\u4EFB\u610F\u7684\u30BD\u30D5\u30C8\u6CD5 vs \u6CD5\u7684\u626F\u675F\u306E\u786C\u6CD5\uFF09\u3002\u56DB\u8C61\u9650\u3067\u300C\u6A29\u5229\u4FDD\u8B77\u30FB\u786C\u6CD5\u300D\u300C\u56FD\u5BB6\u7D71\u5236\u30FB\u30BD\u30D5\u30C8\u6CD5\u300D\u306A\u3069\u3092\u793A\u3057\u307E\u3059\u3002",
-    methC4t:"\u30C9\u30C3\u30C8\u30B5\u30A4\u30BA\uFF1D\u57F7\u884C\u529B", methC4b:"\u3069\u3061\u3089\u306E\u8868\u793A\u3067\u3082\u3001\u30C9\u30C3\u30C8\u306E\u5927\u304D\u3055\u306F\u6CD5\u7684\u626F\u675F\u529B\u3092\u793A\u3057\u307E\u3059\u3002\u5927\u304D\u3044\u307B\u3069\u610F\u5473\u306E\u3042\u308B\u7F70\u5247\u4ED8\u304D\u306E\u6CD5\u7684\u30E1\u30AB\u30CB\u30BA\u30E0\u304C\u5F37\u3044\u3053\u3068\u3092\u610F\u5473\u3057\u3001\u5EA7\u6A19\u3068\u306F\u72EC\u7ACB\u3057\u307E\u3059\u3002",
+    methC4t:"\u30C9\u30C3\u30C8\u30B5\u30A4\u30BA\uFF1D\u6CD5\u7684\u57F7\u884C\u529B", methC4b:"\u3069\u3061\u3089\u306E\u8868\u793A\u3067\u3082\u3001\u30C9\u30C3\u30C8\u306E\u5927\u304D\u3055\u306F\u6CD5\u7684\u57F7\u884C\u529B\u3092\u793A\u3057\u307E\u3059\u3002\u5927\u304D\u3044\u307B\u3069\u610F\u5473\u306E\u3042\u308B\u7F70\u5247\u4ED8\u304D\u306E\u6CD5\u7684\u30E1\u30AB\u30CB\u30BA\u30E0\u304C\u5F37\u3044\u3053\u3068\u3092\u610F\u5473\u3057\u3001\u5EA7\u6A19\u3068\u306F\u72EC\u7ACB\u3057\u307E\u3059\u3002",
     methC5t:"\u30BF\u30A4\u30E0\u30E9\u30A4\u30F3\uFF082016\u20132026\u5E74\uFF09", methC5b:"\u5E74\u30B9\u30E9\u30A4\u30C0\u30FC\u3067\u3001\u3069\u3061\u3089\u306E\u8868\u793A\u3067\u3082\u6642\u7CFB\u5217\u306E\u4F4D\u7F6E\u5909\u5316\u3092\u78BA\u8A8D\u3067\u304D\u307E\u3059\u30022022\u5E74\u4EE5\u964D\u306E\u91CD\u8981\u5E74\u306B\u306F\u30DE\u30A4\u30EB\u30B9\u30C8\u30FC\u30F3\u304C\u8868\u793A\u3055\u308C\u307E\u3059\u3002",
     methCallout:"<strong>\u8981\u70B9\uFF1A</strong>\u4E09\u89D2\u5F62\u3067\u306FEU\u3068\u4E2D\u56FD\u306F\u5BFE\u6975\u306E\u89D2\u306B\u4F4D\u7F6E\u3057\u307E\u3059\u3002\u30B3\u30F3\u30D1\u30B9\u3067\u306F\u7E26\u65B9\u5411\uFF08\u6A29\u5229 vs \u56FD\u5BB6\u7D71\u5236\uFF09\u3067\u306F\u53CD\u5BFE\u5074\u306B\u306A\u308A\u306A\u304C\u3089\u3001\u3069\u3061\u3089\u3082\u6A2A\u65B9\u5411\u306E\u786C\u6CD5\u5074\u306B\u5BC4\u3063\u3066\u3044\u307E\u3059\u3002\u6CD5\u7684\u626F\u675F\u529B\u3068\u54F2\u5B66\u7684\u5411\u304D\u306F\u72EC\u7ACB\u3057\u305F\u6B21\u5143\u3067\u3059\u3002",
     tlYear:"\u5e74", tlSecTag:"\u6b74\u53f2\u8a18\u9332", tlSecH2:"\u898f\u5236\u30bf\u30a4\u30e0\u30e9\u30a4\u30f3", tlSecSub:"2016\u5e74\u304b\u30892026\u5e74\u306e\u30b0\u30ed\u30fc\u30d0\u30ebAI\u30ac\u30d0\u30ca\u30f3\u30b9\u306e\u4e3b\u8981\u4e8b\u4ef6\u3002",
     tlSecNote:"2025\u20132026\u5e74\u306e\u96c6\u7d04\u306f\u3001\u81ea\u767a\u7684\u306a\u539f\u5247\u304b\u3089\u7d81\u5b9a\u7684\u306a\u57f7\u884c\u3078\u3068\u79fb\u884c\u3059\u308b\u5168\u7403\u7684\u306a\u8ee2\u63db\u3092\u53cd\u6620\u3057\u3066\u3044\u307e\u3059\u3002\u5927\u90e8\u5206\u306e\u56fd\u306e\u30b9\u30b3\u30a2\u306f\u6cd5\u6848\u63d0\u6848\u6642\u3067\u306f\u306a\u304f\u3001\u6cd5\u304c\u767a\u52b9\u3057\u305f\u3068\u304d\u306b\u52d5\u304d\u307e\u3059\u3002",
-    tlFAll:"\u3059\u3079\u3066\u306e\u4e8b\u4ef6", tlFLeg:"\u7acb\u6cd5", tlFIntl:"\u56fd\u969b", tlFEnf:"\u57f7\u884c", tlFAi:"AI\u516c\u958b",
+    tlFAll:"\u3059\u3079\u3066\u306e\u4e8b\u4ef6", tlFLeg:"\u7acb\u6cd5", tlFIntl:"\u56fd\u969b", tlFEnf:"\u6CD5\u7684\u57F7\u884C\u529B", tlFAi:"AI\u516c\u958b",
     ctSecTag:"\u5168\u30c7\u30fc\u30bf", ctSecH2:"\u3059\u3079\u3066\u306e\u6cd5\u57df", ctHint:"\u884c\u3092\u30af\u30ea\u30c3\u30af\u3059\u308b\u3068\u5730\u56f3\u3067\u30cf\u30a4\u30e9\u30a4\u30c8\u3002\u30d8\u30c3\u30c0\u30fc\u30af\u30ea\u30c3\u30af\u3067\u30bd\u30fc\u30c8\u3002", ctDownload:"\u21e9 CSV\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9",
-    ctThName:"\u6cd5\u57df", ctThModel:"\u30e2\u30c7\u30eb", ctThBinding:"\u7d81\u5b9a\uff1f", ctThR:"\u6a29\u5229", ctThM:"\u5e02\u5834", ctThS:"\u4e3b\u6a29", ctThEnf:"\u57f7\u884c\u529b"
+    ctThName:"\u6cd5\u57df", ctThModel:"\u30e2\u30c7\u30eb", ctThBinding:"\u6CD5\u7684\u626F\u675F\u529B", ctThR:"\u6a29\u5229", ctThM:"\u5e02\u5834", ctThS:"\u4e3b\u6a29", ctThEnf:"\u6CD5\u7684\u57F7\u884C\u529B"
   }
 };
 
@@ -2497,7 +2501,7 @@ function applyUiLang() {
   document.getElementById("r-middle").textContent=isJa?"\u4E2D\u6771":"Middle East";
   document.getElementById("r-global").textContent=isJa?"\u56FD\u969B":"Global";
   document.getElementById("sb-filter").textContent=isJa?"\u30E2\u30C7\u30EB":"Model";
-  document.getElementById("sb-size").textContent=isJa?"\u30C9\u30C3\u30C8\u30B5\u30A4\u30BA\uFF1D\u57F7\u884C\u529B":"Dot size = enforcement";
+  document.getElementById("sb-size").textContent=isJa?"\u30C9\u30C3\u30C8\u30B5\u30A4\u30BA\uFF1D\u6CD5\u7684\u57F7\u884C\u529B":"Dot size = enforcement";
   document.getElementById("sb-compare").textContent=isJa?"\u6BD4\u8F03":"Compare";
   updateCompareBtnText();
   if (compareList.length>=2) updateComparePanel();

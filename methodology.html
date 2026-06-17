@@ -81,7 +81,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
       <a href="#scale" data-i18n="toc2">2. The three-level scoring scale</a>
       <a href="#rights" data-i18n="toc3">3. Rights dimension — R1 to R10</a>
       <a href="#market" data-i18n="toc4">4. Market dimension — M1 to M10</a>
-      <a href="#sovereign" data-i18n="toc5">5. Sovereign dimension — S1 to S10</a>
+      <a href="#sovereign" data-i18n="toc5">5. State-centric dimension — S1 to S10</a>
       <a href="#compass" data-i18n="toc6">6. Compass coordinates (rx, bx)</a>
       <a href="#example" data-i18n="toc7">7. Worked examples &amp; scorecard PDFs</a>
       <a href="#all-scores" data-i18n="toc8">8. Full scoring table — all 79 jurisdictions</a>
@@ -97,7 +97,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
       <div style="background:#0D1B2A;border-radius:8px;padding:1.4rem 1.6rem;font-family:monospace;font-size:13px;color:#F0A830;line-height:2.2;margin-bottom:1.2rem;">
         R_raw &nbsp;= &Sigma;(R1 &hellip; R10) &nbsp;&nbsp; <span style="color:rgba(255,255,255,.4);font-size:11px;">// sum of 10 Rights indicators, each scored 0, 1, or 2</span><br>
         M_raw = &Sigma;(M1 &hellip; M10) &nbsp;&nbsp; <span style="color:rgba(255,255,255,.4);font-size:11px;">// sum of 10 Market indicators, each scored 0, 1, or 2</span><br>
-        S_raw &nbsp;= &Sigma;(S1 &hellip; S10) &nbsp;&nbsp; <span style="color:rgba(255,255,255,.4);font-size:11px;">// sum of 10 Sovereign indicators, each scored 0, 1, or 2</span><br>
+        S_raw &nbsp;= &Sigma;(S1 &hellip; S10) &nbsp;&nbsp; <span style="color:rgba(255,255,255,.4);font-size:11px;">// sum of 10 State-centric indicators, each scored 0, 1, or 2</span><br>
         <br>
         Total = R_raw + M_raw + S_raw<br>
         <br>
@@ -178,7 +178,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
     <!-- SOVEREIGN TABLE -->
     <div id="sovereign" style="margin-bottom:2rem;">
       <div class="sec-tag" data-i18n="s5tag">Section 5</div>
-      <h2 class="sec-h2" style="margin-bottom:.4rem;" data-i18n="s5h2">Sovereign dimension (S)</h2>
+      <h2 class="sec-h2" style="margin-bottom:.4rem;" data-i18n="s5h2">State-centric dimension (S)</h2>
       <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;" data-i18n="s5sub">Measures how strongly the state directs and controls AI development and deployment. Max raw score: 20.</p>
       <div style="border:1px solid #D4CFC6;border-radius:8px;overflow:hidden;">
         <table style="width:100%;border-collapse:collapse;font-size:12px;">
@@ -198,7 +198,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
     <div id="compass" style="margin-bottom:2.5rem;">
       <div class="sec-tag" data-i18n="s6tag">Section 6</div>
       <h2 class="sec-h2" data-i18n="bindH2">Binding Enforcement Score (bind%)</h2>
-      <p class="sec-sub" style="margin-bottom:1.2rem;" data-i18n="bindIntro">The binding enforcement score is an independently assessed measure, ranging from 0 to 100, representing the degree to which a jurisdiction&rsquo;s AI governance operates through formally enacted legal instruments with explicit enforcement mechanisms &mdash; as opposed to voluntary guidelines, soft law, or industry self-governance frameworks. It is assessed independently of the three-pole coordinates (r, m, s) and captures governance mechanism rather than governance philosophy: both the EU (rights-protective) and China (sovereignty-centered) score high on bind because both govern AI through formal law with penalties, despite sitting at opposite poles of the triangle.</p>
+      <p class="sec-sub" style="margin-bottom:1.2rem;" data-i18n="bindIntro">The binding enforcement score is an independently assessed measure, ranging from 0 to 100, representing the degree to which a jurisdiction&rsquo;s AI governance operates through formally enacted legal instruments with explicit enforcement mechanisms &mdash; as opposed to voluntary guidelines, soft law, or industry self-governance frameworks. It is assessed independently of the three-pole coordinates (r, m, s) and captures governance mechanism rather than governance philosophy: both the EU (rights-protective) and China (state-centric) score high on bind because both govern AI through formal law with penalties, despite sitting at opposite poles of the triangle.</p>
       <h3 style="font-family:'DM Serif Display',serif;font-size:1.25rem;color:#0D1B2A;margin-bottom:.5rem;" data-i18n="bindDerivH3">Binding Enforcement Score &mdash; Derivation</h3>
       <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;" data-i18n="bindDerivIntro">The binding enforcement score (bind%) is derived directly from five of the thirty indicators that measure governance mechanism rather than governance philosophy. It is calculated as follows:</p>
       <div style="background:#0D1B2A;border-radius:8px;padding:1.4rem 1.6rem;font-family:monospace;font-size:13px;color:#F0A830;line-height:2.2;margin-bottom:1rem;">
@@ -214,8 +214,8 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
       </ul>
       <p style="font-size:13px;color:#6B7280;margin-bottom:.4rem;line-height:1.7;" data-i18n="bindDerivMax">Maximum possible score: (2+2+2+2+2) &divide; 10 &times; 100 = 100%</p>
       <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;" data-i18n="bindDerivMin">Minimum possible score: 0%</p>
-      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;" data-i18n="bindDerivPhil">This formula is mechanism-blind with respect to governance philosophy: a jurisdiction governed through binding rights-protective law (EU) and one governed through binding sovereignty-centered law (China) can both score high on bind, reflecting that both use formal law with enforcement mechanisms &mdash; even though they sit at opposite poles of the triangle. This separation of enforcement mechanism from governance philosophy is what makes the compass horizontal axis analytically independent of the vertical axis.</p>
-      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;" data-i18n="bindDerivAdj">For sovereignty-centered jurisdictions where mandatory registration, content pre-approval, or state oversight requirements add additional binding elements not captured in R7/R8/M1/M4/M7, the bind score may be manually adjusted upward from the formula baseline and documented in the country&rsquo;s scoring rationale.</p>
+      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;" data-i18n="bindDerivPhil">This formula is mechanism-blind with respect to governance philosophy: a jurisdiction governed through binding rights-protective law (EU) and one governed through binding state-centric law (China) can both score high on bind, reflecting that both use formal law with enforcement mechanisms &mdash; even though they sit at opposite poles of the triangle. This separation of enforcement mechanism from governance philosophy is what makes the compass horizontal axis analytically independent of the vertical axis.</p>
+      <p style="font-size:13px;color:#6B7280;margin-bottom:1rem;line-height:1.7;" data-i18n="bindDerivAdj">For state-centric jurisdictions where mandatory registration, content pre-approval, or state oversight requirements add additional binding elements not captured in R7/R8/M1/M4/M7, the bind score may be manually adjusted upward from the formula baseline and documented in the country&rsquo;s scoring rationale.</p>
       <p style="font-size:12px;font-weight:600;color:#0D1B2A;margin-bottom:.5rem;" data-i18n="bindDerivTiersHead">The five tiers mapping bind% to dot size are:</p>
       <ul style="font-size:13px;color:#2D3748;line-height:1.75;margin-bottom:1.2rem;padding-left:1.2rem;max-width:720px;">
         <li data-i18n-html="bindDerivT1"><strong>85&ndash;100%:</strong> Strong binding &mdash; large dot</li>
@@ -461,7 +461,7 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
     </div>
 
     <div class="callout-note" style="margin-bottom:2rem;" data-i18n-html="callout">
-      <strong>Position &ne; ranking.</strong> The formula produces a location in three-dimensional governance space, not a score from good to bad. A country positioned near the sovereignty corner is not worse than one near the rights corner &mdash; it reflects a different stated philosophy about what AI governance is for, as expressed in primary legal documents. The formula makes that philosophy visible and contestable, which is the point.
+      <strong>Position &ne; ranking.</strong> The formula produces a location in three-dimensional governance space, not a score from good to bad. A country positioned near the state-centric corner is not worse than one near the rights corner &mdash; it reflects a different stated philosophy about what AI governance is for, as expressed in primary legal documents. The formula makes that philosophy visible and contestable, which is the point.
     </div>
 
     <div style="text-align:center;padding:1rem 0;">

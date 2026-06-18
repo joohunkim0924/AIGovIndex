@@ -37,6 +37,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,27,42,.95
 .controls-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
 .timeline-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:6px 12px;display:flex;align-items:center;gap:8px;}
 #crisis-banner{position:absolute;top:10px;right:12px;z-index:40;width:min(188px,calc(100% - 24px));pointer-events:none;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .22s ease,transform .22s ease,visibility .22s;}
+#canvas-wrap.map-view #crisis-banner{top:10px;bottom:auto;left:50%;right:auto;width:min(620px,calc(100% - 40px));transform:translateX(-50%) translateY(-6px);}
+#canvas-wrap.map-view #crisis-banner.visible{transform:translateX(-50%) translateY(0);}
+#canvas-wrap.map-view .crisis-banner-inner{flex-direction:row;align-items:center;gap:12px;padding:7px 14px;border-left-width:3px;}
+#canvas-wrap.map-view .crisis-banner-year{font-size:1.05rem;white-space:nowrap;flex-shrink:0;}
+#canvas-wrap.map-view .crisis-banner-body{display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-width:0;}
+#canvas-wrap.map-view .crisis-banner-label{display:none;}
+#canvas-wrap.map-view .crisis-banner-text{font-size:10.5px;line-height:1.35;}
+#canvas-wrap.map-view .crisis-banner-growth{margin:0;padding:0;border:none;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+#canvas-wrap.map-view .crisis-banner-growth.has-milestone{border-left:1px solid rgba(255,255,255,.15);padding-left:10px;margin-left:2px;}
+#canvas-wrap.map-view .crisis-banner-dotcount{display:inline;margin:0;}
+#canvas-wrap.map-view .crisis-banner-growth-text{display:inline;}
+#canvas-wrap.map-view #click-hint{display:none;}
 #crisis-banner.visible{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto;}
 .crisis-banner-inner{display:flex;flex-direction:column;align-items:stretch;gap:5px;padding:8px 10px;border-radius:7px;background:rgba(8,16,28,.94);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.22);border-left-width:3px;line-height:1.4;box-shadow:0 4px 20px rgba(0,0,0,.35);}
 .crisis-banner-year{font-family:"DM Serif Display",serif;font-size:1.2rem;line-height:1.1;}
@@ -572,8 +584,10 @@ footer a{color:rgba(255,255,255,.4);text-decoration:none;}
 <script src="meth-indicators.js"></script>
 <script src="country-scoring-data.js"></script>
 <script src="timeline-i18n.js"></script>
+<script src="d3-array.min.js"></script>
+<script src="d3-geo.min.js"></script>
 <script src="world-map-geo.js"></script>
-<script src="world-map.js"></script>
+<script src="world-map.js?v=5"></script>
 <script>
 // ── DATA ──────────────────────────────────────────────────────────────────────
 var countries = [
@@ -1458,6 +1472,8 @@ function setView(v,btn) {
   viewMode=v;
   document.querySelectorAll(".vt-btn").forEach(function(b){b.classList.remove("active");});
   btn.classList.add("active");
+  var wrap=document.getElementById("canvas-wrap");
+  if (wrap) wrap.classList.toggle("map-view", v==="map");
   var isJa=currentLang==="ja";
   var hintEl=document.getElementById("click-hint");
   if (hintEl) hintEl.textContent=viewMode==="map"
